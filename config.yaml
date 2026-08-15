@@ -1,0 +1,89 @@
+# LiveWhisper configuration.
+# Most of this is editable from the app: tray icon > Settings.
+
+hotkeys:
+  record: ctrl+alt+space      # start / stop recording
+  cycle_profile: ctrl+alt+p   # switch to the next prompt profile
+  toggle_backend: ctrl+alt+g  # flip between engines
+  cancel: ctrl+alt+x          # abort the current recording, transcribe nothing
+
+audio:
+  capture_system: true        # WASAPI loopback - what the other participants say
+  capture_mic: true           # your microphone - what you say
+  system_gain: 1.0
+  mic_gain: 1.0
+
+transcription:
+  # auto  - Groq first, fall back to local when Groq is out of credit or offline
+  # groq  - Groq only
+  # local - local only, nothing leaves this machine
+  backend: auto
+
+  fallback_cooldown_minutes: 60   # after Groq refuses, stop retrying it for this
+                                  # long instead of stalling every recording
+
+  groq:
+    model: whisper-large-v3
+    api_key_env: GROQ_API_KEY # read from .env or the environment
+    chunk_seconds: 600        # split long audio to stay under the upload cap
+
+  local:
+    model: large-v3           # large-v3 is the accuracy pick for 10+ languages.
+                              # large-v3-turbo is ~2x faster but weaker on
+                              # non-English audio.
+    device: cuda              # cuda | cpu
+    compute_type: int8_float16  # ~3 GB VRAM. float16 (~5 GB) for max quality.
+    language: null            # null = auto-detect. Or force e.g. "en", "hi", "mr".
+    beam_size: 5
+    batch_size: 8             # decode VAD chunks in parallel. Big speedup on long
+                              # meetings. Lower to 4 if you run out of VRAM; 1
+                              # disables batching.
+    vad_filter: true
+    condition_on_previous_text: false  # keep false: stops language context
+                                       # bleeding across segments when speakers
+                                       # code-switch mid-meeting
+
+  # Optional: bias the decoder toward names/jargon it keeps mishearing.
+  # e.g. "Attendees: Priya, Marcus. Topics: database vendor, migration timeline."
+  vocabulary: ""
+
+output:
+  auto_paste: true            # send Ctrl+V into whatever field has focus
+  copy_to_clipboard: true     # put the text on the clipboard
+  restore_clipboard: false    # false = leave the transcript on the clipboard, so a
+                              # failed auto-paste is recoverable with a manual Ctrl+V
+  save_transcripts: true
+  transcript_dir: transcripts
+
+ui:
+  theme: dark-amber           # dark-amber | dark-indigo | system
+  overlay: true               # floating recording pill: timer + live level meter
+  overlay_meter: true         # level bars inside the pill
+  overlay_position: null      # remembered pill position, set by dragging it
+
+# Prompt profiles. The active profile's prompt is prepended to the transcript
+# before it is pasted. Ctrl+Alt+P cycles through them.
+profiles:
+  - name: Raw
+    prompt: ''
+
+  - name: Summarise
+    prompt: |
+      Summarise the key points and action items from this meeting transcript.
+      Note who committed to what, and flag anything left unresolved.
+
+      Transcript:
+
+  - name: Notes
+    prompt: |
+      Turn this meeting transcript into clean structured notes with headings
+      and bullet points. Preserve technical detail and specific numbers.
+
+      Transcript:
+
+  - name: Translate
+    prompt: |
+      Translate this meeting transcript into English. Preserve names and
+      technical terms exactly as spoken.
+
+      Transcript:
