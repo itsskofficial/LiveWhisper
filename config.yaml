@@ -26,6 +26,13 @@ transcription:
     model: whisper-large-v3
     api_key_env: GROQ_API_KEY # read from .env or the environment
     chunk_seconds: 600        # split long audio to stay under the upload cap
+    language: null            # null = auto-detect.
+                              # IMPORTANT for Hindi/English (or any code-switched)
+                              # meetings: Groq's whisper-large-v3 transliterates
+                              # English into Devanagari when it auto-detects Hindi
+                              # ("that's your take" -> "देट्स यॉर टेक").
+                              # Set "en" to get a clean English translation, or
+                              # use the local engine to keep natural Hinglish.
 
   local:
     model: large-v3           # large-v3 is the accuracy pick for 10+ languages.

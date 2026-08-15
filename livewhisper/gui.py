@@ -336,6 +336,12 @@ class SettingsWindow(ctk.CTkToplevel):
         self._menu(card, "Groq model", "transcription.groq.model",
                    t.get("groq", {}).get("model", "whisper-large-v3"),
                    ["whisper-large-v3", "whisper-large-v3-turbo"])
+        self._entry(card, "Groq language", "transcription.groq.language",
+                    t.get("groq", {}).get("language") or "",
+                    "Blank = auto-detect. For Hindi/English meetings set 'en': "
+                    "Groq otherwise transliterates English into Devanagari. "
+                    "The local engine handles code-switching correctly either way.",
+                    width=90)
 
         # --- Local ---
         ctk.CTkLabel(p, text="Local model", font=("Segoe UI", 15, "bold"),
@@ -584,6 +590,7 @@ class SettingsWindow(ctk.CTkToplevel):
             "transcription.fallback_cooldown_minutes", int, 60)
         t["groq"]["model"] = self._get("transcription.groq.model", str,
                                        "whisper-large-v3")
+        t["groq"]["language"] = self._get("transcription.groq.language", str, None)
         t["local"]["model"] = self._get("transcription.local.model", str, "large-v3")
         t["local"]["device"] = self._get("transcription.local.device", str, "cuda")
         t["local"]["compute_type"] = self._get("transcription.local.compute_type", str,

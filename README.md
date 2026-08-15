@@ -138,11 +138,57 @@ model, precision and batch size that will actually fit:
 decoder layers 32→4 and is measurably worse on non-English audio, which matters
 if your meetings are multilingual.
 
-## Accuracy
+## Accuracy, measured
 
-Names and jargon are the main error source, not general accuracy. In testing,
-`small` heard "Priya" as "PREA" and `large-v3` as "Preo". Setting **Settings →
-Engine → Vocabulary** fixed it exactly:
+Tested on real recorded meetings, not read-aloud samples.
+
+### English, multi-speaker
+
+90 seconds of a public GitLab weekly meeting — a real Zoom call with several
+speakers, compressed audio, and technical jargon. Both engines transcribed the
+same captured audio independently:
+
+| | Groq | Local `large-v3` |
+| --- | --- | --- |
+| Words | 215 | 212 |
+| Word-level agreement | **98.6%** | |
+| Substitutions | 0 | |
+| Deletions | 3 (`it`, `is there`) | |
+
+Zero substitutions. Two independently-run systems produced word-for-word
+identical output apart from three dropped filler words, and both got "VS Code",
+"Terraform module" and "MAU" right. Real meeting audio is not a problem.
+
+### Hindi/English code-switching — read this if your meetings are Hinglish
+
+This is where the engines diverge sharply. 75 seconds of a Hinglish podcast:
+
+| Setting | Result |
+| --- | --- |
+| **Groq `large-v3`** (the default) | **Broken.** English transliterated into Devanagari: "that's your take" → "देट्स यॉर टेक", "MNCs are gonna shut shop" → "एम एन सीज आर गुण टो शट शॉप" |
+| Groq `large-v3`, `language: hi` | No change — identical bad output |
+| Groq `large-v3`, `language: en` | Clean, accurate English translation |
+| Groq `turbo` | Clean English, but inverted a claim ("MNCs will create more startup jobs" — the speaker said the opposite) |
+| **Local `large-v3`** | **Best.** Natural mixed script: `MNCs से ज़्यादा startup job create करेंगे, that's your take` |
+
+Groq and local run nominally the same model, but Groq's hosted version commits to
+one detected language and renders everything in that script. Locally the same
+model code-switches correctly.
+
+**If you take meetings in Hinglish** (or any code-switched pair), do one of:
+
+- Set **Settings → Engine → Backend** to `local` — keeps natural mixed script,
+  closest to what was actually said.
+- Or set **Settings → Engine → Groq language** to `en` — fast, clean English
+  translation, but you lose the original phrasing.
+
+Do not leave Groq on auto-detect for code-switched audio.
+
+### Names and jargon
+
+The main error source in monolingual audio is proper nouns, not general
+accuracy. In testing, `small` heard "Priya" as "PREA" and `large-v3` as "Preo".
+Setting **Settings → Engine → Vocabulary** fixed it exactly:
 
 ```
 Attendees: Priya, Marcus. Topics: database vendor, migration timeline.
