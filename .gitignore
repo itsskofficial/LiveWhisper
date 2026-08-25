@@ -8,3 +8,5 @@ transcripts/
 *.log
 shot*.png
 accuracy_runs/
+
+*.pt
