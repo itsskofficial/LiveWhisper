@@ -20,7 +20,7 @@ from .theme import appearance_mode, palette
 log = logging.getLogger(__name__)
 
 ROOT = Path(__file__).resolve().parent.parent
-SECTIONS = ["Prompts", "Engine", "Audio", "Hotkeys", "General"]
+SECTIONS = ["Prompts", "Writing", "Engine", "Audio", "Hotkeys", "General"]
 
 MODELS = ["large-v3", "large-v3-turbo", "medium", "small", "base", "tiny"]
 COMPUTE = ["int8_float16", "float16", "int8", "float32"]
@@ -298,6 +298,115 @@ class SettingsWindow(ctk.CTkToplevel):
         self._selected = max(0, self._selected - 1)
         self._render_profiles()
 
+
+    # -------------------------------------------------------------- Writing
+
+    def _build_writing(self, p) -> None:
+        t = self.cfg.get("script", {}) or {}
+        self._heading(p, "Writing style",
+                      "Hindi and Marathi are transcribed in Devanagari, but "
+                      "almost nobody types Devanagari in chat. LiveWhisper "
+                      "converts it to the Latin spelling you actually use, and "
+                      "learns that spelling from your corrections.")
+
+        card = self._card(p)
+        self._menu(card, "Default script", "script.default",
+                   t.get("default", "latin"), ["latin", "devanagari"],
+                   "Latin = kya kar rahe ho. Devanagari = the original script. "
+                   "This is overridden when the field you are typing in already "
+                   "contains one or the other.")
+        self._menu(card, "Language", "script.language", t.get("language", "hi"),
+                   ["hi", "mr"],
+                   "hi = Hindi, mr = Marathi. Both use Devanagari, so this "
+                   "selects which spelling dictionary to load.")
+
+        ctk.CTkLabel(p, text="What it has learned about you",
+                     font=("Segoe UI", 15, "bold"), text_color=self.c["text"],
+                     anchor="w").pack(fill="x", pady=(18, 4))
+        card = self._card(p)
+
+        box = ctk.CTkFrame(card, fg_color=self.c["bg"], corner_radius=8)
+        box.pack(fill="x", padx=16, pady=14)
+        self._learned = ctk.CTkTextbox(box, height=150, fg_color=self.c["bg"],
+                                       border_width=0, text_color=self.c["text"],
+                                       wrap="word", font=("Consolas", 12))
+        self._learned.pack(fill="x", padx=10, pady=10)
+        self._refresh_learned()
+
+        row = ctk.CTkFrame(card, fg_color="transparent")
+        row.pack(fill="x", padx=16, pady=(0, 14))
+        ctk.CTkButton(row, text="Teach it how you write", height=34,
+                      corner_radius=8, fg_color=self.c["accent"],
+                      hover_color=self.c["accent_hi"],
+                      text_color=self.c["accent_text"],
+                      command=self._run_wizard).pack(side="left")
+        ctk.CTkButton(row, text="Refresh", width=90, height=34, corner_radius=8,
+                      fg_color=self.c["surface_hi"], hover_color=self.c["border"],
+                      text_color=self.c["text"],
+                      command=self._refresh_learned).pack(side="left", padx=8)
+        ctk.CTkButton(row, text="Forget everything", width=150, height=34,
+                      corner_radius=8, fg_color="transparent",
+                      hover_color=self.c["rec"], text_color=self.c["muted"],
+                      command=self._forget).pack(side="right")
+
+        card = self._card(p)
+        self._switch(card, "Learn from my corrections", "learning.enabled",
+                     (self.cfg.get("learning") or {}).get("enabled", True),
+                     "When you edit what was pasted, the change is read back at "
+                     "the start of your next dictation. Nothing runs in the "
+                     "background and keystrokes are never recorded.")
+
+    def _refresh_learned(self) -> None:
+        from .profile import ProfileStore
+        store = self.app.styles
+        g = store.get(ProfileStore.GLOBAL).conventions
+        lines = []
+        if g.rules:
+            lines.append("Spelling conventions (applied to every word):")
+            for a, b in g.rules.items():
+                lines.append("   " + a + " -> " + b)
+        else:
+            lines.append("No spelling conventions learned yet.")
+        if g.overrides:
+            lines.append("")
+            lines.append("Exact words remembered: " + str(len(g.overrides)))
+            for w, v in list(g.overrides.items())[:8]:
+                lines.append("   " + w + " -> " + v)
+            if len(g.overrides) > 8:
+                lines.append("   ... and " + str(len(g.overrides) - 8) + " more")
+
+        apps = [(k, v) for k, v in store.profiles.items()
+                if k != ProfileStore.GLOBAL and v.habits.samples]
+        if apps:
+            lines.append("")
+            lines.append("Per-app habits:")
+            for name, prof in apps:
+                h = prof.habits
+                lines.append(f"   {name}: capitals {h.capitalize:.0%}, "
+                             f"full stops {h.terminal_period:.0%} "
+                             f"({h.samples} samples)")
+        self._learned.configure(state="normal")
+        self._learned.delete("1.0", "end")
+        self._learned.insert("1.0", "\n".join(lines))
+        self._learned.configure(state="disabled")
+
+    def _run_wizard(self) -> None:
+        self.app.open_wizard()
+        self.after(1500, self._refresh_learned)
+
+    def _forget(self) -> None:
+        from .profile import Habits, ProfileStore
+        store = self.app.styles
+        g = store.get(ProfileStore.GLOBAL).conventions
+        g.rules.clear()
+        g.overrides.clear()
+        g.evidence.clear()
+        for prof in store.profiles.values():
+            prof.habits = Habits()
+        store.save()
+        self._refresh_learned()
+        self._flash("Forgot everything it had learned.", self.c["rec"])
+
     # --------------------------------------------------------------- Engine
 
     def _build_engine(self, p) -> None:
@@ -393,6 +502,30 @@ class SettingsWindow(ctk.CTkToplevel):
                                     command=self._download_model)
         self._dlbtn.pack(side="right")
         self._sync_download_button()
+
+        ctk.CTkLabel(p, text="Writing assistant", font=("Segoe UI", 15, "bold"),
+                     text_color=self.c["text"], anchor="w").pack(fill="x", pady=(18, 4))
+        a = self.cfg.get("actions", {}) or {}
+        m = a.get("models", {}) or {}
+        card = self._card(p)
+        self._menu(card, "Provider", "actions.models.provider",
+                   m.get("provider", "ollama"),
+                   ["ollama", "groq", "openai", "anthropic"],
+                   "Used by the write and fix hotkeys. Ollama runs on your "
+                   "machine and nothing leaves it. Local models are fine for "
+                   "grammar and short rewrites; for longer writing a cloud "
+                   "model is noticeably better.")
+        self._entry(card, "Model", "actions.models.model",
+                    m.get("model", "qwen2.5:7b"), width=200)
+        self._entry(card, "Command listens for (seconds)",
+                    "actions.command_seconds", a.get("command_seconds", 8),
+                    width=70)
+        self._switch(card, "Screenshot fallback for reading the screen",
+                     "context.ocr_fallback",
+                     (self.cfg.get("context") or {}).get("ocr_fallback", False),
+                     "Some Chrome and Electron apps hide their text from the "
+                     "accessibility layer. This reads the screen as an image "
+                     "instead. Needs: pip install rapidocr_onnxruntime")
 
         ctk.CTkLabel(p, text="Vocabulary", font=("Segoe UI", 15, "bold"),
                      text_color=self.c["text"], anchor="w").pack(fill="x", pady=(18, 4))
@@ -490,6 +623,18 @@ class SettingsWindow(ctk.CTkToplevel):
                     h.get("cycle_profile", "ctrl+alt+p"))
         self._entry(card, "Switch engine", "hotkeys.toggle_backend",
                     h.get("toggle_backend", "ctrl+alt+g"))
+        card = self._card(p)
+        self._entry(card, "Write this for me", "hotkeys.write",
+                    h.get("write", "ctrl+alt+w"),
+                    "Speak an instruction. Reads what is on screen for context.")
+        self._entry(card, "Fix grammar", "hotkeys.fix", h.get("fix", "ctrl+alt+f"),
+                    "Corrects the text in the field you are in, keeping your "
+                    "lowercase, slang and Hinglish spellings.")
+        self._entry(card, "Notes mode", "hotkeys.notes",
+                    h.get("notes", "ctrl+alt+n"),
+                    "Transcripts append to a note file instead of pasting.")
+        self._entry(card, "Keep next dictation in Devanagari",
+                    "hotkeys.devanagari", h.get("devanagari", "ctrl+alt+h"))
 
     # -------------------------------------------------------------- General
 
@@ -578,6 +723,9 @@ class SettingsWindow(ctk.CTkToplevel):
                                                     "ctrl+alt+p")
         cfg["hotkeys"]["toggle_backend"] = self._get("hotkeys.toggle_backend", str,
                                                      "ctrl+alt+g")
+        for _k, _d in (("write", "ctrl+alt+w"), ("fix", "ctrl+alt+f"),
+                       ("notes", "ctrl+alt+n"), ("devanagari", "ctrl+alt+h")):
+            cfg["hotkeys"][_k] = self._get("hotkeys." + _k, str, _d)
 
         cfg["audio"]["capture_system"] = self._get("audio.capture_system", bool)
         cfg["audio"]["capture_mic"] = self._get("audio.capture_mic", bool)
@@ -604,6 +752,21 @@ class SettingsWindow(ctk.CTkToplevel):
         o["auto_paste"] = self._get("output.auto_paste", bool)
         o["restore_clipboard"] = self._get("output.restore_clipboard", bool)
         o["save_transcripts"] = self._get("output.save_transcripts", bool)
+
+        sc = cfg.setdefault("script", {})
+        sc["default"] = self._get("script.default", str, "latin")
+        sc["language"] = self._get("script.language", str, "hi")
+
+        act = cfg.setdefault("actions", {})
+        mdl = act.setdefault("models", {})
+        mdl["provider"] = self._get("actions.models.provider", str, "ollama")
+        mdl["model"] = self._get("actions.models.model", str, "qwen2.5:7b")
+        act["command_seconds"] = self._get("actions.command_seconds", int, 8)
+
+        cfg.setdefault("context", {})["ocr_fallback"] = self._get(
+            "context.ocr_fallback", bool)
+        cfg.setdefault("learning", {})["enabled"] = self._get(
+            "learning.enabled", bool)
 
         u = cfg.setdefault("ui", {})
         u["overlay"] = self._get("ui.overlay", bool)

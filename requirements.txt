@@ -11,9 +11,14 @@ PyYAML>=6.0
 ruamel.yaml>=0.18
 python-dotenv>=1.0
 customtkinter>=5.2
+uiautomation>=2.0
+pywinauto>=0.6
 requests>=2.31
 
 # CUDA runtime libs faster-whisper needs on Windows but does not pull in itself.
 # Without these you get a cryptic "Could not locate cudnn_ops64_9.dll" failure.
 nvidia-cublas-cu12
 nvidia-cudnn-cu12
+
+# optional: screenshot fallback for reading apps that hide their text
+# rapidocr_onnxruntime

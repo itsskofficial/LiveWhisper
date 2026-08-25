@@ -447,6 +447,28 @@ class App:
     def settings_closed(self) -> None:
         self._settings = None
 
+    def open_wizard(self) -> None:
+        if self.root:
+            self.root.after(0, self._open_wizard)
+
+    def _open_wizard(self) -> None:
+        from .wizard import Wizard
+        try:
+            Wizard(self)
+        except Exception as e:
+            log.exception("wizard failed to open")
+            self.notify(f"Setup could not open: {e}")
+
+    def _needs_onboarding(self) -> bool:
+        """First run: no profile file and nothing learned yet."""
+        from .profile import ProfileStore
+        if not self.cfg.get("learning", {}).get("enabled", True):
+            return False
+        if self.styles.path.exists():
+            return False
+        g = self.styles.get(ProfileStore.GLOBAL).conventions
+        return not g.rules and not g.overrides
+
     # --------------------------------------------------------------- wiring
 
     def _unbind_hotkeys(self) -> None:
@@ -513,6 +535,8 @@ class App:
                              lambda icon, item: self.toggle_backend()),
             pystray.Menu.SEPARATOR,
             pystray.MenuItem("Settings...", lambda icon, item: self.open_settings()),
+            pystray.MenuItem("Teach it how you write...",
+                             lambda icon, item: self.open_wizard()),
             pystray.MenuItem("Open transcripts",
                              lambda icon, item: self.open_transcripts()),
             pystray.MenuItem("Quit", lambda icon, item: self.quit()),
@@ -548,6 +572,9 @@ class App:
         self._bind_hotkeys()
         threading.Thread(target=self.icon.run, daemon=True).start()
         threading.Thread(target=self._warm_up, daemon=True).start()
+
+        if self._needs_onboarding():
+            threading.Timer(1.2, self.open_wizard).start()
 
         hk = self.cfg["hotkeys"].get("record", "ctrl+alt+space")
         print(f"LiveWhisper running. Press {hk} to start/stop recording.", flush=True)

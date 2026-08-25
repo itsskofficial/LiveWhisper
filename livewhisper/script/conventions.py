@@ -83,10 +83,20 @@ class Conventions:
             key = f"{a}>{b}"
             self.evidence.setdefault(key, set()).add(source_word)
             seen = len(self.evidence[key])
-            if seen >= PROMOTE_AT and self.rules.get(a) != b:
-                self.rules[a] = b
-                notes.append(f"learned convention: {a} -> {b} "
-                             f"(seen in {seen} words)")
+            if seen < PROMOTE_AT or self.rules.get(a) == b:
+                continue
+            ok, collateral = validate_rule(a, b)
+            if not ok:
+                # Keep the per-word override, refuse the generalisation. This
+                # is what stops "too" for तू from turning aur into aoor.
+                log.info("rejected rule %s -> %s (would affect %.0f%% of words)",
+                         a, b, collateral * 100)
+                notes.append(f"kept {source_word} as {corrected} "
+                             f"(too risky to apply everywhere)")
+                continue
+            self.rules[a] = b
+            notes.append(f"learned convention: {a} -> {b} "
+                         f"(seen in {seen} words)")
         return notes
 
     def seed(self, pairs: list[tuple[str, str, str]]) -> list[str]:
@@ -113,6 +123,54 @@ class Conventions:
             overrides=dict(d.get("overrides") or {}),
             evidence={k: set(v) for k, v in (d.get("evidence") or {}).items()},
         )
+
+
+VOWELS = set("aeiou")
+MAX_COLLATERAL = 0.22     # share of the whole vocabulary a rule may rewrite
+
+
+def validate_rule(pattern: str, replacement: str) -> tuple[bool, float]:
+    """Is it safe to apply this substitution to every word, or only this one?
+
+    Two guards, learned from a bug this caught in testing.
+
+    1. Single vowels are unsafe. Someone typing "too" for तू teaches u -> oo,
+       which then rewrites aur as aoor and bahut as bahoot. A single Latin
+       vowel stands for several different Devanagari vowels depending on
+       context, so a blind replace destroys the distinction. Consonants do not
+       have this problem: jh and v map reliably back to specific letters, so
+       jh -> z and v -> w are safe. Multi-character patterns are specific
+       enough either way.
+
+    2. Collateral. Whatever the pattern, a rule that rewrites a fifth of the
+       entire vocabulary is over-reaching for the two examples behind it.
+
+    Returns (safe, share_of_vocabulary_affected).
+    """
+    if len(pattern) == 1 and pattern in VOWELS:
+        return False, 1.0
+
+    try:
+        from .lexicon import get_lexicon
+        lex = get_lexicon("hi")
+        lex.load()
+        entries = lex._entries
+    except Exception:
+        return True, 0.0            # cannot check, do not block the user
+
+    if not entries:
+        return True, 0.0
+
+    changed = total = 0
+    for _word, forms in entries.items():
+        if not forms:
+            continue
+        total += 1
+        if pattern in forms[0] and forms[0].replace(pattern, replacement) != forms[0]:
+            changed += 1
+
+    share = changed / total if total else 0.0
+    return share <= MAX_COLLATERAL, share
 
 
 def _substitutions(default: str, corrected: str) -> list[tuple[str, str]]:
