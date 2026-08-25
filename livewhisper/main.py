@@ -27,7 +27,11 @@ import keyboard
 import pystray
 
 from . import config as cfgio
-from . import icons, output
+from . import context, icons, output
+from .actions import Actions
+from .notes import NoteBook
+from .pipeline import Pipeline
+from .profile import ProfileStore
 from .audio import AudioError, Recorder, write_wav
 from .overlay import RecordingOverlay
 from .theme import palette
@@ -65,6 +69,15 @@ class App:
         self._hotkeys: list = []
         self._lock = threading.Lock()
 
+        # personalisation + actions
+        self.styles = ProfileStore()
+        self.pipeline = Pipeline(self.cfg, self.styles)
+        self.actions = Actions(self.cfg.get("actions", {}))
+        self.notebook = NoteBook()
+        self.note_mode = False
+        self._force_script: str | None = None
+        self._screen_at_start = None
+
     # ---------------------------------------------------------------- config
 
     @property
@@ -90,6 +103,8 @@ class App:
         """Called by the settings window after a save."""
         self.cfg = cfg
         self._backend = None            # rebuild with the new settings
+        self.pipeline = Pipeline(cfg, self.styles)
+        self.actions = Actions(cfg.get("actions", {}))
         self.profile_index = 0
         self._bind_hotkeys()
         if self.icon:
@@ -142,6 +157,10 @@ class App:
             self.recorder = None
             self.notify(f"Could not start recording: {e}")
             return
+        try:
+            self._screen_at_start = context.capture()
+        except Exception:
+            self._screen_at_start = None
         self._started_at = time.monotonic()
         self._set_state(State.RECORDING)
         if self.cfg.get("ui", {}).get("overlay", True) and self.root:
@@ -171,6 +190,107 @@ class App:
         self._set_state(State.TRANSCRIBING)
         threading.Thread(target=self._transcribe, args=(recording,), daemon=True).start()
 
+    # ------------------------------------------------- personalised pipeline
+
+    def _apply_pipeline(self, transcript: str) -> str:
+        """Romanize, apply this app's habits, and learn from the last edit."""
+        try:
+            screen = self._screen_at_start or context.capture()
+            # Learn before writing: whatever is in the field now reflects any
+            # corrections made to what we pasted last time.
+            for note in self.pipeline.learn_from_screen(screen):
+                log.info("learned: %s", note)
+                self.notify(note)
+            delivery = self.pipeline.process(transcript, screen,
+                                             force_script=self._force_script)
+            self._force_script = None
+            log.info("app=%s script=%s romanized=%s",
+                     delivery.app, delivery.script, delivery.romanized)
+            return delivery.text
+        except Exception:
+            log.warning("pipeline failed, delivering raw transcript", exc_info=True)
+            return transcript
+
+    # ------------------------------------------------------------- actions
+
+    def _run_action(self, kind: str) -> None:
+        """Voice command, grammar fix, or rewrite - all read the screen first."""
+        try:
+            self._set_state(State.TRANSCRIBING)
+            screen = context.capture(
+                use_ocr=self.cfg.get("context", {}).get("ocr_fallback", False))
+            profile = self.styles.get(screen.app)
+
+            if kind == "fix":
+                target = (screen.focused_text or "").strip()
+                if not target:
+                    self.notify("Nothing to fix - no text found in this field.")
+                    return
+                fixed = self.actions.fix(target)
+                if fixed.strip() == target.strip():
+                    self.notify("Already looks correct.")
+                    return
+                output.deliver(fixed, auto_paste=False, copy_to_clipboard=True)
+                self.notify(f"Corrected - {len(fixed.split())} words on clipboard.")
+                return
+
+            # Command mode: record, then treat the transcript as an instruction.
+            self.notify("Listening for a command...")
+            audio = self._record_once(self.cfg.get("actions", {})
+                                      .get("command_seconds", 8))
+            if audio is None:
+                return
+            instruction = self.backend().transcribe(audio)
+            if not instruction.strip():
+                self.notify("Did not catch a command.")
+                return
+            log.info("command: %s", instruction)
+
+            result = self.actions.compose(instruction, profile, screen)
+            result = self.pipeline.process(result, screen).text
+            o = self.cfg["output"]
+            output.deliver(result,
+                           auto_paste=o.get("auto_paste", True),
+                           copy_to_clipboard=o.get("copy_to_clipboard", True))
+            self.notify(f"Written - {len(result.split())} words.")
+        except Exception as e:
+            log.exception("action failed")
+            self.notify(f"Action failed: {e}")
+        finally:
+            self._set_state(State.IDLE)
+
+    def _record_once(self, seconds: float):
+        """Blocking capture used by command mode."""
+        a = self.cfg["audio"]
+        rec = Recorder(capture_system=False,
+                       capture_mic=a.get("capture_mic", True))
+        try:
+            rec.start()
+        except AudioError as e:
+            self.notify(f"Microphone unavailable: {e}")
+            return None
+        self._started_at = time.monotonic()
+        if self.root:
+            self.root.after(0, self._show_overlay)
+        time.sleep(seconds)
+        if self.root:
+            self.root.after(0, self._hide_overlay)
+        return rec.stop().audio
+
+    def toggle_notes(self) -> None:
+        self.note_mode = not self.note_mode
+        if self.note_mode:
+            note = self.notebook.start()
+            self.notify(f"Notes on - {note.path.name}")
+        else:
+            note = self.notebook.stop()
+            if note:
+                self.notify(f"Note saved ({note.word_count} words).")
+
+    def force_devanagari(self) -> None:
+        self._force_script = "devanagari"
+        self.notify("Next dictation will stay in Devanagari.")
+
     def cancel(self) -> None:
         with self._lock:
             if self.state is not State.RECORDING:
@@ -192,7 +312,14 @@ class App:
                 self.notify("No speech detected in the recording.")
                 return
 
-            text = output.compose(self.profile.get("prompt", ""), transcript)
+            # Notes mode diverts the transcript into the open note instead.
+            if self.note_mode:
+                note = self.notebook.append(transcript)
+                self.notify(f"Added to note ({note.word_count} words).")
+                return
+
+            text = self._apply_pipeline(transcript)
+            text = output.compose(self.profile.get("prompt", ""), text)
             self._save(text)
 
             o = self.cfg["output"]
@@ -340,6 +467,10 @@ class App:
             hk.get("cycle_profile", "ctrl+alt+p"): self.cycle_profile,
             hk.get("toggle_backend", "ctrl+alt+g"): self.toggle_backend,
             hk.get("cancel", "ctrl+alt+x"): self.cancel,
+            hk.get("write", "ctrl+alt+w"): lambda: self._run_action("write"),
+            hk.get("fix", "ctrl+alt+f"): lambda: self._run_action("fix"),
+            hk.get("notes", "ctrl+alt+n"): self.toggle_notes,
+            hk.get("devanagari", "ctrl+alt+h"): self.force_devanagari,
         }
         for combo, fn in bindings.items():
             # Run off the hook thread so a slow handler cannot wedge the keyboard.

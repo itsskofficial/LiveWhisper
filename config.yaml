@@ -6,6 +6,10 @@ hotkeys:
   cycle_profile: ctrl+alt+p   # switch to the next prompt profile
   toggle_backend: ctrl+alt+g  # flip between engines
   cancel: ctrl+alt+x          # abort the current recording, transcribe nothing
+  write: ctrl+alt+w           # speak an instruction: "reply saying I can't make Thursday"
+  fix: ctrl+alt+f             # grammar/spelling pass over the text in this field
+  notes: ctrl+alt+n           # toggle notes mode - transcripts go to a note file
+  devanagari: ctrl+alt+h      # keep the NEXT dictation in Devanagari script
 
 audio:
   capture_system: true        # WASAPI loopback - what the other participants say
@@ -94,3 +98,36 @@ profiles:
       technical terms exactly as spoken.
 
       Transcript:
+
+# Script handling for Hindi / Marathi.
+#
+# Whisper transcribes Hindi in Devanagari (क्या कर रहे हो) but almost nobody
+# types Devanagari in chat, so by default we convert to the Latin spelling you
+# actually use (kya kar rahe ho). Measured coverage: 92% dictionary + 8% model.
+script:
+  default: latin              # latin | devanagari
+  language: hi                # hi | mr  - which lexicon to use
+  # The app also reads the field you are typing into: if the text already there
+  # is Devanagari it keeps Devanagari, no setting required.
+
+# Reading the screen, for "write a reply to this" and for grammar checks.
+context:
+  ocr_fallback: false         # screenshot+OCR when UI Automation finds nothing.
+                              # Needed for some Chrome/Electron apps. Requires
+                              # `pip install rapidocr_onnxruntime`.
+
+# Text generation. Local by default so nothing leaves the machine.
+actions:
+  command_seconds: 8          # how long Ctrl+Alt+W listens for an instruction
+  models:
+    provider: ollama          # ollama | groq | openai | anthropic
+    model: qwen2.5:7b
+  # Honest note: local models are fine for grammar and short rewrites. For
+  # longer composition a frontier model is noticeably better. Switch the
+  # provider above if you want that and are happy for the text to leave.
+
+# Learning. The app watches what you change about what it pasted, and adapts.
+learning:
+  enabled: true
+  min_samples: 3              # observations before a habit is applied
+  promote_rule_at: 2          # different words before a spelling rule generalises
