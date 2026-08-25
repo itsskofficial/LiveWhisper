@@ -303,7 +303,40 @@ Word-by-word learning would need thousands.
 
 `livewhisper/script/conventions.py`, `experiments/exp5_spelling_axes.py`
 
-### 5.2 How it notices you corrected something
+### 5.2 The one-minute setup
+
+Waiting for ten corrections to arrive naturally takes a while. So the app asks
+instead.
+
+On first run it shows five short sentences in Devanagari and asks you to type
+each one **the way you would actually send it**:
+
+```
+   मुझे कल ऑफिस जाना है, तू आ रहा है क्या?
+   ("I have to go to the office tomorrow, are you coming?")
+
+   > muze kal office jana hai, too aa raha hai kya
+```
+
+Because the app knows exactly which Devanagari word sits at each position, every
+word you type is a labelled example. It compares `muze` against its own default
+`mujhe`, extracts the difference, and learns.
+
+One minute of typing replaces weeks of corrections. And because these are chat
+sentences, it learns your capitalisation and punctuation from the same input —
+if you type in lowercase with no full stops, it notices.
+
+The sentences are hand-written rather than picked by the algorithm. We *did*
+compute an optimal set from the data — six sentences covering 19 of the top 20
+conventions — but they came from Wikipedia and read like *"in apartment 3,
+intruders captured six weightlifters"*. Nobody types that, and a formal sentence
+would make you type formally, hiding the very habits we want to see.
+
+You can skip it, and redo it any time from **Settings → Writing**.
+
+`livewhisper/onboarding.py`, `livewhisper/wizard.py`
+
+### 5.3 How it notices you corrected something
 
 When you dictate, the app pastes text. If you edit it, that edit is the signal.
 
@@ -318,7 +351,7 @@ is the same mechanism Wispr Flow uses.
 
 `livewhisper/context.py`
 
-### 5.3 What gets stored
+### 5.4 What gets stored
 
 Not model weights. A readable file, one section per application:
 
@@ -350,7 +383,7 @@ magic.
 
 `livewhisper/profile.py` · stored in `profiles.json`
 
-### 5.4 Why counting, not training
+### 5.5 Why counting, not training
 
 We deliberately do **not** fine-tune a model on your writing.
 
@@ -369,7 +402,7 @@ become a general rule — you might have simply typo'd. A substitution seen in
 **two different words** gets promoted. That stops one slip from mangling 316
 words.
 
-### 5.5 Where the personalisation sits
+### 5.6 Where the personalisation sits
 
 This ordering matters more than it looks:
 
@@ -383,6 +416,45 @@ Your rules apply **after both paths**. If they only applied to the dictionary,
 92% of your words would be spelled your way and 8% wouldn't — your own text
 would be internally inconsistent. One layer after both means every word obeys
 your habits regardless of which path produced it.
+
+### 5.7 The guard that stops it learning nonsense
+
+This one came out of a bug found while testing, and it is worth understanding
+because it is the difference between a system that improves and one that decays.
+
+Suppose you type `too` for तू once. The app sees `tu` → `too` and extracts the
+rule "this person writes **u** as **oo**". Reasonable-looking. But applied to
+every word, it produces:
+
+| Word | Becomes |
+| --- | --- |
+| aur (and) | **aoor** |
+| bahut (very) | **bahoot** |
+| kuch (some) | **kooch** |
+| subah (morning) | **soobah** |
+
+Measured against the dictionary: **97% of affected words came out wrong.** One
+casual keystroke would have quietly degraded the app forever.
+
+The fix is a check before any rule is allowed to generalise. The first version
+of that check was itself wrong — it asked "does this rewrite appear in the
+dictionary's list of accepted spellings?", which rejected `jh → z`, a completely
+genuine convention, because the dictionary simply lists few variants per word.
+
+The working version is linguistic rather than statistical:
+
+> A single Latin **vowel** stands for several different Devanagari vowels
+> depending on context, so replacing it everywhere destroys the distinction.
+> **Consonants** don't have this problem — `jh` and `v` map back reliably.
+
+So single vowels are refused outright, and everything else is measured for
+collateral damage against all 30,000 words. `jh → z` touches 0.8% of the
+vocabulary and passes. `u → oo` touches 100% and is refused.
+
+A refused substitution still applies to **that one word** — you get your
+spelling, it just doesn't spread.
+
+`livewhisper/script/conventions.py`
 
 ---
 
@@ -448,6 +520,8 @@ livewhisper/
   notes.py         Markdown notes from system audio
   main.py          hotkeys, tray icon, state machine
   gui.py           settings window
+  onboarding.py    turns typed sentences into a spelling profile
+  wizard.py        the one-minute setup window
   script/
     lexicon.py     the 30k-word dictionary + curated common words
     oov.py         the 2.56M character model for unknown words
@@ -491,11 +565,15 @@ re-run. Being clear about their limits:
 - 57% of spelling variation from 10 conventions — across 30,000 words
 - Prompting fails — ten variations, all negative
 
+- The `u -> oo` failure: 97% of affected words wrong, which is why the safety
+  guard exists
+
 **Not yet measured:**
 - Accuracy on *your* voice and *your* vocabulary
 - Whether the learning loop converges pleasantly in daily use
 - How well UI Automation reads Chrome and Electron apps (Slack, Discord, web
-  Gmail expose text only reluctantly — this is the weakest part of the app)
+  Gmail expose text only reluctantly — this is the weakest part of the app).
+  The screenshot fallback works but takes ~2.3s for a full screen.
 
 **Known limitations:**
 - Errors compound: if Whisper mishears a word, the romanizer faithfully
@@ -519,7 +597,8 @@ Ctrl+Alt+H       keep the next dictation in Devanagari
 Ctrl+Alt+X       discard
 ```
 
-To see the personalisation work, the fastest demonstration:
+The setup wizard runs automatically on first launch. To see the personalisation
+work afterwards:
 
 1. Dictate a Hindi sentence into any text field
 2. Change one spelling — `mujhe` to `muze`

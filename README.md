@@ -4,242 +4,158 @@
 
 # LiveWhisper
 
-**Wispr Flow for system audio.** Press a hotkey to capture a meeting, press it
-again to transcribe it, and the text lands wherever your cursor is.
+**Voice dictation that writes the way you write.**
 
-Runs on your own GPU. Understands 99 languages. No subscription.
-
-<img src="assets/screenshot.png" width="720" alt="LiveWhisper settings">
+Hold a hotkey, speak, and the words land at your cursor — in your capitalisation,
+your punctuation, and your Hinglish spellings. Runs on your own machine.
 
 </div>
 
 ---
 
+## Why this exists
+
+Every dictation tool is built to **normalise** your speech: add punctuation, fix
+capitalisation, clean it up. But personal writing style *is* deviation from the
+norm. So the category's core feature actively destroys the thing that makes text
+sound like you.
+
+Two concrete examples that shaped this project:
+
+**Lowercase.** Some people write `nhi yaar kal karta hoon` on WhatsApp and
+`Dear Sir,` in email. Wispr Flow reads your corrections — its documentation says
+so — but explicitly discards *"capitalization-only changes"*. It keeps
+vocabulary and throws away style, because a word→word dictionary has nowhere to
+put "don't capitalise in this app."
+
+**Script.** Whisper transcribes Hindi as `क्या कर रहे हो`. Almost nobody types
+Devanagari in chat; they type `kya kar rahe ho`. Research confirms there is no
+way to ask a speech engine for romanized Hinglish. So voice typing produces text
+in the wrong *script* for hundreds of millions of people.
+
+LiveWhisper keeps what the others throw away.
+
 ## What it does
 
-Dictation tools transcribe **your microphone**. LiveWhisper transcribes **what
-you hear** — the other participants on the call — and optionally your mic
-alongside it, mixed into one track.
-
-- **No virtual audio cable.** Captures system audio through WASAPI loopback, so
-  your speakers keep working and nothing needs rerouting or admin rights.
-- **Groq first, local fallback.** Uses the cloud when it is available and fast,
-  and drops to a local model automatically when credit runs out, the key is
-  rejected, or you are offline. You never get a failed transcription because a
-  quota expired mid-meeting.
-- **99 languages, auto-detected**, including speakers code-switching mid-call.
-- **Prompt profiles.** The active profile's prompt is prepended to the
-  transcript, so what you paste is ready to hand straight to an LLM.
-- **Nothing is lost.** Every transcript is saved to disk. If transcription fails
-  the raw audio is kept so you can retry it.
+| | Hotkey | |
+| --- | --- | --- |
+| **Dictate** | `Ctrl+Alt+Space` | Speak, text lands at your cursor in your style |
+| **Write this for me** | `Ctrl+Alt+W` | Speak an instruction; it reads your screen for context |
+| **Fix grammar** | `Ctrl+Alt+F` | Corrects the field you're in, *keeping* your slang and lowercase |
+| **Notes** | `Ctrl+Alt+N` | System-audio transcripts append to a Markdown note |
+| **Force Devanagari** | `Ctrl+Alt+H` | Keep the next dictation in the original script |
 
 ## Install
 
-Requires Windows 10/11, an NVIDIA GPU for the local engine (optional if you use
-Groq), and Python 3.10+.
+Windows 10/11, Python 3.10+, NVIDIA GPU recommended.
 
 ```powershell
-git clone https://github.com/YOUR-USERNAME/LiveWhisper.git
+git clone https://github.com/itsskofficial/LiveWhisper.git
 cd LiveWhisper
 .\install.ps1
 ```
 
-The installer detects your GPU, picks local-model settings that fit its VRAM,
-asks for a Groq API key (optional), offers to pre-download the model, and
-creates Start Menu and Desktop shortcuts. No admin rights; everything lives in
-one folder.
+On first run a one-minute wizard shows five sentences in Devanagari and asks you
+to type them your way. That's enough to learn most of your spelling habits
+before you dictate anything. It's skippable.
 
-```powershell
-.\install.ps1 -InstallDir "E:\Apps\LiveWhisper" -Startup   # pick a location
-.\install.ps1 -Unattended -SkipModel                       # no prompts
-.\uninstall.ps1 -KeepTranscripts
+## How the Hinglish part works
+
+Three stages, and only one of them is a neural network:
+
+```
+92.3% of words  →  dictionary lookup   →  instant, 1.1 MB, no AI
+ 7.7% of words  →  2.5M char model     →  10 MB, runs on CPU
+      every word →  your conventions    →  learned from your corrections
+                                          ─────────────
+                                          ~97% correct
 ```
 
-Verify the environment at any time:
+The dictionary comes from Google's [Dakshina](https://github.com/google-research-datasets/dakshina)
+dataset — 30,000 Hindi and 30,000 Marathi words with the Latin spellings real
+people use. Coverage was measured against real Whisper output, not a benchmark.
 
-```powershell
-.\.venv\Scripts\python.exe check_setup.py
-```
+**Why this matters:** nine-tenths of the hard problem is a table lookup. That's
+why this can be free and instant where cloud tools charge monthly and count your
+words.
 
-## Hotkeys
+## How it learns
 
-| Hotkey | Action |
+Your correction of `mujhe` → `muze` isn't a fact about that word. It's a fact
+about how you spell **ज** — and it applies to the 316 other words containing it.
+
+We measured this across 30,000 words. Variation follows 1,200 letter-level
+conventions, heavily concentrated:
+
+| Conventions learned | Variation explained |
 | --- | --- |
-| `Ctrl+Alt+Space` | Start / stop recording |
-| `Ctrl+Alt+X` | Discard the current recording |
-| `Ctrl+Alt+P` | Next prompt profile |
-| `Ctrl+Alt+G` | Switch engine (auto / groq / local) |
+| 5 | 43.9% |
+| **10** | **57.0%** |
+| 20 | 70.5% |
 
-All rebindable in Settings. Recording is a **toggle, not push-to-talk** —
-meetings are long.
+So about ten corrections — or one minute of setup — gets you most of the way.
 
-While recording, a floating pill shows elapsed time and a live level meter.
-The meter is the useful part: a flat line means the meeting audio is not
-reaching you, and you find that out in the first ten seconds rather than after a
-forty-minute call. Click the square to stop, the ✕ to discard, drag to move it,
-or turn it off entirely in Settings.
+**How it notices.** It does *not* watch you type. At the start of your next
+dictation, before pasting, it reads what's currently in that field and compares
+it with what it left there. Nothing runs in the background.
 
-## Prompt profiles
+**What it stores.** Plain readable JSON, one section per app — observed rates,
+not settings:
 
-The active profile's prompt is prepended before pasting. With `Summarise` active
-you get:
-
-```
-Summarise the key points and action items from this meeting transcript.
-Note who committed to what, and flag anything left unresolved.
-
-Transcript:
-
-[the transcript]
+```json
+"whatsapp.exe": { "habits": { "capitalize": 0.04, "terminal_period": 0.11 } },
+"_global":      { "conventions": { "rules": { "jh": "z" } } }
 ```
 
-Add, edit and delete profiles in **Settings → Prompts**.
+Spelling is global (how you spell ज doesn't change between apps). Habits are
+per-app (your WhatsApp voice isn't your email voice). Open it, edit it, delete
+it — **Settings → Writing** shows exactly what it has learned.
 
-## Engines
+**Safety rule.** One correction fixes that word but doesn't generalise — you
+might have typo'd. Two different words promote it to a rule, and even then the
+rule is checked against the lexicon first. This is not theoretical: in testing,
+someone typing `too` for तू taught the app `u → oo`, which rewrote `aur` as
+`aoor` and `bahut` as `bahoot` — 97% of affected words wrong. Single vowels are
+now refused; consonants like `jh → z` pass.
 
-`auto` (default) sends to Groq and falls back to local. `groq` is cloud-only.
-`local` never lets audio leave the machine — the right choice for a confidential
-call.
+## Local by default
 
-When Groq refuses, LiveWhisper benches it for a cooldown period rather than
-retrying and stalling every subsequent recording. Transient failures (a network
-blip, a 5xx) do not trigger the bench.
-
-### Measured
-
-Identical audio through both engines on an RTX 4060 Laptop (`large-v3`,
-`int8_float16`, `batch_size: 8`):
-
-| Audio | Local | Groq | Saved | Groq cost |
-| --- | --- | --- | --- | --- |
-| 3 min | 7.9s | 2.9s | 5s | $0.002 |
-| 30 min | 54.4s | 22.3s | 32s | $0.020 |
-
-Word counts were identical at both lengths. Local runs at **27–33x realtime**.
-
-Worth knowing: Groq's advertised 200x+ figure is throughput, not latency. Fixed
-upload overhead dominates short clips, so the real-world gap is ~2.5x, not 10x.
-**If privacy matters at all, stay local** — you are trading it for seconds.
-
-## Hardware detection
-
-The installer and **Settings → Engine** both detect your GPU and recommend
-model, precision and batch size that will actually fit:
-
-| VRAM | Recommendation |
+| Stage | Local? |
 | --- | --- |
-| 10 GB+ | `large-v3` · `float16` · batch 16 |
-| 6–10 GB | `large-v3` · `int8_float16` · batch 8 |
-| 4–6 GB | `large-v3` · `int8` · batch 4 |
-| 2–4 GB | `large-v3-turbo` · `int8` · batch 4 |
-| CPU only | `small` · `int8` |
+| Audio capture | Always |
+| Transcription | Yes — faster-whisper on your GPU |
+| Romanization + style | Yes — no network at all |
+| Compose & grammar | Yes, via Ollama — or Groq/OpenAI/Anthropic if you prefer |
 
-`large-v3` is preferred over `large-v3-turbo` wherever it fits. Turbo cuts
-decoder layers 32→4 and is measurably worse on non-English audio, which matters
-if your meetings are multilingual.
+**Honest note:** local models are genuinely fine for grammar and short rewrites.
+For longer composition a frontier model is noticeably better. Ollama support is
+a real capability, not parity.
 
-## Accuracy, measured
+## Measured
 
-Tested on real recorded meetings, not read-aloud samples.
-
-### English, multi-speaker
-
-90 seconds of a public GitLab weekly meeting — a real Zoom call with several
-speakers, compressed audio, and technical jargon. Both engines transcribed the
-same captured audio independently:
-
-| | Groq | Local `large-v3` |
-| --- | --- | --- |
-| Words | 215 | 212 |
-| Word-level agreement | **98.6%** | |
-| Substitutions | 0 | |
-| Deletions | 3 (`it`, `is there`) | |
-
-Zero substitutions. Two independently-run systems produced word-for-word
-identical output apart from three dropped filler words, and both got "VS Code",
-"Terraform module" and "MAU" right. Real meeting audio is not a problem.
-
-### Hindi/English code-switching — read this if your meetings are Hinglish
-
-This is where the engines diverge sharply. 75 seconds of a Hinglish podcast:
-
-| Setting | Result |
+| | |
 | --- | --- |
-| **Groq `large-v3`** (the default) | **Broken.** English transliterated into Devanagari: "that's your take" → "देट्स यॉर टेक", "MNCs are gonna shut shop" → "एम एन सीज आर गुण टो शट शॉप" |
-| Groq `large-v3`, `language: hi` | No change — identical bad output |
-| Groq `large-v3`, `language: en` | Clean, accurate English translation |
-| Groq `turbo` | Clean English, but inverted a claim ("MNCs will create more startup jobs" — the speaker said the opposite) |
-| **Local `large-v3`** | **Best.** Natural mixed script: `MNCs से ज़्यादा startup job create करेंगे, that's your take` |
+| Transcription | 27x realtime (`large-v3`, RTX 4060) |
+| Dictionary coverage | 92.3% of Devanagari tokens |
+| OOV model | 63.2% exact match, 2.56M params, CPU |
+| Combined | ~97% of words correctly romanized |
+| Grammar fix (local) | ~9s · Compose (local) ~3s |
 
-Groq and local run nominally the same model, but Groq's hosted version commits to
-one detected language and renders everything in that script. Locally the same
-model code-switches correctly.
-
-**If you take meetings in Hinglish** (or any code-switched pair), do one of:
-
-- Set **Settings → Engine → Backend** to `local` — keeps natural mixed script,
-  closest to what was actually said.
-- Or set **Settings → Engine → Groq language** to `en` — fast, clean English
-  translation, but you lose the original phrasing.
-
-Do not leave Groq on auto-detect for code-switched audio.
-
-### Names and jargon
-
-The main error source in monolingual audio is proper nouns, not general
-accuracy. In testing, `small` heard "Priya" as "PREA" and `large-v3` as "Preo".
-Setting **Settings → Engine → Vocabulary** fixed it exactly:
-
-```
-Attendees: Priya, Marcus. Topics: database vendor, migration timeline.
-```
-
-If you have recurring meetings with the same people, set this once.
-
-## Gotchas
-
-- **Muting your speakers captures silence.** WASAPI loopback taps the stream
-  *after* the master volume stage. Low volume is fine; mute yields nothing.
-  LiveWhisper warns you rather than returning an empty transcript.
-- **Your mic picks up the call through your speakers.** Harmless — both tracks
-  are summed to mono — but lower `mic_gain` if the echo is bad.
-- **`restore_clipboard` is off by default** so a failed auto-paste is
-  recoverable with a manual `Ctrl+V`.
-
-## How it works
-
-```
-audio.py       WASAPI loopback + mic capture, resample, mix to 16 kHz mono
-transcribe.py  Groq / faster-whisper / auto-fallback behind one interface
-overlay.py     floating recording pill
-gui.py         settings window
-hardware.py    GPU detection and model recommendation
-output.py      clipboard + SendInput Ctrl+V
-main.py        tray icon, hotkeys, state machine
-```
-
-Tk owns the main thread, pystray runs its message loop in a daemon thread, and
-hotkey handlers run in their own short-lived threads.
-
-One Windows-specific fix worth knowing about if you fork this: `pip install
-nvidia-cudnn-cu12` puts its DLLs where CTranslate2 cannot find them, which fails
-as `Could not locate cudnn_ops64_9.dll`. `livewhisper/_cuda.py` registers those
-directories at import, which avoids a manual CUDA Toolkit install.
+Every number is reproducible from `experiments/`.
 
 ## Development
 
 ```powershell
-python -m venv .venv; .\.venv\Scripts\activate
-pip install -r requirements.txt
-
-python check_setup.py                  # environment diagnostics
-python test_e2e.py                     # capture -> transcribe -> paste
-python test_fallback.py                # Groq -> local fallback behaviour
-python bench.py --minutes 10           # decode throughput
-python -m livewhisper.hardware         # what would be recommended here
-python run.py -v                       # run with debug logging
+python check_setup.py       # environment diagnostics
+python test_pipeline.py     # romanization, learning, habits, notes
+python test_gui.py          # wizard + settings, on a throwaway profile
+python run.py -v            # run with debug logging
 ```
+
+`docs/HOW-IT-WORKS.md` explains the whole system from scratch, assuming no
+background in speech recognition or machine learning.
 
 ## Licence
 
-MIT
+Code MIT. The Dakshina lexicons in `data/` are CC BY-SA 4.0 — see
+`data/LICENSE-DATA.md`.
