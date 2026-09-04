@@ -94,32 +94,76 @@ class Onboarding:
         if not native or not latin:
             return []
 
-        if len(native) == len(latin):
-            return list(zip(native, latin))
-
+        # Always walk, never zip. Equal counts are not proof of alignment:
+        # merging one pair of words while splitting another keeps the count
+        # identical and shifts everything after it. Real wizard data failed
+        # exactly this way.
         pairs, i, j = [], 0, 0
         while i < len(native) and j < len(latin):
-            if self._plausible(native[i], latin[j]):
+            merged = self._merge_score(native, i, latin[j])
+            direct = self._score(native[i], latin[j])
+
+            # A merge scores higher than either half alone, so check it first.
+            # "aa raha" typed as "araha" matches आ+रहा better than either word,
+            # and no override is recorded because the spelling cannot honestly
+            # be attributed to one of them.
+            if merged > max(direct, 0.6):
+                i += 2
+                j += 1
+                continue
+
+            if direct >= self.MIN_SIMILARITY:
                 pairs.append((native[i], latin[j]))
                 i += 1
                 j += 1
-            elif i + 1 < len(native) and self._plausible(native[i + 1], latin[j]):
-                i += 1                      # user skipped a word
-            elif j + 1 < len(latin) and self._plausible(native[i], latin[j + 1]):
-                j += 1                      # extra Latin word with no source
+            elif (i + 1 < len(native)
+                  and self._score(native[i + 1], latin[j]) >= self.MIN_SIMILARITY):
+                i += 1                      # a native word the user skipped
+            elif (j + 1 < len(latin)
+                  and self._score(native[i], latin[j + 1]) >= self.MIN_SIMILARITY):
+                j += 1                      # a Latin word with no native source
             else:
-                i += 1
+                i += 1                      # neither matches: drop both
                 j += 1
         return pairs
 
-    def _plausible(self, native: str, latin: str) -> bool:
-        """Is this Latin token a believable spelling of that Devanagari word?"""
-        default = self.lexicon.lookup(native)
-        candidates = [default] if default else []
-        candidates += self.lexicon.variants(native)
+    def _merge_score(self, native: list, i: int, latin: str) -> float:
+        """Does this Latin token look like two native words typed as one?"""
+        if i + 1 >= len(native):
+            return 0.0
+        a = self.lexicon.lookup(native[i])
+        b = self.lexicon.lookup(native[i + 1])
+        if not a or not b:
+            return 0.0
+        return similarity(a + b, latin)
+
+    # Tuned against real failures rather than guessed. similarity alone is not
+    # enough: "aa" vs "araha" scores 0.57, but so does "mujhe" vs "muze", and
+    # the first is nonsense while the second is exactly what we want to learn.
+    MIN_SIMILARITY = 0.60
+    LEN_RATIO = (0.5, 1.8)      # transliteration roughly preserves length
+
+    def _score(self, native: str, latin: str) -> float:
+        """How believable is this Latin token as a spelling of that word?
+
+        Best match across every attested spelling, but only for candidates of a
+        sensible length - transliteration roughly preserves length, so a token
+        much longer than the word is a merge rather than a respelling.
+        """
+        candidates = [c for c in ([self.lexicon.lookup(native)]
+                                  + self.lexicon.variants(native)) if c]
         if not candidates:
-            return True         # unknown word: accept rather than derail
-        return any(similarity(c, latin) >= 0.45 for c in candidates if c)
+            return 1.0          # unknown word: accept rather than derail
+        best = 0.0
+        for c in candidates:
+            ratio = len(latin) / len(c)
+            if not (self.LEN_RATIO[0] <= ratio <= self.LEN_RATIO[1]):
+                continue
+            best = max(best, similarity(c, latin))
+        return best
+
+    def _plausible(self, native: str, latin: str) -> bool:
+        return self._score(native, latin) >= self.MIN_SIMILARITY
 
     # ------------------------------------------------------------- learning
 
