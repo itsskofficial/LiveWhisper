@@ -11,6 +11,8 @@ Every dictation app gives you `क्या कर रहे हो`.
 
 *Hinglish · Tanglish · Banglish · Thanglish · Manglish · Punglish · and six more*
 
+[**What it does →**](https://claude.ai/code/artifact/f350c628-163d-4a75-a4e1-8a7829c6b2e9) · [Install](#install) · [How it works](#how-it-works) · [Contributing](CONTRIBUTING.md)
+
 </div>
 
 ---
