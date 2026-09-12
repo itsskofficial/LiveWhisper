@@ -64,9 +64,13 @@ in this app."
 | 🇵🇰 | Sindhi | Sindhlish | 32M | 88.0% |
 | 🇱🇰 | Sinhala | Singlish | 17M | 76.2% |
 
-**87.4% average**, measured on running text, not a benchmark. It picks the
-language from what you actually said — speak Tamil at work and Hindi at home
-without touching a setting.
+Coverage is how much of the language the dictionary knows. It is not accuracy —
+for that, see [below](#measured-not-claimed).
+
+It picks the language from the script it is handed, so speaking Tamil at work and
+Hindi at home needs no setting change. Ten of these twelve scripts belong to one
+language and are unambiguous; Devanagari and Arabic are each shared by two, and
+there your configured language decides.
 
 ---
 
@@ -120,6 +124,10 @@ conventions, heavily concentrated:
 | **10** | **57.0%** |
 | 20 | 70.5% |
 
+Running the loop for real does better than that table suggests: a single habit
+generalises to **100%** of held-out words after two corrections. [Measured
+here.](#learning)
+
 **It does not watch you type.** At the start of your next dictation, before
 pasting, it reads what's in that field and compares it with what it left there.
 Nothing runs in the background.
@@ -171,7 +179,7 @@ instant where cloud tools charge monthly and count your words.
 | | Local? |
 | --- | --- |
 | Audio capture | Always |
-| Transcription | Yes — faster-whisper on your GPU, 27x realtime |
+| Transcription | Yes — faster-whisper on your GPU, ~3s for a sentence |
 | Romanization + style | Yes — no network at all |
 | Compose & grammar | Yes via Ollama — or Groq/OpenAI/Anthropic if you prefer |
 
@@ -185,15 +193,75 @@ real capability, not parity.
 
 ## Measured, not claimed
 
+### Accuracy
+
+Google's Dakshina dataset includes ~5,000 sentences per language that a **human**
+romanized by hand. That is the only real ground truth for this task, so the
+headline number is how close we get to what that person wrote — 500 held-out
+sentences per language, 6,000 total:
+
 | | |
 | --- | --- |
-| Lexicon coverage, 12 languages | **87.4%** average on running text |
-| Transcription | 27x realtime (`large-v3`, RTX 4060) |
+| Spelled exactly as the human did | **60.4%** |
+| Spelled acceptably (both spellings attested) | **83.7%** |
+| A spelling nobody uses — actually wrong | **16.3%** |
+| Words left in native script | **1.0%** |
+
+Romanization has no single right answer: 45% of words have several accepted
+spellings, so `nahi` against a human's `nahin` is a disagreement, not an error.
+**83.7%** is the honest headline and **16.3%** is the number to drive down.
+Word error rate, if you want one number to compare against a paper, is 40.6%.
+
+Best and worst: Hindi 93.4% acceptable, Malayalam 73.2%. Per-language results in
+[`tests/results/`](tests/results/).
+
+### Speed
+
+Everything LiveWhisper itself does is far below what you can perceive. The wait
+is Whisper, and almost all of it is fixed cost:
+
+| | |
+| --- | --- |
+| Romanize a sentence | **0.01 ms** |
+| Romanize 156 words | **0.12 ms** |
+| Learn from a correction | **3.4 ms** |
+| First word in a new language | 80–105 ms (loads that lexicon) |
+| Transcribe a 4-second dictation | **2.8 s** — 1.5x realtime |
+| Transcribe two minutes | 3.5 s — 37x realtime |
+| Speech model load, once per launch | ~13 s |
+
+So a short dictation lands in about three seconds. Throughput figures like "37x
+realtime" are true only for long recordings; on a one-sentence dictation the
+fixed cost dominates, which is the number you actually feel.
+
+### Learning
+
+Simulated users with consistent spelling habits, measured on words they **never
+corrected** — because learning the words you fixed is worthless, the point is
+that fixing `mujhe` also fixes the 316 other words containing ज:
+
+| | |
+| --- | --- |
+| One habit, after 2 corrections | **100%** |
+| Three habits, after 3 / 30 | 91.7% / **98.3%** |
+| Five habits, after 2 / 15 | 78.8% / **91.7%** |
+
+### And one negative result
+
+| | |
+| --- | --- |
 | Character model, 12 languages | 65.4% exact match, 4.5M params, CPU |
-| 10 corrections | 57% of spelling variation |
 | Whisper → romanized via prompting | **Impossible** — 10 approaches, all failed |
 
-Every number is reproducible from [`experiments/`](experiments/).
+Every number here is reproducible. Experiments live in
+[`experiments/`](experiments/), measurements in [`tests/`](tests/):
+
+```powershell
+python tests/bench_romanization.py <dakshina-root>   # accuracy vs humans
+python tests/test_learning.py                        # convergence
+python tests/test_robustness.py                      # 118 adversarial checks
+python tests/bench_latency.py                        # per-stage timings
+```
 
 ---
 

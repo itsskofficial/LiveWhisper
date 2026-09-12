@@ -128,10 +128,24 @@ class ProfileStore:
             log.warning("could not read %s", self.path, exc_info=True)
 
     def save(self) -> None:
+        """Write the profile, creating its directory if it is not there yet.
+
+        The missing mkdir was silent: the write failed, the exception was logged
+        and swallowed, and everything the user had taught the app was lost on
+        exit with no visible error. It only showed up when a test pointed the
+        store at a directory that did not exist yet - which is also what happens
+        on a fresh install, or if someone moves the install folder.
+
+        Written to a temporary file and moved into place, so an interrupted write
+        cannot leave a truncated profile behind.
+        """
         try:
+            self.path.parent.mkdir(parents=True, exist_ok=True)
             data = {k: v.to_dict() for k, v in self.profiles.items()}
-            self.path.write_text(json.dumps(data, indent=2, ensure_ascii=False),
-                                 encoding="utf-8")
+            tmp = self.path.with_suffix(self.path.suffix + ".tmp")
+            tmp.write_text(json.dumps(data, indent=2, ensure_ascii=False),
+                           encoding="utf-8")
+            tmp.replace(self.path)
         except Exception:
             log.warning("could not write %s", self.path, exc_info=True)
 
