@@ -47,6 +47,7 @@ class LocalBackend:
     name = "local"
 
     def __init__(self, cfg: dict, vocabulary: str = ""):
+        self.last_language: str | None = None   # what Whisper heard, e.g. "ta"
         self.cfg = cfg
         self.vocabulary = vocabulary.strip()
         self._model = None
@@ -135,7 +136,10 @@ class LocalBackend:
                 **common,
             )
         text = " ".join(s.text.strip() for s in segments).strip()
-        log.info("detected language %s (p=%.2f)", info.language, info.language_probability)
+        self.last_language = info.language
+        self.language_probability = float(info.language_probability or 0)
+        log.info("detected language %s (p=%.2f)", info.language,
+                 info.language_probability)
         return text
 
 
@@ -143,6 +147,8 @@ class GroqBackend:
     name = "groq"
 
     def __init__(self, cfg: dict, vocabulary: str = ""):
+        self.last_language: str | None = None
+        self.language_probability = 0.0
         self.cfg = cfg
         self.vocabulary = vocabulary.strip()
 
@@ -175,7 +181,7 @@ class GroqBackend:
         buf.seek(0)
 
         data = {"model": self.cfg.get("model", "whisper-large-v3"),
-                "response_format": "json"}
+                "response_format": "verbose_json"}
         if self.cfg.get("language"):
             data["language"] = self.cfg["language"]
         if self.vocabulary:
@@ -194,7 +200,10 @@ class GroqBackend:
             raise GroqUnavailable(f"network error: {e}", cooldown=False) from e
 
         if r.status_code == 200:
-            return r.json().get("text", "").strip()
+            payload = r.json()
+            if payload.get("language"):
+                self.last_language = _iso_code(payload["language"])
+            return payload.get("text", "").strip()
 
         detail = r.text[:300]
         if r.status_code in (401, 403):
@@ -213,7 +222,13 @@ class AutoBackend:
 
     name = "auto"
 
+    @property
+    def last_language(self) -> str | None:
+        """Whichever backend actually ran most recently."""
+        return self._last_language
+
     def __init__(self, groq: GroqBackend, local: LocalBackend, cooldown_minutes: int = 60):
+        self._last_language = None
         self.groq = groq
         self.local = local
         self.cooldown = cooldown_minutes * 60
@@ -238,7 +253,9 @@ class AutoBackend:
     def transcribe(self, audio: np.ndarray) -> str:
         if self.groq_available:
             try:
-                return self.groq.transcribe(audio)
+                out = self.groq.transcribe(audio)
+                self._last_language = self.groq.last_language
+                return out
             except GroqUnavailable as e:
                 if e.cooldown:
                     self._block_groq()
@@ -253,7 +270,9 @@ class AutoBackend:
             self.notify("Downloading local model (~3 GB). This happens once.")
             self.local.download()
             self.notify("Local model ready.")
-        return self.local.transcribe(audio)
+        out = self.local.transcribe(audio)
+        self._last_language = self.local.last_language
+        return out
 
 
 def build_backend(name: str, cfg: dict):
@@ -271,6 +290,22 @@ def build_backend(name: str, cfg: dict):
             groq, local, int(cfg.get("fallback_cooldown_minutes", 60))
         )
     raise TranscriptionError(f"unknown backend {name!r}; expected auto, groq or local")
+
+
+_LANG_NAMES = {
+    "hindi": "hi", "bengali": "bn", "urdu": "ur", "punjabi": "pa",
+    "marathi": "mr", "telugu": "te", "tamil": "ta", "gujarati": "gu",
+    "kannada": "kn", "malayalam": "ml", "sinhala": "si", "sindhi": "sd",
+    "english": "en", "nepali": "ne",
+}
+
+
+def _iso_code(value: str) -> str:
+    """Groq reports language names; faster-whisper reports ISO codes."""
+    v = (value or "").strip().lower()
+    if len(v) == 2:
+        return v
+    return _LANG_NAMES.get(v, v[:2])
 
 
 def _split_on_silence(audio: np.ndarray, target: int) -> list[np.ndarray]:

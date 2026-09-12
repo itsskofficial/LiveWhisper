@@ -18,7 +18,8 @@ from pathlib import Path
 log = logging.getLogger(__name__)
 
 DATA = Path(__file__).resolve().parent.parent.parent / "data"
-CHECKPOINT = DATA / "translit_hi.pt"
+MULTI_CHECKPOINT = DATA / "translit.pt"          # all languages, one model
+LEGACY_CHECKPOINT = DATA / "translit_hi.pt"      # hindi-only, older builds
 
 PAD, BOS, EOS = 0, 1, 2
 MAX_OUT = 24
@@ -75,13 +76,17 @@ class OOVModel:
         self._src = self._tgt = None
         self._tried = False
         self.available = False
+        self.multilingual = False
+        self.languages: set = set()
 
     def load(self) -> bool:
         if self._tried:
             return self.available
         self._tried = True
-        if not CHECKPOINT.exists():
-            log.info("no transliteration checkpoint at %s", CHECKPOINT)
+        checkpoint = (MULTI_CHECKPOINT if MULTI_CHECKPOINT.exists()
+                      else LEGACY_CHECKPOINT)
+        if not checkpoint.exists():
+            log.info("no transliteration checkpoint in %s", DATA)
             return False
         try:
             import torch
@@ -89,7 +94,9 @@ class OOVModel:
             log.info("torch not installed - unknown words will pass through")
             return False
         try:
-            ck = torch.load(CHECKPOINT, map_location="cpu", weights_only=False)
+            ck = torch.load(checkpoint, map_location="cpu", weights_only=False)
+            self.languages = set(ck.get("languages") or ["hi"])
+            self.multilingual = bool(ck.get("languages"))
             self._src = {c: i for i, c in enumerate(ck["src_itos"])}
             self._tgt = ck["tgt_itos"]
             cls = _build()
@@ -97,18 +104,29 @@ class OOVModel:
             self._model.load_state_dict(ck["model"])
             self._model.eval()
             self.available = True
-            log.info("transliteration model ready (%d src chars)", len(self._src))
+            log.info("transliteration model ready: %d chars, languages %s",
+                     len(self._src), ",".join(sorted(self.languages)))
         except Exception:
             log.warning("could not load transliteration model", exc_info=True)
         return self.available
 
-    def spell(self, words: list[str]) -> dict[str, str]:
-        """Romanize a batch of unknown Devanagari words."""
+    def spell(self, words: list[str], lang: str = "hi") -> dict[str, str]:
+        """Romanize a batch of unknown native-script words.
+
+        The multilingual model is told which language it is reading via a tag
+        character prepended to the input, because the same letter can romanize
+        differently across scripts.
+        """
         if not words or not self.load():
+            return {}
+        if self.multilingual and lang not in self.languages:
             return {}
         import torch
 
-        enc = [[self._src[c] for c in w if c in self._src] + [EOS] for w in words]
+        tag = [self._src[f"<{lang}>"]] if (self.multilingual
+                                           and f"<{lang}>" in self._src) else []
+        enc = [tag + [self._src[c] for c in w if c in self._src] + [EOS]
+               for w in words]
         enc = [e if len(e) > 1 else [EOS] for e in enc]
         width = max(len(e) for e in enc)
         S = torch.full((len(enc), width), PAD, dtype=torch.long)

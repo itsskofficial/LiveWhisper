@@ -61,8 +61,8 @@ def main() -> int:
     print("\n=== 3. script chosen from what is on screen ===")
     deva_field = ScreenContext(app="notepad.exe", title="", text="",
                                focused_text="मैं अभी वहाँ पहुँच रहा हूँ", method="uia")
-    check("devanagari field keeps devanagari",
-          pipe.choose_script("notepad.exe", deva_field), "devanagari")
+    check("native-script field keeps native script",
+          pipe.choose_script("notepad.exe", deva_field), "native")
     latin_field = ScreenContext(app="whatsapp.exe", title="", text="",
                                 focused_text="yes I will be there soon", method="uia")
     check("latin field stays latin",

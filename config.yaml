@@ -30,7 +30,7 @@ transcription:
     model: whisper-large-v3
     api_key_env: GROQ_API_KEY # read from .env or the environment
     chunk_seconds: 600        # split long audio to stay under the upload cap
-    language: null            # null = auto-detect.
+    language:                 # null = auto-detect.
                               # IMPORTANT for Hindi/English (or any code-switched)
                               # meetings: Groq's whisper-large-v3 transliterates
                               # English into Devanagari when it auto-detects Hindi
@@ -44,7 +44,7 @@ transcription:
                               # non-English audio.
     device: cuda              # cuda | cpu
     compute_type: int8_float16  # ~3 GB VRAM. float16 (~5 GB) for max quality.
-    language: null            # null = auto-detect. Or force e.g. "en", "hi", "mr".
+    language:                 # null = auto-detect. Or force e.g. "en", "hi", "mr".
     beam_size: 5
     batch_size: 8             # decode VAD chunks in parallel. Big speedup on long
                               # meetings. Lower to 4 if you run out of VRAM; 1
@@ -70,34 +70,34 @@ ui:
   theme: dark-amber           # dark-amber | dark-indigo | system
   overlay: true               # floating recording pill: timer + live level meter
   overlay_meter: true         # level bars inside the pill
-  overlay_position: null      # remembered pill position, set by dragging it
+  overlay_position:           # remembered pill position, set by dragging it
 
 # Prompt profiles. The active profile's prompt is prepended to the transcript
 # before it is pasted. Ctrl+Alt+P cycles through them.
 profiles:
-  - name: Raw
-    prompt: ''
+- name: Raw
+  prompt: ''
 
-  - name: Summarise
-    prompt: |
-      Summarise the key points and action items from this meeting transcript.
-      Note who committed to what, and flag anything left unresolved.
+- name: Summarise
+  prompt: |
+    Summarise the key points and action items from this meeting transcript.
+    Note who committed to what, and flag anything left unresolved.
 
-      Transcript:
+    Transcript:
 
-  - name: Notes
-    prompt: |
-      Turn this meeting transcript into clean structured notes with headings
-      and bullet points. Preserve technical detail and specific numbers.
+- name: Notes
+  prompt: |
+    Turn this meeting transcript into clean structured notes with headings
+    and bullet points. Preserve technical detail and specific numbers.
 
-      Transcript:
+    Transcript:
 
-  - name: Translate
-    prompt: |
-      Translate this meeting transcript into English. Preserve names and
-      technical terms exactly as spoken.
+- name: Translate
+  prompt: |
+    Translate this meeting transcript into English. Preserve names and
+    technical terms exactly as spoken.
 
-      Transcript:
+    Transcript:
 
 # Script handling for Hindi / Marathi.
 #
@@ -105,10 +105,21 @@ profiles:
 # types Devanagari in chat, so by default we convert to the Latin spelling you
 # actually use (kya kar rahe ho). Measured coverage: 92% dictionary + 8% model.
 script:
-  default: latin              # latin | devanagari
-  language: hi                # hi | mr  - which lexicon to use
+  default: latin              # latin | native
+  language: hi                # auto, or one of:
+                              #   hi Hindi      bn Bengali    ur Urdu
+                              #   pa Punjabi    mr Marathi    te Telugu
+                              #   ta Tamil      gu Gujarati   kn Kannada
+                              #   ml Malayalam  si Sinhala    sd Sindhi
+                              #
+                              # auto uses the language Whisper heard, which is
+                              # right far more often than a setting you would
+                              # remember to change. Pin it if you only ever
+                              # speak one language and clips are short, since
+                              # detection is weakest on short audio.
+                              #
   # The app also reads the field you are typing into: if the text already there
-  # is Devanagari it keeps Devanagari, no setting required.
+  # is in the native script it keeps the native script, no setting required.
 
 # Reading the screen, for "write a reply to this" and for grammar checks.
 context:

@@ -1,4 +1,7 @@
-"""Dakshina romanization lexicon: Devanagari word -> attested Latin spellings.
+"""Dakshina romanization lexicons: native word -> attested Latin spellings.
+
+One lexicon per language, 30,000 words each, twelve languages. Loaded lazily
+so a Hindi user never pays for the Tamil table.
 
 Data from Google's Dakshina dataset (CC BY-SA 4.0). See data/LICENSE-DATA.md.
 
@@ -23,6 +26,7 @@ DATA = Path(__file__).resolve().parent.parent.parent / "data"
 # removes both observed failure modes: the very short words the model loops on,
 # and the common inflections the sample happened to miss.
 COMMON_WORDS = {
+  "hi": {
     # future tense - the gap that showed up in testing
     "जाऊंगा": "jaunga", "जाऊंगी": "jaungi", "जाऊँगा": "jaunga",
     "खाऊंगा": "khaunga", "आऊंगा": "aaunga", "करूंगा": "karunga",
@@ -56,6 +60,9 @@ COMMON_WORDS = {
     "मेरा": "mera", "तेरा": "tera", "अपना": "apna", "उनका": "unka",
     "एक": "ek", "दो": "do", "कुछ": "kuch", "सब": "sab", "कोई": "koi",
     "कौन": "kaun", "कहाँ": "kahan",
+  },
+  # Other languages rely on the lexicon alone until a native speaker
+  # contributes a list. See CONTRIBUTING.md - this is a good first issue.
 }
 
 # Kept for backwards compatibility with earlier imports.
@@ -77,6 +84,7 @@ class Lexicon:
     def __init__(self, lang: str = "hi"):
         self.lang = lang
         self._entries: dict[str, list[str]] = {}
+        self._counts: dict[str, int] = {}      # attestations, a commonness proxy
         self._loaded = False
 
     def load(self) -> None:
@@ -94,20 +102,48 @@ class Lexicon:
                 if len(parts) < 2:
                     continue
                 # each field after the word is "spelling:attestations"
-                forms = [p.rsplit(":", 1)[0] for p in parts[1:] if p]
+                forms, total = [], 0
+                for field in parts[1:]:
+                    if not field:
+                        continue
+                    spelling, _, count = field.rpartition(":")
+                    if not spelling:            # no colon - treat as bare form
+                        spelling, count = field, "1"
+                    forms.append(spelling)
+                    total += int(count) if count.isdigit() else 1
                 if forms:
                     self._entries[parts[0]] = forms
+                    self._counts[parts[0]] = total
                     n += 1
         self._loaded = True
         log.info("loaded %s lexicon: %d words", self.lang, n)
 
     def lookup(self, word: str) -> str | None:
         """Most-attested spelling, or None if unknown."""
-        if word in COMMON_WORDS:
-            return COMMON_WORDS[word]
+        curated = COMMON_WORDS.get(self.lang)
+        if curated and word in curated:
+            return curated[word]
         self.load()
         forms = self._entries.get(word)
         return forms[0] if forms else None
+
+    def attestations(self, word: str) -> int:
+        """How many people wrote this word at all - a rough frequency signal."""
+        self.load()
+        return self._counts.get(word, 0)
+
+    def contested(self, limit: int = 40) -> list:
+        """Common words people spell in more than one way.
+
+        These are the only words worth asking about during setup: a word with
+        one accepted spelling teaches us nothing, and an obscure word the user
+        does not recognise makes the question unanswerable.
+        """
+        self.load()
+        scored = [(self._counts.get(w, 0), w) for w, forms in self._entries.items()
+                  if len(forms) > 1 and 2 <= len(w) <= 8]
+        scored.sort(reverse=True)
+        return [w for _n, w in scored[:limit]]
 
     def variants(self, word: str) -> list[str]:
         """All attested spellings - the surface the user's preference selects from."""
@@ -119,7 +155,7 @@ class Lexicon:
         return len(self._entries)
 
 
-@lru_cache(maxsize=4)
+@lru_cache(maxsize=16)
 def get_lexicon(lang: str = "hi") -> Lexicon:
     lex = Lexicon(lang)
     lex.load()

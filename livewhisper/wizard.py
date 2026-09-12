@@ -12,6 +12,7 @@ import customtkinter as ctk
 
 from . import icons
 from .onboarding import Onboarding
+from .script.languages import CODES, DEFAULT, LANGUAGES, supported
 from .theme import appearance_mode, palette
 
 log = logging.getLogger(__name__)
@@ -31,8 +32,11 @@ class Wizard(ctk.CTkToplevel):
         self.minsize(680, 460)
         self._centre(760, 560)
 
-        self.onboarding = Onboarding(
-            app.cfg.get("script", {}).get("language", "hi"))
+        configured = (app.cfg.get("script", {}) or {}).get("language", "auto")
+        # "auto" is fine for transcription but meaningless here - onboarding has
+        # to be about one specific language, so ask.
+        self.lang = configured if supported(configured) else DEFAULT
+        self.onboarding = Onboarding(self.lang)
         self.prompts = self.onboarding.prompts()
         self.index = 0
         self.answers: list = []
@@ -70,6 +74,21 @@ class Wizard(ctk.CTkToplevel):
                  "write - that is the whole point.",
             font=("Segoe UI", 13), text_color=c["muted"], anchor="w",
             justify="left", wraplength=620).pack(fill="x", pady=(6, 20))
+
+        picker = ctk.CTkFrame(wrap, fg_color="transparent")
+        picker.pack(fill="x", pady=(0, 14))
+        ctk.CTkLabel(picker, text="Which language do you type?",
+                     font=("Segoe UI", 12), text_color=c["muted"],
+                     anchor="w").pack(side="left")
+        self.lang_var = ctk.StringVar(
+            value=f"{self.lang} - {LANGUAGES[self.lang].name}")
+        ctk.CTkOptionMenu(
+            picker, variable=self.lang_var,
+            values=[f"{c2} - {LANGUAGES[c2].name}" for c2 in CODES],
+            width=190, height=32, fg_color=c["bg"], button_color=c["border"],
+            button_hover_color=c["surface_hi"], text_color=c["text"],
+            dropdown_fg_color=c["surface"], dropdown_text_color=c["text"],
+            command=self._change_language).pack(side="right")
 
         self.progress = ctk.CTkLabel(wrap, text="", font=("Segoe UI", 11),
                                      text_color=c["accent"], anchor="w")
@@ -121,7 +140,24 @@ class Wizard(ctk.CTkToplevel):
 
         self._show()
 
+    def _change_language(self, choice: str) -> None:
+        """Switching language restarts setup with that language's prompts."""
+        code = choice.split(" - ")[0].strip()
+        if code == self.lang:
+            return
+        self.lang = code
+        self.onboarding = Onboarding(code)
+        self.prompts = self.onboarding.prompts()
+        self.index = 0
+        self.answers = []
+        self._show()
+
     def _show(self) -> None:
+        if not self.prompts:
+            self._done_screen("No data for this language",
+                              ["Its lexicon is missing, so there is nothing to "
+                               "learn from yet."])
+            return
         p = self.prompts[self.index]
         self.progress.configure(
             text=f"SENTENCE {self.index + 1} OF {len(self.prompts)}")
@@ -147,6 +183,7 @@ class Wizard(ctk.CTkToplevel):
         try:
             result = self.onboarding.process(self.answers)
             self.onboarding.apply(result, self.app.styles)
+            self._persist_language()
         except Exception as e:
             log.exception("onboarding failed")
             self._done_screen(f"Setup could not be applied: {e}", [])
@@ -200,6 +237,17 @@ class Wizard(ctk.CTkToplevel):
                       hover_color=c["accent_hi"], text_color=c["accent_text"],
                       font=("Segoe UI", 13, "bold"),
                       command=self._close).pack(pady=(18, 0))
+
+    def _persist_language(self) -> None:
+        """Remember which language was onboarded, so romanization matches."""
+        try:
+            from . import config as cfgio
+            cfg = self.app.cfg
+            cfg.setdefault("script", {})["language"] = self.lang
+            cfgio.save(self.app.config_path, cfg)
+            self.app.apply_config(cfg)
+        except Exception:
+            log.debug("could not persist language", exc_info=True)
 
     def _skip_all(self) -> None:
         self._close()

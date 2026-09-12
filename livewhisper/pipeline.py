@@ -17,7 +17,8 @@ from dataclasses import dataclass
 
 from . import context as ctx_mod
 from .profile import ProfileStore
-from .script.romanize import Romanizer, has_devanagari, script_ratio
+from .script.languages import detect_script, has_indic, supported
+from .script.romanize import Romanizer, script_ratio
 
 log = logging.getLogger(__name__)
 
@@ -27,9 +28,10 @@ class Delivery:
     text: str
     raw: str                 # transcript before any processing
     app: str
-    script: str              # latin | devanagari | n/a
+    script: str              # latin | native
     romanized: bool
     notes: list
+    language: str | None = None   # which lexicon was used
 
 
 class Pipeline:
@@ -49,19 +51,37 @@ class Pipeline:
         and is right nearly always.
         """
         forced = self.profiles.get(app).script
-        if forced in ("latin", "devanagari"):
-            return forced
+        if forced in ("latin", "native", "devanagari"):
+            return "native" if forced == "devanagari" else forced
 
         if screen:
             existing = screen.focused_text or ""
             if len(existing.strip()) >= 8:
-                return "devanagari" if script_ratio(existing) < 0.5 else "latin"
+                return "native" if script_ratio(existing) < 0.5 else "latin"
         return self.cfg.get("script", {}).get("default", "latin")
 
     # -------------------------------------------------------------- forward
 
+    def resolve_language(self, transcript: str, heard: str | None) -> str:
+        """Which lexicon should romanize this?
+
+        Whisper reports the language it heard, which is right far more often
+        than any setting the user would remember to change - somebody who
+        speaks Tamil at work and Hindi at home should not have to toggle. A
+        configured language wins when set to something other than `auto`,
+        because detection is weak on short or code-switched clips.
+        """
+        configured = (self.cfg.get("script", {}) or {}).get("language", "auto")
+        if configured and configured != "auto" and supported(configured):
+            return configured
+        if heard and supported(heard):
+            return heard
+        # Fall back to whichever script is actually on the page.
+        return detect_script(transcript) or "hi"
+
     def process(self, transcript: str, screen: ctx_mod.ScreenContext | None = None,
-                force_script: str | None = None) -> Delivery:
+                force_script: str | None = None,
+                heard_language: str | None = None) -> Delivery:
         app = (screen.app if screen else "") or ""
         profile = self.profiles.get(app)
         notes: list = []
@@ -69,9 +89,10 @@ class Pipeline:
         script = force_script or self.choose_script(app, screen)
         text = transcript
         romanized = False
+        lang = None
 
-        if has_devanagari(transcript) and script == "latin":
-            lang = self.cfg.get("script", {}).get("language", "hi")
+        if has_indic(transcript) and script == "latin":
+            lang = self.resolve_language(transcript, heard_language)
             r = Romanizer(lang, self.profiles.merged_conventions(app))
             r.remember_source(transcript)
             text = r.text(transcript)
@@ -81,7 +102,7 @@ class Pipeline:
         text = profile.habits.apply(text)
 
         d = Delivery(text=text, raw=transcript, app=app, script=script,
-                     romanized=romanized, notes=notes)
+                     romanized=romanized, notes=notes, language=lang)
         self._last = d
         return d
 

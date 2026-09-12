@@ -201,11 +201,14 @@ class App:
             for note in self.pipeline.learn_from_screen(screen):
                 log.info("learned: %s", note)
                 self.notify(note)
+            heard = getattr(self.backend(), "last_language", None)
             delivery = self.pipeline.process(transcript, screen,
-                                             force_script=self._force_script)
+                                             force_script=self._force_script,
+                                             heard_language=heard)
             self._force_script = None
-            log.info("app=%s script=%s romanized=%s",
-                     delivery.app, delivery.script, delivery.romanized)
+            log.info("app=%s script=%s romanized=%s lang=%s",
+                     delivery.app, delivery.script, delivery.romanized,
+                     delivery.language)
             return delivery.text
         except Exception:
             log.warning("pipeline failed, delivering raw transcript", exc_info=True)
@@ -288,8 +291,8 @@ class App:
                 self.notify(f"Note saved ({note.word_count} words).")
 
     def force_devanagari(self) -> None:
-        self._force_script = "devanagari"
-        self.notify("Next dictation will stay in Devanagari.")
+        self._force_script = "native"
+        self.notify("Next dictation will stay in the original script.")
 
     def cancel(self) -> None:
         with self._lock:

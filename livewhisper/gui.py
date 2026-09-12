@@ -15,6 +15,7 @@ import customtkinter as ctk
 
 from . import config as cfgio
 from . import hardware, icons, startup
+from .script.languages import CODES, LANGUAGES
 from .theme import appearance_mode, palette
 
 log = logging.getLogger(__name__)
@@ -311,14 +312,26 @@ class SettingsWindow(ctk.CTkToplevel):
 
         card = self._card(p)
         self._menu(card, "Default script", "script.default",
-                   t.get("default", "latin"), ["latin", "devanagari"],
-                   "Latin = kya kar rahe ho. Devanagari = the original script. "
+                   "native" if t.get("default") == "devanagari"
+                   else t.get("default", "latin"), ["latin", "native"],
+                   "Latin = kya kar rahe ho / naan varuven. native = the original script. "
                    "This is overridden when the field you are typing in already "
                    "contains one or the other.")
-        self._menu(card, "Language", "script.language", t.get("language", "hi"),
-                   ["hi", "mr"],
-                   "hi = Hindi, mr = Marathi. Both use Devanagari, so this "
-                   "selects which spelling dictionary to load.")
+        choices = ["auto"] + [f"{c} - {LANGUAGES[c].name}" for c in CODES]
+        current = t.get("language", "auto")
+        if current != "auto" and current in LANGUAGES:
+            current = f"{current} - {LANGUAGES[current].name}"
+        self._menu(card, "Language", "script.language", current, choices,
+                   "Twelve South Asian languages are supported. 'auto' uses the "
+                   "language actually heard, which beats a setting you would "
+                   "forget to change. Pin it if you only ever speak one and "
+                   "your clips are short.", width=200)
+
+        langs = ", ".join(LANGUAGES[c].nickname for c in CODES[:6])
+        ctk.CTkLabel(p, text=f"Supports {len(CODES)} languages: {langs} and more",
+                     font=("Segoe UI", 11), text_color=self.c["muted"],
+                     anchor="w", justify="left", wraplength=560).pack(
+            fill="x", pady=(2, 0))
 
         ctk.CTkLabel(p, text="What it has learned about you",
                      font=("Segoe UI", 15, "bold"), text_color=self.c["text"],
@@ -755,7 +768,8 @@ class SettingsWindow(ctk.CTkToplevel):
 
         sc = cfg.setdefault("script", {})
         sc["default"] = self._get("script.default", str, "latin")
-        sc["language"] = self._get("script.language", str, "hi")
+        lang = self._get("script.language", str, "auto") or "auto"
+        sc["language"] = lang.split(" - ")[0].strip()
 
         act = cfg.setdefault("actions", {})
         mdl = act.setdefault("models", {})

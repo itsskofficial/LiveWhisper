@@ -24,8 +24,9 @@ import logging
 from dataclasses import dataclass
 
 from .script.conventions import Conventions, similarity, tokenize
+from .script.languages import DEFAULT, LANGUAGES, run_pattern, supported
 from .script.lexicon import get_lexicon
-from .script.romanize import DEVA_RUN, Romanizer
+from .script.romanize import Romanizer
 
 log = logging.getLogger(__name__)
 
@@ -39,7 +40,8 @@ class Prompt:
 
 # Five sentences, chosen to exercise the highest-frequency spelling axes from
 # exp5 while sounding like something you would actually send someone.
-PROMPTS = [
+SENTENCES = {
+  "hi": [
     Prompt("मुझे कल ऑफिस जाना है, तू आ रहा है क्या?",
            "I have to go to the office tomorrow, are you coming?",
            "j/z (mujhe), oo/u (tu), ai/e (hai), c/k (kya)"),
@@ -55,7 +57,30 @@ PROMPTS = [
     Prompt("पूरा दिन काम किया फिर भी कुछ नहीं हुआ।",
            "Worked all day and still nothing happened.",
            "oo/u (poora, kuch), i/y (kiya), f/ph (phir)"),
-]
+  ],
+  # The other eleven fall back to word prompts generated from their own
+  # lexicon (see _word_prompts). Contributing natural chat-register sentences
+  # for your language is the single most useful thing a native speaker can add
+  # here - see CONTRIBUTING.md.
+}
+
+PROMPTS = SENTENCES["hi"]        # kept for callers that imported it
+
+
+# A sentence per language to show the before/after effect at the end of setup.
+PREVIEW = {
+    "hi": "मुझे नहीं पता वो कब आएगा, फिर भी मैं ठीक हूँ",
+    "mr": "मला माहीत नाही तो कधी येईल",
+    "bn": "আমি জানি না সে কখন আসবে",
+    "ta": "அவன் எப்போது வருவான் என்று தெரியாது",
+    "te": "అతను ఎప్పుడు వస్తాడో నాకు తెలియదు",
+    "kn": "ಅವನು ಯಾವಾಗ ಬರುತ್ತಾನೆ ಎಂದು ಗೊತ್ತಿಲ್ಲ",
+    "ml": "അവൻ എപ്പോൾ വരുമെന്ന് എനിക്കറിയില്ല",
+    "gu": "મને ખબર નથી તે ક્યારે આવશે",
+    "pa": "ਮੈਨੂੰ ਨਹੀਂ ਪਤਾ ਉਹ ਕਦੋਂ ਆਵੇਗਾ",
+    "ur": "مجھے نہیں معلوم وہ کب آئے گا",
+    "si": "එයා කවදා එනවද කියලා මම දන්නේ නෑ",
+}
 
 
 @dataclass
@@ -70,13 +95,44 @@ class Result:
 class Onboarding:
     """Turns typed sentences into a seeded profile."""
 
-    def __init__(self, lang: str = "hi"):
-        self.lang = lang
-        self.lexicon = get_lexicon(lang)
-        self.romanizer = Romanizer(lang)
+    def __init__(self, lang: str = DEFAULT):
+        # "auto" is a transcription setting, not something we can onboard for -
+        # the user has to tell us which language they type.
+        self.lang = lang if supported(lang) else DEFAULT
+        self.language = LANGUAGES[self.lang]
+        self.lexicon = get_lexicon(self.lang)
+        self.romanizer = Romanizer(self.lang)
+        self._pattern = run_pattern(self.lang)
 
     def prompts(self) -> list:
-        return list(PROMPTS)
+        """Sentences where we have them, generated word prompts otherwise."""
+        hand_written = SENTENCES.get(self.lang)
+        if hand_written:
+            return list(hand_written)
+        return self._word_prompts()
+
+    def _word_prompts(self, count: int = 8) -> list:
+        """Ask about common words whose spelling people disagree on.
+
+        Hindi gets hand-written sentences, which are better - they reveal
+        capitalisation and punctuation too. For the other eleven we generate
+        from the lexicon until a native speaker contributes sentences, ranking
+        by how many people attested the word so the questions are answerable.
+        """
+        out = []
+        for word in self.lexicon.contested(limit=count * 3):
+            forms = self.lexicon.variants(word)
+            if len(forms) < 2:
+                continue
+            alts = ", ".join(forms[1:3])
+            out.append(Prompt(
+                devanagari=word,
+                gloss=f"we spell this \"{forms[0]}\"" +
+                      (f", others write {alts}" if alts else ""),
+                axes="generated from lexicon variance"))
+            if len(out) >= count:
+                break
+        return out
 
     # ------------------------------------------------------------ alignment
 
@@ -89,7 +145,7 @@ class Onboarding:
         is a plausible spelling of that Devanagari word. That stops a single
         mismatch from corrupting every pair after it.
         """
-        native = DEVA_RUN.findall(devanagari)
+        native = self._pattern.findall(devanagari)
         latin = tokenize(typed)
         if not native or not latin:
             return []
@@ -219,7 +275,10 @@ class Onboarding:
 
     def preview(self, conventions: Conventions) -> list:
         """Show the effect: how a sample sentence looks before and after."""
-        sample = "मुझे नहीं पता वो कब आएगा, फिर भी मैं ठीक हूँ"
+        sample = PREVIEW.get(self.lang)
+        if not sample:
+            words = [p.devanagari for p in self.prompts()[:6]]
+            sample = " ".join(words)
         before = Romanizer(self.lang).text(sample)
         after = Romanizer(self.lang, conventions).text(sample)
         return [sample, before, after]
