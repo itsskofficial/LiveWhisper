@@ -195,6 +195,80 @@ Every number is reproducible from [`experiments/`](experiments/).
 
 ---
 
+## "Isn't this already solved?"
+
+Reasonable question. Three things look like they solve it and don't.
+
+### Gboard already does transliteration
+
+It does — **in the opposite direction.** Gboard lets you *type* `kya kar rahe ho`
+and turns it into `क्या कर रहे हो`. That is roman → native.
+
+LiveWhisper is native → roman, which is what you need when the *machine*
+produces the text and you want it to look like you wrote it. Gboard's own voice
+typing gives you Devanagari, same as everything else.
+
+Different problem, opposite direction, and nobody was solving this one.
+
+### Wispr Flow / Typeless / superwhisper
+
+All excellent at English dictation, and all give you native script for Indic
+languages because they use the same speech engines everyone does.
+
+On style: Wispr Flow does read your corrections — but its documentation says it
+keeps proper nouns and jargon while discarding *"capitalization-only changes"*
+and style fixes. That is a deliberate design choice forced by its data model, a
+flat word→word dictionary. Per-app style needs per-app profiles.
+
+They are also cloud services with word limits and subscriptions. This is neither.
+
+### Just ask Whisper for romanized output
+
+The first thing we tried. It cannot be done — ten different approaches, all
+failed, documented in [`experiments/exp1_romanized_prompt.py`](experiments/).
+
+The closest attempt forces Whisper to *start* in Latin letters. It complies for
+about thirty seconds and then reverts mid-sentence:
+
+```
+haan toh main ye keh raha tha ki, you were saying MNCs se zyada startup
+job create karenge... mai batata hon because MNCs खरीद नहीं लेगी ...
+```
+
+Whisper decides the audio is Hindi, and to Whisper, Hindi *means* Devanagari.
+You can nudge it. You cannot change its mind. That negative result is why the
+conversion stage exists.
+
+---
+
+## Questions
+
+**Is my audio sent anywhere?**
+No. Capture and transcription run on your machine. Romanization and style
+learning never touch the network at all. You can optionally point transcription
+at Groq for speed, or the writing assistant at a cloud model — both are off by
+default and clearly labelled.
+
+**Does it work offline?**
+Entirely, once the speech model is downloaded.
+
+**What does it learn about me, and where does it go?**
+A JSON file in the install directory containing spelling preferences and
+observed rates like "capitalises 4% of the time in WhatsApp". It never stores
+the text you wrote. Open it, edit it, delete it — **Settings → Writing** shows
+all of it and has a Forget button.
+
+**My language isn't listed.**
+The twelve are the ones Google's Dakshina dataset covers, because a romanization
+lexicon is the hard prerequisite. If you know of an equivalent dataset for
+another language, open an issue — the pipeline itself is language-agnostic.
+
+**The romanization is wrong for my language.**
+Very possibly, and we'd like to know. Eleven of the twelve have never been
+checked by a native speaker. There's an issue template for exactly this.
+
+---
+
 ## Contributing
 
 **The most valuable thing a native speaker can do** takes ten minutes: write
