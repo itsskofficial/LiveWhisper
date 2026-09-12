@@ -1,25 +1,31 @@
-﻿<#
+<#
 .SYNOPSIS
-    Install LiveWhisper - hotkey meeting transcription for Windows.
+    Install LiveWhisper - voice typing that writes your language the way you type it.
 
 .DESCRIPTION
-    Creates an isolated virtualenv, installs dependencies, detects your GPU and
-    configures the best local model for it, optionally stores a Groq API key and
-    pre-downloads the local model, then creates Start Menu and Desktop shortcuts.
+    Works two ways:
+
+      1. From a clone:   .\install.ps1
+      2. From nothing:   irm https://raw.githubusercontent.com/itsskofficial/LiveWhisper/main/install.ps1 | iex
+
+    In the second case it downloads the project first. Either way it creates an
+    isolated virtualenv, installs dependencies, detects your GPU and configures
+    the best local model for it, and creates Start Menu and Desktop shortcuts.
 
     No admin rights needed. Everything lives under -InstallDir.
 
 .EXAMPLE
     .\install.ps1
 .EXAMPLE
-    .\install.ps1 -InstallDir "E:\Apps\LiveWhisper" -GroqKey "gsk_..." -Startup
+    .\install.ps1 -InstallDir "E:\Apps\LiveWhisper" -Language ta -Startup
 .EXAMPLE
-    .\install.ps1 -Unattended        # accept every default, prompt for nothing
+    .\install.ps1 -Unattended
 #>
 [CmdletBinding()]
 param(
     [string]$InstallDir = "$env:LOCALAPPDATA\Programs\LiveWhisper",
     [string]$GroqKey = "",
+    [string]$Language = "",
     [switch]$DownloadModel,
     [switch]$SkipModel,
     [switch]$Startup,
@@ -28,7 +34,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$Source = Split-Path -Parent $MyInvocation.MyCommand.Path
+$Repo = "itsskofficial/LiveWhisper"
 
 function Say([string]$m, [string]$c = "Gray") { Write-Host $m -ForegroundColor $c }
 function Step([string]$m) { Write-Host ""; Write-Host "==> $m" -ForegroundColor Cyan }
@@ -53,8 +59,30 @@ function AskYesNo([string]$question, [bool]$default = $true) {
 
 Write-Host ""
 Write-Host "  LiveWhisper" -ForegroundColor Yellow
-Write-Host "  Hotkey meeting transcription for Windows" -ForegroundColor DarkGray
-Write-Host "  ----------------------------------------" -ForegroundColor DarkGray
+Write-Host "  Voice typing in Hinglish, Tanglish, Banglish and 9 more" -ForegroundColor DarkGray
+Write-Host "  --------------------------------------------------------" -ForegroundColor DarkGray
+
+# ---------------------------------------------------------------- get source
+# When piped from the web there is no script file on disk, so fetch the project.
+$Source = if ($PSCommandPath) { Split-Path -Parent $PSCommandPath } else { $null }
+
+if (-not $Source -or -not (Test-Path (Join-Path $Source "livewhisper"))) {
+    Step "Downloading LiveWhisper"
+    $tmp = Join-Path $env:TEMP "livewhisper-src-$(Get-Random)"
+    New-Item -ItemType Directory -Path $tmp -Force | Out-Null
+    $zip = Join-Path $tmp "src.zip"
+    try {
+        Invoke-WebRequest -Uri "https://github.com/$Repo/archive/refs/heads/main.zip" `
+                          -OutFile $zip -UseBasicParsing
+    } catch {
+        Die "Could not download the project. Check your connection, or clone it manually:`n    git clone https://github.com/$Repo.git"
+    }
+    Expand-Archive -Path $zip -DestinationPath $tmp -Force
+    $Source = (Get-ChildItem $tmp -Directory | Where-Object { $_.Name -like "LiveWhisper-*" } |
+               Select-Object -First 1).FullName
+    if (-not $Source) { Die "Downloaded archive did not contain the project." }
+    Say "  Downloaded to $Source" "Green"
+}
 
 # --------------------------------------------------------------------- python
 Step "Checking Python"
@@ -100,8 +128,7 @@ if ($LASTEXITCODE -ne 0 -or -not $hwJson) {
     $hw = $hwJson | ConvertFrom-Json
     $rec = $hw.recommended
     Say "  GPU   $($hw.gpu_label)" "Green"
-    Say "  VRAM  $($hw.vram_gb) GB"
-    Say "  RAM   $($hw.ram_gb) GB    CPU  $($hw.machine.cpus) cores"
+    Say "  VRAM  $($hw.vram_gb) GB    RAM  $($hw.ram_gb) GB    CPU  $($hw.machine.cpus) cores"
     Say ""
     Say "  Recommended local model" "Yellow"
     Say "    $($rec.model)  -  $($rec.compute_type)  -  batch $($rec.batch_size)"
@@ -115,29 +142,26 @@ Step "Install location"
 if (-not $Unattended) { $InstallDir = Ask "Install to" $InstallDir }
 Say "  $InstallDir"
 
-if (Test-Path $InstallDir) {
-    $existing = Join-Path $InstallDir "livewhisper"
-    if (Test-Path $existing) {
-        if (-not (AskYesNo "Existing install found. Upgrade in place (keeps config.yaml and .env)?" $true)) {
-            Die "Cancelled."
-        }
-        $upgrade = $true
+if (Test-Path (Join-Path $InstallDir "livewhisper")) {
+    if (-not (AskYesNo "Existing install found. Upgrade in place (keeps your settings)?" $true)) {
+        Die "Cancelled."
     }
-} else {
+} elseif (-not (Test-Path $InstallDir)) {
     New-Item -ItemType Directory -Path $InstallDir -Force | Out-Null
 }
 
 # ---------------------------------------------------------------- copy source
 Step "Copying application files"
 
-$items = @("livewhisper", "assets", "run.py", "requirements.txt", "check_setup.py",
-           "README.md", "LICENSE", "start.bat", "uninstall.ps1", ".env.example")
+$items = @("livewhisper", "assets", "data", "tools", "ci", "docs", "run.py",
+           "requirements.txt", "check_setup.py", "verify.py", "demo_seed.py",
+           "README.md", "CONTRIBUTING.md", "LICENSE", "start.bat",
+           "uninstall.ps1", ".env.example")
 foreach ($item in $items) {
     $src = Join-Path $Source $item
     if (-not (Test-Path $src)) { continue }
     Copy-Item $src -Destination $InstallDir -Recurse -Force
 }
-# Never clobber a user's settings or secrets on upgrade.
 foreach ($keep in @("config.yaml", ".env")) {
     $dst = Join-Path $InstallDir $keep
     if (-not (Test-Path $dst)) {
@@ -165,6 +189,15 @@ Step "Installing dependencies (this pulls ~1.5 GB of CUDA runtime, give it a few
 & $vpy -m pip install --upgrade pip --quiet
 & $vpy -m pip install -r (Join-Path $InstallDir "requirements.txt") --quiet
 if ($LASTEXITCODE -ne 0) { Die "Dependency installation failed. Re-run with -Verbose to see pip's output." }
+
+# torch powers the character model that handles words the dictionary misses.
+# CPU-only is plenty - the model is 4.5M parameters - and it keeps the download
+# to ~200 MB rather than 2.5 GB.
+Say "  Installing the spelling model runtime (CPU torch, ~200 MB)..." "DarkGray"
+& $vpy -m pip install torch --index-url https://download.pytorch.org/whl/cpu --quiet 2>$null
+if ($LASTEXITCODE -ne 0) {
+    Warn "torch did not install. The dictionary still covers ~87% of words; unknown ones stay in the original script."
+}
 Say "  Dependencies installed" "Green"
 
 # --------------------------------------------------------------------- config
@@ -172,45 +205,62 @@ Step "Configuring"
 
 Push-Location $InstallDir
 try {
-    if ($hw) {
-        & $vpy -m livewhisper.bootstrap apply-recommended
-    }
+    if ($hw) { & $vpy -m livewhisper.bootstrap apply-recommended }
     & $vpy -m livewhisper.bootstrap make-icon | Out-Null
+
+    # --- language ---
+    if (-not $Language -and -not $Unattended) {
+        Say ""
+        Say "  Which language do you speak and type in Latin letters?" "Yellow"
+        Say "    hi Hindi      bn Bengali    ur Urdu       pa Punjabi" "DarkGray"
+        Say "    mr Marathi    te Telugu     ta Tamil      gu Gujarati" "DarkGray"
+        Say "    kn Kannada    ml Malayalam  si Sinhala    sd Sindhi" "DarkGray"
+        Say "    auto - detect it from what you say each time" "DarkGray"
+        $Language = Ask "Language" "auto"
+    }
+    if ($Language) {
+        & $vpy -c @"
+import sys
+from livewhisper import config as c
+from livewhisper.script.languages import supported
+lang = sys.argv[1].strip().lower()
+if lang != 'auto' and not supported(lang):
+    print(f'  unknown language {lang!r}, using auto'); lang = 'auto'
+cfg = c.load('config.yaml'); cfg.setdefault('script', {})['language'] = lang
+c.save('config.yaml', cfg); print(f'  language set to {lang}')
+"@ $Language
+    }
 
     # --- Groq key ---
     if (-not $GroqKey -and -not $Unattended) {
         Say ""
-        Say "  Groq gives you cloud transcription that is roughly 2.5x faster than" "DarkGray"
-        Say "  local, at about `$0.04/hour with a free tier. LiveWhisper uses it" "DarkGray"
-        Say "  first and falls back to the local model automatically when it runs" "DarkGray"
-        Say "  out or is unreachable. Leave blank to run fully local." "DarkGray"
-        Say "  Get a free key at https://console.groq.com" "DarkGray"
+        Say "  Optional: a Groq key makes transcription ~2.5x faster, free tier" "DarkGray"
+        Say "  available. Leave blank to run entirely on your own machine." "DarkGray"
+        Say "  https://console.groq.com" "DarkGray"
         $GroqKey = Ask "Groq API key (optional)" ""
     }
     if ($GroqKey) {
         & $vpy -m livewhisper.bootstrap set-key $GroqKey
     } else {
-        Say "  No Groq key. Defaulting to the local engine." "DarkGray"
+        Say "  No Groq key - running fully local." "DarkGray"
         & $vpy -c @"
 from livewhisper import config as c
-from pathlib import Path
-cfg = c.load('config.yaml'); cfg['transcription']['backend'] = 'local'; c.save('config.yaml', cfg)
-print('  backend set to local')
+cfg = c.load('config.yaml'); cfg['transcription']['backend'] = 'local'
+c.save('config.yaml', cfg); print('  engine set to local')
 "@
     }
 
-    # --- local model ---
+    # --- speech model ---
     $want = $false
     if ($DownloadModel) { $want = $true }
     elseif ($SkipModel) { $want = $false }
     elseif (-not $Unattended) {
         Say ""
         $modelName = if ($hw) { $rec.model } else { "large-v3" }
-        Say "  The local engine needs the '$modelName' weights (about 3 GB)." "DarkGray"
+        Say "  The speech model '$modelName' is about 3 GB." "DarkGray"
         if ($GroqKey) {
-            Say "  You have a Groq key, so this is only needed as the offline" "DarkGray"
-            Say "  fallback. It downloads automatically the first time it is" "DarkGray"
-            Say "  actually required, so skipping here is perfectly safe." "DarkGray"
+            Say "  You have a Groq key, so this is only the offline fallback and" "DarkGray"
+            Say "  downloads automatically the first time it is needed." "DarkGray"
             $want = AskYesNo "Download it now anyway?" $false
         } else {
             Say "  Without a Groq key this is required to transcribe anything." "DarkGray"
@@ -218,11 +268,11 @@ print('  backend set to local')
         }
     }
     if ($want) {
-        Say "  Downloading model, this takes a while..." "DarkGray"
+        Say "  Downloading, this takes a while..." "DarkGray"
         & $vpy -m livewhisper.bootstrap download-model
         if ($LASTEXITCODE -ne 0) { Warn "Model download failed. It will retry on first use." }
     } else {
-        Say "  Skipped. Download later from Settings > Engine, or it happens on first use." "DarkGray"
+        Say "  Skipped - downloads on first use." "DarkGray"
     }
 } finally {
     Pop-Location
@@ -243,7 +293,7 @@ if (-not $NoShortcuts) {
         $sc.Arguments = "`"$entry`""
         $sc.WorkingDirectory = $InstallDir
         $sc.IconLocation = "$icon,0"
-        $sc.Description = "Hotkey meeting transcription"
+        $sc.Description = "Voice typing in your own spelling"
         $sc.Save()
     }
 
@@ -256,7 +306,7 @@ if (-not $NoShortcuts) {
         Say "  Desktop" "Green"
     }
 
-    $wantStartup = if ($Startup) { $true } else { AskYesNo "Start LiveWhisper automatically when you sign in?" $true }
+    $wantStartup = if ($Startup) { $true } else { AskYesNo "Start automatically when you sign in?" $true }
     if ($wantStartup) {
         $run = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
         Set-ItemProperty -Path $run -Name "LiveWhisper" -Value "`"$pyw`" `"$entry`""
@@ -272,11 +322,13 @@ try { & $vpy check_setup.py } finally { Pop-Location }
 Write-Host ""
 Write-Host "  Installed to $InstallDir" -ForegroundColor Green
 Write-Host ""
-Write-Host "  Ctrl+Alt+Space   start / stop recording" -ForegroundColor Gray
-Write-Host "  Ctrl+Alt+X       discard recording" -ForegroundColor Gray
-Write-Host "  Ctrl+Alt+P       next prompt profile" -ForegroundColor Gray
-Write-Host "  Ctrl+Alt+G       switch engine" -ForegroundColor Gray
+Write-Host "  Ctrl+Alt+Space   dictate" -ForegroundColor Gray
+Write-Host "  Ctrl+Alt+W       speak an instruction, it writes the text" -ForegroundColor Gray
+Write-Host "  Ctrl+Alt+F       fix grammar, keeping your style" -ForegroundColor Gray
+Write-Host "  Ctrl+Alt+N       notes from system audio" -ForegroundColor Gray
+Write-Host "  Ctrl+Alt+H       keep the next dictation in the original script" -ForegroundColor Gray
 Write-Host ""
+Write-Host "  On first run a one-minute setup learns how you spell." -ForegroundColor DarkGray
 Write-Host "  Right-click the tray icon for Settings." -ForegroundColor DarkGray
 Write-Host ""
 
@@ -286,4 +338,3 @@ if (AskYesNo "Launch LiveWhisper now?" $true) {
                   -WorkingDirectory $InstallDir
     Say "  Running in the tray." "Green"
 }
-

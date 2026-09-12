@@ -72,11 +72,23 @@ without touching a setting.
 
 Windows 10/11 · Python 3.10+ · NVIDIA GPU recommended (works without)
 
+**One line, nothing to clone:**
+
+```powershell
+irm https://raw.githubusercontent.com/itsskofficial/LiveWhisper/main/install.ps1 | iex
+```
+
+Or from a clone, if you'd rather read it first:
+
 ```powershell
 git clone https://github.com/itsskofficial/LiveWhisper.git
 cd LiveWhisper
 .\install.ps1
 ```
+
+The installer asks which language you type in, detects your GPU and picks a
+model that fits it, and offers a Groq key for speed (optional — it runs fully
+local without one).
 
 A one-minute wizard then asks you to type a few sentences your way. That alone
 teaches it most of your spelling habits. Skippable.
