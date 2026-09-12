@@ -1,53 +1,76 @@
 <div align="center">
 
-<img src="assets/livewhisper.png" width="96" alt="LiveWhisper">
+<img src="assets/livewhisper.png" width="88" alt="LiveWhisper">
 
 # LiveWhisper
 
-**Voice dictation that writes the way you write.**
+**Voice typing for the 1.6 billion people who type their language in English letters.**
 
-Hold a hotkey, speak, and the words land at your cursor — in your capitalisation,
-your punctuation, and your Hinglish spellings. Runs on your own machine.
+You speak Hindi. You type `kya kar rahe ho`.
+Every dictation app gives you `क्या कर रहे हो`.
+
+*Hinglish · Tanglish · Banglish · Thanglish · Manglish · Punglish · and six more*
 
 </div>
 
 ---
 
-## Why this exists
+## The problem, in one line
 
-Every dictation tool is built to **normalise** your speech: add punctuation, fix
-capitalisation, clean it up. But personal writing style *is* deviation from the
-norm. So the category's core feature actively destroys the thing that makes text
-sound like you.
+Speech engines write the "correct" script. Nobody types the correct script.
 
-Two concrete examples that shaped this project:
+```
+   you say:            "kal main office jaunga"
+   Whisper writes:      कल मैं ऑफिस जाऊंगा        ← correct Hindi. unusable in chat.
+   LiveWhisper writes:  kal main office jaunga    ← what you'd have typed
+```
 
-**Lowercase.** Some people write `nhi yaar kal karta hoon` on WhatsApp and
-`Dear Sir,` in email. Wispr Flow reads your corrections — its documentation says
-so — but explicitly discards *"capitalization-only changes"*. It keeps
-vocabulary and throws away style, because a word→word dictionary has nowhere to
-put "don't capitalise in this app."
+There is **no way to ask a speech engine for romanized output**. We tested ten
+different approaches and every one failed, so LiveWhisper converts the script
+itself — and then learns the spellings *you personally* use.
 
-**Script.** Whisper transcribes Hindi as `क्या कर रहे हो`. Almost nobody types
-Devanagari in chat; they type `kya kar rahe ho`. Research confirms there is no
-way to ask a speech engine for romanized Hinglish. So voice typing produces text
-in the wrong *script* for hundreds of millions of people.
+## And a second problem nobody solves
 
-LiveWhisper keeps what the others throw away.
+Dictation tools **normalise** your writing: they add punctuation, fix
+capitalisation, clean it up. But personal style *is* deviation from the norm, so
+the whole category destroys the thing that makes text sound like you.
 
-## What it does
+Wispr Flow's own documentation says it learns from your corrections but
+explicitly discards *"capitalization-only changes"*. If you write in lowercase
+on WhatsApp, it sees you delete that capital every single time — and throws the
+signal away, because a word→word dictionary has nowhere to put "don't capitalise
+in this app."
 
-| | Hotkey | |
-| --- | --- | --- |
-| **Dictate** | `Ctrl+Alt+Space` | Speak, text lands at your cursor in your style |
-| **Write this for me** | `Ctrl+Alt+W` | Speak an instruction; it reads your screen for context |
-| **Fix grammar** | `Ctrl+Alt+F` | Corrects the field you're in, *keeping* your slang and lowercase |
-| **Notes** | `Ctrl+Alt+N` | System-audio transcripts append to a Markdown note |
-| **Force Devanagari** | `Ctrl+Alt+H` | Keep the next dictation in the original script |
+**LiveWhisper keeps what the others throw away.**
+
+---
+
+## Twelve languages
+
+| | Language | Romanized as | Speakers | Lexicon coverage |
+| --- | --- | --- | --- | --- |
+| 🇮🇳 | Hindi | Hinglish | 610M | 87.3% |
+| 🇧🇩 | Bengali | Banglish | 270M | 83.4% |
+| 🇵🇰 | Urdu | Urdish | 230M | **92.1%** |
+| 🇮🇳 | Punjabi | Punglish | 125M | 91.4% |
+| 🇮🇳 | Marathi | Minglish | 83M | 90.9% |
+| 🇮🇳 | Telugu | Thanglish | 83M | 86.2% |
+| 🇮🇳 | Tamil | Tanglish | 79M | 86.9% |
+| 🇮🇳 | Gujarati | Gujlish | 57M | 90.8% |
+| 🇮🇳 | Kannada | Kanglish | 44M | 88.2% |
+| 🇮🇳 | Malayalam | Manglish | 38M | 88.1% |
+| 🇵🇰 | Sindhi | Sindhlish | 32M | 88.0% |
+| 🇱🇰 | Sinhala | Singlish | 17M | 76.2% |
+
+**87.4% average**, measured on running text, not a benchmark. It picks the
+language from what you actually said — speak Tamil at work and Hindi at home
+without touching a setting.
+
+---
 
 ## Install
 
-Windows 10/11, Python 3.10+, NVIDIA GPU recommended.
+Windows 10/11 · Python 3.10+ · NVIDIA GPU recommended (works without)
 
 ```powershell
 git clone https://github.com/itsskofficial/LiveWhisper.git
@@ -55,107 +78,131 @@ cd LiveWhisper
 .\install.ps1
 ```
 
-On first run a one-minute wizard shows five sentences in Devanagari and asks you
-to type them your way. That's enough to learn most of your spelling habits
-before you dictate anything. It's skippable.
+A one-minute wizard then asks you to type a few sentences your way. That alone
+teaches it most of your spelling habits. Skippable.
 
-## How the Hinglish part works
+| Hotkey | |
+| --- | --- |
+| `Ctrl+Alt+Space` | Dictate |
+| `Ctrl+Alt+W` | Speak an instruction — it reads your screen and writes the text |
+| `Ctrl+Alt+F` | Fix grammar, *keeping* your lowercase and slang |
+| `Ctrl+Alt+N` | Notes from system audio |
+| `Ctrl+Alt+H` | Keep the next dictation in the original script |
 
-Three stages, and only one of them is a neural network:
+---
 
-```
-92.3% of words  →  dictionary lookup   →  instant, 1.1 MB, no AI
- 7.7% of words  →  2.5M char model     →  10 MB, runs on CPU
-      every word →  your conventions    →  learned from your corrections
-                                          ─────────────
-                                          ~97% correct
-```
+## How it learns you
 
-The dictionary comes from Google's [Dakshina](https://github.com/google-research-datasets/dakshina)
-dataset — 30,000 Hindi and 30,000 Marathi words with the Latin spellings real
-people use. Coverage was measured against real Whisper output, not a benchmark.
-
-**Why this matters:** nine-tenths of the hard problem is a table lookup. That's
-why this can be free and instant where cloud tools charge monthly and count your
-words.
-
-## How it learns
-
-Your correction of `mujhe` → `muze` isn't a fact about that word. It's a fact
-about how you spell **ज** — and it applies to the 316 other words containing it.
+Correct `mujhe` → `muze` once. That isn't a fact about that word — it's a fact
+about how you spell **ज**, and it applies to the **316 other words** containing
+it.
 
 We measured this across 30,000 words. Variation follows 1,200 letter-level
 conventions, heavily concentrated:
 
-| Conventions learned | Variation explained |
+| Corrections | Variation explained |
 | --- | --- |
 | 5 | 43.9% |
 | **10** | **57.0%** |
 | 20 | 70.5% |
 
-So about ten corrections — or one minute of setup — gets you most of the way.
+**It does not watch you type.** At the start of your next dictation, before
+pasting, it reads what's in that field and compares it with what it left there.
+Nothing runs in the background.
 
-**How it notices.** It does *not* watch you type. At the start of your next
-dictation, before pasting, it reads what's currently in that field and compares
-it with what it left there. Nothing runs in the background.
-
-**What it stores.** Plain readable JSON, one section per app — observed rates,
-not settings:
+**What it stores** is plain readable JSON — observed rates, not settings:
 
 ```json
 "whatsapp.exe": { "habits": { "capitalize": 0.04, "terminal_period": 0.11 } },
 "_global":      { "conventions": { "rules": { "jh": "z" } } }
 ```
 
-Spelling is global (how you spell ज doesn't change between apps). Habits are
-per-app (your WhatsApp voice isn't your email voice). Open it, edit it, delete
-it — **Settings → Writing** shows exactly what it has learned.
+Spelling is global; how you spell ज doesn't change between apps. Habits are
+per-app; your WhatsApp voice isn't your email voice. **Settings → Writing**
+shows exactly what it has learned, with a button to forget all of it.
 
-**Safety rule.** One correction fixes that word but doesn't generalise — you
-might have typo'd. Two different words promote it to a rule, and even then the
-rule is checked against the lexicon first. This is not theoretical: in testing,
-someone typing `too` for तू taught the app `u → oo`, which rewrote `aur` as
-`aoor` and `bahut` as `bahoot` — 97% of affected words wrong. Single vowels are
-now refused; consonants like `jh → z` pass.
+### It refuses to learn nonsense
+
+Type `too` for तू once and a naive system learns `u → oo`, which rewrites `aur`
+as `aoor` and `bahut` as `bahoot` — **97% of affected words wrong**, measured.
+
+So a rule needs two *different* words before it generalises, and even then it's
+checked: a single Latin vowel stands for several native vowels, so replacing it
+everywhere destroys the distinction. Consonants like `jh → z` map reliably and
+pass. Rejected substitutions still apply to that one word.
+
+---
+
+## How it works
+
+Three stages, and only one is a neural network:
+
+```
+  87% of words  →  dictionary lookup     instant · 17 MB · no AI
+  13% of words  →  2.5M character model  runs on CPU
+  every word    →  your own conventions  learned from your corrections
+```
+
+The dictionary is Google's [Dakshina](https://github.com/google-research-datasets/dakshina)
+dataset — 350,000 words across twelve languages, with the Latin spellings real
+people actually use.
+
+**The hardest part isn't a model. It's a table.** That's why this is free and
+instant where cloud tools charge monthly and count your words.
+
+---
 
 ## Local by default
 
-| Stage | Local? |
+| | Local? |
 | --- | --- |
 | Audio capture | Always |
-| Transcription | Yes — faster-whisper on your GPU |
+| Transcription | Yes — faster-whisper on your GPU, 27x realtime |
 | Romanization + style | Yes — no network at all |
-| Compose & grammar | Yes, via Ollama — or Groq/OpenAI/Anthropic if you prefer |
+| Compose & grammar | Yes via Ollama — or Groq/OpenAI/Anthropic if you prefer |
 
-**Honest note:** local models are genuinely fine for grammar and short rewrites.
-For longer composition a frontier model is noticeably better. Ollama support is
-a real capability, not parity.
+No telemetry. No account. No word limits. Your profile is a file on your disk.
 
-## Measured
+**Honest note:** local models are fine for grammar and short rewrites. For
+longer composition a frontier model is noticeably better. Ollama support is a
+real capability, not parity.
+
+---
+
+## Measured, not claimed
 
 | | |
 | --- | --- |
+| Lexicon coverage, 12 languages | **87.4%** average on running text |
 | Transcription | 27x realtime (`large-v3`, RTX 4060) |
-| Dictionary coverage | 92.3% of Devanagari tokens |
-| OOV model | 63.2% exact match, 2.56M params, CPU |
-| Combined | ~97% of words correctly romanized |
-| Grammar fix (local) | ~9s · Compose (local) ~3s |
+| Character model (Hindi) | 63.2% exact match, 2.56M params, CPU |
+| 10 corrections | 57% of spelling variation |
+| Whisper → romanized via prompting | **Impossible** — 10 approaches, all failed |
 
-Every number is reproducible from `experiments/`.
+Every number is reproducible from [`experiments/`](experiments/).
 
-## Development
+---
+
+## Contributing
+
+**The most valuable thing a native speaker can do** takes ten minutes: write
+five natural chat-register sentences in your language for the setup wizard.
+Hindi has them; the other eleven currently generate word prompts from the
+lexicon instead, which works but is less good.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) — it's a single file edit, and there's an
+issue template that walks you through it.
+
+Also wanted: curated common-word lists per language, macOS and Linux support,
+and anyone who can tell us the romanization looks wrong for their language.
 
 ```powershell
-python check_setup.py       # environment diagnostics
-python test_pipeline.py     # romanization, learning, habits, notes
-python test_gui.py          # wizard + settings, on a throwaway profile
-python run.py -v            # run with debug logging
+python -m tools.check_data    # lexicon integrity, all 12 languages
+python -m tools.check_core    # romanization, learning rules, profiles
+python verify.py              # full readiness check, 22 checks
 ```
-
-`docs/HOW-IT-WORKS.md` explains the whole system from scratch, assuming no
-background in speech recognition or machine learning.
 
 ## Licence
 
 Code MIT. The Dakshina lexicons in `data/` are CC BY-SA 4.0 — see
-`data/LICENSE-DATA.md`.
+[data/LICENSE-DATA.md](data/LICENSE-DATA.md).

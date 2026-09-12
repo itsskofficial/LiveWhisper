@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Add support for a language not in the list
+    url: https://github.com/itsskofficial/LiveWhisper/blob/main/CONTRIBUTING.md
+    about: We cover the twelve in Google's Dakshina dataset. Others need a romanization lexicon first - open a discussion.
