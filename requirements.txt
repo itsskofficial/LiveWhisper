@@ -22,3 +22,8 @@ nvidia-cudnn-cu12
 
 # optional: screenshot fallback for reading apps that hide their text
 # rapidocr_onnxruntime
+
+# optional: generates the speech clips for tests/test_audio_e2e.py and
+# tests/test_loopback.py via scripts/make_test_audio.py. Test-only and needs a
+# network connection; both tests skip cleanly when the clips are absent.
+# edge-tts>=7.0

@@ -91,8 +91,17 @@ def main() -> int:
     print(f"  captured {r.seconds:.1f}s  system_peak={r.system_peak:.3f}  "
           f"mic_peak={r.mic_peak:.3f}")
     if r.system_peak < 1e-4:
-        print("  FAIL: no system audio captured")
-        return 1
+        # Silence is not a failure here. This tool measures whatever the machine
+        # happens to be playing, so on a quiet desktop there is nothing to
+        # measure and "FAIL" is misleading - it reads as a broken capture path
+        # when the real answer is "you forgot to press play".
+        # For an unattended check of the capture path itself, which brings its
+        # own sound, use tests/test_loopback.py.
+        print("  nothing was playing, so there is nothing to measure.")
+        print("  Start some audio and run this again, or run "
+              "tests/test_loopback.py")
+        print("  which plays its own clip and verifies loopback unattended.")
+        return 0
 
     if args.keep_audio:
         write_wav(OUT / f"{args.label}.wav", r.audio)
