@@ -18,7 +18,8 @@ from dataclasses import dataclass
 from . import context as ctx_mod
 from .profile import ProfileStore
 from .script import conventions as conv_mod
-from .script.languages import detect_script, has_indic, supported
+from .script.languages import (DEFAULT, has_indic, languages_for_script,
+                               supported)
 from .script.romanize import Romanizer, script_ratio
 
 log = logging.getLogger(__name__)
@@ -66,19 +67,62 @@ class Pipeline:
     def resolve_language(self, transcript: str, heard: str | None) -> str:
         """Which lexicon should romanize this?
 
-        Whisper reports the language it heard, which is right far more often
-        than any setting the user would remember to change - somebody who
-        speaks Tamil at work and Hindi at home should not have to toggle. A
-        configured language wins when set to something other than `auto`,
-        because detection is weak on short or code-switched clips.
+        The script in front of us decides, because it is the only hard evidence
+        available. A setting and a language detector are both opinions about the
+        audio; the text is a fact.
+
+        This used to return the configured language outright, and the shipped
+        config sets `language: hi`. So Tamil audio - which Whisper transcribed
+        into correct Tamil script, having correctly detected Tamil - was handed to
+        the Hindi lexicon, which found no Devanagari and passed the Tamil through
+        untouched. The user got raw Tamil script, the exact thing this app exists
+        to prevent, in five of twelve languages. Measured in tests/test_audio_e2e.py.
+
+        Only Devanagari (Hindi/Marathi) and Arabic (Urdu/Sindhi) are shared
+        between two languages. There the configured language wins, since the user
+        told us explicitly, then Whisper's guess, then the more spoken of the two.
         """
         configured = (self.cfg.get("script", {}) or {}).get("language", "auto")
-        if configured and configured != "auto" and supported(configured):
+        configured = configured if (configured and configured != "auto"
+                                    and supported(configured)) else None
+        heard = heard if (heard and supported(heard)) else None
+
+        candidates = languages_for_script(transcript)
+        if not candidates:
+            # No native script, so nothing will be looked up anyway.
+            return configured or heard or DEFAULT
+        if len(candidates) == 1:
+            return candidates[0]
+        if configured in candidates:
             return configured
-        if heard and supported(heard):
+        if heard in candidates:
             return heard
-        # Fall back to whichever script is actually on the page.
-        return detect_script(transcript) or "hi"
+        return candidates[0]
+
+    # A transcript can hold more than one script. Whisper does this on its own:
+    # asked for Marathi it has returned Gurmukhi with a stray Devanagari letter
+    # left in, and a Hindi transcript can carry a Bengali name. The main
+    # romanizer only knows one script, so whatever it does not recognise would
+    # reach the user as raw native characters. Two extra passes clear
+    # essentially all of it without letting a pathological input loop.
+    LEFTOVER_PASSES = 2
+
+    def _romanize_leftovers(self, text: str, app: str, exclude: str) -> str:
+        """Romanize native-script runs the main language could not read.
+
+        Deliberately does not touch self._romanizer or the learning path: these
+        are scraps from a misfired transcription, not something the user's
+        spelling preferences should be inferred from.
+        """
+        for _ in range(self.LEFTOVER_PASSES):
+            if not has_indic(text):
+                return text
+            others = [c for c in languages_for_script(text, include_minor=True)
+                      if c != exclude]
+            if not others:
+                break
+            text = Romanizer(others[0]).text(text)
+        return text
 
     def process(self, transcript: str, screen: ctx_mod.ScreenContext | None = None,
                 force_script: str | None = None,
@@ -99,6 +143,7 @@ class Pipeline:
             text = r.text(transcript)
             romanized = True
             self._romanizer = r
+            text = self._romanize_leftovers(text, app, exclude=lang)
 
         text = profile.habits.apply(text)
 

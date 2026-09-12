@@ -167,6 +167,46 @@ def detect_script(text: str) -> str | None:
     return max(tied, key=lambda c: LANGUAGES[c].speakers_m)
 
 
+def script_counts(text: str) -> dict:
+    """How many characters of each language's script this text contains."""
+    counts: dict[str, int] = {}
+    for ch in text:
+        if ch in JOINERS:
+            continue
+        for code, pat in _PER_LANG.items():
+            if pat.match(ch):
+                counts[code] = counts.get(code, 0) + 1
+                break
+    return counts
+
+
+def languages_for_script(text: str, include_minor: bool = False) -> list:
+    """Languages that could plausibly have written this text, most spoken first.
+
+    Script is hard evidence in a way that a setting and a language detector are
+    not: text in Tamil script is Tamil, whatever anyone believes about the audio.
+    Only two of the twelve scripts are shared - Devanagari by Hindi and Marathi,
+    Arabic by Urdu and Sindhi - so this usually returns exactly one answer, and
+    the caller only needs a tiebreak for those two.
+
+    By default a stray character from another script is ignored, so that one
+    Devanagari letter in a Gurmukhi sentence - a real transcription artefact -
+    cannot outvote the body of the text when choosing the lexicon. Pass
+    `include_minor` when the question is "what is still left here?" rather than
+    "what language is this?"; a single unromanized character is exactly what the
+    cleanup pass is hunting for.
+
+    Returns [] when there is no native script at all.
+    """
+    counts = script_counts(text)
+    if not counts:
+        return []
+    if not include_minor:
+        top = max(counts.values())
+        counts = {c: n for c, n in counts.items() if n >= max(2, top * 0.2)}
+    return sorted(counts, key=lambda c: -LANGUAGES[c].speakers_m)
+
+
 def has_indic(text: str) -> bool:
     return any(m.strip(JOINERS) for m in ANY_INDIC.findall(text))
 

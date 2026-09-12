@@ -13,3 +13,4 @@ accuracy_runs/
 !data/translit.pt
 
 .github/workflows/
+build/
