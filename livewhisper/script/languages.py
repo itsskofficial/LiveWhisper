@@ -16,6 +16,14 @@ import re
 from dataclasses import dataclass
 
 
+# ZWNJ and ZWJ appear *inside* Indic words - Marathi अधिकार्‍यांच्या, Malayalam
+# അക്‌ബർ, Sinhala අංශුමාත්‍ර - so a script range that excludes them splits words
+# in half. Measured on the shipped lexicons: 5% of Sinhala words, and a
+# scattering of Marathi and Malayalam. Those words would silently never
+# romanize.
+JOINERS = "\u200c\u200d"
+
+
 @dataclass(frozen=True)
 class Language:
     code: str            # ISO 639-1, matches what Whisper reports
@@ -28,7 +36,7 @@ class Language:
 
     @property
     def pattern(self) -> str:
-        return "".join(f"{a}-{b}" for a, b in self.ranges)
+        return "".join(f"{a}-{b}" for a, b in self.ranges) + JOINERS
 
 
 # Ordered by speaker population, which is also roughly the order in which
@@ -78,7 +86,8 @@ def supported(code: str | None) -> bool:
 # One regex matching every non-Latin script we handle, so text can be scanned
 # without knowing the language up front.
 ALL_RANGES = sorted({r for l in LANGUAGES.values() for r in l.ranges})
-ANY_INDIC = re.compile("[" + "".join(f"{a}-{b}" for a, b in ALL_RANGES) + "]+")
+ANY_INDIC = re.compile("[" + "".join(f"{a}-{b}" for a, b in ALL_RANGES)
+                       + JOINERS + "]+")
 
 _PER_LANG = {code: re.compile("[" + l.pattern + "]+")
              for code, l in LANGUAGES.items()}
@@ -98,6 +107,8 @@ def detect_script(text: str) -> str | None:
     """
     counts: dict[str, int] = {}
     for ch in text:
+        if ch in JOINERS:
+            continue
         for code, pat in _PER_LANG.items():
             if pat.match(ch):
                 counts[code] = counts.get(code, 0) + 1
@@ -111,14 +122,13 @@ def detect_script(text: str) -> str | None:
 
 
 def has_indic(text: str) -> bool:
-    return bool(ANY_INDIC.search(text))
+    return any(m.strip(JOINERS) for m in ANY_INDIC.findall(text))
 
 
 def latin_ratio(text: str) -> float:
     """1.0 = all Latin, 0.0 = all native script. Used to pick output script."""
     latin = sum(1 for c in text if "a" <= c.lower() <= "z")
-    native = len(ANY_INDIC.findall(text))
-    native = sum(len(m) for m in ANY_INDIC.findall(text))
+    native = sum(len(m.strip(JOINERS)) for m in ANY_INDIC.findall(text))
     return latin / (latin + native) if (latin + native) else 1.0
 
 

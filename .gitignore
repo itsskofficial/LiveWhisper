@@ -10,3 +10,5 @@ shot*.png
 accuracy_runs/
 
 *.pt
+
+.github/workflows/
