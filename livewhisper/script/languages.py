@@ -13,6 +13,7 @@ solves the rest unchanged - only the lexicon and the script range differ.
 from __future__ import annotations
 
 import re
+import unicodedata
 from dataclasses import dataclass
 
 
@@ -22,6 +23,51 @@ from dataclasses import dataclass
 # scattering of Marathi and Malayalam. Those words would silently never
 # romanize.
 JOINERS = "\u200c\u200d"
+
+
+def _mark_ranges() -> str:
+    r"""Character-class body covering every Unicode combining mark.
+
+    Needed because Python's `\w` is defined by `str.isalnum()`, and a combining
+    mark is not alphanumeric. So the obvious word pattern `[^\W\d_]+` tears
+    Indic words apart at every vowel sign and virama:
+
+        \u0d05\u0d27\u0d4d\u0d2f\u0d3e\u0d2a\u0d15\u0d38\u0d02\u0d18\u0d1f\u0d28\u0d15\u0d33\u0d41\u0d02  ->  ['\u0d05\u0d27', '\u0d2f', '\u0d2a\u0d15\u0d38', '\u0d18\u0d1f\u0d28\u0d15\u0d33']
+
+    One Malayalam word became four. That inflated word counts wherever native
+    script survived into the output, and fed fragments into convention learning.
+    Malayalam and Sinhala suffer most, being the most conjunct-heavy.
+
+    Scanning all of Unicode at import would cost half a second, so this covers
+    the blocks that carry marks for Latin and the twelve Indic scripts.
+    """
+    spans: list = []
+    start = prev = None
+    for cp in (list(range(0x0300, 0x1B00)) + list(range(0x1DC0, 0x1E00))
+               + list(range(0x20D0, 0x2100)) + list(range(0xFE00, 0xFE30))):
+        if unicodedata.category(chr(cp)).startswith("M"):
+            if start is None:
+                start = cp
+            prev = cp
+        elif start is not None:
+            spans.append((start, prev))
+            start = None
+    if start is not None:
+        spans.append((start, prev))
+    return "".join(chr(a) if a == b else f"{chr(a)}-{chr(b)}" for a, b in spans)
+
+
+MARKS = _mark_ranges()
+
+# A word is a letter, followed by any letters, the marks that attach to them and
+# the joiners that sit inside them. Apostrophes ride along so "don't" stays one
+# word. Anchoring on a letter keeps a stray mark from starting a token.
+#
+# The mark class has to be a positive alternative, not another member of the
+# negated class - putting it inside `[^...]` excludes marks twice over, which is
+# exactly the bug this is here to fix.
+WORD = re.compile("[^\\W\\d_](?:[^\\W\\d_]|[" + MARKS + JOINERS + "'\u2019])*",
+                  re.UNICODE)
 
 
 @dataclass(frozen=True)

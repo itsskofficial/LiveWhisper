@@ -11,6 +11,10 @@ import sys
 
 import livewhisper  # noqa: F401 - loads .env and registers the CUDA DLL dirs
 
+from livewhisper.console import setup as _console
+
+_console()
+
 OK, BAD, WARN = "[ ok ]", "[FAIL]", "[warn]"
 problems = []
 

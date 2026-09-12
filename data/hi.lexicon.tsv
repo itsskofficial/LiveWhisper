@@ -95,7 +95,7 @@
 अंतर्निहित	antnirhit:2	antarnihit:1
 अंतर्मन	antarman:2	antrman:1
 अंतर्मुख	antarmukh:1	antmurkh:1	antrmukh:1
-अंतर्राष्ट्रीय	antarrashtriy:1	antrashtriya:1	antrrashtriy:1
+अंतर्राष्ट्रीय	antarrashtriya:8	antarrashtriy:1	antrashtriya:1	antrrashtriy:1
 अंतर्वस्त्र	antarvastr:2	antavastra:1	antvastra:1
 अंतर्विरोधों	antarvirodhon:1	antrvirodhon:1	antvirrodhon:1
 अंतर्वैयक्तिक	antarvaiyaktik:2	antvaiyktik:1
@@ -159,7 +159,7 @@
 अकाउंटेंट	accountant:3
 अकाट्य	akaatya:2	akaty:1
 अकादमिक	akadamik:2	academic:1
-अकादमी	akadami:2	akaadami:1
+अकादमी	academy:7	akadami:2	akaadami:1
 अकादेमी	academy:1	acedemy:1	akademi:1
 अकापुल्को	akapulko:2	acapulco:1
 अकार	akaar:2	akar:1
@@ -228,7 +228,7 @@
 अगरिया	agariya:2	agriyaa:1
 अगला	agala:2	agla:2
 अगली	agali:2	agli:1
-अगले	agale:4	agle:2
+अगले	agle:10	agale:4
 अगवा	agava:2	agawa:1
 अगवाई	agavai:2	agvaai:1
 अगस्टस	augustus:3
@@ -260,7 +260,7 @@
 अग्रदूत	agradoot:2	agradut:2
 अग्रभाग	agrabhag:2	agrbhaag:1
 अग्रवाल	aggarwal:1	agraval:1	agrawal:1
-अग्रसर	agrasar:2	agrsar:1
+अग्रसर	agrsar:2	agrasar:2
 अग्रसेन	agarsain:1	agrasen:1	agrsen:1
 अग्रहरि	agrahari:2	agrahri:1
 अग्राह्य	agrahaye:1	agrahy:1	agrahya:1
@@ -281,10 +281,10 @@
 अचूक	achuk:2	achook:1
 अचेत	achet:2	ahet:1
 अचेतन	achetan:3
-अच्छा	achcha:2	accha:1	achchha:1
+अच्छा	achchhaa:3	achcha:2	accha:1	achchha:1
 अच्छाई	achchaee:1	achchai:1	achhai:1
 अच्छी	acchi:1	achchi:1	achhi:1
-अच्छे	achchhe:2	acche:1
+अच्छे	acche:3	achchhe:2
 अच्युत	achyut:3
 अच्युतानंद	achyutanand:3
 अछनेरा	achhanera:2	achnera:1
@@ -324,7 +324,7 @@
 अजूबा	ajuba:3	ajooba:2
 अजूबों	ajubon:3	ajoobon:2
 अजैविक	ajaivik:3
-अज्ञात	agnat:1	agyaat:1	agyat:1
+अज्ञात	agyat:2	agnat:1	agyaat:1
 अज्ञातवास	agnatvas:1	agyaatvaas:1	agyaatvas:1	agyatwas:1
 अज्ञान	agyaan:2	agnan:1	agyan:1
 अज्ञानता	agnanta:1	agyaanata:1	agyanta:1
@@ -489,12 +489,12 @@
 अधीग्रहण	adhigrahan:2	adhikrahan:1
 अधीन	adhin:2	adheen:1	adhiin:1
 अधीनता	adhiinataa:1	adhinata:1	adhinta:1
-अधीनस्थ	adhiinastha:1	adhinasth:1	adhinsth:1
+अधीनस्थ	adhinasth:2	adhiinastha:1	adhinsth:1
 अधीर	adhir:2	adheer:1
 अधीरता	adheerta:1	adhirata:1	adhirta:1
 अधूरा	adhura:2	adhuura:1
 अधूरी	adhuri:2	adhoori:1
-अधूरे	adhoore:1	adhur:1	adhure:1
+अधूरे	adhure:2	adhoore:1	adhur:1
 अध्यक्ष	adhyaksh:5	adhyaksha:1
 अध्यक्षता	adhyakshta:2	adhyakshataa:1
 अध्यक्षा	adhyaksha:2	adhyakshaa:1
@@ -644,7 +644,7 @@
 अनुपयोगी	anupayogi:2	anupyogee:1
 अनुपलब्ध	anuplabdh:2	anupalabdh:1
 अनुपस्थित	anupasthit:1	anupasthiti:1	anupsthitha:1
-अनुपस्थिति	anupasthiti:2	anupsthiti:1
+अनुपस्थिति	anupsthiti:2	anupasthiti:2
 अनुपात	anupat:3
 अनुपातहीन	anupatheen:1	anupathheen:1	anupathin:1
 अनुपालन	anupalan:2	anupalna:1
@@ -686,9 +686,9 @@
 अनुरूपता	anuroopta:1	anurupataa:1	anurupta:1
 अनुरोध	anurodh:3
 अनुरोधों	anurodhon:3
-अनुवांशिक	anuwanshik:2	anuvaanshik:1
+अनुवांशिक	anuvanshik:2	anuwanshik:2	anuvaanshik:1
 अनुवांशिकी	anuwanshiki:2	anivaanshiki:1
-अनुवाद	anuwad:2	anuvaad:1
+अनुवाद	anuvad:6	anuwad:2	anuvaad:1
 अनुवादक	anuvaadak:1	anuvadak:1	anuwadak:1
 अनुवादकों	anuvaadakon:1	anuvadakon:1	anuvadkon:1
 अनुवादित	anuvadit:2	anuvaadit:1
@@ -770,7 +770,7 @@
 अपने	apne:10
 अपनेआप	apneaap:2	apaneaap:1
 अपनेे	apne:2	apney:1
-अपभ्रंश	apbhransh:2	apbramsh:1
+अपभ्रंश	apabhransh:2	apbhransh:2	apbramsh:1
 अपमान	apman:3	apmaan:1
 अपमानजनक	apmanjanak:4	apmaanjanak:2
 अपमानित	apmanit:4
@@ -781,15 +781,15 @@
 अपरा	apra:2	apara:1
 अपराजित	aparajit:3
 अपराजिता	aparajita:2	aparajit:1
-अपराध	apraadh:2	apradh:2
+अपराध	apradh:4	apraadh:2
 अपराधबोध	apraadhbodh:4	aparadhbodh:2	apradhbodh:2
 अपराधमुक्त	aparadhmukt:1	apraadhamukta:1	apraadhmukt:1	apradhamukta:1
 अपराधिक	aparadhik:1	apraadhik:1	apradhik:1
 अपराधियों	apradhiyon:2	apraadhiyon:1
-अपराधी	apradhi:2	apraadhi:1
+अपराधी	aparadhi:3	apradhi:2	apraadhi:1
 अपराधों	aparadhon:1	apraadhon:1	apradhon:1
 अपरिग्रह	aparigrah:3
-अपरिचित	aparichit:3
+अपरिचित	aprichit:2	aparichit:3
 अपरिपक्व	aparipakv:2	aparipakk:1
 अपरिपक्वता	aparipakvata:2	aparipakkta:1
 अपरिभाषित	aparibhashit:2	apribhashit:1
@@ -812,7 +812,7 @@
 अपव्यय	apvyay:3
 अपशिष्ट	apshisht:3
 अपसेट	upset:3
-अपहरण	apharan:2	apaharan:1
+अपहरण	apaharan:2	apharan:2
 अपहरणकर्ता	apaharankarta:1	apharankarta:1	apharankrta:1
 अपाचे	apache:3
 अपार	apar:3	apaar:1
@@ -825,7 +825,7 @@
 अपीलकर्ता	apilkarta:2	appealkarta:1	appealkartaa:1
 अपुष्ट	apusht:3
 अपूर्ण	apoorna:1	apuran:1	apurn:1	apurna:1
-अपूर्व	apurv:3	apoorv:1	apoorva:1	apurva:1
+अपूर्व	apurva:2	apurv:3	apoorv:1	apoorva:1
 अपेक्षा	apeksha:3	apekshaa:1
 अपेक्षाओं	apekshaon:3	apekshaaon:1
 अपेक्षाकृत	apekshakrit:2	apekshakrta:1
@@ -842,7 +842,7 @@
 अप्रचलित	aprachalit:3
 अप्रतिम	apratim:3
 अप्रत्यक्ष	apratyaksh:3
-अप्रत्याशित	apratyashit:2	pratyashit:1
+अप्रत्याशित	apratyakshit:2	apratyashit:2	pratyashit:1
 अप्रधान	apradhan:3
 अप्रभावित	aprabhavit:2	prabhavit:1
 अप्रभावी	aprabhavi:3
@@ -883,7 +883,7 @@
 अफ्रिका	africa:3
 अफ्रीकन	african:3
 अफ्रीका	africa:6
-अफ्रीकी	afriki:3
+अफ्रीकी	africi:2	afriki:3
 अब	ab:2	aab:1
 अबाउट	about:3
 अबाधित	abadhit:2	abadhith:1
@@ -897,7 +897,7 @@
 अब्दुर	abdur:3
 अब्दुल	abdul:4
 अब्दुला	abdula:3
-अब्दुल्ला	abdulla:3
+अब्दुल्ला	abdullah:2	abdulla:3
 अब्बास	abbas:3
 अब्बासी	abbasi:3	abbaasi:1
 अब्राहम	abraham:3	abraaham:1
@@ -952,7 +952,7 @@
 अभिरुचि	abhiruchi:3
 अभिलाषा	abhilasha:3
 अभिलेख	abhilekh:3
-अभिलेखागार	abhilekhaagaar:1	abhilekhagaar:1	abhilekhagar:1
+अभिलेखागार	abhilekhagar:3	abhilekhaagaar:1	abhilekhagaar:1
 अभिलेखीय	aabhilekhiy:1	abhilekhiy:1	abhilekhiya:1
 अभिलेखों	abhilekhon:3
 अभिवादन	abhivadan:2	abhivaadan:1
@@ -1021,7 +1021,7 @@
 अमावस्या	amavasya:5	amavsya:1
 अमिट	amit:3
 अमित	amit:3
-अमिताभ	amitabh:4
+अमिताभ	amitaabh:2	amitabh:4
 अमिताव	amitav:2	amitao:1
 अमिला	amila:3
 अमीन	amin:2	ameen:1
@@ -1047,7 +1047,7 @@
 अमेरिकन	american:3
 अमेरिका	america:6
 अमेरिकियों	amerikiyon:3
-अमेरिकी	ameriki:3	americi:1
+अमेरिकी	americi:6	ameriki:3
 अमोघ	amogh:3
 अमोद	amod:2	amodh:1
 अमोनियम	ammonium:2	ammounium:1
@@ -1088,7 +1088,7 @@
 अरब	arab:3	araba:1
 अरबपति	arabpati:3	arabapati:2
 अरबाब	arbab:3	arabab:1
-अरबी	arabi:3	arbi:1
+अरबी	arbi:9	arabi:3
 अरबों	arabon:3	arabaon:1	arbon:1
 अरमान	aramaan:2	araman:1	arman:1
 अरमानी	armani:2	aramani:1	armaani:1
@@ -1142,7 +1142,7 @@
 अर्थशास्त्रियों	arthashastriyon:2	arthshastriyon:1
 अर्थशास्त्री	arthashastri:2	arthshastri:1
 अर्थहीन	arthahin:1	arthheen:1	arthhin:1
-अर्थात	arthaat:1	arthart:1	arthat:1
+अर्थात	arthat:5	arthaat:1	arthart:1
 अर्थात्	arthat:2	arthart:1
 अर्थिंग	arthing:2	earthing:1
 अर्थी	arthi:3
@@ -1248,7 +1248,7 @@
 अल्बानिया	albania:2	albiniya:1
 अल्बूकर्क	albuquerque:2	albukark:1
 अल्बेनिया	albania:2	albeniya:1
-अल्मोड़ा	almora:2	almoda:1
+अल्मोड़ा	almoda:2	almora:2
 अल्युमीनियम	aluminium:3
 अल्लामा	allama:3
 अल्लाह	allah:3
@@ -1256,17 +1256,17 @@
 अल्सर	ulcer:2	alsar:1
 अल्हड़	alhad:3	alhar:1
 अवंतिपुर	avantipur:2	awantipora:1
-अवकाश	avakash:1	avkaash:1	avkash:1
+अवकाश	avkash:2	avakash:1	avkaash:1
 अवगत	avgat:2	avagat:1
 अवचेतन	avchetan:2	avachetan:1
 अवज्ञा	avagya:2	avg:1
 अवतरण	avtaran:2	avataran:1
 अवतरित	avtarit:2	avatarit:1
-अवतार	avataar:1	avatar:1	avtar:1
+अवतार	avtaar:2	avataar:1	avatar:1	avtar:1
 अवतारों	avtaron:2	avataron:1
 अवदान	avadan:1	avdaan:1	avdan:1
 अवध	avadh:3
-अवधारणा	avadharna:1	avdharna:1	avdharnaa:1
+अवधारणा	avdharna:2	avadharna:1	avdharnaa:1
 अवधारणाएं	avadharnaye:1	avdharnaein:1	avdharnaen:1
 अवधारणाओं	avdharnaon:2	avdharnao:1	awadhaarnao:1
 अवधि	avadhi:2	avdhi:1
@@ -1296,16 +1296,16 @@
 अवर्णनीय	avarnaneeya:1	avarnaniy:1	avarnaniya:1	avranyaan:1
 अवलोकन	avalokan:1	avlokan:1	awalokan:1
 अवशिष्ट	avshisht:2	avashist:1	awashist:1
-अवशेष	avshesh:2	avashesh:1	awashesh:1
+अवशेष	avashesh:2	avshesh:2	awashesh:1
 अवशेषों	avsheshon:2	avashesho:1	awashesho:1
 अवशोषण	avshoshan:2	awashoshan:1
 अवशोषित	avshoshit:3
-अवश्य	avashy:1	avashya:1	avasy:1	awasya:1
+अवश्य	avashya:4	avashy:1	avasy:1	awasya:1
 अवश्यंभावी	avashyanbhaavee:1	avashyanbhave:1	avashyanbhavi:1	avasyambhavi:1
 अवश्यकता	avashyakta:2	aawaskyakta:1	avshykata:1
 अवश्यमेव	avashyamev:2	avshymev:1
 अवसंरचना	avasanrchana:1	avasanrchanaa:1	avsanrachna:1	avsanrchana:1
-अवसर	avsar:3
+अवसर	avasar:6	avsar:3
 अवसरवादिता	avasaravaadita:1	avasaravaaditaa:1	avasaravadita:1	avsarvadita:1
 अवसरवादी	avasaravaadee:1	avasaravadi:1	avasarvadi:1	avsarvadi:1
 अवसरों	avsaron:2	avasaron:1	avasron:1
@@ -1313,8 +1313,8 @@
 अवस्था	avastha:5	avasthaa:1	avstha:1
 अवस्थाएं	avasthaayen:1	avsthaen:1	avsthayen:1	awasthaen:1
 अवस्थाओं	avasthaon:1	avsthaon:1	awasthaon:1
-अवस्थी	awasthi:2	avsthi:1
-अवहेलना	avahelana:1	avahelanaa:1	avahelna:1	avhelna:1
+अवस्थी	avasthi:2	awasthi:2	avsthi:1
+अवहेलना	avhelna:2	avahelana:1	avahelanaa:1	avahelna:1
 अवांछनीय	avaanchhaneeya:1	avanchaniy:1	avanchaniya:1	awanchhniya:1
 अवांछित	avanchhit:1	avanchit:1	awanchhit:1
 अवाद	avaad:1	avad:1	awad:1
@@ -1449,7 +1449,7 @@
 असहमत	asahamat:1	asahmat:1	ashamat:1
 असहमति	asahamati:2	asahmati:1
 असहयोग	asahayog:2	asahyog:1
-असहाय	asahaay:1	asahaaye:1	asahay:1	asahaye:1
+असहाय	asahay:2	asahaay:1	asahaaye:1	asahaye:1
 असहायता	asahayta:2	asahaayataa:1	asahayata:1
 असहायों	asahayon:3
 असहिष्णुता	asahishnuta:3
@@ -1522,7 +1522,7 @@
 अहमियत	ahmiyat:2	ahamiyat:1
 अहसान	ahsaan:2	ahsan:1
 अहसास	ahsaas:2	ahsas:1
-अहाते	ahaate:2	ahate:1
+अहाते	ahate:2	ahaate:2
 अहान	ahaan:2	ahan:1
 अहिंसक	ahinsak:3
 अहिंसा	ahinsa:2	ahimsa:1	ahinsaa:1
@@ -1538,10 +1538,10 @@
 अौर	aur:3
 आँखे	aankhe:2	aankhen:1
 आँखें	aankhen:3
-आँखों	aankhon:2	aankhen:1
+आँखों	ankhon:2	aankhon:2	aankhen:1
 आंक	aank:3
 आंकड़ा	aankaraa:1	aankda:1	ankada:1	ankara:1
-आंकड़े	aankade:2	ankade:1
+आंकड़े	aankde:2	aankade:2	ankade:1
 आंकड़ों	aakadon:1	aankadon:1	ankdon:1
 आंकने	aankne:2	aankane:1
 आंका	aanka:2	aankaa:1
@@ -1555,7 +1555,7 @@
 आंगलोंग	anglong:2	aonglong:1
 आंग्रे	angre:2	aangre:1
 आंचलिक	aanchalik:1	aanchlik:1	anachalik:1
-आंतरिक	aantarik:2	aantrik:1
+आंतरिक	aantrik:2	aantarik:2
 आंतों	aanton:3
 आंदोलनों	aandolanon:2	andolanon:1
 आंदोलित	aandolit:2	andolit:1
@@ -1566,7 +1566,7 @@
 आंनद	anand:2	aanand:1
 आंबेडकर	aambedkar:1	ambedkar:1	amedkar:1
 आंवला	aanvala:1	aanwala:1	anvala:1	anwala:1
-आंशिक	aanshik:2	anashik:1
+आंशिक	anshik:3	aanshik:2	anashik:1
 आंसर	answer:2	aansar:1
 आंसुओं	aansuon:2	aansuo:1
 आंसू	aansu:3
@@ -1670,7 +1670,7 @@
 आऊ	aau:2	aauu:1	ou:1
 आऊंगा	aaunga:2	aaungaa:1
 आऊट	out:3
-आए	aae:2	aaye:1
+आए	aaye:10	aae:2
 आएंगे	aaenge:2	aayenge:1
 आएगा	aaega:1	aayegaa:1	aega:1
 आएगी	aaegi:1	aayegi:1	aegi:1
@@ -1680,7 +1680,7 @@
 आकर्षक	akarshak:2	aakarshak:1
 आकर्षण	aakarshan:5	aakrshan:1	akarshan:1
 आकर्षणों	aakarshanon:1	aakarshnon:1	akarshanon:1
-आकर्षित	aakarshit:3
+आकर्षित	akarshit:2	aakarshit:3
 आकलन	aakalan:2	aaklan:1	akalan:1
 आकस्मिक	aakasmik:3
 आकांक्षा	aakankshaa:1	aakansha:1	akanksha:1
@@ -1699,7 +1699,7 @@
 आकृतियों	aakritiyon:1	aakrutiyon:1	akritiyon:1
 आकृष्ट	aakrisht:1	aakrusht:1	aakrushta:1
 आके	aake:3
-आक्रमण	aakraman:3
+आक्रमण	akraman:4	aakraman:3
 आक्रमणकारियों	aakramankariyon:2	aakramankaariyon:1
 आक्रमणकारी	aakramankari:2	aakramankaari:1
 आक्रमणों	aakramanon:3
@@ -1709,13 +1709,13 @@
 आक्रोश	aakrosh:2	aakrsoh:1
 आक्षेप	aakshep:3
 आखर	aakhar:3
-आखरी	aakhari:2	aakhri:1
+आखरी	aakhri:2	aakhari:2
 आखिर	aakhir:3	akhir:1
 आखिरकार	aakhirkar:2	aakhirkaar:1
 आखिरी	aakhiri:2	akhiri:1
 आखेट	aakhet:2	akhet:1
 आख्या	aakhya:2	aalhyaa:1
-आख्यान	aakhyan:2	aakhyaan:1
+आख्यान	aakhyaan:2	aakhyan:2
 आख्यानों	aakhyaanon:2	akhyanon:1
 आग	aag:3
 आगंतुक	aagantuk:1	aangatuk:1	agantuk:1
@@ -1745,7 +1745,7 @@
 आचमन	aachman:3
 आचरण	aacharan:3
 आचारसंहिता	aachaarsanhitaa:1	aacharsanhita:1	acharsanhita:1
-आचार्य	aacharya:3	acharya:2	aachaarya:1
+आचार्य	acharya:6	aacharya:3	aachaarya:1
 आचार्यों	aachaaryon:1	aacharyon:1	aachayon:1
 आच्छादन	aacchaadan:1	aachaadan:1	aachchadan:1	acchadan:1
 आच्छादित	aacchaadit:1	aachchadit:1	aachhadit:1	acchadit:1
@@ -1763,9 +1763,9 @@
 आज़मी	azmi:2	aazmi:1	azami:1
 आज़ादी	azadi:3	azaadi:1
 आजा	aaja:6	aajaa:1	aja:1
-आजाद	ajad:2	azaad:1	azad:1
+आजाद	azaad:2	ajad:2	azad:1
 आजादनगर	ajadnagar:2	azadnagar:1
-आजादी	aajadi:1	aazadi:1	azadi:1
+आजादी	ajadi:3	aajadi:1	aazadi:1	azadi:1
 आजी	aaji:3
 आजीवन	aajeevan:2	aajivan:1
 आजीविका	aajivika:2	aajeevika:1
@@ -1792,7 +1792,7 @@
 आतंक	aatank:3
 आतंकवाद	aatankvad:1	aatankwaad:1	aatankwad:1
 आतंकवादियों	aatankwadiyon:2	aatankvadhiyo:1
-आतंकवादी	aatankwadi:2	aatankvadi:1
+आतंकवादी	aatankvadi:4	aatankwadi:2
 आतंकियों	aatankiyon:2	aatankiayon:1
 आतंकी	aatanki:3
 आता	aata:3
@@ -1822,7 +1822,7 @@
 आत्मसाक्षात्कार	atmasakshatkar:2	atmsakshatkar:1
 आत्महत्या	aatmhatya:3	atmahatya:2	aatmahatya:1
 आत्महत्याओं	atmahatyaon:2	aatmhatyaon:1
-आत्मा	atma:2	aatma:1
+आत्मा	aatma:4	atma:2
 आत्माएं	aatmayen:2	atmaen:2
 आत्माओं	aatmaon:2	atmaon:2
 आत्माराम	atmaram:2	atamara:1
@@ -1830,18 +1830,18 @@
 आत्मीयता	atmiyata:2	aatmiyata:1
 आत्यंतिक	aatyantik:2	atyantik:1
 आत्रेय	aatrey:1	aatreya:1	aatry:1
-आदत	aadat:3
+आदत	adat:4	aadat:3
 आदतन	aadatan:3
 आदतें	aadaten:2	aadatein:1
 आदतों	aadaton:3
 आदम	adam:2	aadam:1
 आदमखोर	aadamkhor:2	adamkhor:1
 आदमियों	aadmiyon:2	adamiyon:1
-आदमी	aadami:3
+आदमी	aadmi:5	aadami:3
 आदर	aadar:3
 आदरणीय	aadarniy:2	aadarniya:1
 आदरपूर्वक	aadarpurvak:3
-आदर्श	aadarsh:3	adarsh:2	aadrsh:1
+आदर्श	adarsh:4	aadarsh:3	aadrsh:1
 आदर्शवाद	aadarshvaad:1	aadarshvad:1	adarshwad:1
 आदर्शवादी	aadarshvaadi:1	aadarshvadi:1	adarshwadi:1
 आदर्शों	aadarshon:3
@@ -1853,14 +1853,14 @@
 आदित्य	aditya:2	aaditya:1
 आदित्यनाथ	adityanath:2	aadityanath:1
 आदिनाथ	aadinath:2	adinath:1
-आदिम	aadim:3
+आदिम	adim:2	aadim:3
 आदिल	aadil:2	adil:1
-आदिवासियों	aadivasiyon:2	adivasiyon:1
-आदिवासी	aadivashi:1	aadivasi:1	adivasi:1
+आदिवासियों	aadiwasiyon:2	aadivasiyon:2	adivasiyon:1
+आदिवासी	adiwasi:3	aadivashi:1	aadivasi:1	adivasi:1
 आदिशक्ति	aadishakti:2	adishakti:1
 आदी	aadi:2	adi:1
 आदीवासी	adivasi:2	aadivasi:1
-आदेश	aadesh:6	adesh:1
+आदेश	adesh:7	aadesh:6
 आदेशात्मक	aadeshaatmak:2	aadeshatmak:2	aadeshmatmak:1
 आदेशानुसार	aadeshanusar:2	aadeshanusaar:1	aadeshanushar:1	adeshanusar:1
 आदेशों	aadeshon:3
@@ -1868,14 +1868,14 @@
 आद्यंत	aadyant:3
 आद्या	adya:2	aadya:1
 आधर	aadhar:2	aadhr:1	aadhra:1
-आधा	aadha:3	aadhaa:1
+आधा	adha:6	aadha:3	aadhaa:1
 आधान	aadhaan:2	aadhan:1	adhaan:1
-आधार	aadhaar:2	aadhar:1
+आधार	adhar:12	aadhaar:2	aadhar:1
 आधारभूत	aadhaarbhoot:1	aadharbhoot:1	aadharbhut:1	adhaarbhoot:1
 आधारशिला	aadharshila:2	aadhaarsheela:1	aadhaarshila:1	aadharsheela:1
 आधारहीन	aaddharhin:1	aadhaarheen:1	aadhaarhin:1	aadharheen:1
 आधारिक	aadhaarik:1	aadharik:1	adharik:1
-आधारित	aadhaarit:1	aadharit:1	adharit:1
+आधारित	aadharit:12	aadhaarit:1	adharit:1
 आधारों	aadhaaron:1	aadharon:1	adharon:1
 आधिकरिक	adhikarik:2	aadhikarik:1	adhikaarik:1
 आधिकार	aadhikar:1	adhikaar:1	adhikar:1
@@ -1883,7 +1883,7 @@
 आधिकारिता	adhikarita:3
 आधिकारों	adhikaron:2	ahikaron:1
 आधिक्य	aadhikya:2	adhiky:1
-आधिपत्य	aadhipaty:1	aadhipatya:1	aadhiptay:1
+आधिपत्य	adhipatya:2	aadhipaty:1	aadhipatya:1	aadhiptay:1
 आधी	aadhi:3
 आधीन	aadhin:2	aadheen:1
 आधुनिक	aadhunik:3
@@ -1895,10 +1895,10 @@
 आधे	aadhe:2	adhe:1
 आध्यत्मिक	aadhyatmik:2	adhyatmik:1
 आध्यात्म	aadhyatm:1	aadhyatma:1	adhyatm:1
-आध्यात्मिक	aadhyatmik:3
+आध्यात्मिक	adhyatmik:5	aadhyatmik:3
 आध्यात्मिकता	aadhyatmikta:2	aadhyatmikata:1
 आन	aan:2	on:1
-आनंद	anand:2	aanand:1
+आनंद	aanand:3	anand:2
 आनंदन	anandan:3
 आनंदपुर	anandpur:3
 आनंदमय	anandmay:2	anandamay:1
@@ -1933,7 +1933,7 @@
 आपदा	aapda:2	aapadaa:1
 आपदाएं	aapadaaaen:1	aapdaein:1	aapdayein:1
 आपदाओं	aapadaaon:1	aapadaon:1	aapdaon:1
-आपने	aapane:1	aapne:1	apane:1
+आपने	aapne:2	aapane:1	apane:1
 आपराधिक	aapradhik:3
 आपस	aapas:2	aaps:1
 आपसी	aapsi:3
@@ -1961,7 +1961,7 @@
 आबरू	aabru:2	abaru:1
 आबाद	abad:2	aabaad:1	aabad:1
 आबादियों	abadiyon:2	aabaadiyon:1	aabadiyon:1
-आबादी	abadi:2	aabaadi:1	aabadi:1
+आबादी	aabadi:2	abadi:2	aabaadi:1
 आबिदा	aabida:1	aabidaa:1	abida:1
 आबिदी	aabidi:2	abidi:1
 आबू	abu:2	aabu:1
@@ -1972,7 +1972,7 @@
 आभाव	aabhav:2	abhav:1
 आभास	aabhas:2	abhash:1
 आभासी	aabhasi:2	abhasi:1
-आभूषण	abhushan:2	aabhushan:1
+आभूषण	aabhushan:3	abhushan:2
 आभूषणों	abhushanon:2	aabhushanon:1
 आम	aam:6
 आमंत्रण	aamantran:3
@@ -2003,7 +2003,7 @@
 आय	aay:2	aaya:1
 आयकर	aaykar:4	aayakar:1	ayekar:1
 आयत	aayat:2	aayet:1
-आयतन	aayatan:2	ayatan:1
+आयतन	aaytan:4	aayatan:2	ayatan:1
 आयताकार	aayatakar:2	ayatakar:1
 आयते	aayate:1	aayatey:1	ayate:1
 आयतों	aayaton:2	ayaton:1
@@ -2129,7 +2129,7 @@
 आर्मस्ट्रांग	armstrong:3
 आर्माडिलो	armadillo:2	armadilon:1
 आर्मी	army:6
-आर्मेनिया	armenia:2	armeniya:1
+आर्मेनिया	armeniya:2	armenia:2
 आर्य	arya:4	aary:1	aarya:1
 आर्यन	aryan:4	aaryan:2
 आर्यभट	aryabhatta:2	aryabhat:1
@@ -2148,7 +2148,7 @@
 आलम	alam:2	aalam:1
 आलसी	aalsi:2	alasi:1
 आलस्य	aalsy:1	aalsya:1	alasy:1
-आला	ala:2	aala:1
+आला	aala:4	ala:2
 आलिम	alim:2	aalim:1
 आलिया	aaliya:1	alia:1	aliya:1
 आलिशान	aalishan:3	aalishaan:1
@@ -2164,11 +2164,11 @@
 आलोचना	aalochana:1	aalochanaa:1	alochana:1
 आलोचनाएं	aalochanaayein:1	aalochnaen:1	alochanayen:1
 आलोचनाओं	aalochanaaon:1	aalochnaon:1	alochanaon:1
-आलोचनात्मक	aalochanaatmak:1	aalochnatmak:1	alochanatmak:1
+आलोचनात्मक	alochanatmak:2	aalochanaatmak:1	aalochnatmak:1
 आलोट	aalot:2	alot:1
 आल्प्स	alps:2	aalps:1
 आल्हा	aalha:1	aalhaa:1	alha:1	allah:1
-आवंटन	aavantan:2	avanatan:1	avantan:1
+आवंटन	avantan:2	aavantan:2	avanatan:1
 आवंटित	aavantit:2	avantit:1
 आवधिक	avdhik:2	aavdhik:1
 आवभगत	aavbhagat:2	avbhagat:1
@@ -2183,7 +2183,7 @@
 आवश्यकतानुसार	aavashykataanusaar:1	aavshyaktanusar:1	avashyaktanusaar:1	avashyaktanusar:1
 आवश्यकतापूर्ति	aavshyaktaapurti:1	avashyakatapurti:1	avashyaktapoorti:1
 आवागमन	aavagaman:1	aawagaman:1	avagaman:1	awagaman:1
-आवाज	aawaaz:1	aawaj:1	awaaj:1	awaaz:1
+आवाज	aawaj:2	aawaaz:1	awaaj:1	awaaz:1
 आवाज़ें	aawaazen:1	aawajen:1	awaazen:1	awazen:1
 आवाज़ों	aawajon:1	aawazon:1	awaazon:1	awazon:1
 आवाजाही	aawajahi:2	aavaajaahi:1	aavanazhi:1	avaajaahi:1
@@ -2198,13 +2198,13 @@
 आवासों	aavason:1	aawaason:1	avaason:1	awason:1
 आवाहन	aavaahan:2	aavahan:2
 आविर्भाव	aavirbhaav:2	aavirbhav:1	avirbhav:1
-आविष्कार	aavishkaar:2	aavishakaar:1	avishkar:1
+आविष्कार	avishkar:2	aavishkaar:2	aavishakaar:1
 आविष्कारक	aavishkaarak:2	aavishakarak:1	avishkarak:1
 आविष्कारों	aavishkaaron:2	aavishakaron:1	avishkaron:1
 आविष्कृत	aavishkrit:2	avishkrit:1	avishkrut:1
 आवृति	aavriti:2	avruti:1
 आवृत्त	aavritt:2	avrut:1
-आवृत्ति	aavriti:1	aavritti:1	avuti:1
+आवृत्ति	avrutti:2	aavriti:1	aavritti:1	avuti:1
 आवृत्तियों	aavritiyon:1	aavrittiyon:1	avrutiyon:1
 आवेग	aaveg:2	aveg:1
 आवेदक	aavedak:3	avedak:2
@@ -2235,12 +2235,12 @@
 आशीष	ashish:2	aashish:1
 आशुतोष	ashutosh:3
 आशुरा	ashura:3
-आश्चर्य	ashcharya:3	aashchary:1	aashcharya:1	ashchary:1
+आश्चर्य	ascharya:2	ashcharya:3	aashchary:1	aashcharya:1
 आश्चर्यचकित	aashcharychakit:2	ashcharychakit:2	aashcharyachakit:1	ashcharyachakit:1
 आश्चर्यजनक	aashcharyajanak:1	aashcharyjank:1	ashcharyajanak:1
 आश्चर्यपूर्ण	aashcharypurn:1	ashcharyapurana:1	ashcharyapurna:1
 आश्चर्यों	ashcharyon:4	aashcharyon:2
-आश्रम	aashram:5	ashram:1
+आश्रम	ashram:5	aashram:5
 आश्रमवासी	aashramvasi:1	aashramwasi:1	ashramvasi:1
 आश्रमों	aashramon:2	ashramon:1
 आश्रय	aashray:1	aashraye:1	aashya:1	ashray:1
@@ -2263,7 +2263,7 @@
 आसमान	aasamaan:2	aasman:2	aasmaan:1
 आसाधारण	aasadharan:2	asadharan:1
 आसान	aasan:2	aasaan:1	asan:1
-आसानी	asani:2	aasaani:1	aasani:1
+आसानी	aasani:4	asani:2	aasaani:1
 आसाम	assam:2	asam:1
 आसामी	asami:2	aasami:1
 आसाराम	asaram:3	aasaram:1
@@ -2276,7 +2276,7 @@
 आसू	aasu:2	asu:1
 आस्ताने	astane:2	aastane:1
 आस्तिक	astik:2	aastik:1
-आस्तिकता	aastikata:1	aastikta:1	astikata:1
+आस्तिकता	astikta:2	aastikata:1	aastikta:1	astikata:1
 आस्तिकों	aastikon:2	astikon:1
 आस्तियों	aastiyon:3
 आस्तीन	aasteen:1	aastin:1	astin:1
@@ -2286,7 +2286,7 @@
 आहत	aahat:3
 आहलूवालिया	ahluwalia:2	aahloowaliya:1
 आहवान	aahvaan:1	aahvan:1	ahavan:1
-आहार	aahaar:1	aahar:1	ahar:1
+आहार	aahar:7	aahaar:1	ahar:1
 आहिस्ता	aahista:3
 आहुजा	ahuja:2	aahuja:1
 आहुति	aahuti:2	ahuti:1
@@ -2312,7 +2312,7 @@
 इंग्लैड	england:3
 इंच	inch:3
 इंची	inchi:2	inchy:1
-इंजन	engine:3
+इंजन	injan:2	engine:3
 इंजनों	enginon:2	enjanon:1
 इंजिन	engine:3
 इंजिनियर	engineer:3
@@ -2391,7 +2391,7 @@
 इंफ्लूएंजा	influenza:3
 इंशा	insha:3
 इंश्योरेंस	insurance:3
-इंसान	insaan:7	insan:7
+इंसान	insan:7	insaan:7
 इंसानों	insanon:3
 इंस्टाल	install:3
 इंस्टालेशन	installation:3
@@ -2408,7 +2408,7 @@
 इआन	eon:2	iaan:1
 इए	ea:2	ia:1
 इक	ek:2	ik:1
-इकट्ठा	ekattha:2	ikattha:1
+इकट्ठा	ikatta:2	ekattha:2	ikattha:1
 इकट्ठी	ekatthi:1	ekthhi:1	ikatthi:1
 इकट्ठे	ekathe:1	ekatthe:1	ikatthe:1
 इकठ्ठा	ekattha:2	ikattha:1
@@ -2452,7 +2452,7 @@
 इग्नू	ignu:3	ignoo:1
 इग्लेसियस	iglesias:3
 इच	itch:3
-इच्छा	ichcha:3	iccha:2	ichchha:1
+इच्छा	iccha:3	ichcha:3	ichchha:1
 इच्छाओं	ichchaon:2	ichchhaaon:1
 इच्छाधारी	icchhadhaari:1	ichchadhari:1	ichchhadhaari:1
 इच्छानुसार	icchhanusar:1	ichchanusar:1	ichchhanusaar:1
@@ -2493,15 +2493,15 @@
 इतर	itar:3
 इतरा	itara:1	itra:1	itraa:1
 इतालवी	italvi:2	etalvi:1	italavi:1
-इतिहास	itihaas:5	itihas:1
-इतिहासकार	itihaaskaar:1	itihaaskar:1	itihaskar:1
-इतिहासकारों	itihaaskaaron:2	itihaaskaron:1
+इतिहास	itihas:32	itihaas:5
+इतिहासकार	itihasakar:2	itihaaskaar:1	itihaaskar:1	itihaskar:1
+इतिहासकारों	itihaskaron:4	itihaaskaaron:2	itihaaskaron:1
 इतिहासविद	itihaasvid:3
 इतिहासों	itihaason:3
 इत्ती	itti:3
 इत्तेफाक	ittefaq:2	ittefak:1	itteyfak:1
 इत्मीनान	itminaan:3
-इत्यादि	ityaadi:2	ityadi:1
+इत्यादि	ityadi:9	ityaadi:2
 इत्र	itra:2	itr:1
 इथियोपिया	ethiopia:2	ethiopiaya:1
 इथेनॉल	ethanol:2	ethenol:1
@@ -2513,7 +2513,7 @@
 इनका	inka:2	inaka:1
 इनकार	inkar:2	inkaar:1
 इनकी	inki:2	inaki:1
-इनके	inake:1	inke:1	inkey:1
+इनके	inke:35	inake:1	inkey:1
 इनको	inko:2	inako:1
 इनकोडिंग	encoding:3
 इनक्यूबेटर	incubator:3
@@ -2526,7 +2526,7 @@
 इनफ	enough:3
 इनफिनिटी	infinity:3
 इनबॉक्स	inbox:3
-इनमें	inmain:1	inmein:1	inmen:1
+इनमें	inmen:14	inmain:1	inmein:1
 इनलाइन	inline:3
 इनलोगों	inlogon:3
 इनविजिबल	invisible:3
@@ -2559,8 +2559,8 @@
 इन्वेस्टिंग	investing:3
 इन्वेस्टिगेशन	investigation:3
 इन्हाेंने	inhone:2	inhonne:1
-इन्हीं	inhin:3
-इन्हें	inhen:3
+इन्हीं	inhi:4	inhin:3
+इन्हें	inhe:6	inhen:3
 इन्हेलर	inhaler:3
 इन्हों	inhon:3
 इन्होंने	inhone:3
@@ -2625,13 +2625,13 @@
 इर्दगिर्द	irdgird:3	eradgirad:1	iradgirad:1
 इलयास	ilayas:1	ilyaas:1	ilyas:1
 इलाइची	elaichi:1	ilaichi:1	ilayachi:1	ilayichi:1
-इलाका	ilaaka:2	ilaka:2
+इलाका	ilaka:2	ilaaka:2
 इलाके	ilake:2	elaakey:1
 इलाको	elaako:1	ialko:1	ilako:1
 इलाकों	elaakon:1	ialkon:1	ilakon:1
 इलाज	ilaaj:5	elaaj:1	ilaj:1
 इलाजों	ilajon:2	ilaajon:1
-इलाहाबाद	allahabad:2	ilahabaad:1
+इलाहाबाद	ilahabaad:2	allahabad:2
 इलाहाबादी	ilahabaadi:1	ilahabadi:1	illahabadi:1
 इलाही	elahi:1	ilahi:1	illahi:1
 इलिंगवर्थ	ellingworth:1	ilingvarn:1	illingworth:1
@@ -2665,7 +2665,7 @@
 इशांत	ishant:2	ishaant:1
 इशाक	ishaak:1	ishaaq:1	ishak:1
 इशान	ishan:2	ishaan:1
-इशारा	ishaara:1	ishaaraa:1	ishara:1
+इशारा	ishara:3	ishaara:1	ishaaraa:1
 इशारे	ishaare:1	ishare:1	isharey:1
 इशारों	ishaaron:2	isharon:1
 इशिता	ishita:3
@@ -2680,8 +2680,8 @@
 इसकी	iski:2	isaki:1
 इसके	iske:2	isake:1
 इसको	isko:3	isako:1
-इसने	isane:2	isne:1
-इसमें	ismein:2	ismem:1	ismen:1
+इसने	isne:5	isane:2
+इसमें	ismen:21	ismein:2	ismem:1
 इसमेें	ismein:1	ismem:1	ismen:1
 इसराइल	israel:4
 इसरार	isarar:2	isaraar:1	israr:1
@@ -2690,7 +2690,7 @@
 इसलामी	islami:3
 इसलिए	isliye:3	islie:2
 इसवी	isavi:2	isvi:1
-इससे	isase:3
+इससे	isse:33	isase:3
 इसहाक	ishak:2	isahak:1
 इसाक	isak:2	isaac:1	isaak:1
 इसाबेल	isabel:2	isabela:1	izabel:1
@@ -2700,7 +2700,7 @@
 इस्कॉन	iskcon:3	iscon:1	iskon:1
 इस्तीफा	istifa:5	isteefa:3
 इस्तीफे	istife:3	isteefe:1
-इस्तेमाल	istemaal:2	istemal:2
+इस्तेमाल	istemal:19	istemaal:2
 इस्पात	ispat:2	ispaat:1
 इस्राइल	israel:7	istrail:2
 इस्लाम	islam:7	islaam:1
@@ -2757,7 +2757,7 @@
 ईशनिंदा	ishninda:2	ishaninda:1
 ईशा	isha:3
 ईशान	ishan:3
-ईश्वर	ishwar:3	inshwar:1
+ईश्वर	ishvar:4	ishwar:3	inshwar:1
 ईश्वरी	ishwari:3
 ईश्वरीय	ishwariy:3
 ईष्ट	east:1	ishat:1	isht:1
@@ -2795,7 +2795,7 @@
 उखाड़ने	ukhaadaney:1	ukhadane:1	ukhadne:1
 उखीमठ	ukhimath:3
 उग	ugg:2	ug:1
-उगता	ugata:1	ugta:1	ugtaa:1
+उगता	ugta:3	ugata:1	ugtaa:1
 उगती	ugaati:1	ugati:1	ugti:1
 उगते	ugate:1	ugatey:1	ugte:1
 उगने	ugane:2	uganey:1
@@ -2819,14 +2819,14 @@
 उचित	uchit:3
 उचेहरा	uchehara:3
 उच्च	ucch:1	uchch:1	uchh:1
-उच्चतम	ucchatam:1	uchchtam:1	uchhtam:1
+उच्चतम	ucchtam:2	ucchatam:1	uchchtam:1	uchhtam:1
 उच्चतर	ucchatar:1	uchchtar:1	uchhtar:1
 उच्चता	ucchata:1	uchchta:1	uchhta:1
 उच्चस्तरीय	achhstariy:1	ucchasariya:1	ucchstariiya:1	uchchstariy:1
 उच्चाधिकार	achhadhikari:1	ucchadhikaar:1	uchchadhikar:1
 उच्चायुक्त	ucchayukta:1	uchchayukta:1	uchhayukt:1
 उच्चायोग	ucchayog:1	uchchayog:1	uchhayog:1
-उच्चारण	uccharan:1	uchcharan:1	uchharan:1
+उच्चारण	uchharan:3	uccharan:1	uchcharan:1
 उच्चारित	uchharit:2	ucchaarit:1
 उच्छिष्ट	uccchisht:1	ucchishta:1	uchchhisht:1
 उछलते	ucchalte:2	uchhalate:1
@@ -2952,10 +2952,10 @@
 उत्तराखंड	uttarakhand:4	uttrakhand:4
 उत्तराधिकार	uttradhikar:2	uttradhikaar:1
 उत्तराधिकारियों	uttradhikariyon:2	uttaradhikariyon:1
-उत्तराधिकारी	uttradhikari:3
+उत्तराधिकारी	uttaradhikari:3	uttradhikari:3
 उत्तरायण	uttrayan:2	uttarayan:1
 उत्तरार्द्ध	uttardh:1	uttraadharya:1	uttrardh:1
-उत्तरार्ध	uttaradh:1	uttradharya:1	uttrardh:1
+उत्तरार्ध	uttarardh:2	uttaradh:1	uttradharya:1	uttrardh:1
 उत्तरी	uttari:3
 उत्तरोत्तर	uttarottar:3
 उत्ताल	uttal:2	uttaal:1
@@ -2978,7 +2978,7 @@
 उत्पादकों	utpadakon:3
 उत्पादन	utpadan:5	utpaadan:1
 उत्पादित	utpadit:3
-उत्पादों	utpadon:3
+उत्पादों	utpado:2	utpadon:3
 उत्पीड़न	utpidan:3
 उत्प्रेरक	utprerak:3
 उत्प्रेरण	utpreran:3
@@ -3052,10 +3052,10 @@
 उद्यमियों	uddhamiyon:1	udyamiyon:1	udymiyon:1
 उद्यमी	uddhami:1	udyami:1	udymi:1
 उद्यमों	udyamon:2	uddhamon:1
-उद्यान	uddan:1	udyaan:1	udyan:1
+उद्यान	udyan:4	uddan:1	udyaan:1
 उद्यानों	udyanon:2	uddhanon:1
 उद्यापन	udyapan:4	udhyapan:1	udyaapan:1
-उद्योग	udhyog:2	udyog:2
+उद्योग	udyog:11	udhyog:2
 उद्योगपतियों	udyogpatiyon:3
 उद्योगों	udyogon:3
 उद्विग्न	udvign:1	udvigna:1	udwigna:1
@@ -3089,13 +3089,13 @@
 उन्मुख	unmukh:3
 उन्मुखीकरण	unmukhikaran:2	unmukhikarana:1
 उन्मूलन	unmulan:3
-उन्हीं	unhin:2	unhi:1
-उन्हें	unhen:4	unhein:2
+उन्हीं	unhi:4	unhin:2
+उन्हें	unhe:55	unhen:4	unhein:2
 उन्होंने	unhone:6	unhonen:1
 उप	up:3
 उपकर	upkar:2	upakar:1
 उपकरण	upkaran:2	upakaran:1
-उपकरणों	upkaranon:2	upakaranon:1
+उपकरणों	upakarno:2	upkaranon:2	upakaranon:1
 उपकार	upakaar:1	upkaar:1	upkar:1
 उपकुलपति	upkulpati:2	upakulapati:1
 उपक्रम	upkram:2	upakram:1
@@ -3111,8 +3111,8 @@
 उपचुनाव	upchunav:5	upachunav:1	upchunaav:1
 उपज	upaj:3
 उपजाई	upjai:2	upjaai:1
-उपजाऊ	upajaoo:1	upjaauu:1	upjau:1
-उपजाति	upjati:2	upjaati:1
+उपजाऊ	upjau:2	upajaoo:1	upjaauu:1
+उपजाति	upjaati:2	upjati:2
 उपजातियों	upjatiyon:5	upjaatiyon:2
 उपजाते	upjate:2	upjaate:1
 उपजी	upaji:2	upajii:1
@@ -3131,7 +3131,7 @@
 उपनाम	upnaam:2	upanam:1
 उपनिदेशक	upnideshak:3	upnirdeshak:2	upanideshak:1
 उपनियम	upaniyam:2	upniyam:1
-उपनिवेश	upanivesh:2	upnivesh:1
+उपनिवेश	upnivesh:2	upanivesh:2
 उपनिवेशन	upniveshan:2	upaniveshan:1
 उपनिवेशवाद	upaniveshawad:1	upniveshvad:1	upniveshwaad:1
 उपनिवेशवादियों	upaniveshawadiyon:1	upniveshvadiyon:1	upniveshwaadiyon:1
@@ -3140,7 +3140,7 @@
 उपनिषद	upanishad:2	upnishad:1
 उपनिषदों	upanishadon:1	upnishadon:1	upnishdon:1
 उपनेता	upneta:3
-उपन्यास	upnyas:3	upanyas:2	upanyaas:1
+उपन्यास	upanyas:27	upnyas:3	upanyaas:1
 उपन्यासकार	upnyaskar:2	upanyaaskaar:1
 उपन्यासों	upanyaason:1	upanyason:1	upnyason:1
 उपप्रजाति	upprajati:3	upprajaati:1
@@ -3164,7 +3164,7 @@
 उपयोगार्थ	upyogarth:3
 उपयोगिता	upyogita:3
 उपयोगितावाद	upyogitavad:2	upyogitawad:1
-उपयोगी	upyogi:3
+उपयोगी	upayogi:3	upyogi:3
 उपयोगों	upyogon:3
 उपरांत	uprant:3
 उपराष्ट्रपति	uprashtrapati:3	uaprashtrapati:1	upraashtrapati:1	uprashtrpati:1
@@ -3172,7 +3172,7 @@
 उपलक्ष्य	uplaksh:1	uplakshay:1	uplakshya:1
 उपलब्ध	uplabdh:3
 उपलब्धता	uplabdhata:2	uplabhdhata:1
-उपलब्धि	uplabdhi:3
+उपलब्धि	upalabdhi:3	uplabdhi:3
 उपलब्धियां	uplabdhiyaan:1	uplabdhiyan:1	uplabhiyan:1
 उपलब्धियों	uplabdhiyon:3
 उपलब्धी	uplabdhi:3
@@ -3191,7 +3191,7 @@
 उपसर्ग	upsarg:6
 उपस्कर	upaskar:2	upskar:1
 उपस्थित	upasthit:2	upsthit:1
-उपस्थिति	upasthiti:2	upsthiti:1
+उपस्थिति	upsthiti:5	upasthiti:2
 उपहार	uphaar:2	uphar:1
 उपहास	uphaas:2	uphas:1
 उपाख्यानों	upakhyanon:2	upakhyaanon:1
@@ -3235,7 +3235,7 @@
 उभरते	ubharate:2	ubharte:1
 उभरनी	ubharani:2	ubharni:1
 उभरने	ubharane:2	ubharne:1
-उभरा	ubhra:2	ubhara:1
+उभरा	ubhara:2	ubhra:2
 उभरी	ubhari:2	ubhri:1
 उभरे	ubhre:2	ubhare:1
 उभार	ubhar:3
@@ -3309,7 +3309,7 @@
 उल्लिखित	ullikhit:2	ullekhit:1
 उल्लू	ullu:3
 उल्लेख	ullekh:3
-उल्लेखनीय	ullekhniya:2	ulekhniye:1
+उल्लेखनीय	ullekhaniya:2	ullekhniya:2	ulekhniye:1
 उल्लेखित	ullekhit:3
 उष्ण	ushna:2	ushn:1
 उष्णकटिबंधीय	ushnakatibandhiya:1	ushnkatibandhiy:1	ushnkatibandhiya:1
@@ -3321,7 +3321,7 @@
 उसको	usko:2	usako:1
 उसने	usne:3
 उसपर	uspar:2	usper:1
-उसमें	usmein:2	usmen:2
+उसमें	usmen:7	usmein:2
 उसर	usar:3
 उससे	usse:2	usase:1
 उसी	usi:3
@@ -3345,12 +3345,12 @@
 ऊखीमठ	ukhimath:3
 ऊटपटांग	ootpatang:2	utpatang:2	utptang:2
 ऊटी	uti:2	ooty:1
-ऊतक	utak:3
+ऊतक	ootak:2	utak:3
 ऊन	un:2	oon:1	uun:1
 ऊनी	uni:2	ooni:1
 ऊपर	upar:2	ooper:1
 ऊपरकोट	oopercoat:1	uparcoat:1	uparkot:1
-ऊपरी	ooperi:1	upari:1	upri:1
+ऊपरी	upri:2	ooperi:1	upari:1
 ऊबड़	ubad:3
 ऊबड़खाबड़	ubadkhabad:2	ubarkhabad:1
 ऊर्जा	urja:3
@@ -3445,7 +3445,7 @@
 एकड़	ekad:3
 एकतरफा	ektarfa:3
 एकता	ekta:5	ekata:1
-एकत्र	akatra:1	ektra:1	ykatra:1
+एकत्र	ekatra:3	akatra:1	ektra:1	ykatra:1
 एकत्रित	ekatrit:1	ektrita:1	ykatrit:1
 एकत्रीकरण	ekatrikaran:1	ektrikaran:1	ykatrikaran:1
 एकत्व	ekatva:1	ektva:1	ykatva:1
@@ -3488,7 +3488,7 @@
 एक्टोपिक	actopic:3
 एक्युरेसी	accuracy:3
 एक्शन	action:10
-एक्स	axe:10	x:10	ex:1
+एक्स	x:10	axe:10	ex:1
 एक्सएम	xm:3
 एक्सचेंज	exchange:4
 एक्सटेंशन	extension:4
@@ -3596,7 +3596,7 @@
 एड्रीनलीन	adrenaline:1	edrenalin:1	edrenaline:1
 एड्रेनल	adrenal:2	adrenaline:1
 एड्रेस	address:3
-एड्स	aids:2	ads:1
+एड्स	adis:5	aids:2	ads:1
 एतबार	aitbaar:2	aitbar:2
 एतिहासिक	aitihasik:1	athihasik:1	atihaasik:1	etihaasik:1
 एथन	ethan:3
@@ -3639,7 +3639,7 @@
 एनालिसिस	analysis:2	analisis:1
 एनालॉग	analog:1	analogue:1	enalog:1
 एनिग्मा	enigma:3
-एनिमेटेड	animated:9
+एनिमेटेड	animeted:2	animated:9
 एनी	any:2	annie:1
 एनीमिया	anemia:2	animiya:1
 एनीमेशन	animation:3
@@ -3723,7 +3723,7 @@
 एमिली	emily:2	emilie:1
 एमिस	amis:1	amiss:1	emis:1
 एमी	amy:2	emi:1
-एम्पायर	ampire:1	empire:1	employer:1
+एम्पायर	umpire:2	ampire:1	empire:1	employer:1
 एम्बुलेंस	ambulance:3
 एम्बेसडर	ambassador:3
 एम्मा	emma:2	amma:1
@@ -3756,7 +3756,7 @@
 एरिका	arica:1	erica:1	erika:1
 एरिक्सन	ericsson:2	erikson:1
 एरिना	erina:2	arina:1
-एरिया	area:3
+एरिया	aria:2	area:3
 एरियाना	ariana:2	eriyana:1
 एरी	eri:2	ari:1
 एरीना	erina:2	arena:1
@@ -3827,7 +3827,7 @@
 एल्यूमीनियम	aluminium:8
 एल्विन	elvin:2	alvin:1
 एल्स	else:2	els:1
-एवं	avn:1	evam:1	evan:1
+एवं	evam:88	avn:1	evan:1
 एवम्	avam:1	avm:1	evam:1
 एवरेज	average:3
 एवरेडी	eveready:2	evready:1
@@ -3982,7 +3982,7 @@
 ऑक्सफोर्ड	oxford:3
 ऑक्साइड	oxide:3
 ऑक्सी	oxy:3
-ऑक्सीकरण	oxykaran:2	oxikaran:1
+ऑक्सीकरण	oxikaran:3	oxykaran:2
 ऑक्सीजन	oxygen:3
 ऑक्सीटॉसिन	oxytocin:2	oxytosin:1
 ऑटिस्टिक	autistic:3
@@ -4010,7 +4010,7 @@
 ऑप्टिक	optic:3
 ऑप्टिकल	optical:4
 ऑप्टिक्स	optics:3
-ऑफ	off:10	of:1
+ऑफ	of:12	off:10
 ऑफर	offer:8
 ऑफर्स	offers:4
 ऑफलाइन	offline:6
@@ -4103,7 +4103,7 @@
 ओमेगा	omega:3
 ओय	oye:3
 ओर	or:4	aur:2
-ओरछा	orachha:2	orchha:1
+ओरछा	orchha:2	orachha:2
 ओरण	oran:3
 ओरल	oral:3
 ओरलैंडो	orlando:3
@@ -4212,7 +4212,7 @@
 कंट्रोल	control:3
 कंट्रोलिंग	controlling:2	controling:1
 कंट्रोल्ड	controlled:3
-कंट्रोल्स	controls:3
+कंट्रोल्स	kantrols:2	controls:3
 कंठ	kanth:3	kunth:1
 कंठस्थ	kanthasth:2	kanthast:1
 कंठहार	kanthhar:2	kanthahar:1
@@ -4442,7 +4442,7 @@
 कपाड़िया	kapaadiya:1	kapadiya:1	kpadiya:1
 कपारो	kaparo:2	kapaaro:1
 कपाल	kapaal:1	kapal:1	kpal:1
-कपास	kapaas:1	kapas:1	kpas:1
+कपास	kapas:3	kapaas:1	kpas:1
 कपिंग	kaping:2	kping:1
 कपिल	kapil:3
 कपूर	kapoor:4
@@ -4452,7 +4452,7 @@
 कपोल	kapol:2	kpol:1
 कपोलकल्पना	kapolkalpana:3
 कपोलों	kapolon:2	coupolon:1
-कप्तान	captan:1	kaptaan:1	kaptan:1
+कप्तान	kaptaan:2	captan:1	kaptan:1
 कप्तानी	captani:1	kaptaani:1	kaptani:1
 कफ	kaf:2	cough:1
 कब	kab:3
@@ -4463,7 +4463,7 @@
 कबायली	kabayali:2	kbayali:1
 कबीर	kabir:3	kabeer:1
 कबीले	kabile:2	kabiile:1
-कबीलों	kabilon:2	kabiilon:1
+कबीलों	kabilo:3	kabilon:2	kabiilon:1
 कबूतर	kabutar:2	kabootar:1
 कबूतरों	kabootaron:1	kabutaron:1	kabuutaron:1
 कबूल	kabool:1	kabul:1	kabuul:1
@@ -4542,7 +4542,7 @@
 कमीशनिंग	commissioning:3
 कमेंट्री	commentary:3
 कमेंट्स	comments:3
-कमेटी	cometti:1	committee:1	commity:1
+कमेटी	committee:2	cometti:1	commity:1
 कमेरे	kamere:2	kmere:1
 कमोडिटी	commodity:3
 कमोडोर	commodore:2	comodor:1
@@ -4588,7 +4588,7 @@
 करनाली	karnali:3
 करनी	karni:3	karani:1
 करनूल	karnul:1	kernel:1	kurnool:1
-करने	karane:3
+करने	karne:231	karane:3
 करनैल	karnail:3
 करपात्री	karpatri:3
 करबला	karbala:3
@@ -4607,7 +4607,7 @@
 करवाते	karvate:3
 करवाना	karvana:3
 करवाने	karvane:3
-करवाया	karvaya:3
+करवाया	karwaya:3	karvaya:3
 करवायी	karvayi:3
 करवायें	karvayen:3
 करवाल	karval:2	karwal:1
@@ -4637,7 +4637,7 @@
 करिश्मा	karishma:3
 करी	kari:3
 करीना	kareena:5
-करीब	kareeb:2	karib:1
+करीब	karib:8	kareeb:2
 करीबन	kariban:3
 करीबी	karibi:2	kareebi:1
 करीम	kareem:2	karim:1
@@ -4660,7 +4660,7 @@
 करो	karo:8
 करोगी	karogi:3
 करोगे	karoge:4
-करोड़	crode:1	crore:1	karor:1
+करोड़	crore:4	crode:1	karor:1
 करोड़पति	karodpati:3	crorepati:1
 करोड़ो	karodon:2	krodo:1
 करोड़ों	karodon:2	karoron:1	krodon:1
@@ -4690,7 +4690,7 @@
 कर्मकांड	karmkand:4	karmakand:2
 कर्मकार	karmkar:2	karmakar:1
 कर्मचारियों	karmchariyon:2	karmachariyon:1
-कर्मचारी	karmchari:4	karmachari:2
+कर्मचारी	karmachari:2	karmchari:4
 कर्मचारीगण	karmacharigan:2	karcharigan:1
 कर्मचारीयों	karmchariyon:3
 कर्मभूमि	karmabhoomi:2	karmabhumi:1	karmbhumi:1
@@ -4732,7 +4732,7 @@
 कला	kala:8	kalaa:2
 कलांतर	kalantar:3
 कलाई	kalai:3
-कलाओं	kalaon:3
+कलाओं	kalao:2	kalaon:3
 कलाकार	kalakar:4	kalakaar:3
 कलाकारी	kalakari:3	kalakaari:1
 कलाकारों	kalakaron:5	kalakaaron:1
@@ -4858,18 +4858,18 @@
 कस्बें	kasben:3
 कस्बों	kasbon:3
 कहकर	kahkar:2	kahakar:1
-कहता	kahata:1	kahataa:1	kahta:1
-कहती	kahati:2	kahti:1
-कहते	kahate:4	kahte:1	kehte:1
-कहना	kahana:2	kahna:1
-कहने	kahane:2	kahne:1
+कहता	kahta:4	kahata:1	kahataa:1
+कहती	kehti:2	kahati:2	kahti:1
+कहते	kahte:20	kahate:4	kehte:1
+कहना	kahna:6	kahana:2
+कहने	kehne:2	kahane:2	kahne:1
 कहला	kahla:2	kahala:1
 कहलाई	kahlai:3
 कहलाए	kahlaaye:1	kahlae:1	kahlaye:1
 कहलाएगी	kahlayegi:2	kahlaegi:1
 कहलाता	kahlata:3	kahlaataa:1
 कहलाती	kahlati:3
-कहलाते	kahlate:3
+कहलाते	kahlaate:2	kahlate:3
 कहलाना	kahlana:3	kahlaanaa:1
 कहलाने	kahlane:2	kahlaane:1
 कहलाया	kahlaya:3
@@ -4977,7 +4977,7 @@
 काजीरंगा	kajiranga:2	kaziranga:1
 काजू	kaju:3	kajoo:1
 काजोल	kajol:4
-काट	kat:2	kaat:1
+काट	kaat:3	kat:2
 काटकर	katkar:2	kaatkar:1
 काटता	katata:2	kaatata:1
 काटती	kaatati:2	katati:1
@@ -5008,7 +5008,7 @@
 कानन	kanan:3
 कानपुर	kanpur:3
 काना	kana:2	kaanaa:1
-कानून	kanoon:2	kanun:2
+कानून	kanun:6	kanoon:2
 कानूनसम्मत	kanunsammat:2	kanoonsammat:1
 कानूनी	kanooni:2	kanuni:2
 कानूनों	kanunon:2	kanoonon:1
@@ -5077,8 +5077,8 @@
 कायस्थ	kayasth:3
 काया	kaya:3
 कार	car:10
-कारक	karak:3
-कारकों	karkon:2	karakon:1
+कारक	kaarak:2	karak:3
+कारकों	karakon:3	karkon:2
 कारखाना	karkhana:2	kakhana:1
 कारखाने	karkhane:3
 कारखानों	karkhanon:3
@@ -5112,7 +5112,7 @@
 कार्टर	carter:3
 कार्टियर	cartier:2	kartiyar:1
 कार्टिलेज	cartilage:2	kartilej:1
-कार्टून	cartoon:5
+कार्टून	kaartoon:2	cartoon:5
 कार्टूनिस्ट	cartoonist:4
 कार्टेल	cartel:2	kartel:1
 कार्ड	card:10
@@ -5147,7 +5147,7 @@
 कार्यकुशलता	karyakushalata:3	karyakushalta:2	karykushalata:1
 कार्यक्रम	karyakram:4	karyakarm:1	karykram:1	karykrm:1
 कार्यक्रमो	karyakramo:2	karykramo:1
-कार्यक्रमों	karyakramo:1	karyakramon:1	karykramon:1
+कार्यक्रमों	karyakramon:2	karyakramo:1	karykramon:1
 कार्यक्षमता	karyakshamata:1	karyakshmata:1	karykshamata:1
 कार्यक्षेत्र	karyakshetra:2	karykshetr:1
 कार्यक्षेत्रों	karyakshetron:2	karykshetron:1
@@ -5157,7 +5157,7 @@
 कार्यबल	karybal:2	karyabal:1
 कार्यभार	karybhar:2	karyabhar:1
 कार्यमुक्त	karymukt:2	karyamukta:1
-कार्यरत	karyrat:2	karyarat:1
+कार्यरत	karyarat:3	karyrat:2
 कार्यवाहक	karyvahak:2	karyavahak:1
 कार्यवाहियों	karyavahiyon:1	karyvahiyon:1	karyvahon:1
 कार्यवाही	karyavahi:1	karyawahi:1	karyvahi:1
@@ -5173,9 +5173,9 @@
 कार्याधिकारी	karyadhikari:3
 कार्यान्वय	karyanvay:2	karyanavya:1
 कार्यान्वित	karyanvit:2	karyanivit:1
-कार्यालय	karyalaya:4	karyalay:3
+कार्यालय	karyalay:9	karyalaya:4
 कार्यालयों	karyalayon:2	karyalyon:1
-कार्यों	karyo:2	karyon:1
+कार्यों	karyon:6	karyo:2
 कार्ल	karl:3
 कार्लटन	carlton:1	kalten:1	karlton:1
 कार्लाइल	karlail:2	caarlyle:1	carlyle:1	kaarlail:1
@@ -5266,7 +5266,7 @@
 किंतु	kintu:3
 किंवदंतियां	kinvadantiyan:1	kinvanditiyan:1	kinvdantiyan:1
 किंवदंती	kinvadanti:2	kinvandi:1
-किए	kie:4	kiye:4
+किए	kiye:27	kie:4
 किओस्क	kiosk:3
 किक	kick:5
 किग्रा	kigra:3
@@ -5282,7 +5282,7 @@
 कितना	kitna:2	kitana:1
 कितनी	kitni:2	kitani:1
 कितने	kitne:5	kitane:1
-किताब	kitaab:2	kitab:2
+किताब	kitab:4	kitaab:2
 किताबें	kitaben:5
 किताबों	kitabon:5
 किदवई	kidwai:2	kidvai:1
@@ -5369,7 +5369,7 @@
 किसने	kisne:3
 किससे	kisse:3
 किसा	kisa:3
-किसान	kisan:8	kisaan:7
+किसान	kisaan:7	kisan:8
 किसानी	kisani:3	kisaani:1
 किसानों	kisanon:3
 किसिंग	kissing:3
@@ -5403,7 +5403,7 @@
 कीड़ी	kidi:3
 कीड़े	kide:2	keede:1
 कीड़ों	kidon:2	keedon:1
-कीथ	keeth:2	kith:1
+कीथ	keith:3	keeth:2	kith:1
 कीनन	kinan:2	keenan:1
 कीनिया	kiniya:2	kenya:1
 कीनोट	kinote:2	keynote:1
@@ -5467,7 +5467,7 @@
 कुचलना	kuchalna:3
 कुचलने	kuchalne:2	kuchalane:1
 कुचामन	kuchaman:3
-कुछ	kuchh:2	kuch:1
+कुछ	kuch:99	kuchh:2
 कुछेक	kuchhek:3
 कुजूर	kujur:2	kujoor:1
 कुटिया	kutiya:3
@@ -5549,7 +5549,7 @@
 कुलदीपक	kuldeepak:3
 कुलदेवी	kuldevi:3
 कुलनाम	kulnam:3
-कुलपति	kulpati:3
+कुलपति	kulapati:2	kulpati:3
 कुलभूषण	kulbhushan:3
 कुलवंत	kulvant:2	kulwant:1
 कुलशेखर	kulshekhar:3
@@ -5587,7 +5587,7 @@
 कुश्ती	kushti:4
 कुश्तीबाज	kushtibaaj:2	kushatibaaz:1
 कुषाण	kushaan:2	kushan:1
-कुष्ठ	kushth:2	kushtha:1
+कुष्ठ	kusht:2	kushth:2	kushtha:1
 कुसंस्कार	kusanskar:3
 कुसंस्कारों	kusanskaron:3
 कुसुम	kusum:3
@@ -5620,7 +5620,7 @@
 कूली	coolie:3	kuli:1
 कूल्हे	kulhe:2	koolhe:1
 कूष्मांडा	kushmanda:2	kooshmaandaa:1
-कृत	krit:2	krut:1
+कृत	krut:3	krit:2
 कृतकृत्य	krikritya:1	kritakrity:1	krutakrutya:1
 कृतज्ञता	kritadnyataa:1	kritagya:1	kritagyata:1
 कृतसंकल्प	kritsankalp:2	krutsankalpa:1
@@ -5630,7 +5630,7 @@
 कृतियों	kritiyon:3
 कृत्य	kritya:2	krity:1
 कृत्यों	krityon:3
-कृत्रिम	kritrim:3
+कृत्रिम	krutrim:2	kritrim:3
 कृपया	kripya:2	kripayaa:1
 कृपलानी	kriplani:2	kripalani:1
 कृपा	kripa:6	kripaa:2
@@ -5717,7 +5717,7 @@
 केयूर	keyur:3
 केरकेट्टा	kerketta:2	kerakettaa:1
 केरन	karen:2	keron:1
-केरल	keral:3	kerala:3
+केरल	kerala:3	keral:3
 केरलवासी	keralavaasi:1	keralavasi:1	keralwasi:1
 केरला	kerala:2	keralaa:1
 केरली	kerali:2	kerli:1
@@ -5745,7 +5745,7 @@
 केशवानंद	keshavanand:2	keshvanand:1
 केशा	kesha:2	keshaa:1
 केशी	keshi:3
-केस	case:5	kes:1
+केस	kes:2	case:5
 केसर	kesar:3
 केसरी	kesari:4	kesri:2
 केसिनो	casino:3
@@ -5847,7 +5847,7 @@
 कैसेट	cassette:3
 कैस्पियन	caspian:2	capsiun:1
 कॉइन	coin:3
-कॉक	cock:5
+कॉक	kok:2	cock:5
 कॉकटेल	cocktail:3
 कॉकपिट	cockpit:3
 कॉकरोच	cockroach:3
@@ -6018,8 +6018,8 @@
 कोल्हू	kohlu:1	kolhoo:1	kolhu:1
 कोश	kosh:3
 कोशिका	koshika:3
-कोशिकाएं	koshikayen:2	koshikaen:1
-कोशिकाओं	koshikaon:3
+कोशिकाएं	koshikae:2	koshikayen:2	koshikaen:1
+कोशिकाओं	koshikaaon:7	koshikaon:3
 कोशिकीय	koshikiy:1	koshikiya:1	koshkiy:1
 कोशिश	koshish:6
 कोशिशें	koshishen:2	koshishon:1
@@ -6079,8 +6079,8 @@
 क्यूबिक	cubic:2	kyuubik:1
 क्यूबेक	quebec:2	cubeck:1
 क्यूब्स	cubes:3
-क्यों	kyun:3	kyon:2	kyu:2	kyo:1
-क्योंकि	kyunki:2	kyonki:1
+क्यों	kyon:8	kyun:3	kyu:2	kyo:1
+क्योंकि	kyonki:45	kyunki:2
 क्योटो	kyoto:3
 क्रंदन	krandan:3
 क्रम	kram:3
@@ -6165,7 +6165,7 @@
 क्रूड	crude:2	crood:1
 क्रूर	krur:3
 क्रूरतम	kruratam:1	krurtam:1	kurtam:1
-क्रूरता	krurata:2	kurta:1
+क्रूरता	krurta:2	krurata:2	kurta:1
 क्रूस	cruise:1	cyrus:1	krus:1
 क्रूसेडर	crusader:2	krusedar:1
 क्रेग	craig:2	creg:1
@@ -6186,7 +6186,7 @@
 क्रॉसरोड्स	crossroads:2	crossrhodes:1
 क्रॉसिंग	crossing:3
 क्रॉसिंगों	crosingo:1	crossingo:1	crossingon:1
-क्रो	crow:2	kro:1
+क्रो	cro:2	crow:2	kro:1
 क्रोएशिया	croatia:2	kroeshiya:1
 क्रोएशियाई	croatia:1	croatiai:1	kroeshiyai:1
 क्रोकर	croaker:1	crocker:1	krokar:1
@@ -6201,7 +6201,7 @@
 क्रोमोसोम	chromosome:2	crommosome:1
 क्रौंच	cranch:1	kraunch:1	krench:1
 क्लक्स	clucks:1	klaks:1	klux:1
-क्लब	club:3
+क्लब	klab:2	club:3
 क्लबों	clabon:2	clubon:1
 क्लर्क	clerk:3
 क्लस्टर	cluster:2	kalstar:1
@@ -6282,7 +6282,7 @@
 क्षतिग्रस्त	kshatigrast:5	shatigrast:1
 क्षतिपूर्ति	kshatipurti:2	shatipurti:1
 क्षत्रपों	kshatrapon:1	shatrpon:1	shtrapon:1
-क्षत्रिय	kshtriy:1	kshtriya:1	shatriy:1
+क्षत्रिय	kshatriya:2	kshtriy:1	kshtriya:1	shatriy:1
 क्षत्रियों	kshatriyon:2	shatriyon:1
 क्षत्रीय	kshatriya:1	kshtriya:1	shtriy:1
 क्षमता	kshamta:2	shamta:1
@@ -6308,7 +6308,7 @@
 क्षेत्रवासी	kshetrawasi:2	shetrvasi:1
 क्षेत्राधिकार	kshetradhikar:1	kshetradhikari:1	shetradhikar:1
 क्षेत्री	kshetri:1	kshetrri:1	shetri:1
-क्षेत्रीय	kshetiya:2	ksheriya:1	shetriy:1
+क्षेत्रीय	kshetriy:7	kshetiya:2	ksheriya:1	shetriy:1
 क्षेत्रों	kshetron:4	shetron:1
 क्षेम	kshem:2	shem:1
 क्षेेत्र	kshetra:2	shetr:1
@@ -6332,7 +6332,7 @@
 खंडेराव	khanderav:3
 खंडेलवाल	khandelwal:3
 खंडेला	khandela:3
-खंडों	khandon:3
+खंडों	khando:2	khandon:3
 खंदक	khandak:3
 खंभे	khambhe:2	khanbhe:1
 खंभों	khambhon:2	khanbhon:1
@@ -6378,7 +6378,7 @@
 खत	khat:3
 खतना	khatna:2	khatana:1
 खतने	khatane:1	khatne:1	khatney:1
-खतरनाक	khatarnaak:2	khatarnak:1
+खतरनाक	khatarnak:2	khatarnaak:2
 खतरा	khatra:2	khatara:1
 खतरे	khatre:2	khatare:1	khatrey:1
 खतरों	khatron:3	khataron:1
@@ -6427,7 +6427,7 @@
 खरबूजे	kharbuje:2	kharboojey:1
 खरसिया	kharsiya:3
 खरा	khara:3
-खराब	kharab:2	kharaab:1
+खराब	kharaab:3	kharab:2
 खराबी	kharabi:2	khraabi:1
 खराश	kharash:2	kharaash:1
 खरिया	khariya:3
@@ -6496,10 +6496,10 @@
 खाजूवाला	khaajuvala:2	khajuvala:1	khajuwala:1
 खाटूश्याम	khatushyam:3
 खाड़ी	khadi:2	khaadi:1
-खाता	khaata:2	khata:2
+खाता	khata:8	khaata:2
 खातिर	khaatir:2	khatir:2
 खाती	khaati:2	khati:2
-खाते	khate:2	khaate:1	khaatey:1
+खाते	khaate:3	khate:2	khaatey:1
 खातों	khaaton:2	khaton:2
 खात्मा	khatma:2	khaatma:1
 खात्मे	khatme:2	khaatamey:1
@@ -6549,7 +6549,7 @@
 खाश	khash:3
 खास	khas:5	khaas:1
 खासकर	khaskar:2	khaaskar:1
-खासतौर	khaastaur:1	khastaur:1	khastour:1
+खासतौर	khastaur:2	khaastaur:1	khastour:1
 खासा	khasa:3
 खासियत	khasiyat:5	khaasiyat:1
 खासी	khasi:6
@@ -6561,7 +6561,7 @@
 खिंचे	khinche:3
 खिचड़ी	khichdi:2	khichari:1
 खिड़कियां	khidakiyan:1	khidiyan:1	khidkiyan:1
-खिड़की	khidaki:2	khidki:2
+खिड़की	khidki:2	khidaki:2
 खिताब	khitab:3
 खिताबी	khitabi:3
 खिल	khil:3
@@ -6575,7 +6575,7 @@
 खिलाए	khilaye:2	khilae:1
 खिलाएं	khilayen:2	khilaen:1
 खिलाओ	khilao:3
-खिलाड़ियों	khiladiyon:3
+खिलाड़ियों	khiladiyo:2	khiladiyon:3
 खिलाड़ी	khiladi:3
 खिलाता	khilata:2	khilati:1
 खिलाती	khilati:3
@@ -6613,7 +6613,7 @@
 खीरे	khire:3
 खुचे	khuche:3
 खुजलाने	khujlane:3
-खुजली	khujali:3
+खुजली	khujli:2	khujali:3
 खुजलीदार	khujlidar:2	khujalidar:1
 खुद	khud:3
 खुदरा	khudra:2	khudara:1
@@ -6667,7 +6667,7 @@
 खूंटे	khunte:3
 खून	khoon:3
 खूनी	khooni:3	khuni:1
-खूब	khoob:2	khub:1
+खूब	khub:4	khoob:2
 खूबसूरत	khubsurat:2	khoobsurat:1
 खूबसूरती	khubsurti:2	khubsurati:1
 खूबियां	khubiyan:2	khbiyan:1
@@ -6732,7 +6732,7 @@
 खोजा	khoja:3	khojaa:1
 खोजी	khoji:3
 खोजें	khojen:2	khojein:1
-खोजों	khojon:3
+खोजों	khojo:2	khojon:3
 खोटा	khota:3	khotaa:1
 खोटे	khote:3
 खोता	khota:3
@@ -6773,7 +6773,7 @@
 गंगरेल	gangrel:3
 गंगवा	gangwa:2	gangava:1
 गंगवार	gangwar:2	gangvar:1
-गंगा	gangaa:6	ganga:3
+गंगा	ganga:7	gangaa:6
 गंगाजल	gangajal:2	gangaajal:1
 गंगादास	gangadas:3
 गंगाधर	gangadhar:3
@@ -6888,7 +6888,7 @@
 गतिविधियाँ	gatividhiyan:3
 गतिविधियों	gatividhiyon:3
 गतिशील	gatishil:2	gatisheel:1
-गतिशीलता	gatishilata:3
+गतिशीलता	gatishilta:2	gatishilata:3
 गतिहीन	gatihin:2	gatiheen:1
 गत्ते	gatte:3
 गदा	gada:3
@@ -6897,7 +6897,7 @@
 गद्दाफी	gaddafi:5
 गद्दारों	gaddaron:3
 गद्दी	gaddi:3
-गद्य	gaday:1	gadhy:1	gadya:1
+गद्य	gadya:4	gaday:1	gadhy:1
 गधा	gadha:6
 गधे	gadhe:3
 गन	gun:3
@@ -6980,7 +6980,7 @@
 गल्ला	galla:3
 गल्ले	galle:3
 गवर्नमेंट	government:3
-गवर्नर	governor:2	government:1
+गवर्नर	gavarnar:4	governor:2	government:1
 गवर्निंग	governing:4
 गवर्नेंस	governance:3	governors:1
 गवली	gavali:2	gavli:1
@@ -6996,12 +6996,12 @@
 गहनों	gahno:1	gahnon:1	gehnon:1
 गहमरी	gahmari:2	gehmari:1
 गहमागहमी	gahmagahmi:2	gemhagehmi:1
-गहरवार	gaharwar:2	geharwar:1
+गहरवार	geharvar:2	gaharwar:2	geharwar:1
 गहरा	gehra:2	gahra:1
-गहराई	gehrai:2	gahrai:1
+गहराई	gahrai:2	gehrai:2
 गहराती	gahrati:2	gehrati:1
-गहरी	gahari:1	gahri:1	gehari:1	gehri:1
-गहरे	gahare:1	gahre:1	gehre:1
+गहरी	gahri:2	gahari:1	gehari:1	gehri:1
+गहरे	gahre:2	gahare:1	gehre:1
 गहलोत	gahlot:2	gehlot:1
 गहलौत	gahlaut:2	gehlaut:1
 गा	gaa:3
@@ -7045,14 +7045,14 @@
 गाढ़ेपन	gadhepan:3
 गाता	gata:2	gaata:1
 गाती	gati:2	gaati:1
-गाते	gate:2	gaate:1
+गाते	gaate:2	gate:2
 गाथा	gatha:3
 गाथाओं	gathaon:3
 गादी	gadi:3
 गान	gaan:2	gan:1
 गाना	gana:4	gaana:3	gaanaa:1
 गाने	gaane:4	gane:4
-गानों	ganon:3
+गानों	gaanon:2	ganon:3
 गाबा	gaba:3
 गामा	gama:3
 गामिनी	gamini:3
@@ -7069,7 +7069,7 @@
 गायिकाओं	gayikaon:3
 गाये	gaye:2	gaaye:1
 गायेंगे	gayenge:3
-गायों	gayon:2	gaayon:1
+गायों	gaayon:2	gayon:2
 गारंटी	guarantee:3
 गारफील्ड	garfield:3
 गारी	gari:2	gaari:1	gary:1
@@ -7103,7 +7103,7 @@
 गिनते	ginte:2	ginate:1
 गिना	gina:3
 गिनी	gini:3
-गिनीज़	guinness:2	ginij:1
+गिनीज़	ginij:2	guinness:2
 गिने	gine:3
 गिनें	ginen:3
 गिनेस	guinness:2	gines:1
@@ -7198,7 +7198,7 @@
 गुजरा	gujra:2	gujara:1
 गुजरांवाला	gujranwala:2	gujaranvala:1
 गुजरात	gujarat:3
-गुजराती	gujarati:2	gujraati:1
+गुजराती	gujrati:3	gujarati:2	gujraati:1
 गुजराल	gujaral:1	gujral:1	gutral:1
 गुजरे	gujre:2	gujare:1
 गुजरेगा	gujrega:2	gujarega:1
@@ -7240,7 +7240,7 @@
 गुणांक	gunank:3
 गुणात्मक	gunatmak:3
 गुणी	guni:3
-गुणों	gunon:3
+गुणों	guno:3	gunon:3
 गुदगुदाना	gudgudana:3
 गुदगुदाने	gudgudane:3
 गुदना	gudna:3
@@ -7644,7 +7644,7 @@
 ग्रे	grey:2	gray:1
 ग्रेग	greg:3
 ग्रेगरी	gregory:2	gregari:1
-ग्रेगोरी	gregory:2	gregori:1
+ग्रेगोरी	gregori:5	gregory:2
 ग्रेजिया	grazia:1	grejiya:1	greyzia:1
 ग्रेजुएट	graduate:3
 ग्रेजुएशन	graduation:6
@@ -7697,7 +7697,7 @@
 ग्लोरियस	glorious:3
 ग्वांगडोंग	guangdong:2	gwangdong:1
 ग्वाटेमाला	guatemala:2	gwatemala:1
-ग्वादर	gwadar:3
+ग्वादर	gvadar:2	gwadar:3
 ग्वार	gwar:2	guar:1
 ग्वाला	gwala:3
 ग्वालियर	gwalior:3
@@ -7717,7 +7717,7 @@
 घटते	ghatate:2	ghatte:1
 घटना	ghatna:3
 घटनाएं	ghatanaaaen:1	ghatnaen:1	ghatnayen:1
-घटनाओं	ghatnaon:2	ghatanaaon:1
+घटनाओं	ghatanaon:3	ghatnaon:2	ghatanaaon:1
 घटनाक्रम	ghatnakram:3	ghatnakrm:2	ghatanaakram:1
 घटनाचक्र	ghatnachakra:3	ghatanaachakra:1	ghatnachakr:1	ghatnachkr:1
 घटनास्थल	ghatnasthal:4	ghatanaasthal:2
@@ -7741,7 +7741,7 @@
 घड़ी	ghadi:3
 घड़े	ghade:3
 घनघोर	ghanghor:3
-घनत्व	ghanatv:1	ghantv:1	ghantva:1
+घनत्व	ghanatva:2	ghanatv:1	ghantv:1	ghantva:1
 घनश्याम	ghanshyam:3
 घना	ghana:3
 घनाकार	ghanakar:3
@@ -7773,7 +7773,7 @@
 घाटकोपर	ghatkopar:3
 घाटमपुर	ghatampur:3
 घाटा	ghata:3
-घाटियों	ghatiyon:3
+घाटियों	ghatiyo:2	ghatiyon:3
 घाटी	ghati:3
 घाटे	ghate:3
 घाटों	ghaton:3
@@ -7883,7 +7883,7 @@
 घोला	ghola:3
 घोलें	gholen:3
 घोष	ghosh:3
-घोषणा	ghoshana:2	ghoshan:1
+घोषणा	ghoshna:7	ghoshana:2	ghoshan:1
 घोषणाएं	ghoashnayen:1	ghoshanaen:1	ghoshnayen:1
 घोषणापत्र	ghoshanapatr:3	ghoshanapatra:1	ghoshanpatr:1	ghoshnapatr:1
 घोषणापत्रों	ghoshanapatr:2	ghoshanapatron:2	ghoshanpatron:1	ghoshnapatron:1
@@ -8078,7 +8078,7 @@
 चराचर	charachar:3
 चरित	charit:3
 चरितार्थ	charitarth:3
-चरित्र	charitr:2	charitra:1
+चरित्र	charitra:6	charitr:2
 चरित्रवान	charitravan:3
 चरित्रों	charitron:3
 चर्च	church:6
@@ -8201,7 +8201,7 @@
 चाय	chai:2	chaiye:1	chay:1
 चायपत्ती	chaipatti:2	chaypatti:1
 चायल	chayal:3
-चार	char:3
+चार	chaar:12	char:3
 चारकोल	charcoal:2	charkol:1
 चारण	charan:3
 चारदिवारी	chardiwari:3
@@ -8221,7 +8221,7 @@
 चार्ज्ड	charged:3
 चार्ट	chart:6
 चार्टड	charted:2	chartered:1
-चार्टर	charter:3
+चार्टर	chartar:3	charter:3
 चार्टर्ड	chartered:2	charted:1
 चार्टेड	charted:2	chartered:1
 चार्टों	charton:3
@@ -8232,7 +8232,7 @@
 चार्ल्सटन	charleston:2	charlstan:1
 चार्वाक	charvak:3
 चाल	chaal:2	chal:1
-चालक	chaalak:1	chalak:1	chalk:1
+चालक	chalak:3	chaalak:1	chalk:1
 चालकों	chalkon:2	chalakon:1
 चालढाल	chaaldhaal:3	chaldhal:3
 चालन	chalan:3
@@ -8253,16 +8253,16 @@
 चासनी	chasani:2	chasni:1
 चाह	chah:3
 चाहत	chahat:2	chahath:1
-चाहता	chahata:1	chahta:1	chahtha:1
-चाहती	chahati:1	chahthi:1	chahti:1
-चाहते	chahate:1	chahte:1	chahthe:1
+चाहता	chahta:4	chahata:1	chahtha:1
+चाहती	chahti:2	chahati:1	chahthi:1
+चाहते	chahte:6	chahate:1	chahthe:1
 चाहने	chahane:2	chahne:1
 चाहा	chaha:3
-चाहिए	chaahie:1	chahie:1	chahiye:1
+चाहिए	chahiye:9	chaahie:1	chahie:1
 चाहिये	chahiye:2	chaahiye:1
 चाहूं	chahun:2	chahoon:1
 चाहे	chahe:2	chaahe:1	chahey:1
-चाहें	chahein:2	chahen:1
+चाहें	chahen:2	chahein:2
 चाहेंगे	chahenge:2	chaheingey:1
 चाहेगा	chahega:3
 चाहेगी	chahegi:3
@@ -8284,7 +8284,7 @@
 चिंतामन	chintaman:3
 चिंतित	chintit:3
 चिंपांजियों	chimpanjion:1	chimpanjiyon:1	chimpanziyon:1
-चिकन	chicken:3
+चिकन	chikan:2	chicken:3
 चिकना	chikna:2	chickana:1
 चिकनाई	chiknai:2	chickenaee:1
 चिकनाहट	chickenaahat:1	chiknahat:1	chknahat:1
@@ -8331,12 +8331,12 @@
 चित्ती	chitti:2	chiththi:1
 चित्तूर	chittur:2	chiththor:1
 चित्तौड़	chiththod:1	chittod:1	chittor:1
-चित्र	chitr:2	chithr:1
+चित्र	chitra:6	chitr:2	chithr:1
 चित्रकर्म	chitrkarm:2	chithrkarm:1
 चित्रकला	chithrkala:1	chitrakala:1	chitrkla:1
 चित्रकार	chitrkar:2	chithrkar:1
 चित्रकारी	chitrkari:2	chithrkari:1
-चित्रकारों	chithrkaron:1	chitrakaron:1	chitrkaron:1
+चित्रकारों	chitrakaron:2	chithrkaron:1	chitrkaron:1
 चित्रकूट	chitrkut:2	chithrkot:1
 चित्रगुप्त	chitrgupt:2	chithrgupth:1
 चित्रण	chitran:2	chithrand:1
@@ -8407,7 +8407,7 @@
 चीखते	cheekhate:1	chikhate:1	chikhte:1
 चीखने	chikhane:2	cheekhane:1
 चीज	chij:3	chees:1
-चीज़	chij:2	chees:1	cheese:1
+चीज़	cheez:3	chij:2	chees:1	cheese:1
 चीजें	chijen:3
 चीजों	chijon:4
 चीटियाँ	chitiyan:2	chintiyan:1
@@ -8456,7 +8456,7 @@
 चुनार	chunar:3	chunaar:1
 चुनाव	chunav:6	chunaav:1
 चुनावी	chunavi:3	chunaavi:1
-चुनावों	chunavon:2	chavoun:1	chunaavon:1
+चुनावों	chunawon:2	chunavon:2	chavoun:1	chunaavon:1
 चुनिंदा	chuninda:3	chunindaa:1
 चुनी	chuni:3
 चुने	chune:3
@@ -8507,7 +8507,7 @@
 चेंजिंग	changing:3
 चेंज्ड	changed:3
 चेंबर	chamber:2	chember:1
-चेक	check:3
+चेक	chek:2	check:3
 चेकोस्लोवाकिया	czechoslovakia:3
 चेचक	chechak:3
 चेचेन	chechen:3
@@ -8675,7 +8675,7 @@
 छठवें	chhathven:2	chhathavein:1
 छठा	chhatha:3
 छठी	chhathi:3
-छठे	chhathe:3
+छठे	chathe:2	chhathe:3
 छड़	chhad:3
 छड़ी	chhadi:3
 छड़ों	chhadon:3
@@ -8779,7 +8779,7 @@
 छिड़ा	chhida:2	chhidaa:1
 छिड़ी	chhidi:3
 छितरा	chhitra:2	chhitaraa:1
-छिद्र	chhidra:3
+छिद्र	chhidr:2	chhidra:3
 छिद्रों	chhidron:3
 छिन	chhin:3
 छिनने	chhinane:3
@@ -8885,7 +8885,7 @@
 जंक्शन	junction:3
 जंग	jung:3
 जंगल	jungle:2	jungal:1
-जंगली	jangali:1	jungali:1	junglee:1
+जंगली	jungli:2	jangali:1	jungali:1	junglee:1
 जंगीपुर	jangipur:2	jungipur:1
 जंघा	jangha:1	jngha:1	jnghaa:1	jungha:1
 जंजीर	janjeer:2	zanjeer:2
@@ -8932,7 +8932,7 @@
 जगाते	jagate:2	jagaate:1	jaghate:1	jgaate:1
 जगाने	jagaane:2	jagane:2	jgaane:1
 जग्गी	jaggi:3	jagghi:1
-जज	judge:2	jajh:1	jujge:1
+जज	jaj:2	judge:2	jajh:1	jujge:1
 जजमान	jajmaan:3	jajamaan:1	jajman:1
 जजमेंट	judgement:1	judgment:1	jujgement:1
 जज़्बा	jajba:3	jajbaa:1	jajhba:1
@@ -8983,14 +8983,14 @@
 जनजातीय	janajatiye:2	janajateeya:1	janjaatiy:1	janjatiy:1
 जनजीवन	janjivan:3	janajivan:2	janajeevan:1	janjeevan:1
 जनतंत्र	jantantra:2	janatantra:1	jantantr:1
-जनता	janata:4	janta:3	janataa:2
+जनता	janta:7	janata:4	janataa:2
 जनतांत्रिक	jantantrik:3	janatantrik:1	jantaantrik:1	jantantreik:1
 जनन	janan:3	jann:1
 जननांग	jananaang:1	jananang:1	janananga:1	jannang:1
 जननायकों	jananayakon:2	jannayakon:2	jananaayakon:1
 जननी	janani:3	jananee:1	janni:1
 जननेता	janneta:4	jananeta:2	jannetaa:2	janantaa:1
-जनपद	janapad:1	janapadh:1	janpad:1	janpd:1
+जनपद	janpad:3	janapad:1	janapadh:1	janpd:1
 जनपदों	janpadon:2	janapadhon:1	janpdon:1
 जनप्रतिनिधि	janpratinidhi:3	janprtinidhi:2	janapratinidhi:1	janprateeneedhee:1
 जनप्रिय	janapriy:1	janapriya:1	janapriye:1	janpriy:1
@@ -9112,7 +9112,7 @@
 जमींदारी	jameendaaree:1	jameendari:1	jamindaari:1	jamindari:1
 जमींदारों	jameendaaron:1	jamieendaron:1	jamindaaron:1	jamindaron:1
 जमीकंद	jamikanad:1	jamikand:1	jimikand:1
-जमीन	zameen:2	jameen:1	jamin:1
+जमीन	jameen:5	zameen:2	jamin:1
 जमीनी	jamini:2	jameeni:1	zamini:1
 जमीनें	jameene:1	jameenen:1	jaminen:1	zmeenen:1
 जमीनों	jameeno:1	jameenon:1	jaminon:1	zmeenon:1
@@ -9123,7 +9123,7 @@
 जमे	jame:3
 जमैका	jamaica:2	jamaika:1	jameka:1
 जम्मू	jammu:3
-जय	jai:6	jay:2
+जय	jay:3	jai:6
 जयंत	jayant:3	jaynt:1
 जयंती	jayanti:3	jayenti:1
 जयंतीलाल	jayantilal:3
@@ -9155,7 +9155,7 @@
 जरनैल	jarnail:3	jarnel:1
 जरा	jara:3	zara:1
 जरासंध	jarasandh:2	jarasandha:1
-जरिए	jarie:2	jariye:1
+जरिए	jariye:3	jarie:2
 जरिया	jariya:3	jariyaa:1
 जरिये	jariye:3
 जरी	jari:2	zari:1
@@ -9198,11 +9198,11 @@
 जलधाराओं	jaldharaon:3	jaldharaaon:1
 जलन	jalan:3	jaln:1
 जलना	jalna:3	jalnaa:1
-जलने	jalane:2	jalne:2	jlane:1
+जलने	jalne:3	jalane:2	jlane:1
 जलपरी	jalpari:3	jalpri:1
 जलपान	jalpan:3	jalpaan:1
 जलप्रदाय	jalpraday:2	jalprdaay:1	jalprday:1
-जलप्रपात	jalprapat:2	jalprapaat:1	jalprpaat:1	jalprpat:1
+जलप्रपात	jalprapaat:2	jalprapat:2	jalprpaat:1	jalprpat:1
 जलप्रपातों	jalprapaton:1	jalprapoton:1	jalprpaaton:1	jalprpaton:1
 जलप्रलय	jalpralay:4	jalprlay:2
 जलभराव	jalbharav:4	jalbhraav:2	jalbhrav:1
@@ -9236,7 +9236,7 @@
 जलावन	jalavan:3	jalawan:1
 जलाशय	jalashay:2	jalaashay:1	jalashy:1
 जलाशयों	jalashayon:2	jalaashyon:1	jalashyon:1
-जलीय	jaliy:2	jaleey:1
+जलीय	jaliya:2	jaliy:2	jaleey:1
 जलूस	jaloos:2	jalus:2
 जले	jale:6
 जलेगी	jalegi:3
@@ -9297,7 +9297,7 @@
 ज़किया	zakiya:2	jakiya:1
 ज़ख्मों	jakhmon:2	zakhmon:2
 ज़माना	zamana:3	jamaanaa:1	jamana:1	zamaanaa:1
-ज़माने	zamane:3	jamaane:1	jamane:1	zamaane:1
+ज़माने	jamane:2	zamane:3	jamaane:1	zamaane:1
 ज़मीनी	zamini:2	jameeni:1	jamini:1	zameeni:1
 ज़मीर	zameer:2	zamir:1
 ज़रा	zaraa:3	zara:1
@@ -9322,7 +9322,7 @@
 जांगड़े	jangade:2	jangde:1	jangrhe:1
 जांघ	jangh:3	jaangh:2
 जांघों	jaanghon:2	janghon:2	jandon:1
-जांच	jaanch:2	janch:2
+जांच	janch:3	jaanch:2
 जांचकर्ताओं	janchkartaon:2	jaanchkartao:1	jaanchkartaon:1	janchkartaaon:1
 जांचता	janchta:2	jaachta:1	jaanchta:1	jaanchtaa:1
 जांचने	jaanchne:3	janchane:1	janchne:1
@@ -9330,15 +9330,15 @@
 जाइए	jaaiye:2	jaie:1	jaiye:1
 जाई	jaai:1	jai:1	jaie:1
 जाईए	jaiye:2	jaaiye:1	jaie:1
-जाए	jaaye:2	jae:1	jaye:1
-जाएं	jaayen:1	jaen:1	jaena:1	jayen:1
+जाए	jaye:3	jaaye:2	jae:1
+जाएं	jayen:2	jaayen:1	jaen:1	jaena:1
 जाएंगी	jaayengi:1	jaenagi:1	jaengi:1	jayengi:1
 जाएंगे	jaayenge:1	jaenage:1	jaenge:1	jayenge:1
-जाएगा	jaayega:1	jaega:1	jayega:1	jayegaa:1
+जाएगा	jayega:6	jaayega:1	jaega:1	jayegaa:1
 जाएगी	jayegi:2	jaayegi:1	jaegi:1
 जाओ	jao:3	jaao:1
 जाओगे	jaaoge:3	jaoge:2
-जाकर	jaakar:3	jakar:2
+जाकर	jakar:4	jaakar:3
 जाकिर	jaakir:2	jakir:1	zakir:1
 जाके	jaake:3	jake:2
 जाखड़	jakhad:2	jaakhad:1	jakhar:1	jakharh:1
@@ -9350,12 +9350,12 @@
 जागने	jagane:2	jagne:2	jaagane:1
 जागरण	jagran:3	jagaran:1
 जागरूक	jaagruk:2	jagaruk:2	jagruk:2	jaagaruk:1
-जागरूकता	jagarukata:2	jagrukta:2	jagarukta:1
+जागरूकता	jagrukta:3	jagarukata:2	jagarukta:1
 जागी	jagi:3	jaagi:2
 जागीर	jagir:3	jageer:1
 जागीरदार	jagirdar:3	jageerdar:1
 जागीरों	jagiron:3	jageeron:1
-जागृत	jagrat:1	jagrit:1	jagrut:1
+जागृत	jagrut:2	jagrat:1	jagrit:1
 जागृति	jagriti:2	jagruti:2	jaagriti:1
 जागे	jage:3	jaage:2
 जागेगी	jagegi:3	jaagegi:1
@@ -9369,18 +9369,18 @@
 जाड़े	jaade:2	jade:1
 जाड़ों	jaadon:2	jadon:2
 जात	jaat:3	jat:1
-जातक	jaatak:2	jatak:2
+जातक	jatak:8	jaatak:2
 जातकों	jatakon:2	jaatakon:1	jaatkon:1
 जाता	jata:2	jaata:1	jaataa:1
-जाति	jaati:2	jati:2
+जाति	jati:11	jaati:2
 जातिगत	jaatigat:2	jatigat:2
 जातिय	jaatiy:1	jaatiya:1	jatiy:1	jatiya:1
 जातियां	jaatiyan:2	jatiyan:2
-जातियों	jaatiyon:2	jatiyon:2
+जातियों	jatiyon:3	jaatiyon:2
 जातिवाद	jaativaad:1	jaativad:1	jativaad:1	jativad:1
 जातिवादी	jaativaadi:1	jaatiwadi:1	jativaadi:1	jativadi:1
-जाती	jaatee:1	jaati:1	jatee:1	jati:1
-जातीय	jaateey:1	jaatiy:1	jateeya:1	jatiy:1
+जाती	jati:76	jaatee:1	jaati:1	jatee:1
+जातीय	jatiy:2	jaateey:1	jaatiy:1	jateeya:1
 जातीयता	jatiyata:2	jaatiyataa:1	jateeyata:1
 जाते	jate:3	jaate:2
 जादव	jadav:3
@@ -9391,7 +9391,7 @@
 जादूगरों	jadugaron:3
 जाधव	jadhav:2	jaadhav:1
 जान	jaan:8
-जानकर	jaankar:2	jankar:2
+जानकर	jankar:3	jaankar:2
 जानकार	jaankaar:2	jankar:2
 जानकारियां	jaankaariyan:2	jankariyan:2
 जानकारियों	jankariyon:2	jaankaariyon:1	jaankariyon:1
@@ -9401,8 +9401,8 @@
 जानकीपुरम	jankipuram:2	jaankipuram:1
 जानता	jaanta:1	jaantaa:1	janata:1	janta:1
 जानती	jaanti:2	janti:2
-जानते	jaante:2	janate:1	jante:1
-जानना	jaanana:1	jaananaa:1	janana:1	janna:1
+जानते	jante:4	jaante:2	janate:1
+जानना	janana:2	jaanana:1	jaananaa:1	janna:1
 जानबूझ	jaanboojh:2	jaanbujh:2	janbujh:2	janbiz:1
 जानबूझकर	jaanboojhkar:1	jaanbujhkar:1	janbujhkr:1	janbuzkar:1
 जानम	jaanam:2	janam:2
@@ -9411,12 +9411,12 @@
 जानवर	jaanwar:3	janvar:2	janwar:2
 जानवरों	janvaron:2	jaanwaron:1	janwaron:1
 जानसन	johnson:2	jansan:1
-जाना	jaana:3	jana:3	jaanaa:1
+जाना	jana:45	jaana:3	jaanaa:1
 जानिए	jaaniye:2	janiye:2
 जानिये	jaaniye:2	janiye:2
-जानी	jaani:2	jani:1
+जानी	jani:3	jaani:2
 जानीमानी	jaanimaani:4	janimani:4
-जाने	jaane:5	jane:2
+जाने	jane:63	jaane:5
 जानें	janen:2	jaanen:1	jane:1
 जानेमन	jaaneman:2	jaanemann:1	janeman:1
 जानेमाने	jaanemaane:4	janemane:4
@@ -9496,7 +9496,7 @@
 जिंग	jing:3
 जिंगल	jingal:2	jingle:1
 जिंटा	zinta:2	jinta:1
-जिंदगी	jindagee:1	jindagi:1	jindgi:1	zindagi:1
+जिंदगी	jindagi:2	jindagee:1	jindgi:1	zindagi:1
 जिंदल	jindal:3
 जिंदा	jinda:2	jindaa:1	zinda:1
 जिओ	jio:2	geo:1
@@ -9508,7 +9508,7 @@
 जिज्ञासा	jigyasa:3	jigyaasaa:1
 जिज्ञासु	jigyasu:3	jigyaasu:1
 जिज्ञासुओं	jigyasuon:3	jigyaasuon:1
-जितना	jitnaa:2	jitanaa:1	jitna:1
+जितना	jitna:4	jitnaa:2	jitanaa:1
 जितनी	jitni:3	jitani:1
 जितने	jitne:3	jitane:1
 जितवाया	jitavaayaa:1	jitvaayaa:1	jitvaya:1	jitwaayaa:1
@@ -9522,8 +9522,8 @@
 जिद्द	jidd:2	zidd:2	jeedd:1	zid:1
 जिद्दू	jiddu:2	jidood:1
 जिन	jin:3	gin:1	jeen:1
-जिनका	jinaka:1	jinakaa:1	jinka:1	jinkaa:1
-जिनकी	jinaki:2	jinki:2
+जिनका	jinka:5	jinaka:1	jinakaa:1	jinkaa:1
+जिनकी	jinki:3	jinaki:2
 जिनके	jinke:2	jinak:1	jinake:1
 जिनको	jinko:3
 जिनमे	jinme:2	jiname:1
@@ -9536,8 +9536,8 @@
 जिनेवा	geneva:1	jeneva:1	jineva:1
 जिनोम	jinom:2	genome:1
 जिन्ना	jinna:3
-जिन्हें	jinhen:3
-जिन्होंने	jinhonne:2	jinhone:1
+जिन्हें	jinhe:8	jinhen:3
+जिन्होंने	jinhone:11	jinhonne:2
 जिन्होने	jinhone:3
 जिन्होनें	jinhonen:3
 जिप्सम	gypsum:2	jipsam:1
@@ -9573,7 +9573,7 @@
 जिसके	jiske:3	jisake:1
 जिसको	jisko:3	jisako:1
 जिसने	jisne:2	jisane:1
-जिसमें	jismein:2	jismen:1
+जिसमें	jismen:30	jismein:2
 जिससे	jisse:2	jisase:1
 जिस्मानी	jismani:3	jismaani:1
 जिहाद	jihaad:1	jihad:1	zihad:1
@@ -9596,13 +9596,13 @@
 जीतता	jitata:2	jitataa:2
 जीतना	jitana:2	jeetna:1	jitanaa:1	jitna:1
 जीतने	jeetane:1	jitane:1	jitne:1
-जीता	jita:3	jeeta:1
+जीता	jeeta:5	jita:3
 जीती	jiti:3
 जीतू	jeetu:2	jitu:1
 जीते	jeete:2	jite:1
 जीतें	jeeten:1	jitein:1	jiten:1
 जीतोड़	jitod:4	gtod:1	gtor:1	jeetod:1
-जीन	jeen:2	jean:1	jin:1
+जीन	gene:3	jeen:2	jean:1	jin:1
 जीनगर	jinagar:2	jeenagar:1
 जीनस	genus:2	jinas:1
 जीना	jina:2	jeena:1
@@ -9636,7 +9636,7 @@
 जीवजंतुओं	jivjantuon:2	jeevjantuon:1
 जीवटता	jeevatta:1	jivatata:1	jivtataa:1
 जीवधारियों	jivdhariyon:2	jeevdhaariyon:1
-जीवन	jeevan:7	jivan:6	jeewan:1	jiwan:1
+जीवन	jivan:49	jeevan:7	jeewan:1	jiwan:1
 जीवनकाल	jeevankaal:2	jivankal:2	jivankaal:1
 जीवनचर्या	jeevancharya:1	jivanacharya:1	jivanchryaa:1
 जीवनदर्शन	jeevandarshan:2	jivanadarshan:1	jivandarshan:1	jivandrshan:1
@@ -9647,7 +9647,7 @@
 जीवनी	jivani:2	jeevni:1
 जीवनों	jeevnon:1	jivano:1	jivanon:1
 जीवराज	jivraj:2	jeevraaj:1
-जीवविज्ञान	jeevvigyan:2	jivvigyan:2	jeevvigyaan:1	jivavigyan:1
+जीवविज्ञान	jivvigyan:2	jeevvigyan:2	jeevvigyaan:1	jivavigyan:1
 जीवविज्ञानी	jeevvigyani:1	jivavigyani:1	jivvigyaani:1
 जीवा	jiva:3	jeeva:2
 जीवाणु	jivanu:2	jeevaanu:1	jivaanu:1
@@ -9660,7 +9660,7 @@
 जीवित	jivit:2	jeevit:1
 जीवित्पुत्रिका	jivitputrika:3
 जीवो	jivo:2	jeevo:1
-जीवों	jivon:2	jeevon:1
+जीवों	jivo:2	jivon:2	jeevon:1
 जीसस	jesus:3
 जीसीए	gca:3
 जीसैट	gsat:2	gset:1
@@ -9736,7 +9736,7 @@
 जुलाई	july:3
 जुलाहे	julahe:2	julaahe:1
 जुलाहों	julaahon:2	julahon:2
-जुलूस	juluus:2	juloos:1	julus:1
+जुलूस	julus:2	juluus:2	juloos:1
 जुल्का	julka:2	julfa:1
 जुल्मी	julmi:2	zulmi:1
 जुल्मों	julmon:2	zulmon:1
@@ -9792,7 +9792,7 @@
 जेडी	jd:3
 जेद्दा	jedda:3
 जेद्दाह	jeddah:3
-जेन	zen:2	jen:1
+जेन	jen:2	zen:2
 जेनर	jenner:3
 जेनरिक	generic:2	jenrick:1
 जेनरेट	generate:2	generat:1
@@ -9916,13 +9916,13 @@
 जोडता	jodata:2	jodta:1
 जोडते	jodte:3	jodtey:1	jorte:1
 जोड़	jod:3
-जोड़कर	jodakar:1	joddkar:1	jodkar:1	jorhkar:1
+जोड़कर	jodkar:3	jodakar:1	joddkar:1	jorhkar:1
 जोड़ता	jodta:2	joddta:1	jorhta:1
 जोड़ती	jodti:2	joddti:1	jorhti:1
 जोड़ते	jodate:1	joddte:1	jodte:1	jodtey:1
 जोड़तोड़	jodtod:4	joddtodd:2
 जोड़ना	jodna:2	joddna:1
-जोड़ने	jodne:2	jodane:1	joddne:1
+जोड़ने	jodene:3	jodne:2	jodane:1	joddne:1
 जोड़नेवाला	jodnevala:2	joddnewala:1	jodnewala:1
 जोड़ा	joda:2	jodaa:2
 जोड़ियां	jodiyan:2	jodiyaan:1
@@ -9980,8 +9980,8 @@
 ज्यादा	jyada:6
 ज्यादातर	jyadatar:3
 ज्यामिति	jyamiti:3
-ज्यामितीय	jyaamiteey:1	jyamiteey:1	jyamitiy:1
-ज्यूस	juice:3
+ज्यामितीय	jyamitiya:2	jyaamiteey:1	jyamiteey:1	jyamitiy:1
+ज्यूस	jews:2	juice:3
 ज्येष्ठ	jyeshtha:2	jyeshth:1
 ज्येष्ठता	jyeshthata:2	jyeshthataa:1	jyesthata:1
 ज्येष्ठा	jyeshtha:2	jayeshtha:1
@@ -10027,12 +10027,12 @@
 झंझरी	jhanjhari:3
 झंझारपुर	jhanjharpur:3
 झंझावात	jhanjhavat:2	jhanjhawat:1
-झंडा	jhanda:2	jhande:1
+झंडा	zenda:2	jhanda:2	jhande:1
 झंडे	jhande:3
 झगड़ते	jhagadate:3
 झगड़ने	jhagadane:3
 झगड़ा	jhagada:3
-झगड़े	jhagade:3
+झगड़े	jhagde:2	jhagade:3
 झगड़ों	jhagadon:3
 झगडा	jhagada:3
 झगडों	jhagadon:3
@@ -10099,7 +10099,7 @@
 झिल्लियों	jhilliyon:3
 झिल्ली	jhilli:3
 झींगा	jhinga:2	jheenga:1
-झील	jhil:2	jheel:1
+झील	jheel:4	jhil:2
 झीलें	jhilen:2	jheelen:1
 झीलों	jhilon:2	jheelon:1
 झुंझलाहट	jhunjhalahat:1	jhunjhamahat:1	jhunjhlahat:1
@@ -10122,7 +10122,7 @@
 झुलाया	jhulaya:3
 झुहाई	jhuhai:2	zhuhai:1	zuhai:1
 झू	jhu:2	jhoo:1
-झूठ	jhooth:4	jhuth:1
+झूठ	jhuth:2	jhooth:4
 झूठा	jhutha:3	jhootha:1
 झूठी	jhuthi:3	jhoothi:1
 झूठे	jhuthe:3	jhoothe:1
@@ -10183,7 +10183,7 @@
 टचिंग	touching:3
 टटोलते	tatolate:2	tatlote:1
 टट्टी	tatti:3
-टन	ton:2	tan:1
+टन	tan:3	ton:2
 टनल	tunnel:2	tounal:1
 टपकती	tapakti:2	tapkati:1
 टपरी	tapri:2	tapari:1
@@ -10358,7 +10358,7 @@
 टुडे	today:3
 टुब्रो	toubro:1	tubro:1	turbo:1
 टुवर्ड्स	towards:2	toowords:1
-टू	two:2	to:1	tu:1
+टू	to:3	two:2	tu:1
 टूक	tuk:2	took:1
 टूगेदर	together:3
 टूट	tut:2	toot:1
@@ -10375,7 +10375,7 @@
 टूल	tool:3
 टूलबार	toolbar:3
 टेंडन	tendon:2	tendan:1
-टेंडर	tender:2	tendor:1
+टेंडर	temder:2	tender:2	tendor:1
 टेंपो	tempo:2	tampo:1
 टेंशन	tension:3
 टेक	take:3	tech:1
@@ -10423,7 +10423,7 @@
 टेलीग्राफ	telegraph:3
 टेलीनॉर	telenor:3
 टेलीफोन	telephone:3
-टेलीविजन	television:3
+टेलीविजन	telivision:2	television:3
 टेलीसर्विसेज	teleservices:3
 टेल्स	tales:1	tells:1	tels:1
 टेस्ट	test:3	taste:1
@@ -10431,7 +10431,7 @@
 टेस्टिंग	testing:6	tasting:1
 टेस्टों	teston:2	testo:1
 टेस्टोस्टेरॉन	testosterone:2	testosteron:1
-टैंक	tank:6
+टैंक	taink:2	tank:6
 टैंकर	tankar:2	tanker:2	tainkar:1	tynker:1
 टैंको	tainko:1	tanko:1	tankon:1
 टैंकों	tankon:2	tainkon:1
@@ -10508,7 +10508,7 @@
 ट्यूनर	tuner:2	ttunar:1
 ट्यूनिंग	tuning:3
 ट्यूनीशिया	tunicea:1	tunishia:1	tyunishiya:1
-ट्यूब	tube:3
+ट्यूब	tyub:2	tube:3
 ट्यूबरक्यूलोसिस	tuberculosis:2	tuberkyulosis:1
 ट्यूमर	tumor:3
 ट्यूरिंग	touring:1	turing:1	tyuring:1
@@ -10579,7 +10579,7 @@
 ट्रेड्स	traders:1	trades:1	triads:1
 ट्रेन	train:3
 ट्रेनर	trainer:3
-ट्रेनिंग	training:3
+ट्रेनिंग	treaning:3	training:3
 ट्रेनें	trainen:2	traine:1
 ट्रेनों	traino:2	trainon:1
 ट्रेप	trap:3
@@ -10605,7 +10605,7 @@
 ट्रैवलर्स	traveles:1	travellers:1	travelrs:1
 ट्रैविस	travis:2	traivis:1
 ट्रॉट	trott:2	trot:1
-ट्रॉपिकल	tropical:3
+ट्रॉपिकल	tropikal:2	tropical:3
 ट्रॉफियों	trofiyon:1	trophyion:1	trophyon:1
 ट्रॉफी	trophy:3
 ट्रॉय	troy:2	toy:1
@@ -10655,7 +10655,7 @@
 ठिकाने	thikane:3
 ठिकानों	thikanon:2	thikano:1
 ठिठोली	thitholi:3	ththoli:1
-ठीक	theek:2	thick:1	thik:1
+ठीक	thik:15	theek:2	thick:1
 ठुकरा	thakura:1	thukara:1	thukra:1
 ठुकराए	thukrae:2	thukraye:2
 ठुकराकर	thukrakar:3	thukraakar:1
@@ -10697,7 +10697,7 @@
 डगमगाया	dagmagaya:3
 डगर	dagar:3
 डगलस	daglas:2	douglas:1
-डच	douch:1	duch:1	dutch:1
+डच	dutch:4	douch:1	duch:1
 डचों	dachon:1	duchon:1	dutchon:1
 डटे	date:2	daten:1
 डन	done:3
@@ -10717,7 +10717,7 @@
 डभोई	dabhoi:3
 डम	dum:2	dam:1
 डमरू	damru:2	damaru:1
-डर	darr:3
+डर	dar:3	darr:3
 डरता	darta:3
 डरते	darte:2	darate:1
 डरने	darne:3
@@ -10756,13 +10756,13 @@
 डाउन	down:3
 डाउनलोड	download:9
 डाउनलोडिंग	downloading:5	downloding:1
-डाक	dak:2	daak:1
+डाक	daak:2	dak:2
 डाकघर	dakghar:3
 डाकघरों	dakgharon:2	dakgharo:1
 डाका	daka:3
 डाकिया	dakiya:3
 डाकुओं	dakuon:3
-डाकू	daku:3
+डाकू	daaku:3	daku:3
 डाक्यूमेंट्री	documentary:3
 डागर	dagar:3
 डाटा	data:3
@@ -10787,7 +10787,7 @@
 डायर	dayar:1	dire:1	dyer:1
 डायरियां	diariyan:2	dayriyaan:1	diarian:1
 डायरियों	dayriyon:1	diarion:1	diariyon:1
-डायरी	diary:3
+डायरी	dairy:2	diary:3
 डायरीज	diaries:3
 डायरेक्ट	direct:3
 डायरेक्टर	director:2	direct:1
@@ -10975,7 +10975,7 @@
 डूम	doom:2	dum:1
 डूम्सडे	doomsday:2	dumsde:1
 डूरंड	durand:3
-डे	day:3
+डे	de:3	day:3
 डेंगू	dangu:1	dengu:1	dengue:1
 डेंच	dench:2	danch:1
 डेंजरस	dangerous:6
@@ -10988,7 +10988,7 @@
 डेजर्ट	desert:2	dessert:2
 डेजी	daisy:2	dazy:1	deji:1
 डेट	data:1	date:1	debt:1
-डेटा	data:3
+डेटा	deta:3	data:3
 डेटाबेस	database:3
 डेटिंग	dating:3
 डेटोनेटर	detonator:2	detonetar:1
@@ -11042,7 +11042,7 @@
 डेविल	devil:3
 डेविल्स	devils:3
 डेविस	davis:3
-डेवी	davey:1	devi:1	dewey:1
+डेवी	devi:2	davey:1	dewey:1
 डेसमंड	desmond:3
 डेसिमल	decimal:3
 डेस्क	desk:3
@@ -11222,7 +11222,7 @@
 ढूंढता	dhoondhata:1	dhundhata:1	dhundhta:1
 ढूंढते	dhundhate:2	dhoondhate:1	dhoondhnte:1	dhoondhte:1
 ढूंढना	dhoondhna:3	dhundhana:2	dhundhna:1
-ढूंढने	dhoondhne:2	dhundhane:2	dhoondhane:1	dhundhne:1
+ढूंढने	dhundhne:2	dhoondhne:2	dhundhane:2	dhoondhane:1
 ढूंढा	dhoondha:3	dhundha:3
 ढूंढी	dhundhi:2	dhoondhi:1
 ढूंढे	dhundhe:2	dhoondhe:1
@@ -11249,14 +11249,14 @@
 तंत्रिकाएं	tantrikaae:1	tantrikaen:1	tantrikayen:1
 तंत्रिकाओं	tantrikaon:2	tantrikao:1
 तंत्रिकीय	tantrikeeya:1	tantrikiy:1	tantriy:1
-तंत्रों	tantron:2	tantro:1
+तंत्रों	tantro:2	tantron:2
 तंदूरी	tandoori:2	tanduri:1
 तंबाकू	tambaku:2	tambako:1	tanbakoo:1	tanbaku:1
 तंबोली	tamboli:3
 तंवर	tanwar:2	tanvar:1
 तक	tak:3
 तकदीर	takdeer:1	takdir:1	taqdir:1
-तकनीक	takneek:1	taknik:1	technic:1
+तकनीक	taknik:3	takneek:1	technic:1
 तकनीकियों	takneekiyon:1	taknikiyon:1	technikiyo:1
 तकनीकी	takniki:2	techniki:1
 तकनीकें	takniken:2	technice:1
@@ -11295,9 +11295,9 @@
 तड़ीपार	tadipaar:2	tadipar:2
 तता	tataa:3
 तत्काल	tatkal:2	tatkaal:1
-तत्कालीन	tatkaalin:1	tatkalin:1	tattakalin:1
+तत्कालीन	tatkalin:5	tatkaalin:1	tattakalin:1
 तत्तापानी	tattapani:2	tatapani:1
-तत्त्व	tatv:2	tattva:1	tatva:1
+तत्त्व	tatva:3	tatv:2	tattva:1
 तत्त्वों	tattvon:2	tatvon:1
 तत्पर	tatpar:3
 तत्परता	tatparta:2	tatparata:1	tatparataa:1
@@ -11312,7 +11312,7 @@
 तथाकथित	tathakathit:2	tathakthit:2
 तथागत	tathagat:3
 तथापि	tathapi:3
-तथ्य	tathy:2	tathya:1
+तथ्य	tathya:2	tathy:2
 तथ्यगत	tathygat:2	tathyagat:1
 तथ्यों	tathyon:3
 तदनुसार	tadanusara:1	tadnusaar:1	tadnusar:1
@@ -11414,7 +11414,7 @@
 तरीका	tarika:2	tareeka:1
 तरीके	tarike:2	tareekey:1
 तरीको	tariko:2	tareeko:1
-तरीकों	tareekon:1	tarikon:1	tarinko:1
+तरीकों	tarikon:2	tareekon:1	tarinko:1
 तरुण	tarun:3
 तर्क	tark:6
 तर्कपूर्ण	tarkpooran:1	tarkpurana:1	tarkpurn:1
@@ -11442,7 +11442,7 @@
 तलवंडी	talwandi:2	talvandi:1
 तलवलकर	talvalkar:2	talwalkar:1
 तलवाड़ा	talvada:2	talvaadaa:1	talwada:1
-तलवार	talvaar:2	talwaar:1	talwar:1
+तलवार	talwaar:2	talvaar:2	talwar:1
 तलवारबाज	talvaarbaaj:1	talvarbaaj:1	talwaarbaaj:1	talwaarbaaz:1
 तलवारों	talvaron:2	talwaron:2
 तलवे	talve:2	talawe:1
@@ -11451,7 +11451,7 @@
 तलहटी	talahati:2	talhati:1	talhti:1
 तला	talaa:2	tala:1
 तलाक	talaak:1	talak:1	talaq:1
-तलाश	talaash:2	talash:1
+तलाश	talash:3	talaash:2
 तलाशता	talashata:2	talaashata:1	talashta:1
 तलाशते	talashate:3	talaashate:1
 तलाशना	talashana:3	talaashanaa:1
@@ -11493,7 +11493,7 @@
 तहर	tahar:2	tahr:1
 तहरीर	tahrir:2	taharir:1
 तहलका	tahalaka:1	tahalka:1	tahlaka:1
-तहसील	tahseal:1	tahsil:1	tehsil:1
+तहसील	tahsil:5	tahseal:1	tehsil:1
 तहसीलों	tahsilon:2	tehsilon:1
 ता	ta:2	taa:1
 तांग	tang:3	taang:1
@@ -11534,7 +11534,7 @@
 तातार	tatar:3	taataar:1
 ताते	tate:2	taate:1
 तात्कालिक	tatkalik:2	taatkaalik:1
-तात्पर्य	taatpary:1	taatparya:1	tatpary:1
+तात्पर्य	tatparya:3	taatpary:1	taatparya:1	tatpary:1
 तात्या	taatya:1	tattya:1	tatya:1
 तात्विक	taatvik:2	tatvik:1
 तादात	taadaat:2	tadat:2
@@ -11547,10 +11547,10 @@
 तानाशाह	tanashah:2	taanaashah:1	taanashah:1
 तानाशाही	tanashahi:2	taanaashahi:1	taanashahi:1
 तानिया	taniya:3
-ताने	taane:2	tane:2
+ताने	tane:2	taane:2
 ताप	taap:2	tap:1
 तापक्रम	tapkram:3
-तापमान	tapman:3	taapmaan:1
+तापमान	taapman:2	tapman:3	taapmaan:1
 तापमानों	tapmanon:2	taapmaanon:1	tapmano:1
 तापमापी	tapmapi:2	taapmaapi:1
 तापसी	tapsi:2	taapasi:1	taapsi:1
@@ -11583,9 +11583,9 @@
 तारीखों	tarikhon:3	taarikhon:1
 तारीफ	tarif:3	taarif:1	tareef:1
 तारीफ़	tarif:3	taarif:1	tareef:1
-तारे	taare:2	tare:2
+तारे	tare:3	taare:2
 तारो	taro:3	taaro:1
-तारों	taron:3	taaron:1
+तारों	taro:2	taron:3	taaron:1
 तार्किक	tarkik:2	taarkik:1	takrik:1
 ताल	taal:7
 तालकटोरा	talkatora:2	talkatore:1
@@ -11681,10 +11681,10 @@
 तीखी	teekhi:2	tikhi:1
 तीखे	teekhe:2	tikhe:1
 तीज	teej:2	tij:1
-तीतर	teetar:2	titar:1
+तीतर	titar:2	teetar:2
 तीन	teen:2	tin:1
 तीनो	teeno:2	tino:1
-तीनों	teenon:3
+तीनों	tinon:4	teenon:3
 तीर	teer:3	tir:1
 तीरंदाजी	teerandaji:1	teerndaaji:1	tirandaji:1
 तीरंदाजों	teerandagon:1	teerndaajon:1	tirandazon:1
@@ -11706,9 +11706,9 @@
 तीव्रगामी	tivragami:3
 तीव्रता	tivrata:3
 तीस	tees:3	tis:1
-तीसरा	tisara:2	teesra:1
-तीसरी	tisari:2	teesri:1
-तीसरे	tisare:2	tisre:1
+तीसरा	teesra:2	tisara:2
+तीसरी	teesari:3	tisari:2	teesri:1
+तीसरे	tisre:6	tisare:2
 तीसी	tisi:2	teesi:1
 तु	tu:3
 तुंग	tung:3
@@ -11748,7 +11748,7 @@
 तुर्कमान	turkman:2	turakman:1
 तुर्कमेनिस्तान	turkmenistan:3
 तुर्किस्तान	turkistan:2	turkestan:1
-तुर्की	turkey:2	turki:1
+तुर्की	turki:3	turkey:2
 तुर्बत	turbat:2	turbt:1
 तुल	tul:3
 तुलना	tulna:2	tulana:1
@@ -11888,10 +11888,10 @@
 त्यागी	tyagi:2	tyaagi:1
 त्याज्य	tyajya:2	tyaajy:1
 त्यार	tyar:2	tyaar:1
-त्यों	tyon:3
+त्यों	tyo:2	tyon:3
 त्योहार	tyohar:5
 त्योहारों	tyoharon:3	tyoharo:1
-त्यौहार	tyohaar:1	tyohar:1	tyoihar:1
+त्यौहार	tyohar:2	tyohaar:1	tyoihar:1
 त्यौहारों	tyauharon:1	tyoharon:1	tyoiharon:1
 त्रयोदशी	trayodashi:2	trayodhashi:1
 त्रस्त	trast:2	trasd:1
@@ -11946,8 +11946,8 @@
 त्रैमासिक	trimasik:2	tremasik:1
 त्रैलोक्य	trailoky:1	trailokya:1	trelokya:1
 त्व	tv:2	tva:1
-त्वचा	tvacha:3
-त्वरित	tvarit:3
+त्वचा	twacha:2	tvacha:3
+त्वरित	twarit:2	tvarit:3
 त्सांग	tsang:3
 त्से	tse:3
 त्सो	tso:3
@@ -12044,7 +12044,7 @@
 थैले	thaile:3
 थैलों	thailon:3
 थॉमस	thomas:3
-थॉमसन	thomson:3
+थॉमसन	thomsan:2	thomson:3
 थो	tho:3
 थोक	thok:2	thock:1
 थोट्टूमकल	thottumkal:1	thotutamkal:1	thotutmakal:1
@@ -12117,7 +12117,7 @@
 दगाबाज	dagabaaj:2	dagaabaaja:1	dagabaj:1	dagabaja:1
 दजला	dajla:2	dajala:1
 दतिया	datiya:2	datia:1
-दत्त	datt:2	dutt:1
+दत्त	dutt:2	datt:2
 दत्तक	dattak:3
 दत्ता	datta:2	detta:1
 दत्तात्रेय	dattatreya:2	dettatrey:1
@@ -12217,7 +12217,7 @@
 दर्रा	darra:3
 दर्रे	darre:3
 दर्शक	darshak:3
-दर्शकों	darshkon:2	darshakon:1
+दर्शकों	darshakon:5	darshkon:2
 दर्शन	darshan:8
 दर्शनार्थियों	darshnarthiyon:2	darshnaarthiyon:1
 दर्शनीय	darshniya:2	darshaniiya:1	darshaniy:1	darshniy:1
@@ -12249,9 +12249,9 @@
 दलीय	daliy:2	daleey:1	daliye:1
 दलील	dalil:3	daleel:1
 दलेल	dalel:2	dalele:1
-दलों	dalon:3
+दलों	dalo:2	dalon:3
 दव	dav:3
-दवा	dava:1	davaa:1	dawa:1
+दवा	dawa:2	dava:1	davaa:1
 दवाइयां	davaaiyan:1	davaiya:1	davaiyaan:1	dawaaiyan:1
 दवाइयों	davaaiyon:1	davaiyon:1	dawaaiyon:1	dawaiyon:1
 दवाईयां	davaiyan:2	davaaiyan:1	dawaaiyan:1	dawaiyan:1
@@ -12287,7 +12287,7 @@
 दस्तावेज	dastavej:3
 दस्तावेज़	dastavej:2	dastavez:1
 दस्तावेजी	dastveji:2	dastaveji:1
-दस्तावेजों	dastavejon:3
+दस्तावेजों	dastavejo:2	dastavejon:3
 दस्ती	dasti:3
 दस्तूर	dastur:2	dastoor:1
 दस्ते	daste:3
@@ -12340,7 +12340,7 @@
 दाना	dana:3	daana:1
 दानापुर	danapur:3
 दानी	dani:2	daani:1
-दाने	dane:2	daane:1
+दाने	daane:3	dane:2
 दानेदार	daanedar:1	danedaar:1	danedar:1
 दानों	danon:2	daanon:1
 दाब	daab:2	dab:1
@@ -12358,7 +12358,7 @@
 दायरा	dayra:2	dayara:1
 दायरे	dayre:3
 दायरों	dayron:2	dayaron:1
-दायित्व	dayitv:1	dayitva:1	dayitwa:1
+दायित्व	daayitv:2	dayitv:1	dayitva:1	dayitwa:1
 दायित्वों	dayitvon:2	dayityon:1
 दायिनी	dayini:2	dayinie:1
 दार	dar:2	daar:1
@@ -12370,20 +12370,20 @@
 दारूल	darul:3
 दारोगा	daroga:3
 दार्जिलिंग	darjeeling:3
-दार्शनिक	daarshnik:2	darshanik:1
+दार्शनिक	darshnik:2	daarshnik:2	darshanik:1
 दाल	daal:3	dal:1
 दालचीनी	dalchini:2	daalcheenee:1	daalcheeni:1
 दाली	daali:2	daalee:1	dalee:1	dali:1
 दालों	dalon:2	daalon:1	dalo:1
 दाव	daav:2	daaw:1	dav:1	daw:1
 दावत	dawat:2	daavat:1	daawat:1
-दावा	daava:1	daawa:1	davaa:1	dawa:1
+दावा	dava:3	daava:1	daawa:1	davaa:1
 दावे	daave:3	daawe:1	dawe:1
 दावेदार	davedaar:2	daavedaar:1	daawedaar:1	davedar:1
 दावेदारी	davedari:2	daavedaari:1	daavedaree:1	daawedaaree:1
 दावों	daavon:1	daon:1	davon:1	dawon:1
 दाश	dash:2	daash:1
-दास	daas:2	das:2
+दास	das:4	daas:2
 दासता	daasta:1	dasata:1	dasta:1
 दासत्व	dasatv:2	dastav:1
 दासवानी	dasvani:2	daaswani:1
@@ -12397,12 +12397,12 @@
 दाहिनी	dahini:3
 दाहिने	dahine:3
 दाहोद	dahod:3
-दि	di:2	the:1
+दि	the:5	di:2
 दिंगबर	digambar:1	dingabar:1	dingbar:1
-दिए	diae:1	die:1	diye:1
+दिए	diye:7	diae:1	die:1
 दिक्कत	dikkat:3
 दिख	dikh:3
-दिखता	dikhta:2	dikhtaa:2
+दिखता	dikhata:2	dikhta:2	dikhtaa:2
 दिखती	dikhti:3
 दिखते	dikhte:3
 दिखना	dikhna:3	dikhnaa:1
@@ -12414,10 +12414,10 @@
 दिखलाए	dikhlaaye:2	dikhlaye:2
 दिखलाता	dikhlaata:2	dikhlata:2	dikhlaataa:1	dikhlataa:1
 दिखलाया	dikhlaaya:2	dikhlaya:2	dikhlaayaa:1
-दिखा	dikha:3	dikhaa:1
+दिखा	dikhaa:2	dikha:3
 दिखाइए	dikhaiye:2	dikhaaiye:1	dikhaiae:1
 दिखाइये	dikhaiye:3	dikhaaiye:1
-दिखाई	dikhaai:2	dikhai:1	dikhayi:1
+दिखाई	dikhai:10	dikhaai:2	dikhayi:1
 दिखाईं	dikhaaee:1	dikhaai:1	dikhaain:1	dikhaee:1
 दिखाए	dikhaye:2	dikhae:1
 दिखाएगा	dikhaega:2	dikhaayegaa:1	dikhayega:1
@@ -12457,7 +12457,7 @@
 दिनो	dino:3
 दिनों	dinon:4
 दिब्येंदु	dibyendu:3
-दिमाग	dimag:2	dimaag:1
+दिमाग	dimaag:2	dimag:2
 दिमागी	dimagi:2	dimaagi:1
 दिमागों	dimagon:2	dimaagon:1
 दिया	diya:5	diyaa:1
@@ -12526,7 +12526,7 @@
 दीए	diae:1	die:1	diye:1
 दीक्षा	diksha:4	deeksha:1	dikha:1
 दीक्षांत	dikshant:3
-दीक्षित	dikshit:4	dixit:4
+दीक्षित	dixit:4	dikshit:4
 दीगर	digar:2	deegar:1
 दीजिए	dijia:1	dijiae:1	dijiye:1
 दीदी	didi:3
@@ -12553,7 +12553,7 @@
 दीमापुर	dimapur:3
 दीया	diya:3	deeya:1
 दीयों	diyon:2	deeyon:1
-दीर्घ	dirgha:2	deergha:1	dirgh:1
+दीर्घ	dirgh:2	dirgha:2	deergha:1
 दीर्घकाल	deerghakaal:1	dirghakaal:1	dirghakal:1	dirghkaal:1
 दीर्घकालिक	deerghakaleek:1	dirghakaaalik:1	dirghakalika:1	dirghkaalik:1
 दीर्घकालीन	deerghakaleen:1	dirghakaleen:1	dirghakalin:1	dirghkaalin:1
@@ -12627,7 +12627,7 @@
 दुरुपयोग	durupyog:3
 दुरूपयोग	durupyog:2	durupayog:1
 दुरूह	duruh:2	durruh:1
-दुर्ग	durg:4
+दुर्ग	durgh:2	durg:4
 दुर्गंध	durgandh:2	durganddh:1
 दुर्गम	durgam:3	durgaum:1
 दुर्गा	durga:7
@@ -12700,7 +12700,7 @@
 दूरदर्शी	durdarshi:3	doordarshi:2
 दूरदृष्टा	doordristha:1	doorhashta:1	durdrashta:1	durhashta:1
 दूरबीन	durbin:2	doorbin:1	durbeen:1
-दूरबीनों	doorbinon:2	durbinon:2
+दूरबीनों	durbinon:3	doorbinon:2
 दूरभाष	doorbhaash:1	doorbhash:1	durbhaash:1	durbhash:1
 दूरसंचार	doorsanchaar:1	doorsanchar:1	dursanchar:1
 दूरस्थ	durasth:2	dursth:1
@@ -12716,7 +12716,7 @@
 दृग	drag:1	drig:1	hug:1
 दृढ़	dradh:2	dridh:1
 दृढ़ता	dradhataa:1	dradhta:1	dridhta:1
-दृश्य	drishya:3	drashya:1	drishy:1	drisya:1
+दृश्य	drushy:5	drishya:3	drashya:1	drishy:1
 दृश्यता	drashyata:1	drashyataa:1	drishytah:1
 दृश्यमान	drishyamaan:1	drishyaman:1	drishyman:1
 दृश्यश्रव्य	drashyashravya:1	drishashravya:1	drishyshrvy:1
@@ -12724,8 +12724,8 @@
 दृष्ट	drisht:3
 दृष्टया	drishtya:2	drishtyaa:1
 दृष्टांत	drishtaant:2	drashtant:1
-दृष्टि	drishti:3
-दृष्टिकोण	drishtikon:3
+दृष्टि	drushti:12	drishti:3
+दृष्टिकोण	drushtikon:5	drishtikon:3
 दृष्टिकोणों	drashtikonon:1	drishtikono:1	drishtikonon:1
 दृष्टिगत	drishtigat:2	drishtigath:1
 दृष्टिगोचर	drishtigochar:3
@@ -12741,7 +12741,7 @@
 देखता	dekhta:3
 देखती	dekhti:3
 देखते	dekhte:3
-देखना	dekhna:3
+देखना	dekhana:2	dekhna:3
 देखने	dekhne:3
 देखनेवाले	dekhnevale:3	dekhnevaale:1	dekhnewaale:1	dekhnewale:1
 देखरेख	dekhrekh:3
@@ -12749,7 +12749,7 @@
 देखिए	dekhiae:2	dekhiye:1
 देखी	dekhi:3
 देखे	dekhe:4
-देखें	dekhen:2	dekhein:1
+देखें	dekhe:3	dekhen:2	dekhein:1
 देखेंगे	dekhenge:3
 देखो	dekho:7
 देखोगे	dekhoge:3
@@ -12775,7 +12775,7 @@
 देर	der:3
 देरी	deri:3
 देवकली	devkali:3
-देवकी	devki:3
+देवकी	devaki:5	devki:3
 देवकीनंदन	devkinandan:3
 देवकुमार	devkumar:3
 देवकोटा	devkota:3
@@ -12786,13 +12786,13 @@
 देवताओं	devtaon:2	devtaaon:1
 देवतागण	devtagan:2	devataagan:1
 देवताले	devtale:3
-देवत्व	devatv:1	devatva:1	devtv:1
+देवत्व	devattwa:2	devatv:1	devatva:1	devtv:1
 देवदत्त	devadatt:1	devdatt:1	devdutt:1
 देवदार	deodar:1	devdaar:1	devdar:1
 देवदास	devdas:3
 देवदासी	devadasi:2	devdaasi:1
 देवन	devan:3
-देवनागरी	devanagari:1	devnagari:1	devnagri:1
+देवनागरी	devnagari:4	devanagari:1	devnagri:1
 देवनार	deonar:1	devnaar:1	devnar:1
 देवबंद	devband:2	deoband:1
 देवयानी	devyani:3	devayani:2	devayaani:1
@@ -12889,7 +12889,7 @@
 दोराहे	dorahe:3
 दोष	dosh:6
 दोषी	doshi:3
-दोषों	doshon:3
+दोषों	doson:2	doshon:3
 दोस्त	dost:3
 दोस्तपुर	dostpur:3
 दोस्ताना	dostana:3
@@ -12901,7 +12901,7 @@
 दोहराने	dohrane:2	doharaane:1	doharane:1
 दोहराया	dohraya:3
 दोहराव	dohrav:2	dohrao:1
-दोहरी	dohari:4	dohri:2
+दोहरी	dohri:2	dohari:4
 दोहरे	dohre:2	dohare:1
 दोहा	doha:6
 दोहे	dohe:6
@@ -12925,7 +12925,7 @@
 द्रमुक	dramuk:2	drmuk:1
 द्रव	drav:3
 द्रविड़	dravid:3
-द्रव्य	dravy:1	dravya:1	drvy:1
+द्रव्य	dravya:4	dravy:1	drvy:1
 द्रव्यमान	dravyaman:3
 द्रव्यों	dravyon:3
 द्रास	dras:3
@@ -12950,7 +12950,7 @@
 द्वारा	dwara:4	davara:1	dvara:1
 द्वारों	dwaron:2	dvaron:1
 द्विज	davij:1	dvij:1	dwij:1
-द्वितीय	dwitiya:2	dvitiya:1
+द्वितीय	dwitiy:5	dwitiya:2	dvitiya:1
 द्वितीयक	dwitiyak:2	dvitiyak:1
 द्वितीया	dvitiya:1	dwitiya:1	dwitiyaa:1
 द्वितीयेश	davitiyesh:1	dvitiyesh:1	dwitiyesh:1
@@ -12961,8 +12961,8 @@
 द्विवेदी	dwivedi:2	dvivedi:1
 द्विस्तरीय	dvistariya:2	dvistariy:1	dwistariya:1
 द्विस्वभाव	davisvbhav:1	dvisvabhav:1	dwiswabhav:1
-द्वीप	dweep:4	dveep:1	dvip:1
-द्वीपसमूह	dweepsamuh:2	dvipsamuh:1
+द्वीप	dvip:2	dweep:4	dveep:1
+द्वीपसमूह	dvipsamuh:2	dweepsamuh:2
 द्वीपीय	dvipiya:2	dvipiy:1
 द्वीपों	dweepon:2	dvipon:1
 द्वेश	davesh:1	dvesh:1	dwesh:1
@@ -13090,26 +13090,26 @@
 धागा	dhaaga:1	dhaagaa:1	dhaga:1
 धागे	dhaage:4	dhage:2
 धागों	dhaagon:2	dhagon:1
-धातु	dhaatu:4	dhati:1	dhatu:1
+धातु	dhatu:7	dhaatu:4	dhati:1
 धातुएं	dhaatuein:1	dhaatuyein:1	dhtuen:1
 धातुओं	dhaatuon:2	dhatuon:1
 धातुकर्म	dhaatukarm:1	dhaatukarma:1	dhatukarm:1
 धातृ	dhaatr:1	dhaatru:1	dhatri:1
-धान	dhaan:2	dhan:1
+धान	dhan:2	dhaan:2
 धानी	dhaani:2	dhani:1
 धाबी	dhaabi:2	dhabi:1
-धाम	dhaam:5	dham:1
+धाम	dham:2	dhaam:5
 धामनोद	dhaamnod:2	dhamnod:1
 धार	dhar:2	dhaar:1
 धारक	dharak:2	dhaarak:1
 धारकों	dhaarakon:1	dharakon:1	dharkon:1
-धारण	dhaarann:1	dharan:1	dharna:1
-धारणा	dharna:2	dhaarnaa:1
+धारण	dharan:3	dhaarann:1	dharna:1
+धारणा	dharana:3	dharna:2	dhaarnaa:1
 धारणाएं	dhaaranaayein:1	dharnaae:1	dharnayein:1
 धारणाओं	dharnaon:2	dhaarnaaon:1
 धारदार	dhardar:2	dhaardaar:1
 धारा	dhara:2	dhaaraa:1
-धाराएं	dhaarayein:1	dharaae:1	dharayein:1
+धाराएं	dharayen:3	dhaarayein:1	dharaae:1	dharayein:1
 धाराओं	dharaon:2	dhaaraaon:1
 धाराप्रवाह	dhaaraapravaaha:1	dharapravah:1	dharaprawah:1
 धारावाहिक	dharavahik:2	dhaaraavahik:1
@@ -13132,7 +13132,7 @@
 धीमे	dhime:3
 धीर	dheer:2	dhir:2
 धीरज	dheeraj:2	dhiraj:2
-धीरे	dheere:2	dhire:2
+धीरे	dhire:8	dheere:2
 धीरेधीरे	dheeredheere:2	dhiredhire:2
 धुंआ	dhunaa:2	dhuan:1
 धुंआधार	dhuandhar:1	dhunaadhaar:1	dhunaadhar:1	dhunadhar:1
@@ -13149,7 +13149,7 @@
 धुनाई	dhunai:2	dhunaai:1
 धुने	dhune:3
 धुनों	dhunon:3
-धुप	dhup:3	dhoop:1
+धुप	dhoop:2	dhup:3
 धुर	dhur:3
 धुरिया	dhuriya:2	dhuriyaa:1
 धुरी	dhuri:3
@@ -13184,7 +13184,7 @@
 धोखा	dhokha:3
 धोखाधड़ी	dhokhadhadi:4	dhokhaadhadi:1	dhokhaadhari:1	dhokhadhdi:1
 धोखाधडी	dhokhadhadi:3
-धोखे	dhokhe:3
+धोखे	dhoke:2	dhokhe:3
 धोखेबाज	dhokebaaj:1	dhokebaaz:1	dhokebaj:1	dhokebaz:1
 धोखेबाजी	dhokhebaji:2	dhokebaji:1	dhokhebaaji:1	dhokhebaazi:1
 धोती	dhoti:3
@@ -13217,7 +13217,7 @@
 ध्रुवीय	dhruveeya:1	dhruviy:1	dhruviya:1
 ध्रुवों	dhruvon:2	druvon:1
 ध्वंस	dhvans:1	dhvansa:1	dhwans:1
-ध्वज	dhwaj:2	dhvaj:1	dhvaja:1
+ध्वज	dhvaj:2	dhwaj:2	dhvaja:1
 ध्वजा	dhvja:2	dhwaja:1
 ध्वजारोहण	dhvajarohan:1	dhvjaropan:1	dhwajarohan:1
 ध्वजों	dhvajon:1	dhvjon:1	dhwajon:1
@@ -13265,7 +13265,7 @@
 नक्त	nakta:2	nakt:1
 नक्श	naksh:2	naqsh:1
 नक्शबंदी	nakshabandi:1	nakshbandi:1	naqshbandi:1
-नक्शा	nakshaa:3	naksha:1
+नक्शा	naksha:3	nakshaa:3
 नक्शे	nakshe:3
 नक्शों	nakshon:3
 नक्षत्र	nakshatra:5
@@ -13502,7 +13502,7 @@
 नवी	navi:3
 नवीकरण	navikaran:3
 नवीकरणीय	navikaraniya:1	navikarniy:1	navikarniye:1
-नवीन	naveen:3	navin:1
+नवीन	navin:3	naveen:3
 नवीनतम	naveenatam:1	navinatam:1	navintam:1
 नवीनता	naveenta:1	navinata:1	navinataa:1
 नवीनीकरण	navinikaran:2	naveenikaran:1
@@ -13541,7 +13541,7 @@
 नहाकर	nahakar:3	nahaakar:1
 नहान	nahan:2	nahaan:1
 नहाने	nahane:3	nahaane:1
-नहीं	nahin:5	nahi:2
+नहीं	nahi:157	nahin:5
 नहुष	nahush:3
 ना	na:3
 नांगिया	naangiya:1	nangia:1	nangiya:1
@@ -13587,9 +13587,9 @@
 नागर	nagar:3
 नागरमोथा	nagarmotha:3
 नागराज	nagraj:2	nagaraj:1
-नागरिक	nagrik:2	nagarik:1
-नागरिकता	nagarikata:1	nagarikta:1	nagrikta:1
-नागरिकों	nagrikon:2	nagarikon:1
+नागरिक	nagarik:3	nagrik:2
+नागरिकता	nagrikta:6	nagarikata:1	nagarikta:1
+नागरिकों	nagarikon:3	nagrikon:2
 नागरी	nagari:2	naagri:1
 नागा	naga:3
 नागारिक	naagrik:1	nagarik:1	nagrik:1
@@ -13693,7 +13693,7 @@
 नामीबिया	namibia:4
 नामुमकिन	namumkin:3
 नामो	naamo:2	namo:1
-नामों	naamon:2	namon:1
+नामों	namon:3	naamon:2
 नायक	nayak:3
 नायकत्व	nayakatva:2	naayakatva:1	nayaktwa:1
 नायकों	nayakon:3
@@ -13722,7 +13722,7 @@
 नारियल	nariyal:3	naariyal:1
 नारियां	nariyan:2	naariyaan:1	naariyan:1	nariyaan:1
 नारियों	naariyon:2	nariyon:2
-नारी	naari:2	nari:2
+नारी	nari:3	naari:2
 नारीवाद	narivad:2	naarivaad:1	narivaad:1
 नारीवादी	narivadi:2	naarivaadi:1	naarivadi:1
 नारे	naare:1	naaro:1	nare:1	naro:1
@@ -13750,7 +13750,7 @@
 नासिक	nasik:2	nashik:1
 नासिका	naasikaa:2	naasika:1
 नासिर	nasir:2	naasir:1
-नास्तिक	naastik:2	nastik:1
+नास्तिक	nastik:2	naastik:2
 नास्तिकता	naastikataa:2	naastikta:1
 नाहटा	naahataa:1	naahtaa:1	nahta:1
 नाहर	naahar:2	nahar:1
@@ -13768,14 +13768,14 @@
 निकम्मे	nikamme:3
 निकल	nikal:3
 निकलकर	nikalkar:2	nikalakar:1
-निकलता	nikalataa:1	nikalta:1	nikaltaa:1
+निकलता	nikalta:2	nikalataa:1	nikaltaa:1
 निकलती	nikalti:2	nikalati:1
 निकलते	nikalate:2	nikaalte:1	nikalte:1
 निकलना	nikalna:2	nikalanaa:1
 निकलने	nikalane:2	nikalne:1
 निकलवा	nikalwa:2	nikalavaa:1	nikalva:1
 निकलवाया	nikalwaya:2	nikalavaayaa:1	nikalvaya:1
-निकला	nikalaa:2	nikala:1	nikla:1
+निकला	nikla:2	nikalaa:2	nikala:1
 निकली	nikali:3
 निकलीं	nikalin:2	niklin:1
 निकले	nikale:3
@@ -13784,14 +13784,14 @@
 निकाय	nikaay:2	nikay:2
 निकायों	nikayon:3	nikaayon:1
 निकारागुआ	nicaragua:3
-निकाल	nikaal:2	nikal:2
+निकाल	nikal:5	nikaal:2
 निकालकर	nikalkar:2	nikaalakar:1	nikaalkar:1
 निकालता	nikaalataa:1	nikaalta:1	nikalata:1	nikalta:1
 निकालती	nikaalati:1	nikaalti:1	nikalati:1	nikalti:1
-निकालते	nikaalate:1	nikaalte:1	nikalate:1	nikalte:1
+निकालते	nikalte:3	nikaalate:1	nikaalte:1	nikalate:1
 निकालना	nikalna:2	nikaalanaa:1	nikaalna:1
 निकालनी	nikaalani:1	nikaalni:1	nikalani:1	nikalni:1
-निकालने	nikaalane:1	nikaalne:1	nikalane:1	nikalne:1
+निकालने	nikalne:2	nikaalane:1	nikaalne:1	nikalane:1
 निकाला	nikala:2	nikaala:1	nikaalaa:1
 निकाली	nikaali:2	nikali:2
 निकाले	nikale:3
@@ -13826,7 +13826,7 @@
 निगमित	nigamit:3
 निगमों	nigamon:3
 निगर	nigar:2	nigger:1
-निगरानी	nigaraani:1	nigarani:1	nigraani:1	nigrani:1
+निगरानी	nigarani:2	nigaraani:1	nigraani:1	nigrani:1
 निगल	nigal:3
 निगलते	nigalate:2	nigalti:1
 निगलने	nigalane:2	nigalne:1
@@ -13864,7 +13864,7 @@
 नित्य	nitya:3	nity:1
 नित्यकर्म	nityakarm:3	nityakarma:1
 नित्या	nitya:2	nityaa:2
-निदान	nidaan:2	nidan:2
+निदान	nidan:4	nidaan:2
 निदेशकों	nideshakon:3	nideshako:1
 निदेशालय	nideshalay:2	nideshaalay:1	nideshalaya:1
 निधन	nidhan:3
@@ -13874,7 +13874,7 @@
 निधी	nidhi:3
 निपटती	nipatati:3
 निपटते	nipatate:2	nipatte:1
-निपटने	nipatane:2	nipatne:2
+निपटने	nipatne:2	nipatane:2
 निपटा	nipta:2	nipata:1	niptaa:1
 निपटाना	niptaana:2	niptana:2	niptaanaa:1	niptanaa:1
 निपटाने	niptaane:2	niptane:2
@@ -13888,7 +13888,7 @@
 निबंधकार	nibandhkar:3	nibandhkaar:1
 निबंधों	nibandhon:3
 निभा	nibha:3	nibhaa:1
-निभाई	nibhaai:3	nibhaayee:1	nibhai:1	nibhayee:1
+निभाई	nibhai:3	nibhaai:3	nibhaayee:1	nibhayee:1
 निभाए	nibhae:2	nibhaaae:1	nibhaae:1
 निभाकर	nibhaakar:3	nibhakar:2
 निभाता	nibhaata:2	nibhaataa:2	nibhata:2	nibhataa:1
@@ -13897,15 +13897,15 @@
 निभाना	nibhaana:2	nibhaanaa:2	nibhana:2	nibhanaa:1
 निभाने	nibhaane:3	nibhane:2
 निभानेवाली	nibhanewali:2	nibhaanevaali:1	nibhaanewaali:1	nibhaanewali:1
-निभाया	nibhaaya:2	nibhaayaa:2	nibhaya:2	nibhayaa:1
+निभाया	nibhaya:2	nibhaaya:2	nibhaayaa:2	nibhayaa:1
 निभाये	nibhaaye:2	nibhaye:2
 निमंत्रण	nimantran:3
 निमग्न	nimagn:3
 निमाड़	nimaad:1	nimad:1	nimar:1
 निमोनिया	pneumonia:2	nimonia:1
-निम्न	nimna:2	nimn:1
+निम्न	nimn:5	nimna:2
 निम्नतम	nimnatam:3
-निम्नलिखित	nimnalikhit:3
+निम्नलिखित	nimnlikhit:7	nimnalikhit:3
 निम्नवर्गीय	nimnavargeeya:1	nimnavargiya:1	nimnvargiya:1
 निम्नानुसार	nimnanusar:2	nimnaanusaar:1
 निम्मी	nimmi:3
@@ -13952,7 +13952,7 @@
 निराकार	niraakaar:2	nirakaar:1	nirakar:1
 निराधार	niraadhaar:2	niradhaar:1	niradhar:1
 निरापद	niraapad:2	nirapad:1
-निराला	niraalaa:2	niraala:1	nirala:1
+निराला	nirala:2	niraalaa:2	niraala:1
 निराश	niraash:3	nirash:1
 निराशजनक	niraashjanak:2	niraashajanak:1	nirashjanak:1
 निराशा	niraashaa:2	niraasha:1	nirasha:1
@@ -14007,14 +14007,14 @@
 निर्भय	nirbhay:4	nirbhaya:2
 निर्भयता	nirbhayata:2	nirbhayataa:1
 निर्भर	nirbhar:3
-निर्भरता	nirbharataa:2	nirbharta:1
+निर्भरता	nirbharta:3	nirbharataa:2
 निर्भीक	nirbhik:3
 निर्मम	nirmam:3
 निर्मल	nirmal:8
 निर्मला	nirmala:3
 निर्मली	nirmali:3
 निर्माण	nirman:3	nirmaan:2
-निर्माणाधीन	nirmaanaadhin:1	nirmanadheen:1	nirmanadhin:1
+निर्माणाधीन	nirmanadhin:2	nirmaanaadhin:1	nirmanadheen:1
 निर्माणों	nirmanon:2	nirmaanon:1
 निर्माता	nirmata:2	nirmaataa:1
 निर्माताओं	nirmataon:2	nirmaataaon:1
@@ -14047,10 +14047,10 @@
 निलोफर	nilofer:2	niloufar:1
 निवर्तमान	nivartman:2	nirvatamaan:1
 निवारक	nivaarak:2	nivarak:1
-निवारण	nivaaran:2	nivaran:1
+निवारण	nivaran:2	nivaaran:2
 निवारणार्थ	nivaaranaarth:1	nivaarnaarth:1	nivarnarth:1
 निवारणीय	nivaaraniy:1	nivaaraniya:1	nivarniy:1
-निवास	nivaas:1	nivas:1	niwas:1
+निवास	nivas:3	nivaas:1	niwas:1
 निवासरत	nivaasarat:1	nivasarat:1	niwasarat:1
 निवासिनी	nivaasini:1	nivasini:1	niwaasini:1
 निवासियों	nivaasiyon:1	nivasiyon:1	niwaasiyon:1
@@ -14073,8 +14073,8 @@
 निशस्त्रीकरण	nishastrikaran:3
 निशा	nisha:3
 निशांत	nishant:3
-निशान	nishan:2	nishaan:1
-निशाना	nishaanaa:2	nishana:2	nishaana:1
+निशान	nishaan:2	nishan:2
+निशाना	nishana:2	nishaanaa:2	nishaana:1
 निशानियां	nishaniyan:2	nishaaniyaan:1	nishaaniyan:1
 निशानियों	nishaaniyon:3	nishaniyon:1
 निशानी	nishaani:2	nishani:2
@@ -14085,7 +14085,7 @@
 निश्चय	nishchay:5	nishchaya:1
 निश्चल	nishchal:2	nischal:1
 निश्चित	nishchit:2	nischit:1
-निषाद	nishaad:2	nishad:1
+निषाद	nishad:4	nishaad:2
 निषादराज	nishaadaraaj:1	nishadraj:1	nishdaraaj:1
 निषादों	nishaadon:2	nishadon:1
 निषिद्ध	nishiddha:3
@@ -14132,7 +14132,7 @@
 निहितार्थ	nihitaarth:2	nihitaartha:1
 नींद	nind:3	neend:1
 नींबू	nimbu:3	nimboo:1
-नींव	neenv:1	neev:1	ninv:1
+नींव	neev:2	neenv:1	ninv:1
 नीच	nich:3	neech:2
 नीचा	neecha:1	neechaa:1	nicha:1	nichaa:1
 नीचाई	nichaai:2	neechaaee:1
@@ -14142,7 +14142,7 @@
 नीडल	needle:3
 नीत	neet:3
 नीता	neeta:5	nita:2	neetaa:1
-नीति	neeti:4	niti:3
+नीति	niti:6	neeti:4
 नीतिगत	nitigat:2	neetigat:1
 नीतिनिर्धारण	nitinirdhaaran:4	neetinirdhaaran:2
 नीतियां	nitiyaan:2	neetiyaan:1
@@ -14175,7 +14175,7 @@
 नीलाभ	neelaabh:1	nilaabh:1	nilabh:1
 नीलामी	neelaami:1	neelami:1	nilaami:1	nilami:1
 नीली	neeli:2	nili:1
-नीले	neele:3	nile:1
+नीले	nile:3	neele:3
 नील्सन	neilson:1	nielsen:1	nilson:1
 नुकसान	nuksan:4	nuksaan:2	nukasaan:1	nukasan:1
 नुकसानकारी	nuksankari:2	nukasaankaari:1	nuksaankaari:1
@@ -14200,7 +14200,7 @@
 नूर	noor:2	nur:1
 नूरजहां	noorjahaan:1	noorjahan:1	nurjahan:1
 नृतकी	nritaki:3	nrutaki:1
-नृत्य	nrity:1	nritya:1	nrutya:1
+नृत्य	nritya:5	nrity:1	nrutya:1
 नृत्यकला	nrityakala:2	nrutyakalaa:1
 नृत्यशैली	nrityashaili:2	nrutyashaili:1
 नृत्यांगना	nrityangana:2	nrityaanaganaa:1	nrutyaanganaa:1
@@ -14235,7 +14235,7 @@
 नेताजी	netaji:3
 नेतृत्व	netritva:1	netrutv:1	netrutva:1
 नेत्तृत्व	netritva:1	netrutva:1	nettrutv:1
-नेत्र	netra:2	netr:1
+नेत्र	netr:2	netra:2
 नेत्रदान	netradan:2	netradaan:1
 नेत्रहीन	netraheen:2	netrhin:1
 नेत्रा	netra:3
@@ -14247,7 +14247,7 @@
 नेपाल	nepal:6
 नेपालियों	nepaliyon:3
 नेपाली	nepali:6
-नेपोलियन	napoleon:2	nepolian:1
+नेपोलियन	nepoliyan:2	napoleon:2	nepolian:1
 नेम	name:3
 नेमत	nemat:3
 नेमसेक	namesake:2	nemsek:1
@@ -14366,7 +14366,7 @@
 नौकायन	naukayan:2	nuakayan:1
 नौकायान	naukayan:3
 नौकासन	naukasan:3
-नौजवान	naujaavan:1	naujavan:1	naujawan:1
+नौजवान	naujavan:2	naujaavan:1	naujawan:1
 नौजवानों	naujavaanon:1	naujavanon:1	naujawanon:1
 नौटंकी	nautanki:6	notanki:1
 नौटियाल	nautiyal:3
@@ -14387,7 +14387,7 @@
 नौसेनाध्यक्ष	nausenadhyaksh:2	nausenadhykesh:1
 नौसैनिक	nausainik:3
 नौहझील	nauhazheel:1	nauhjheel:1	nauhjhil:1
-न्याय	nyaay:1	nyaaya:1	nyaya:1
+न्याय	nyay:7	nyaay:1	nyaaya:1	nyaya:1
 न्यायधीश	nyaayadheesh:1	nyaaydhish:1	nyayadhish:1
 न्यायपालिका	nyaayapaalikaa:1	nyayapalika:1	nyaypalika:1
 न्यायपीठ	nyaayapeetha:1	nyayapith:1	nyaypitha:1
@@ -14406,7 +14406,7 @@
 न्यायाधीशों	nyayadhishon:2	nyaayaadheeshon:1
 न्यायाधीष	nyaayaadheesh:1	nyayadhish:1	nyayadhisha:1
 न्यायापालिका	nyayapalika:2	nyaayaapaalikaa:1
-न्यायालय	nyaayaalay:1	nyayalay:1	nyayalaya:1
+न्यायालय	nyayalay:3	nyaayaalay:1	nyayalaya:1
 न्यायालयों	nyayalayon:2	nyaayaalayon:1
 न्यायिक	nyayik:2	nyaayikaa:1
 न्यायोचित	nyayochit:2	nyaayochit:1
@@ -14458,7 +14458,7 @@
 पंखुड़ियों	pankhudiyon:2	pankhudiyaan:1
 पंखुड़ी	pankhudi:3	pankhuri:1
 पंखे	pankhe:3
-पंखों	pankhon:2	pankho:1
+पंखों	pankho:2	pankhon:2
 पंगु	pangu:2	panguu:1
 पंच	panch:6	punch:2
 पंचकर्म	panchkarm:2	panchakarma:1	punchakarma:1
@@ -14519,7 +14519,7 @@
 पकड़ते	pakadate:1	pakadte:1	pakdate:1
 पकड़ना	pakadana:1	pakadta:1	pakdana:1
 पकड़ने	pakadne:2	pakdane:1
-पकड़ा	pakda:2	pakada:1	pakadaa:1
+पकड़ा	pakada:2	pakda:2	pakadaa:1
 पकड़ी	pakdi:2	pakadi:1
 पकड़े	pakade:2	pakde:1
 पकता	pakta:2	pakata:1	paktaa:1
@@ -14617,11 +14617,11 @@
 पठारी	pathari:2	pathaari:1
 पडरौना	padrauna:2	padaraunaa:1
 पड़ताल	padtaal:2	padataal:1
-पड़ा	padaa:2	pada:1
+पड़ा	pada:11	padaa:2
 पड़ाव	padaav:2	padav:1
 पड़ावों	padaavon:2	padavon:2
 पड़ी	padi:3
-पड़ेगा	padegaa:2	padega:1
+पड़ेगा	padega:2	padegaa:2
 पड़ेगी	padegi:3
 पड़ोस	pados:3
 पड़ोसियों	padosiyon:3
@@ -14632,7 +14632,7 @@
 पढ़ना	padhanaa:1	padhna:1	padhnaa:1
 पढ़ने	padhne:2	padhane:1
 पढ़ा	padha:2	padhaa:1
-पढ़ाई	padhaai:2	padhai:1
+पढ़ाई	padhai:5	padhaai:2
 पढ़ाता	padhaataa:3	padhata:1
 पढ़ाने	padhaane:2	padhane:1
 पढ़ाया	padhaayaa:2	padhaya:1
@@ -14762,7 +14762,7 @@
 परंतु	parantu:3
 परंपरा	parampara:3
 परंपराएं	paramparaein:1	paramparaen:1	paramparayen:1
-परंपराओं	paramparaon:3
+परंपराओं	paramparao:3	paramparaon:3
 परंपरागत	paramparagat:3
 परंपरानुसार	paramparanusar:3
 परकोटा	parkota:3
@@ -14845,14 +14845,14 @@
 परांठा	paraanthaa:2	parantha:1
 पराकाष्ठा	paraakaashthaa:2	parakaashtha:1	parakashtha:1
 पराक्रम	paraakram:3	parakram:1
-पराक्रमी	paraakrami:3	parakrami:1
+पराक्रमी	parakrami:2	paraakrami:3
 पराक्साइड	peroxide:2	paraoxide:1
 पराग	paraag:2	parag:2
 परागकण	paraagkan:2	paraagakan:1	paragkan:1
 परागण	paraagan:3	paragan:1
 पराजय	paraajay:3	parajay:1
 पराजयों	paraajayon:3	parajayon:1
-पराजित	paraajit:3	parajit:1
+पराजित	parajit:4	paraajit:3
 पराठा	paraathaa:2	paraatha:1	paratha:1
 पराठे	paraathe:3	parathe:1
 परात	paraat:3	parat:1
@@ -14861,7 +14861,7 @@
 पराधीनता	paraadheenataa:1	paraadhinataa:1	paradheenta:1	paradhinta:1
 पराबैंगनी	parabaingani:2	paraabaingani:1
 पराबैगनी	parabaigani:2	paraabaigani:1
-परामर्श	paraamarsha:2	paramarsh:1
+परामर्श	paramarsh:3	paraamarsha:2
 परामर्शदाता	paraamarshadaataa:2	paramarshdata:1
 परामर्शदाताओं	paraamarshadaataaon:2	paramarshdataon:1
 परामर्शदात्री	paraamarshadaatri:2	paramarshdatri:1
@@ -14890,11 +14890,11 @@
 परिजन	parijan:3
 परिजनों	parijanon:3
 परिजात	parijaat:2	parijat:1
-परिणाम	parinaam:2	parinam:1
+परिणाम	parinam:10	parinaam:2
 परिणामस्वरुप	parinaamswaroop:1	parinamsvarup:1	parinamswaroop:1
-परिणामस्वरूप	parinaamswaroop:1	parinamsvarup:1	parinamswaroop:1
+परिणामस्वरूप	parinamswarup:2	parinaamswaroop:1	parinamsvarup:1	parinamswaroop:1
 परिणामी	parinami:2	parinaami:1
-परिणामों	parinamon:3	parinaamon:1
+परिणामों	parinamo:2	parinamon:3	parinaamon:1
 परित्याग	parityag:3
 परिदृश्य	paridrashya:1	paridrishya:1	paridrshy:1
 परिदृश्यों	paridrashyon:1	paridrishyon:1	paridrshyon:1
@@ -14906,7 +14906,7 @@
 परिपथों	paripathon:3
 परिपाटी	paripati:3	paripaati:1
 परिपालन	paripalan:3	paripaalan:1
-परिपूर्ण	paripoorn:1	paripurna:1	peripooran:1
+परिपूर्ण	paripurn:3	paripoorn:1	paripurna:1	peripooran:1
 परिपेक्ष	paripeksh:2	paripeksha:1
 परिपेक्ष्य	paripekshya:2	paripekhya:1
 परिभाषा	paribhasha:3
@@ -14919,7 +14919,7 @@
 परिमाणात्मक	parimanaatmak:2	perimanatmak:1
 परिमार्जित	parimarjit:3
 परियों	pariyon:3
-परियोजना	pariyojana:2	pariyojna:1
+परियोजना	pariyojna:6	pariyojana:2
 परियोजनाएं	pariyojanaon:1	pariyojnaaen:1	pariyojnaen:1
 परियोजनाओं	pariyojnaon:2	periyojanaon:1
 परिरक्षण	parirakshan:1	parirakshana:1	perirkshan:1
@@ -14963,10 +14963,10 @@
 परिहार	parihar:2	parihaar:1
 परिहास	parihaas:2	parihas:1
 परी	pari:3
-परीक्षक	parikshak:3
+परीक्षक	parikshan:2	parikshak:3
 परीक्षकों	parikshakon:3
 परीक्षण	parikshan:6
-परीक्षणों	parikshanon:3
+परीक्षणों	parikshano:2	parikshanon:3
 परीक्षा	pariksha:5	parikshaa:1
 परीक्षाएं	parikhaen:1	parikshaayein:1	parikshaen:1
 परीक्षाओं	parikhaon:1	parikshaaon:1	parikshaon:1
@@ -15082,24 +15082,24 @@
 पशुपक्षियों	pashupakshiyon:2	pashipakshisyon:1
 पशुपक्षी	pashupakshi:2	pashipakshi:1
 पशुपतिनाथ	pashupatinath:3
-पश्चात	pakshat:1	paschaat:1	paschat:1
+पश्चात	pashchaat:3	pakshat:1	paschaat:1	paschat:1
 पश्चाताप	pakshatap:1	paschaataap:1	paschatap:1
 पश्चिम	paschim:2	pakshim:1
 पश्चिमांचल	pashchimanchal:2	paschimaanchal:1
-पश्चिमी	pashchimi:2	paschimi:1
+पश्चिमी	paschimi:8	pashchimi:2
 पश्चिमोत्तर	paschimottar:2	pashchimottar:1
 पश्तून	pashtun:2	pashtuun:1
 पश्तो	pashto:3
 पश्मीना	pashmina:2	pasminaa:1
 पस	pus:2	puss:1
 पसंद	pasand:3
-पसंदीदा	pasandida:2	pasandeedaa:1
+पसंदीदा	pasandita:2	pasandida:2	pasandeedaa:1
 पसलियों	pasliyon:2	pasaliyon:1
 पसली	pasali:2	pasli:1
 पसारी	pasari:2	pasaari:1
 पसीना	pasina:2	paseenaa:1
 पसीने	pasine:2	paseene:1
-पहचान	pahchan:2	pehchan:2	pahachan:1	pahchaan:1
+पहचान	pehchan:8	pahchan:2	pahachan:1	pahchaan:1
 पहचानकर	pahchaankar:1	pahchankar:1	pehchankar:1
 पहचानता	pahchaantaaa:1	pahchanta:1	pehchanta:1
 पहचानते	pahchaante:1	pahchante:1	pehchante:1
@@ -15139,7 +15139,7 @@
 पहलवानों	pahalvaanon:1	pahalvanon:1	pahalwaanon:1	pehlwanon:1
 पहलवी	pahalvi:1	pahlavi:1	pehlavi:1
 पहला	pahla:1	pahlaa:1	pehla:1
-पहली	pahli:2	pehli:1
+पहली	pehli:10	pahli:2
 पहलुओं	pahluon:2	pehluon:1
 पहलू	pahlu:2	pehlu:1
 पहले	pahle:3	pehle:2	pahale:1
@@ -15178,7 +15178,7 @@
 पहेली	paheli:3
 पा	paa:2	pa:1
 पांगोंग	paangong:2	pangong:1
-पांच	paanch:5	panch:2
+पांच	panch:7	paanch:5
 पांचवां	paanchvaan:1	paanchvan:1	panchvan:1
 पांचवीं	paanchavi:1	paanchvin:1	panchavin:1
 पांचवें	paanchvein:2	panchven:1
@@ -15186,13 +15186,13 @@
 पांचों	paanchon:2	panchon:1
 पांडव	pandav:2	paandav:1
 पांडवकालीन	pandavkalin:2	paandavkaalin:1
-पांडवों	paandavon:1	pandavon:1	pandvon:1
+पांडवों	pandavon:2	paandavon:1	pandvon:1
 पांडित्य	panditya:2	paanditya:1
 पांडु	pandu:2	paandu:1
 पांडुरंग	pandurang:2	paandurang:1
 पांडुलिपि	pandulipi:2	paandulipi:1
 पांडुलिपियों	pandulipiyon:2	paandulipiyon:1
-पांडे	pande:2	pandey:2
+पांडे	pandey:2	pande:2
 पांड्या	pandya:2	paandyaa:1
 पांव	panv:2	paanv:1
 पांस	pans:2	paans:1
@@ -15204,7 +15204,7 @@
 पाइपलाइन	pipeline:3
 पाइपों	pipeon:2	paipon:1
 पाई	paai:1	pai:1	pie:1
-पाउंड	pound:3
+पाउंड	paund:2	pound:3
 पाउडर	powder:3
 पाउला	paula:2	paaulaa:1
 पाऊं	paaun:1	paoon:1	pau:1
@@ -15240,7 +15240,7 @@
 पाटील	patil:2	paatil:1
 पाटेकर	patekar:3
 पाटों	paton:2	paaton:1
-पाठ	paath:3
+पाठ	path:3	paath:3
 पाठक	pathak:2	paathak:1
 पाठकों	pathakon:2	paathakon:1
 पाठभेद	pathbhed:2	paathbhed:1
@@ -15250,7 +15250,7 @@
 पाठशालाओं	pathshalaon:2	paathshaalaaon:1
 पाठों	pathon:2	paathon:1
 पाठ्य	paathya:1	pathy:1	pathya:1
-पाठ्यक्रम	paathyakram:1	pathyakram:1	pathykram:1
+पाठ्यक्रम	pathyakram:2	paathyakram:1	pathykram:1
 पाठ्यक्रमों	paathyakramon:1	pathyakramon:1	pathykramon:1
 पाठ्यपुस्तकें	pathyapustakein:2	pathypustaken:1
 पाठ्यपुस्तकों	paathyapustakon:1	pathyapustakon:1	pathypustakon:1
@@ -15261,7 +15261,7 @@
 पाताल	paataal:1	pataal:1	patal:1
 पाती	paati:2	pati:1
 पाते	paate:2	pate:1
-पात्र	patra:2	paatra:1
+पात्र	patr:5	patra:2	paatra:1
 पात्रता	patrata:2	paatrataa:1
 पात्रों	patron:2	paatron:1
 पाथेय	pathey:2	paatheya:1
@@ -15272,7 +15272,7 @@
 पादुकाएं	paadukaayein:1	padukaein:1	padukayen:1
 पादुकोण	padukon:3	padukone:1
 पान	paan:4	pan:4
-पाना	paana:1	paanaa:1	pana:1
+पाना	pana:3	paana:1	paanaa:1
 पानी	pani:2	paani:1
 पानीदार	paanidaar:1	panidaar:1	panidar:1
 पानीपत	panipat:4
@@ -15286,7 +15286,7 @@
 पाबंदी	pabandi:2	paabandi:1
 पाबू	pabu:2	paabu:1
 पाब्लो	pablo:2	paablo:1
-पामीर	paamir:1	pameer:1	pamir:1
+पामीर	pamir:2	paamir:1	pameer:1
 पायथन	paayathan:1	pithan:1	python:1
 पायदान	paaydaan:1	paidan:1	payadan:1
 पायदानों	paaydaanon:1	paidanon:1	payadanon:1
@@ -15297,7 +15297,7 @@
 पाया	paya:2	paayaa:1
 पार	paar:2	par:1
 पारंगत	parangat:2	paarangat:1
-पारंपरिक	paaramparik:1	paramparik:1	paranparik:1
+पारंपरिक	paramparik:10	paaramparik:1	paranparik:1
 पारंपरिकता	paarampariktaa:1	paramparikata:1	paramparikta:1
 पारंपारिक	paramparik:2	paaramparik:1
 पारगमन	pargaman:2	paaragman:1
@@ -15351,8 +15351,8 @@
 पालकी	paalki:2	palki:1
 पालघर	palghar:2	paalghar:1
 पालता	paalta:1	paaltaa:1	palta:1
-पालतू	paaltu:2	paltu:1
-पालन	paalan:2	palan:1
+पालतू	paltu:3	paaltu:2
+पालन	palan:5	paalan:2
 पालनकर्ता	palankarta:2	paalankartaa:1
 पालनपुर	palanpur:3
 पालनपोषण	paalanposhan:2	palanposhan:1
@@ -15388,7 +15388,7 @@
 पाश्चात्य	paashaatya:1	pakshatya:1	paschatya:1
 पाश्र्व	paashva:1	paashwa:1	parsva:1	pashv:1
 पाषाण	pashan:2	paashaan:1
-पास	pass:3
+पास	paas:24	pass:3
 पासंग	pasang:2	paasing:1
 पासपोर्ट	passport:4	possport:1
 पासबुक	passbook:3
@@ -15440,7 +15440,7 @@
 पिघलाने	pighalane:1	pighlaane:1	pighlane:1
 पिघली	pighli:2	pighali:1
 पिघले	pighle:2	pighale:1
-पिच	pitch:2	peach:1
+पिच	pica:2	pitch:2	peach:1
 पिछड़	pichhad:3	pichhar:1
 पिछड़ते	pichhadte:3	pichharate:1
 पिछड़ने	pichhadne:2	pichhadane:1
@@ -15450,7 +15450,7 @@
 पिछड़ेपन	pichhaddepan:1	pichhadepan:1	pichhdepann:1
 पिछला	pichhala:2	pichhlaa:1
 पिछली	pichhali:2	pichhli:1
-पिछले	pchhale:1	pichhale:1	pichhle:1
+पिछले	pichhale:2	pchhale:1	pichhle:1
 पिछेती	pichheti:3
 पिछोला	pichhola:2	pichholaa:1
 पिछ्ले	pichhale:1	pichhle:1	pichle:1
@@ -15461,7 +15461,7 @@
 पिटाई	pitaai:1	pitae:1	pitai:1
 पिट्यूटरी	pituitary:2	pituatory:1
 पिट्स	pits:3
-पिट्सबर्ग	pittsburgh:2	pittsburg:1
+पिट्सबर्ग	petersburg:2	pittsburgh:2	pittsburg:1
 पितर	pitar:3
 पितरों	pitaron:2	pitron:1
 पिता	pita:2	pitaa:1
@@ -15489,7 +15489,7 @@
 पियर	peer:1	pier:1	piyar:1
 पियरसन	pearson:3	pierson:1
 पियरी	peary:2	piyari:2
-पियरे	piere:1	pierre:1	piyare:1
+पियरे	piyre:2	piere:1	pierre:1	piyare:1
 पियर्स	pierce:2	pears:1
 पिया	piya:2	piyaa:1
 पियानो	piano:3
@@ -15540,8 +15540,8 @@
 पीके	pk:3
 पीच	peach:2	pitch:1
 पीछले	pichle:2	pichhale:1
-पीछा	peechaa:1	picha:1	pichha:1
-पीछे	peeche:1	piche:1	pichhe:1
+पीछा	pichha:4	peechaa:1	picha:1
+पीछे	pichhe:10	peeche:1	piche:1
 पीजीआई	pgi:3
 पीजीडीएवी	pgdav:3
 पीट	peet:2	peat:1
@@ -15566,8 +15566,8 @@
 पीडीएस	pds:3
 पीडोफाइल	pidofile:2	pedofile:1
 पीढ़ा	peedha:1	pida:1	pidha:1
-पीढ़ियों	peedhiyon:1	pidhiyon:1	pidiyon:1
-पीढ़ी	peedhee:1	pidhi:1	pidi:1
+पीढ़ियों	pidhiyon:2	peedhiyon:1	pidiyon:1
+पीढ़ी	pidhi:7	peedhee:1	pidi:1
 पीढी	peedhee:1	pidhi:1	pidi:1
 पीत	peet:2	pit:1
 पीतम	pitam:3
@@ -15575,7 +15575,7 @@
 पीती	piti:2	peetee:1
 पीते	peete:2	pite:1
 पीना	paana:1	peenaa:1	pina:1
-पीने	peene:2	pine:1
+पीने	pine:4	peene:2
 पीनेवाले	pinewale:2	peenevaale:1	peenewaale:1
 पीपल	pipal:2	peepal:1	people:1
 पीपली	pipli:2	peeplee:1
@@ -15597,7 +15597,7 @@
 पीलिया	peeliyaa:1	piliya:1	piliyan:1
 पीली	pili:2	peeli:1
 पीलीभीत	pilibhit:3
-पीले	peele:2	pele:1
+पीले	pile:3	peele:2	pele:1
 पीलेपन	pilepan:2	peelepan:1
 पीवी	pv:3
 पीवीसी	pvc:2	peeveece:1
@@ -15619,7 +15619,7 @@
 पुकार	pukar:2	pukaar:1
 पुकारते	pukarte:2	pukaarte:1
 पुकारने	pukarne:2	pukaarne:1
-पुकारा	pukaaraa:1	pukara:1	pukarna:1
+पुकारा	pukara:2	pukaaraa:1	pukarna:1
 पुख्ता	pukhta:2	pukhhtaa:1
 पुछती	puchhati:1	puchhti:1	puchti:1
 पुछने	puchhane:2	puchne:1
@@ -15639,7 +15639,7 @@
 पुतला	putla:2	putlaa:1
 पुतलियां	putliyan:2	putaliyaan:1
 पुतलियों	putliyon:2	putaliyon:1
-पुतली	putli:2	putali:1
+पुतली	putali:2	putli:2
 पुतले	putle:4	putale:2
 पुतलों	putalon:2	putlon:1
 पुताई	putaai:1	putae:1	putai:1
@@ -15652,7 +15652,7 @@
 पुत्रों	putron:3
 पुथल	puthal:3
 पुदीने	pudine:3
-पुन	pun:3
+पुन	punah:2	pun:3
 पुननिर्माण	punnirman:2	punanirmaan:1
 पुनर	punar:3
 पुनरावलोकन	punaraavlokan:1	punaravalokan:1	punravalochan:1
@@ -15690,7 +15690,7 @@
 पुरखों	purkhon:3
 पुरषों	purshon:3
 पुरस्कर	puraskar:2	purskar:1
-पुरस्कार	puraskaar:1	puraskar:1	purskar:1
+पुरस्कार	puraskar:8	puraskaar:1	purskar:1
 पुरस्कारों	puraskaron:2	purskaron:1
 पुरस्कृत	puraskrat:1	puraskrit:1	purskrut:1
 पुरस्थ	purasth:2	pursth:1
@@ -15699,16 +15699,16 @@
 पुराणिक	puranik:3	puraanik:1
 पुराणों	puranon:2	poorano:1	puraano:1
 पुरातत्त्व	puraattatav:1	puratattv:1	puratatva:1	purattatav:1
-पुरातत्व	puraattatav:1	puratatv:1	puratatva:1	purattatav:1
+पुरातत्व	puratatv:2	puraattatav:1	puratatva:1	purattatav:1
 पुरातत्वविद	puratatvavid:2	puraattavividhon:1	purattavividh:1
-पुरातत्वविदों	puratatvavidon:2	puraattavividhon:1	purattavividhon:1
+पुरातत्वविदों	puratatwavidon:2	puratatvavidon:2	puraattavividhon:1	purattavividhon:1
 पुरातत्ववेत्ता	puratatvavetta:2	puraattavetta:1	purattavetta:1
 पुरातत्ववेत्ताओं	puratatvavettaon:2	puraattavvetaon:1	purattavvetaon:1
 पुरातन	puratan:3
 पुरातनकाल	puraatnakaal:1	puratanakal:1	puratankaal:1	puratnakal:1
 पुरातनपंथी	puratanpanthi:3	puraatanpanthi:1
 पुरातात्त्विक	puratattvik:2	puraataattvik:1	puratatvik:1
-पुरातात्विक	puratatvik:2	puraataatavik:1	puratatavik:1
+पुरातात्विक	puraataatvik:4	puratatvik:2	puraataatavik:1	puratatavik:1
 पुराना	purana:3	poorana:1
 पुरानी	purani:3
 पुराने	purane:3	puraane:1
@@ -15738,7 +15738,7 @@
 पुर्णिया	purniya:2	purnia:1
 पुर्तगाल	portugal:3
 पुर्तगालियों	purtgaliyon:2	portugaliyon:1
-पुर्तगाली	portugali:2	purtgali:1
+पुर्तगाली	purtgali:3	portugali:2
 पुर्नविचार	punarvichar:2	purnvichar:1
 पुर्नस्थापित	punarsthapit:2	purnsthapit:1
 पुर्व	purav:1	purv:1	purva:1
@@ -15763,7 +15763,7 @@
 पुष्करणा	pushkarana:1	pushkarna:1	pushkarnaa:1
 पुष्कल	pushkal:2	pushpakal:1
 पुष्ट	pusht:2	pushta:1
-पुष्टि	pushti:3
+पुष्टि	prushti:2	pushti:3
 पुष्प	pushp:2	pushpa:1
 पुष्पक	pushpak:3
 पुष्पगुच्छ	pushpaguchha:1	pushpguchch:1	pushpguchchh:1
@@ -15782,7 +15782,7 @@
 पुस्तकें	pustaken:3
 पुस्तकों	pustakon:3
 पुस्तिका	pustika:1	pustikaa:1	pustkiaa:1
-पूंछ	poonch:1	poonchh:1	punch:1	punchh:1
+पूंछ	poonchh:2	poonch:1	punch:1	punchh:1
 पूंजी	punji:3	poonji:1
 पूंजीकरण	punjikaran:3	poonjikaran:1
 पूंजीगत	punjigat:3	poonjigat:1
@@ -15795,7 +15795,7 @@
 पूछती	poochhati:1	poochhti:1	puchti:1
 पूछते	poochhate:1	poochhte:1	puchte:1
 पूछना	poochhanaa:1	poochhnaa:1	puchna:1
-पूछने	poochhane:1	poochhne:1	puchne:1
+पूछने	puchhne:4	poochhane:1	poochhne:1	puchne:1
 पूछा	poochha:1	poochhaa:1	pucha:1
 पूछिये	poochhiye:2	puchiye:1
 पूछे	poochhe:1	puche:1	puchhe:1
@@ -15804,7 +15804,7 @@
 पूजन	poojan:2	pujan:1
 पूजनीय	pujniya:2	poojaneey:1	poojaniya:1
 पूजने	poojne:1	pujane:1	pujne:1
-पूजा	pooja:5	puja:5	poojaa:1
+पूजा	puja:5	pooja:5	poojaa:1
 पूजाएं	poojaayein:1	pujaen:1	pujayein:1
 पूजाओं	pujaon:2	poojaaon:1
 पूजापाठ	pujapath:4	poojaapaath:2	poojapath:1
@@ -15823,8 +15823,8 @@
 पूराना	purana:2	poorana:1	puraanaa:1
 पूराने	purane:2	poorane:1	puraane:1	puraney:1
 पूरी	puri:3	poori:1
-पूरे	poore:1	poorey:1	pure:1	purey:1
-पूर्ण	purna:3	poorna:2	purn:2	poorn:1
+पूरे	pure:18	poore:1	poorey:1	purey:1
+पूर्ण	purn:10	purna:3	poorna:2	poorn:1
 पूर्णकालिक	poornakaalik:1	poornakalik:1	purnakaalik:1	purnakalik:1
 पूर्णत	purnat:3	poornat:1
 पूर्णतया	poornatayaa:1	poornatya:1	purnataya:1	purnatya:1
@@ -15835,7 +15835,7 @@
 पूर्णिमा	purnima:3	poornima:2	poornimaa:1	purnimaa:1
 पूर्णिया	purnia:2	purnima:1
 पूर्ति	purti:2	poorti:1
-पूर्व	purva:5	purv:2
+पूर्व	purv:32	purva:5
 पूर्वक	purvak:3
 पूर्वकाल	purvakaal:2	purvakal:2
 पूर्वग्रह	purvagrah:2	purvgrah:1
@@ -15871,7 +15871,7 @@
 पृथिवी	prithvi:3	prithivi:2
 पृथी	pruthi:2	prithi:1
 पृथु	pruthu:2	prithu:1
-पृथ्वी	prithvi:7	prithavi:1	pruthvi:1
+पृथ्वी	pruthvi:5	prithvi:7	prithavi:1
 पृथ्वीपुर	prithvipur:3
 पृथ्वीराज	prithviraj:5
 पृष्टभूमि	prushtbhumi:2	prishtbhoomi:1	prushtbhoomi:1
@@ -15965,7 +15965,7 @@
 पेशावरी	peshawari:2	peshavari:1
 पेशियों	peshiyon:3
 पेशी	peshi:3
-पेशेवर	peshewar:2	peshevar:1
+पेशेवर	peshevar:3	peshewar:2
 पेशेवरों	pesewaron:1	peshevaron:1	peshewaron:1
 पेशों	peshon:3
 पेस	pace:2	pes:1
@@ -15991,7 +15991,7 @@
 पैगंबर	paigambar:1	paigamber:1	paighanbar:1
 पैच	patch:2	pach:1
 पैटरसन	paitarasan:1	patterson:1	petterson:1
-पैटर्न	pattern:3
+पैटर्न	paitarn:3	pattern:3
 पैटर्सन	paitarsan:1	paterson:1	petterson:1
 पैट्रिक	paitrick:1	patrick:1	petrik:1
 पैट्रोलियम	petroleum:2	petrolium:1
@@ -16009,7 +16009,7 @@
 पैनी	paaini:1	paini:1	panny:1
 पैम	pam:2	paim:1
 पैमाना	paimana:3
-पैमाने	paimane:2	paimana:1
+पैमाने	paimaane:3	paimane:2	paimana:1
 पैर	pair:6
 पैरवी	pairavi:2	pervi:1
 पैराग्वे	paragve:1	paragway:1	peragve:1
@@ -16095,7 +16095,7 @@
 पोरों	poron:3
 पोर्क	pork:3
 पोर्ट	port:6
-पोर्टफोलियो	portfolio:3
+पोर्टफोलियो	portfoliyo:4	portfolio:3
 पोर्टर	porter:3
 पोर्टल	portal:5	potral:1
 पोर्टलैंड	portland:3
@@ -16108,7 +16108,7 @@
 पोर्न	porn:6
 पोर्श	porche:1	porsche:1	porsh:1
 पोर्स	pors:1	porse:1	porus:1
-पोल	poll:3	pole:1
+पोल	pole:4	poll:3
 पोलक	polak:3
 पोलर	polar:3
 पोलराइजेशन	polarization:2	polarisatin:1
@@ -16119,7 +16119,7 @@
 पोलैंड	poland:3
 पोलॉक	pollock:3
 पोलो	polo:3
-पोशाक	poshak:3
+पोशाक	poshakh:2	poshak:3
 पोशाकों	poshakon:3
 पोषक	poshak:3
 पोषण	poshan:3
@@ -16141,7 +16141,7 @@
 पौड़ी	paudi:2	pauri:1
 पौढ़ी	paudhi:1	paudi:1	pauri:1
 पौते	paute:3
-पौत्र	pautr:2	pautra:1
+पौत्र	pautra:4	pautr:2
 पौत्री	pautri:3
 पौध	paudh:2	paudha:1
 पौधा	paudha:5	paudhaa:2
@@ -16181,8 +16181,8 @@
 प्रकाशन	prakashan:2	prakaashan:1
 प्रकाशनों	prakashanon:2	prakashnon:1
 प्रकाशोत्सव	prakashotsav:2	prakshotsav:1
-प्रकीर्णन	prakirnan:3
-प्रकृति	prakriti:5	prakrati:1
+प्रकीर्णन	prakiranan:2	prakirnan:3
+प्रकृति	prakruti:5	prakriti:5	prakrati:1
 प्रकृतिवादी	prakritivadi:2	prakrativadi:1
 प्रकोप	prakop:2	prkop:1
 प्रकोपों	prakopon:3
@@ -16203,7 +16203,7 @@
 प्रगट	pragat:3
 प्रगति	pragati:3
 प्रगतिवादी	pragativadi:2	pragatiwadi:1
-प्रगतिशील	pragatishil:2	pragatisheel:1
+प्रगतिशील	pragtisheel:2	pragatishil:2	pragatisheel:1
 प्रगाढ़	pragaadh:1	pragad:1	pragadh:1
 प्रगाढ़ता	pragadhata:1	pragadhta:1	pragadta:1
 प्रचलन	prachalan:3
@@ -16220,7 +16220,7 @@
 प्रजा	praja:3
 प्रजातंत्र	prajatantra:3
 प्रजातांत्रिक	prajatantrik:3
-प्रजातियां	prajatiyan:3
+प्रजातियां	prajatiya:2	prajatiyan:3
 प्रजातियों	prajatiyon:2	prajation:1
 प्रजापति	prajapati:5	prajaapati:1
 प्रजापतियों	prajapatiyon:3
@@ -16267,7 +16267,7 @@
 प्रतिनिधत्व	pratinidhatva:1	pratinidhitva:1	prtinidhtv:1
 प्रतिनिधि	pratinidhi:2	prtinidhi:1
 प्रतिनिधिगण	pratinidhigan:1	pratinidhigana:1	prtinidhigan:1
-प्रतिनिधित्व	pratinidhitva:2	prtinidhitv:1
+प्रतिनिधित्व	pratinidhitwa:2	pratinidhitva:2	prtinidhitv:1
 प्रतिनिधियों	pratinidhiyon:2	prtinidhiyon:1
 प्रतिनिधी	pratinidhi:2	prtinidhi:1
 प्रतिपक्ष	pratipaksh:1	pratipaksha:1	prtipaksh:1
@@ -16312,7 +16312,7 @@
 प्रतियोगी	pratiyogi:3
 प्रतिरक्षण	pratirakshan:2	pratirakshana:1
 प्रतिरक्षा	pratiraksha:2	pratirksha:1
-प्रतिरूप	pratirodh:1	pratiroop:1	pratirup:1
+प्रतिरूप	pratiroop:2	pratirodh:1	pratirup:1
 प्रतिरोध	pratirodh:3
 प्रतिरोधक	pratirodhak:3
 प्रतिरोधी	pratirodhi:3
@@ -16326,12 +16326,12 @@
 प्रतिशत	pratishat:5
 प्रतिशोध	pratishodh:3
 प्रतिषेध	pratishedh:3
-प्रतिष्ठा	pratishtha:6
+प्रतिष्ठा	pratistha:3	pratishtha:6
 प्रतिष्ठान	pratishthan:4
 प्रतिष्ठानपुर	pratishthanpur:3
 प्रतिष्ठानों	pratishthanon:3
-प्रतिष्ठित	pratishthit:3
-प्रतिस्थापन	pratisthapan:2	pratisthapana:1
+प्रतिष्ठित	pratisthit:3	pratishthit:3
+प्रतिस्थापन	pratisthaapan:2	pratisthapan:2	pratisthapana:1
 प्रतिस्थापना	pratisthapana:2	pratisthapna:1
 प्रतिस्थापित	pratisthapit:2	pratisthaapit:1
 प्रतिस्पर्द्धा	pratispardha:3
@@ -16392,7 +16392,7 @@
 प्रदूषित	pradushit:3
 प्रदेश	pradesh:7
 प्रदेशाध्यक्ष	pradeshadhyaksha:1	pradeshadhyksh:1	pradeshadyaksh:1
-प्रदेशों	pradesho:1	pradeshon:1	prdeshon:1
+प्रदेशों	pradeshon:3	pradesho:1	prdeshon:1
 प्रदेष	pradesh:3
 प्रद्युम्न	praduyamra:1	pradyumn:1	pradyumna:1
 प्रधान	pradhan:2	pradhaan:1
@@ -16438,7 +16438,7 @@
 प्रभावशील	prabhavshil:2	prabhaavshil:1
 प्रभावित	prabhavit:2	prabhaavit:1
 प्रभावी	prabhavi:2	prabhaavi:1
-प्रभावों	prabhavon:2	prabhaavon:1
+प्रभावों	prabhavo:2	prabhavon:2	prabhaavon:1
 प्रभावोत्पादक	prabhavotpadak:2	prabhaavotpaadak:1
 प्रभास	prabhas:3	prabhaas:1
 प्रभु	prabhu:8	prabh:1
@@ -16466,7 +16466,7 @@
 प्रमोद	pramod:3
 प्रयत्न	prayatn:2	pryatna:1
 प्रयत्नशील	prayatnashil:2	prayatnshil:1
-प्रयत्नों	prayatnon:3
+प्रयत्नों	prayatno:2	prayatnon:3
 प्रयाग	prayag:3
 प्रयाय	prayay:2	prayaaya:1
 प्रयास	prayas:2	prayaas:1
@@ -16508,7 +16508,7 @@
 प्रवृति	pravruti:2	pravriti:1
 प्रवृतियों	pravritiyon:2	pravrutiyon:1
 प्रवृत्त	pravritt:1	pravrut:1	pravrutt:1
-प्रवृत्ति	pravritti:1	pravruti:1	pravrutti:1
+प्रवृत्ति	pravrutti:3	pravritti:1	pravruti:1
 प्रवृत्तियों	pravrittiyon:1	pravrutiyon:1	pravruttiyon:1
 प्रवेश	pravesh:3
 प्रवेशद्वार	praveshdwar:3	praveshdwaar:2
@@ -16529,7 +16529,7 @@
 प्रशासकीय	prashaasakiya:1	prashasakiy:1	prashaskiy:1
 प्रशासकों	prashaasakon:1	prashasakon:1	prashaskon:1
 प्रशासन	prashasan:3	prashaasan:1
-प्रशासनिक	prashasnik:2	prashaasanik:1	prashasanik:1
+प्रशासनिक	prashasanik:2	prashasnik:2	prashaasanik:1
 प्रशासनों	prashaasanon:1	prashansanon:1	prashasanon:1
 प्रशासित	prashasit:2	prashaasit:1
 प्रशासी	prashasi:2	prashaasi:1
@@ -16542,12 +16542,12 @@
 प्रशिक्षु	prashikshu:3
 प्रशिक्षुओं	prashikshuon:3
 प्रशिया	prashiya:2	prussia:1
-प्रश्न	prashn:3	prashna:2	prashan:1
+प्रश्न	prashna:4	prashn:3	prashan:1
 प्रश्नपत्र	prashnapatra:2	prashnpatra:2	prashanpatr:1	prashnpatr:1
 प्रश्नपत्रों	prashnapatron:2	prashnpatron:2	prashanpatron:1	prashnpratron:1
 प्रश्नवाचक	prachnvachak:1	prashanvachak:1	prashnavaachak:1
-प्रश्नावली	prashanavali:1	prashnaavali:1	prashravali:1
-प्रश्नों	prashnon:2	prashannon:1
+प्रश्नावली	prashnavali:3	prashanavali:1	prashnaavali:1	prashravali:1
+प्रश्नों	prashno:2	prashnon:2	prashannon:1
 प्रश्रय	prashay:1	prashraya:1	prashraye:1
 प्रसंग	prasang:7
 प्रसंगानुसार	prasanganusar:2	prasangaanusaar:1
@@ -16601,7 +16601,7 @@
 प्रांगण	prangan:2	praagan:1	praangan:1
 प्रांगन	praangan:2	prangan:2
 प्रांजल	pranjal:6	praanjal:1
-प्रांत	praant:2	prant:2
+प्रांत	prant:10	praant:2
 प्रांताध्यक्ष	praantaadhyaksha:1	praantadhyaksh:1	prantadhayaksh:1	prantadhyaksh:1
 प्रांतीय	praantiye:2	praantiya:1	prantiye:1
 प्रांतों	praanton:2	pranton:2
@@ -16614,19 +16614,19 @@
 प्राइस	price:3
 प्राकट्य	praakatya:1	prakaty:1	prakatye:1
 प्राकृत	praakrit:1	prakrat:1	prakrut:1
-प्राकृतिक	praakritik:1	prakratik:1	prakrutik:1
+प्राकृतिक	prakrutik:6	praakritik:1	prakratik:1
 प्राक्कथन	prakkathan:2	praakkathan:1
 प्राग	praag:1	prag:1	prague:1
 प्रागैतिहासिक	pragaitihasik:2	praagaitihaasik:1
 प्राचार्य	praachaarya:1	pracharye:1	prachrya:1
 प्राचार्यों	praachaaryon:1	pracharyo:1	pracharyon:1
 प्राची	prachi:3
-प्राचीन	praachin:1	pracheen:1	prachin:1
+प्राचीन	prachin:22	praachin:1	pracheen:1
 प्राचीनकाल	praachinkaal:1	pracheenkaal:1	prachinkal:1
 प्राचीनतम	praachinatam:1	pracheenatam:1	prachintam:1
 प्राचीनता	praachinataa:1	pracheenata:1	prachinta:1
 प्राजक्ता	prajakta:2	praajakta:1
-प्राण	pran:6	praan:1
+प्राण	praan:2	pran:6
 प्राणघातक	pranghatak:3
 प्राणदंड	prandand:3
 प्राणवायु	pranvayu:3
@@ -16660,8 +16660,8 @@
 प्रामाणिक	pramanik:3
 प्रामाणिकता	pramanikata:2	pramanikta:1
 प्राय	pray:3
-प्रायः	prah:1	praya:1	prayah:1
-प्रायद्वीप	prayadweep:1	praydrip:1	praydvip:1
+प्रायः	prayah:8	prah:1	praya:1
+प्रायद्वीप	praydweep:2	prayadweep:1	praydrip:1	praydvip:1
 प्रायश्चित	prayashchit:1	prayshichat:1	prayshit:1
 प्रायोगिक	prayogik:3
 प्रायोजक	prayojak:3
@@ -16692,7 +16692,7 @@
 प्रिज्म	prism:1	prisme:1	prizm:1
 प्रिटोरिया	pretoria:1	pritoria:1	pritoriya:1
 प्रिपरेशन	preparation:2	prepration:1
-प्रिय	priy:2	priya:1
+प्रिय	priya:3	priy:2
 प्रियंका	priyanka:7
 प्रियजन	priyajan:3
 प्रियजनों	priyajanon:2	priyajano:1
@@ -16798,7 +16798,7 @@
 प्रोड्यूस	produce:3
 प्रोड्यूसर	producer:3
 प्रोत्साहन	protsahan:3	protsaahan:1
-प्रोत्साहित	protsaahit:2	protsahit:2
+प्रोत्साहित	protsahit:5	protsaahit:2
 प्रोद्योगिकियों	prodyogikiyon:2	prodhyogikiyon:1
 प्रोद्योगिकी	prodyogiki:2	prodhyogiki:1
 प्रोद्यौगिकी	prodhyogiki:1	prodyaugiki:1	prodyogiki:1
@@ -16836,7 +16836,7 @@
 प्रौढ़ावस्था	praudhavastha:2	praudhvstha:1
 प्रौढ़ों	praudhon:3
 प्रौद्योगिकियों	praudhogikiyon:1	praudhyogikiyon:1	praudyongikiyon:1
-प्रौद्योगिकी	praudhyogiki:2	praudyogiki:1
+प्रौद्योगिकी	praudyogiki:5	praudhyogiki:2
 प्रौद्योगिकीय	praudhyogikiy:1	praudyogikiy:1	proaudhyogikiy:1
 प्लग	plug:3
 प्लगइन	plugin:6
@@ -16856,7 +16856,7 @@
 प्लावन	plavan:2	plaavan:1
 प्लासी	plassey:2	plasi:1
 प्लास्टर	plaster:3
-प्लास्टिक	plastic:7
+प्लास्टिक	plastik:2	plastic:7
 प्लूटो	pluto:7
 प्लूटोनियम	plutonium:3
 प्ले	play:3
@@ -16968,7 +16968,7 @@
 फर्नांडो	farnando:1	fernado:1	fernando:1
 फर्नीचर	furniture:3
 फर्नेस	farnes:1	fernace:1	firness:1
-फर्म	firm:2	farm:1
+फर्म	farm:2	firm:2
 फर्मवेयर	firmware:2	farmwear:1
 फर्मिऑन	farmion:1	fermion:1	firmian:1
 फर्मों	farma:1	farmon:1	firmon:1
@@ -16986,7 +16986,7 @@
 फलन	falan:3	phalan:1
 फलने	falne:3	phalne:1
 फलफूल	falfool:2	falful:1	phalphool:1
-फलस्वरूप	falaswarup:1	falswaroop:1	falswarup:1	phalaswarup:1
+फलस्वरूप	falswarup:2	falaswarup:1	falswaroop:1	phalaswarup:1
 फला	fala:3	phala:1
 फलाहार	falahar:2	falahaar:1
 फलाहारी	falahari:3
@@ -17065,7 +17065,7 @@
 फागुन	faagun:1	fagun:1	phaagun:1
 फाजिल	faajil:1	fazil:1	phaajil:1
 फाजिल्का	fajilka:1	fazilka:1	phaajilka:1
-फाटक	faatak:1	fatak:1	phaatak:1
+फाटक	fatak:3	faatak:1	phaatak:1
 फाड़	faad:1	fad:1	phaad:1
 फाड़ते	faadate:1	fadte:1	phaadate:1
 फातमा	fatma:2	fatama:1
@@ -17154,7 +17154,7 @@
 फिलिप्स	philips:3
 फिलिस्तीन	philistin:2	filisteen:1
 फिलिस्तीनियों	philistiniyon:2	filisteeniyon:1
-फिलिस्तीनी	philistini:2	filisteeni:1
+फिलिस्तीनी	filistini:2	philistini:2	filisteeni:1
 फिलीप	philip:3
 फिलेटली	filataly:1	filetali:1	philately:1
 फिल्टर	filter:3
@@ -17316,7 +17316,7 @@
 फैमिली	family:6
 फैयाज	faiyaz:3	faiyaj:2
 फैरी	fairi:2	fairy:1	pheri:1
-फैरो	fairo:2	phaero:1
+फैरो	pharaoh:2	fairo:2	phaero:1
 फैल	fail:3
 फैलकर	failkar:3
 फैलता	failta:2	failata:1	failataa:1
@@ -17473,7 +17473,7 @@
 फ्रेंड्स	friends:3
 फ्रेजर	frazer:2	frejer:1
 फ्रेड	fred:3
-फ्रेडरिक	fredrick:2	frederick:1
+फ्रेडरिक	friedrich:2	fredrick:2	frederick:1
 फ्रेडी	fredi:2	freddie:1	fredy:1
 फ्रेम	frame:3
 फ्रेमवर्क	framework:3
@@ -17536,7 +17536,7 @@
 बंगश	bangash:2	bangsh:1
 बंगा	banga:2	bangaa:1
 बंगाणा	bangana:2	bangaanaa:1
-बंगाल	bangal:3	bangaal:1	bangla:1	bengal:1
+बंगाल	bengal:4	bangal:3	bangaal:1	bangla:1
 बंगाली	bangali:2	bangaali:1	bengali:1
 बंग्ला	bangla:3
 बंच	bunch:2	banch:1
@@ -17552,7 +17552,7 @@
 बंडल	bandal:2	bundle:1
 बंद	band:6
 बंदर	bandar:4	bander:2
-बंदरगाह	bandargah:2	bandergah:1
+बंदरगाह	bandargaah:2	bandargah:2	bandergah:1
 बंदरगाहों	bandargahon:2	bandergahon:1
 बंदरी	bandari:3
 बंदरो	bandaro:3
@@ -17671,9 +17671,9 @@
 बच्चन	bachchan:4	bacchan:2
 बच्चा	baccha:4	bachcha:1
 बच्ची	bacchi:1	bachchi:1	bcchi:1
-बच्चे	bacche:3	bachche:1
+बच्चे	bachche:2	bacche:3
 बच्चेदानी	bacchedani:2	bachchedani:1
-बच्चों	bacchon:1	bachchon:1	bachhon:1
+बच्चों	baccho:5	bacchon:1	bachchon:1	bachhon:1
 बछड़ा	bacchada:1	bachada:1	bachhada:1
 बछड़े	bacchade:1	bachade:1	bachhade:1
 बज	baj:2	buzz:1
@@ -17705,7 +17705,7 @@
 बज्जिका	bajjika:2	baggika:1
 बज्मे	bajme:3
 बट	but:3
-बटन	button:2	batan:1
+बटन	batan:2	button:2
 बटनों	batnon:2	batanon:1
 बटर	butter:3
 बटलर	butler:3
@@ -17744,9 +17744,9 @@
 बढ़	badh:3
 बढ़कर	badhkar:2	badhakar:1
 बढ़त	badhat:3
-बढ़ता	badhata:3	badhataa:1
-बढ़ती	badhati:2	badhti:1
-बढ़ते	badhate:2	badhte:1
+बढ़ता	badhta:8	badhata:3	badhataa:1
+बढ़ती	badhti:6	badhati:2
+बढ़ते	badhte:2	badhate:2
 बढ़ना	badhana:2	badhanaa:1	badhna:1
 बढ़नी	badhani:3
 बढ़ने	badhane:2	badhne:1
@@ -17790,7 +17790,7 @@
 बताते	batate:3	bataate:1
 बताना	bataanaa:2	batana:2
 बताने	bataane:2	batane:2
-बताया	bataayaa:2	bataya:2
+बताया	bataya:13	bataayaa:2
 बताशा	batasha:2	bataashaa:1
 बतौर	bataur:3
 बत्तियों	battiyon:3
@@ -17805,7 +17805,7 @@
 बदलकर	badalkar:3
 बदलता	badalataa:1	badalta:1	badaltaa:1	badlata:1
 बदलती	badalati:2	badalti:2
-बदलते	badalate:1	badalte:1	badlate:1
+बदलते	badalte:2	badalate:1	badlate:1
 बदलना	badalana:2	badalna:1	badlanaa:1
 बदलने	badalne:2	badalane:1
 बदला	badla:2	badala:1	badalaa:1
@@ -17856,17 +17856,17 @@
 बनवाये	banvaye:2	banvaaye:1
 बना	bana:1	banaa:1	bna:1
 बनाइये	banaaiye:1	banaiye:1	bnaeye:1
-बनाई	banaayi:1	banaee:1	banai:1
+बनाई	banai:7	banaayi:1	banaee:1
 बनाईं	banaayin:1	banaee:1	banai:1
-बनाए	banaaye:1	banae:1	bnaeye:1
+बनाए	banaye:9	banaaye:1	banae:1	bnaeye:1
 बनाएं	banaayein:1	banaen:1	bnaein:1
 बनाएगा	banaega:2	banaayegaa:1
 बनाएगी	banaegi:2	banaayegi:1
-बनाकर	banaakar:1	banakar:1	bnakar:1
+बनाकर	banakar:5	banaakar:1	bnakar:1
 बनाता	banaataa:1	banata:1	bnata:1
-बनाती	banaati:1	banati:1	bnaati:1
+बनाती	banati:2	banaati:1	bnaati:1
 बनातीं	banaatin:1	banatin:1	bnaatin:1
-बनाते	banaate:1	banate:1	bnaate:1
+बनाते	banate:7	banaate:1	bnaate:1
 बनाना	banana:3	banaanaa:1
 बनानी	banaani:1	banani:1	bnani:1
 बनाने	banane:3	bnane:2	banaane:1
@@ -17877,11 +17877,11 @@
 बनाया	banaya:2	banaayaa:1
 बनायी	banaayi:1	banayi:1	bnayi:1
 बनायीं	banaayin:1	banayin:1	bnayin:1
-बनाये	banaaye:1	banaye:1	bnaye:1
+बनाये	banaye:8	banaaye:1	bnaye:1
 बनायेंगे	banaayenge:1	banayenge:1	bnayenge:1
 बनारस	banaras:2	benaras:1	bnaras:1
-बनारसी	banarashi:1	banarasi:1	bnarasi:1
-बनावट	banaavat:1	banavat:1	bnavat:1
+बनारसी	banarasi:3	banarashi:1	bnarasi:1
+बनावट	banavat:2	banaavat:1	bnavat:1
 बनास	banaas:1	banas:1	bnas:1
 बनासकांठा	banaaskantha:1	banaskantha:1	bnaaskaantha:1
 बनिए	baniae:1	banie:1	baniye:1
@@ -17961,7 +17961,7 @@
 बरी	bari:3
 बरे	bare:3
 बरेठा	baretha:2	bretha:1
-बरेली	bareilly:2	bareli:1
+बरेली	bareli:2	bareilly:2
 बर्क	bark:3
 बर्कली	barkali:2	barklee:1
 बर्कले	barkale:1	barkle:1	berkley:1
@@ -18001,7 +18001,7 @@
 बर्मिंघम	birmingham:2	bumridham:1
 बर्मी	burmi:3	burmee:1
 बर्रे	burre:2	barre:1
-बर्लिन	berlin:2	burlin:1
+बर्लिन	barlin:2	berlin:2	burlin:1
 बर्लिनर	berliner:2	burliner:1
 बर्वे	barve:2	burve:1
 बल	bal:3	bam:1	bum:1
@@ -18027,7 +18027,7 @@
 बली	bali:3
 बलुआ	balua:2	baluaa:1
 बलुई	balui:2	bulai:1
-बलूचिस्तान	balochistan:2	baluchistan:2
+बलूचिस्तान	baluchistan:6	balochistan:2
 बलों	balon:2	blon:1
 बलोच	baloch:2	bloch:1
 बलोचिस्तान	balochistan:3
@@ -18082,7 +18082,7 @@
 बसें	basein:2	busen:1
 बसेड़ा	baseda:3
 बसेरा	basera:3
-बसों	bason:2	buson:1
+बसों	baso:2	bason:2	buson:1
 बस्तर	bastar:2	baster:1
 बस्ता	basta:3
 बस्तियां	bastiyan:2	bastiya:1
@@ -18104,7 +18104,7 @@
 बहनों	bahnon:2	bahanon:1
 बहनोई	bahanoi:1	bahnoi:1	behnoe:1
 बहमनी	bahmani:3
-बहरहाल	baharhal:3
+बहरहाल	baharhaal:2	baharhal:3
 बहराइच	bahraich:2	bahraech:1
 बहराम	bahram:3
 बहरामपुर	baharampur:2	bahrampur:1
@@ -18125,7 +18125,7 @@
 बहामास	bahamas:2	bahamaas:1
 बहाल	bahal:2	bahaal:1
 बहाली	bahali:2	bahaali:1
-बहाव	bahaav:1	bahav:1	bhav:1
+बहाव	bahav:4	bahaav:1	bhav:1
 बहावलपुर	bahavalpur:2	bahawalpur:1
 बहिराणा	bahirana:3
 बहिष्कार	bahishkar:3
@@ -18153,7 +18153,7 @@
 बहुभाषी	bahubhashi:6
 बहुमत	bahumat:3
 बहुमुखी	bahumukhi:3
-बहुमूल्य	bahumulya:2	bahumuly:1
+बहुमूल्य	bhumulya:2	bahumulya:2	bahumuly:1
 बहुरंगी	bahurangi:3
 बहुराष्ट्रीय	bahurashtriy:2	bahurashriy:1
 बहुलता	bahulata:3
@@ -18249,7 +18249,7 @@
 बाजरा	bajara:2	bajra:1
 बाज़ी	bazi:2	baji:1
 बाजा	baja:3
-बाजार	bajaar:1	bajar:1	bazar:1
+बाजार	bajar:6	bajaar:1	bazar:1
 बाजारीकरण	bajarikaran:2	bazarikaran:1
 बाजारू	bajaru:2	bazaru:1
 बाजारों	bajaron:2	bazaron:1
@@ -18269,7 +18269,7 @@
 बाड़	baad:3
 बाड़मेर	barmer:3
 बाड़े	baade:2	bade:1	bare:1
-बाढ़	badh:3
+बाढ़	baadh:2	badh:3
 बाण	baan:3	ban:1
 बाणभट्ट	baanbhatt:1	banbhatt:1	bannbhatt:1
 बाणों	banon:3
@@ -18307,7 +18307,7 @@
 बापा	bapa:3	baapa:1	baapaa:1	bapaa:1
 बापू	bapu:3
 बाबत	baabat:1	babat:1	babt:1
-बाबर	baabar:1	babar:1	babur:1
+बाबर	babar:4	baabar:1	babur:1
 बाबरनामा	baabarnaamaa:1	babarnama:1	baburnama:1
 बाबरी	babri:2	babari:1
 बाबा	baba:4
@@ -18337,7 +18337,7 @@
 बायोमेडिसिन	biomedicin:2	biomedicine:1
 बायोलॉजी	biology:3
 बायोसाइंस	bioscience:3
-बार	bar:4	baar:1
+बार	baar:49	bar:4
 बारंबार	barambar:1	barmbar:1	barnbar:1
 बारगाह	bargah:3	baaragaah:1	baragah:1
 बारनवापारा	barnawapara:2	baranwapara:1
@@ -18407,7 +18407,7 @@
 बाल्यावस्था	balyavastha:2	balyaavastha:1
 बाल्व	balv:1	balva:1	balve:1
 बावजी	bavji:2	bavaji:1
-बावजूद	baavajood:1	baavjud:1	bavjud:1	bavzood:1
+बावजूद	bavajud:4	baavajood:1	baavjud:1	bavjud:1
 बावड़ियों	baavdiyon:1	bavadiyon:1	bavdiyon:1
 बावड़ी	baavdi:1	bavadi:1	bavdi:1
 बावरा	baawaraa:1	bavra:1	bawara:1
@@ -18425,13 +18425,13 @@
 बास्केट	basket:3
 बास्केटबॉल	basketball:3
 बाह	baah:1	baaha:1	bah:1
-बाहर	baahar:1	bahar:1	bahr:1
-बाहरी	baahari:1	bahari:1	bahri:1
+बाहर	bahar:21	baahar:1	bahr:1
+बाहरी	bahari:7	baahari:1	bahri:1
 बाहु	bahu:2	baahu:1
 बाहुबली	bahubali:3
 बाहुल्य	baahulya:1	bahuly:1	bahulya:1
 बाहों	bahon:2	baahon:1
-बाह्य	baahya:1	bahay:1	bahya:1
+बाह्य	bahya:3	baahya:1	bahay:1
 बाॅक्स	box:3
 बाॅलीवुड	bollywood:3
 बाॅस	boss:3
@@ -18480,7 +18480,7 @@
 बिजनेस	business:4
 बिजनौर	bijnor:2	bijnaur:1
 बिजबेहरा	bijbehara:4
-बिजली	bijali:2	bijli:1
+बिजली	bijli:5	bijali:2
 बिजावर	bijavar:2	bijawar:1
 बिजी	biji:1	busy:1	buzy:1
 बिजॉय	bijoy:3
@@ -18582,7 +18582,7 @@
 बीच	bich:2	beech:1
 बीचों	bichon:2	beechon:1
 बीचोंबीच	beechonbeech:1	bichonbhich:1	bichonbich:1
-बीज	bij:2	beej:1
+बीज	beej:3	bij:2
 बीजक	bijak:2	beejak:1
 बीजगणित	bijganit:2	beejganit:1
 बीजापुर	bijapur:3
@@ -18670,7 +18670,7 @@
 बुढ़वल	budhval:1	budhwal:1	budval:1
 बुढ़ाना	budhana:3
 बुढ़ापे	budhape:3
-बुद्ध	buddh:5	buddha:1
+बुद्ध	buddha:5	buddh:5
 बुद्धदेव	buddhdev:2	buddhadev:1
 बुद्धा	buddha:3
 बुद्धि	buddhi:8
@@ -18805,7 +18805,7 @@
 बेचते	bechate:2	bechte:1
 बेचना	bechna:2	bechana:1
 बेचनी	bechani:2	bechni:1
-बेचने	bechane:2	bechne:1
+बेचने	bechne:3	bechane:2
 बेचा	becha:3
 बेचारी	bechari:3
 बेचारे	bechare:3
@@ -18916,7 +18916,7 @@
 बेसाल्ट	besalt:2	basalt:1
 बेसिक	basic:2	besik:1
 बेसिक्स	basics:3
-बेसिन	basin:2	besin:1
+बेसिन	besin:2	basin:2
 बेसिनों	besinon:2	basinon:1
 बेसिल	basil:2	besil:1
 बेसिलिका	basilica:2	besilika:1
@@ -19123,10 +19123,10 @@
 बोर्नो	borno:3
 बोल	bol:6
 बोलकर	bolkar:2	bolakar:1
-बोलचाल	bolchal:6
-बोलता	bolata:3	bolataa:1	bolta:1
+बोलचाल	bolchaal:2	bolchal:6
+बोलता	bolta:2	bolata:3	bolataa:1
 बोलती	bolati:3	bolti:1
-बोलते	bolate:3
+बोलते	bolte:3	bolate:3
 बोलना	bolna:4	bolana:2	bolanaa:1
 बोलने	bolane:3
 बोलपुर	bolpur:2	balpur:1
@@ -19172,7 +19172,7 @@
 ब्याज	byaaj:2	byaaz:1	byaj:1
 ब्यावर	byavar:2	byaawa:1
 ब्यास	byaas:2	vyas:1
-ब्याह	byaah:2	byah:1
+ब्याह	byah:2	byaah:2
 ब्याही	byaahi:2	byahi:1
 ब्यूटी	beauty:3
 ब्यूटीफुल	beautiful:3
@@ -19188,7 +19188,7 @@
 ब्रदर्स	brothers:3
 ब्रश	brush:3
 ब्रसेल्स	brasales:1	brasels:1	brussels:1
-ब्रह्म	braham:2	brahm:1
+ब्रह्म	brahma:4	braham:2	brahm:1
 ब्रह्मचर्य	brahamcharya:1	brahmachary:1	brahmcharay:1
 ब्रह्मचारी	brahamchari:1	brahmachari:1	brahmchari:1
 ब्रह्मपुत्र	brahmaputra:2	brahmputar:1
@@ -19488,7 +19488,7 @@
 भांति	bhanti:3
 भांपते	bhanpte:2	bhanpate:1
 भांपने	bhampane:2	bhanpne:1
-भाइयों	bhaiyon:2	bhaeyon:1
+भाइयों	bhaiyo:2	bhaiyon:2	bhaeyon:1
 भाई	bhai:6
 भाईचारा	bhaichara:6
 भाईचारे	bhaichare:6
@@ -19502,9 +19502,9 @@
 भागता	bhagata:2	bhaagataa:1	bhagataa:1
 भागते	bhaagate:2	bhagate:2
 भागना	bhaaganaa:2	bhaagana:1	bhagana:1
-भागने	bhaagane:3	bhagane:1
+भागने	bhagne:2	bhaagane:3	bhagane:1
 भागलपुर	bhagalpur:4
-भागवत	bhagwat:2	bhagavat:1
+भागवत	bhagvat:2	bhagwat:2	bhagavat:1
 भागवती	bhagwati:2	bhagavati:1	bhagawati:1
 भागा	bhaagaa:3	bhaga:1
 भागी	bhaagi:3	bhagi:1
@@ -19519,7 +19519,7 @@
 भाग्यवती	bhagyavati:2	bhagywati:1
 भाग्यविधाता	bhaagyavidhaataa:1	bhagyavidhata:1	bhagyvidhaataa:1	bhagyvidhata:1
 भाग्यशाली	bhaagyashaali:1	bhagyashali:1	bhagyshaali:1	bhagyshali:1
-भाजपा	bhajpa:3
+भाजपा	bjp:2	bhajpa:3
 भाटिया	bhatiya:2	bhatia:1
 भाटी	bhati:3
 भात	bhaat:2	bhat:2
@@ -19544,9 +19544,9 @@
 भारतवर्ष	bharatvarsh:5	bharatvarsha:1
 भारतविरोधी	bharatvirodhi:2	bharatvirothi:1
 भारती	bharati:2	bharti:1
-भारतीय	bharatiya:3	bhartiya:2	bharteey:1	bhartiy:1
+भारतीय	bhartiy:32	bharatiya:3	bhartiya:2	bharteey:1
 भारतीयता	bharatiyata:1	bharthiyatha:1	bhartiyata:1
-भारतीयों	bhaartiyon:1	bharatiyon:1	bharthiyon:1
+भारतीयों	bhartiyon:3	bhaartiyon:1	bharatiyon:1	bharthiyon:1
 भारतेंदु	bharatendu:2	bhartendu:1
 भारद्वाज	bhardwaj:2	bharadwaj:1
 भारिया	bhariya:2	bhaariyaa:1
@@ -19563,7 +19563,7 @@
 भाले	bhale:3
 भालेकर	bhalekar:3
 भालों	bhalon:2	bhaalon:1
-भाव	bhav:5	bhaav:1
+भाव	bhaav:2	bhav:5
 भावनगर	bhavnagar:3
 भावना	bhavna:2	bhavana:1
 भावनाएं	bhavnaein:1	bhavnaen:1	bhavnayn:1
@@ -19582,7 +19582,7 @@
 भावों	bhavon:2	bavon:1
 भाषण	bhashan:3
 भाषा	bhasha:4
-भाषाई	bhashae:1	bhashaee:1	bhashai:1
+भाषाई	bhashai:2	bhashae:1	bhashaee:1
 भाषाएं	bhashaein:1	bhashaen:1	bhashayen:1
 भाषाओं	bhashaon:3
 भाषायी	bhashayi:3
@@ -19615,8 +19615,8 @@
 भित्तिचित्र	bheetichitra:1	bhittichitra:1	bhittichtra:1
 भित्तिचित्रों	bhittichitron:2	bhittichtron:1
 भिनगा	bhinga:2	bhinagaa:1
-भिन्न	bhinna:2	bhinn:1
-भिन्नता	bhinnata:2	bhinnatta:1
+भिन्न	bhinn:16	bhinna:2
+भिन्नता	bhinnta:2	bhinnata:2	bhinnatta:1
 भिन्नताएं	bhinnataaaen:1	bhinnataein:1	bhinnatayan:1
 भिन्ना	bhinna:1	bhinnaa:1	binna:1
 भिलंगना	bhilangana:1	bhilanganaa:1	bhilangna:1
@@ -19635,7 +19635,7 @@
 भीड़भाड़	bheedbhad:5	bhidbhad:1
 भीत	bheet:2	bhit:1
 भीतर	bhitar:2	bheetar:1
-भीतरी	bheetari:1	bhitari:1	bhitri:1
+भीतरी	bhitari:2	bheetari:1	bhitri:1
 भीम	bheem:5	bhim:2
 भीमकाय	bheemkay:1	bheemkaye:1	bhimkay:1
 भीमबैठका	bheembaithaka:1	bheembaithka:1	bhimbaithaka:1
@@ -19657,7 +19657,7 @@
 भुगतता	bhugatata:1	bhugatta:1	bhugtata:1
 भुगतना	bhugatana:2	bhugtna:1
 भुगता	bhugta:2	bhugata:1
-भुगतान	bhugatan:1	bhugtaan:1	bhugtan:1
+भुगतान	bhugtan:17	bhugatan:1	bhugtaan:1
 भुगती	bhgti:1	bhugati:1	bhugti:1
 भुज	bhuj:3
 भुजा	bhuja:3
@@ -19685,7 +19685,7 @@
 भू	bhu:3	bhoo:1
 भूकंप	bhukamp:4	bhookamp:2
 भूकंपरोधी	bhukamprodhi:2	bhookamprodhi:1
-भूख	bhookh:2	bhukh:1
+भूख	bhukh:2	bhookh:2
 भूखंड	bhukhand:2	bhookhand:1
 भूखंडों	bhukhandon:3	bhookhandon:2	bukhandon:1
 भूखा	bhukha:2	bhookhaa:1	bhukhaa:1
@@ -19719,7 +19719,7 @@
 भूपेश	bhupesh:2	bhoopesh:1
 भूभाग	bhubhag:4	bhoobhag:2
 भूभौतिकी	bhubhautiki:2	bhoobhautiki:1
-भूमध्य	bhoomadha:1	bhumadhy:1	bhumadhya:1
+भूमध्य	bhumadhya:3	bhoomadha:1	bhumadhy:1
 भूमध्यरेखीय	bhoomadhyarekhiy:1	bhumadhyarekhiy:1	bhumadhyrekhiy:1
 भूमध्यसागर	bhoomadhysagar:1	bhumadhyasagar:1	bhumadhysagar:1
 भूमध्यसागरीय	bhoomadhyasagariy:1	bhumadhyasagariy:1	bhumadhysagariy:1
@@ -19734,7 +19734,7 @@
 भूरा	bhura:2	bura:1
 भूरी	bhuri:3
 भूरे	bhure:3
-भूल	bhool:2	bhul:2
+भूल	bhul:2	bhool:2
 भूलकर	bhulkar:3
 भूलता	bhulta:2	bhulata:1	bhulataa:1
 भूलते	bhulate:2	bhulte:1
@@ -19869,7 +19869,7 @@
 मंगेतर	mangetar:3
 मंगेश	mangesh:3
 मंगेशकर	mangeshkar:3
-मंगोल	mangol:3
+मंगोल	mongol:2	mangol:3
 मंगोलियन	mangoliyan:2	mongolian:1
 मंगोलिया	mangoliya:2	mangolia:1
 मंगोलियाई	mangoliyai:2	mangoliyaee:1
@@ -19938,7 +19938,7 @@
 मंदार	mandaar:2	mandar:2
 मंदिर	mandir:4
 मंदिरा	mandira:3
-मंदिरों	mandiron:3
+मंदिरों	mandiro:2	mandiron:3
 मंदी	mandi:3
 मंधार	mandhar:2	mandhaar:1
 मंशा	mansha:3
@@ -19962,7 +19962,7 @@
 मकरानी	makrani:3
 मकसद	maksad:5	maqsad:2
 मकाऊ	makau:3	macau:1
-मकान	makan:2	makaan:1
+मकान	makaan:2	makan:2
 मकानों	makanon:4
 मकोड़े	makode:3
 मक्का	makka:3
@@ -20210,7 +20210,7 @@
 मनोवृति	manovruti:2	manoviriti:1
 मनोवृत्ति	manovrutti:2	manovritti:1
 मनोवेग	manoveg:3
-मनोवैज्ञानिक	manovaigyanik:2	manovegyanik:1
+मनोवैज्ञानिक	manovaidhnyanik:2	manovaigyanik:2	manovegyanik:1
 मनोवैज्ञानिकों	manovaigyanikon:2	manovegyanikon:1
 मनोस्थिति	manosthithi:2	manosthiti:1
 मनोहर	manohar:6
@@ -20304,7 +20304,7 @@
 मलबे	malabe:2	malbe:1
 मलबों	malabon:2	malbon:1
 मलमूत्र	malmutra:5
-मलयालम	malayalam:4	malyalam:2
+मलयालम	malyalam:3	malayalam:4
 मलयाली	malyali:3
 मलवानी	malwani:3
 मलवे	malve:3
@@ -20318,7 +20318,7 @@
 मलाला	malala:3
 मलावी	malavi:2	malawi:2
 मलाशय	malashay:3
-मलेरिया	malaria:3
+मलेरिया	maleriya:2	malaria:3
 मलेशिया	malaysia:4	alaysia:1
 मल्टी	multi:3
 मल्टीटास्किंग	multitasking:7
@@ -20334,15 +20334,15 @@
 मशद	mashad:3
 मशरक	mashrak:3
 मशरूम	mushroom:3
-मशहूर	mashhur:2	mashhoor:1	mashoor:1
+मशहूर	mashur:2	mashhur:2	mashhoor:1	mashoor:1
 मशहूरियत	mashhuriyat:2	mashhooriyat:1	mashooriyat:1
 मशाल	mashaal:3	mashal:3
-मशीन	machine:4	machin:1
+मशीन	mashin:2	machine:4	machin:1
 मशीनरी	machinery:3	machinari:1
 मशीनी	machini:2	mashini:1
 मशीनीकरण	machinikaran:3
 मशीनें	mashinen:2	machinein:1	machinen:1
-मशीनों	machinon:3	mashinon:1
+मशीनों	mashinon:2	machinon:3
 मसलन	masalan:2	maslan:2
 मसल्स	muscles:2	muscle:1
 मसा	masa:2	masaa:1
@@ -20385,13 +20385,13 @@
 महज़	mahaj:1	mahaz:1	mahej:1
 महतारी	mahtari:4
 महती	mahati:1	mahti:1	mahtti:1
-महतो	mahato:1	mahto:1	mehto:1
+महतो	mahto:3	mahato:1	mehto:1
 महत्तम	mahatam:1	mahattam:1	mahttam:1	mehattam:1
-महत्ता	mahtta:2	mahatta:1
+महत्ता	mahatta:2	mahtta:2
 महत्त्व	mahatva:1	mahttav:1	mahtva:1
 महत्त्वपूर्ण	mahtvapurn:2	mahattvapoorn:1	mahattvapurn:1	mahatvapurn:1
-महत्व	mahatva:4	mahatv:3	mahatav:1
-महत्वपूर्ण	mahatvapoorn:2	mahatavpurn:1	mahatvapurn:1	mahatvpurn:1
+महत्व	mahatv:3	mahatva:4	mahatav:1
+महत्वपूर्ण	mahattwapurn:5	mahatvapoorn:2	mahatavpurn:1	mahatvapurn:1
 महत्वाकांक्षा	mahatvakanksha:2	mahtyakansha:1
 महत्वाकांक्षी	mahatvakankshi:2	mahtyakanshi:1
 महत्व्पूर्ण	mahatvapoorn:2	mahatavpurn:1	mahtavpurn:1
@@ -20496,7 +20496,7 @@
 महाविधालय	mahavidyalay:1	mahavidyalaya:1	mhavidhalay:1
 महाविष्णु	mahavishnu:3
 महाविहार	mahavihar:3
-महावीर	mahaveer:2	mahavir:1
+महावीर	mahavir:2	mahaveer:2
 महाशक्ति	mahashakti:2	mahashkti:1
 महाशक्तियों	mahashaktiyon:2	mahashktiyon:1
 महाशय	mahashay:2	mahashaye:1
@@ -20525,7 +20525,7 @@
 महिम	mahim:3
 महिमा	mahima:3
 महिला	mahila:3
-महिलाएं	mahilaen:1	mahilayan:1	mahilayen:1
+महिलाएं	mahilayen:3	mahilaen:1	mahilayan:1
 महिलाऐं	mahilayen:2	mahilaen:1
 महिलाओं	mahilaon:6	mahilao:1
 महिलावादी	mahilawadi:2	mahilavadi:1
@@ -20576,7 +20576,7 @@
 मांसपेशियां	manspeshiyan:2	maaspeshiyan:1
 मांसपेशियों	manspeshiyon:2	maaspeshiyon:1
 मांसपेशी	manspeshi:2	maaspeshi:1
-मांसाहारी	mansahari:3
+मांसाहारी	maansaahaari:2	mansahari:3
 माइक	mike:3
 माइकल	michael:3
 माइकल्स	michaels:3
@@ -20661,7 +20661,7 @@
 माथुर	mathur:3
 माथे	mathe:2	mathey:1
 मादक	madak:2	maadak:1
-मादा	mada:2	maada:1
+मादा	maada:2	mada:2
 मादाएं	madaein:1	madaen:1	madayein:1
 मादाओं	madaon:3
 माधव	madhav:2	maadhav:1
@@ -20675,11 +20675,11 @@
 माधोपुर	madhopur:3
 माधोसिंह	madhosingh:2	maadhosingh:1
 माध्य	maadhy:1	maadhye:1	madhya:1
-माध्यम	maadhyam:1	madhayam:1	madhyam:1
+माध्यम	madhyam:12	maadhyam:1	madhayam:1
 माध्यमिक	madhyamik:2	maadhymik:1
 माध्यमों	madhayamon:1	madhyamon:1	madhymon:1
 मान	maan:3
-मानक	maanak:3
+मानक	manak:6	maanak:3
 मानकर	maankar:2	mankar:1
 मानकीकरण	maanakikaran:1	maankikaran:1	mankikaran:1
 मानकीकृत	maanakikrat:1	maankikrut:1	mankikrit:1
@@ -20690,9 +20690,9 @@
 मानतलाई	manatlai:2	maantalaaee:1
 मानता	manta:2	maanata:1
 मानती	maanati:1	manati:1	manti:1
-मानते	maanate:1	manate:1	mante:1
+मानते	mante:8	maanate:1	manate:1
 मानद	manad:2	maanad:1
-मानदंड	maandand:2	mandand:1
+मानदंड	mandand:2	maandand:2
 मानदंडों	maandandon:1	mandando:1	mandandon:1
 मानना	manana:2	maanana:1
 माननीय	maananiye:1	mananiy:1	mananiya:1
@@ -20704,7 +20704,7 @@
 मानव	manav:5	maanav:1	manv:1
 मानवकल्याण	manavkalyan:3
 मानवजनित	manavjanit:3
-मानवता	manavta:3
+मानवता	manvata:2	manavta:3
 मानवतावाद	manavtavaad:2	manavatavad:1
 मानवतावादी	manavtavaadi:2	manavatavadi:1
 मानवनिर्मित	manavnirmit:5	maanavnirmit:1
@@ -20715,7 +20715,7 @@
 मानवाधिकारों	manvadhikaron:2	manavdhikaron:1
 मानविकी	maanviki:1	manvicky:1	manviki:1
 मानवी	manavi:2	manvi:1
-मानवीय	maanviy:1	manaveeye:1	manviy:1
+मानवीय	manaviya:2	maanviy:1	manaveeye:1	manviy:1
 मानवों	manavon:3
 मानस	manas:3
 मानसरोवर	mansarovar:2	manasarovar:1
@@ -20759,8 +20759,8 @@
 माफीनामा	mafinama:2	mafinaam:1
 मामला	mamla:3	mamala:2	maamala:1	maamla:1
 मामली	mamali:2	maamali:1	mamli:1
-मामले	mamale:2	mamle:1
-मामलों	mamalon:2	mamlon:1
+मामले	mamle:7	mamale:2
+मामलों	mamlon:4	mamalon:2
 मामा	mama:4
 मामी	mami:3
 मामूली	mamuli:2	mamooli:1
@@ -20780,10 +20780,10 @@
 मारती	maarati:1	maarti:1	marti:1
 मारते	maarte:1	maartey:1	marte:1
 मारना	maarna:2	marna:1
-मारने	maaraney:1	maarne:1	marne:1
+मारने	marne:4	maaraney:1	maarne:1
 मारवाड़	maarvaad:1	marvad:1	marwar:1
 मारवाड़ी	maarwaadi:1	marvadi:1	marwari:1
-मारा	maara:3	mara:2	maaraa:1
+मारा	mara:2	maara:3	maaraa:1
 मारियन	mariyan:2	maariyan:1
 मारिया	mariya:4	maariya:1
 मारियो	mariyo:2	maariyo:1	mario:1
@@ -20791,7 +20791,7 @@
 मारीच	maareech:1	maarich:1	marich:1
 मारुति	maruti:2	maaruti:1
 मारून	maaroon:1	maarun:1	marun:1
-मारे	maare:1	maarey:1	mare:1
+मारे	mare:7	maare:1	maarey:1
 मार्क	mark:9
 मार्कर	marker:2	markar:1
 मार्कस	marks:4
@@ -20807,7 +20807,7 @@
 मार्ग	marg:10
 मार्गदर्शक	margdarshak:3
 मार्गदर्शकों	margdarshakon:3
-मार्गदर्शन	margdarshan:2	margdarshak:1
+मार्गदर्शन	margadarshan:2	margdarshan:2	margdarshak:1
 मार्गी	margi:3
 मार्गों	margon:3
 मार्च	march:8
@@ -20851,7 +20851,7 @@
 मालिनी	malini:5
 मालिश	malish:2	maalish:1
 माली	mali:5	maali:1
-मालूम	maloom:2	malum:1
+मालूम	malum:2	maloom:2
 मालों	malon:2	maalon:1
 माल्ट	malt:3
 माल्टा	malta:3
@@ -20944,7 +20944,7 @@
 मिनी	mini:3
 मिनीषा	minisha:2	minissha:1
 मिनेसोटा	minnesota:3
-मिन्ह	minha:2	minh:1
+मिन्ह	minh:2	minha:2
 मिमिक्री	mimicry:3
 मिमी	mimi:3
 मिया	miyaa:2	mia:1	miya:1
@@ -20962,13 +20962,13 @@
 मिलकर	milkar:3
 मिलकियत	milkiyat:3
 मिलजुलकर	miljulkar:2	miljulakar:1
-मिलता	milata:2	milataa:1	milta:1
-मिलती	milati:3
+मिलता	milta:18	milata:2	milataa:1
+मिलती	milti:12	milati:3
 मिलते	milte:2	milate:1
 मिलन	milan:3
-मिलना	milana:2	milanaa:1	milna:1
+मिलना	milna:2	milana:2	milanaa:1
 मिलनी	milani:3
-मिलने	milane:3
+मिलने	milne:4	milane:3
 मिलर	miller:2	milar:1
 मिला	mila:3	milaa:1
 मिलाइए	milaie:2	milaaiye:1	milaiye:1
@@ -21010,7 +21010,7 @@
 मिल्न	miln:2	milan:1
 मिल्लत	millat:3
 मिल्स	mills:2	meals:1
-मिशन	mission:3
+मिशन	mishan:3	mission:3
 मिशनरियों	machanarion:1	missionariyon:1	missionriyon:1
 मिशनरी	missionary:2	machinery:1
 मिशनरीज	missionaries:2	machineries:1
@@ -21018,7 +21018,7 @@
 मिशा	misha:3
 मिशिगन	michigan:2	mishigun:1
 मिशेल	mishel:2	michelle:1
-मिश्र	mishr:2	mishra:1
+मिश्र	mishra:2	mishr:2
 मिश्रण	mishran:3
 मिश्रा	mishra:3
 मिश्रित	mishrit:3
@@ -21038,7 +21038,7 @@
 मिस्टेक्स	mistakes:3
 मिस्ट्री	mistry:2	mistri:1	mystery:1
 मिस्बाह	misbah:3
-मिस्र	misra:2	misar:1
+मिस्र	misr:10	misra:2	misar:1
 मिस्रवासियों	misarvasiyon:1	misrawasiyon:1	misrvaasiyon:1
 मिस्रवासी	misarvasi:1	misravasi:1	misrvaasi:1
 मिस्री	misri:3
@@ -21062,7 +21062,7 @@
 मीणा	meena:4	mina:1
 मीता	meeta:3	mita:1
 मीथेन	methane:3
-मीन	mean:1	meen:1	min:1
+मीन	meen:3	mean:1	min:1
 मीनल	minal:2	meenal:1
 मीना	mina:2	meena:1
 मीनाक्षी	minakshi:2	meenakshi:1
@@ -21146,9 +21146,9 @@
 मुखौटे	mukhaute:2	mukhautey:1
 मुख्तार	mukhtar:2	mukhtaar:1	mukhyetaar:1
 मुख्य	mukhya:5	mukhye:1
-मुख्यत	mukhyat:3
+मुख्यत	mukhyatah:2	mukhyat:3
 मुख्यतया	mukhyataya:1	mukhyatayaa:1	mukhyetya:1
-मुख्यधारा	mukhyadhaara:2	mukhyadhaaraa:2	mukhyedhara:2
+मुख्यधारा	mukhydhara:2	mukhyadhaara:2	mukhyadhaaraa:2	mukhyedhara:2
 मुख्यभूमि	mukhyabhoomi:2	mukhyabhumi:1
 मुख्यमंत्रित्व	mukhyamantritva:3
 मुख्यमंत्रियों	mukhyamantriyon:3
@@ -21177,7 +21177,7 @@
 मुड़	mud:4
 मुड़कर	mudkar:3
 मुड़ने	mudne:2	mudane:1
-मुताबिक	mutaabik:2	mutabik:2
+मुताबिक	mutabik:4	mutaabik:2
 मुदलियार	mudliyar:3
 मुदस्सर	mudssar:2	mudassar:1
 मुदित	mudit:3
@@ -21228,7 +21228,7 @@
 मुरली	murali:5	murli:2
 मुराद	murad:3
 मुरादनगर	muradnagar:3
-मुरादाबाद	moradabad:2	muradabad:1
+मुरादाबाद	muradabad:2	moradabad:2
 मुरीद	murid:2	mureed:1
 मुरे	mure:2	murey:1
 मुरैना	morena:1	muraina:1	murena:1
@@ -21255,8 +21255,8 @@
 मुश्किलों	mushkilon:3
 मुश्ताक	mushtak:3
 मुसम्मी	musammi:2	mosammi:1
-मुसलमान	musalman:3
-मुसलमानों	musalmanon:3
+मुसलमान	musalmaan:2	musalman:3
+मुसलमानों	musalmaanon:2	musalmanon:3
 मुसीबत	musibat:3
 मुसीबतें	musibatein:2	musibaten:1
 मुसोलिनी	musolini:2	mussolini:1
@@ -21266,7 +21266,7 @@
 मुस्तफा	mustafa:2	mustfa:1
 मुस्लिम	muslim:5
 मुस्लिमों	muslimon:4	muslmanon:1
-मुहम्मद	muhammad:3
+मुहम्मद	muhmmad:3	muhammad:3
 मुहम्मदपुर	mudammadpur:1	muhammadpur:1	muhmmadpur:1
 मुहम्मदाबाद	muhammadabad:2	muhmmadabad:1
 मुहर	muhar:3
@@ -21330,7 +21330,7 @@
 मूर्ती	moorati:1	moorti:1	murti:1
 मूर्त्ति	moorati:1	moorti:1	murti:1
 मूर्धन्य	moordhanya:1	moordhnya:1	muradhanya:1
-मूल	mool:5	mul:1
+मूल	mul:24	mool:5
 मूलं	mool:1	mooln:1	mulam:1
 मूलक	mulak:2	moolak:1
 मूलचंद	moolchand:3	mulchand:1
@@ -21338,7 +21338,7 @@
 मूलतः	moolatah:1	mulat:1	multah:1
 मूलधन	muldhan:2	mooldhan:1
 मूलनिवासी	mulniwasi:2	moolniwasi:1
-मूलभूत	moolbhoot:1	mulbhoot:1	mulbhut:1
+मूलभूत	mulbhut:3	moolbhoot:1	mulbhoot:1
 मूलमंत्र	moolmantra:1	mulmantr:1	mulmantra:1
 मूलर	moolar:1	mular:1	muller:1
 मूलरूप	moolroop:1	mulroop:1	mulrup:1
@@ -21348,7 +21348,7 @@
 मूलाधार	mooladhar:1	muladhaar:1	muladhar:1
 मूली	muli:4	mooli:2
 मूलों	mulon:2	moolon:1
-मूल्य	moolya:1	muly:1	mulya:1
+मूल्य	mulya:7	moolya:1	muly:1
 मूल्यपरक	moolyaparak:1	mulyaparak:1	mulyparak:1
 मूल्यबोध	moolyabodh:1	mulyabodh:1	mulybodh:1
 मूल्यवर्धन	mulyavardhan:1	mulyvardhan:1	mulyyevardhan:1
@@ -21374,7 +21374,7 @@
 मृत	mrut:3	mrat:2	mrit:2	mrt:1
 मृतक	mrutak:2	mratak:1	mritak:1
 मृतकों	mratakon:1	mritakon:1	mrutakon:1
-मृत्यु	mrityu:6	mrutyu:3
+मृत्यु	mrutyu:13	mrityu:6
 मृत्युदंड	mrityudand:2	mratyudand:1	mrutyudand:1
 मृत्यृ	mrityu:3
 मृदंग	mrudang:2	mradang:1	mridang:1
@@ -21383,7 +21383,7 @@
 मृदु	mradu:1	mrid:1	mrudu:1
 मृदुल	mrudul:2	mradul:1	mridul:1
 मृदुला	mrudula:2	mradula:1	mridula:1
-में	mein:8
+में	men:1109	mein:8
 मेंं	mein:3
 मेंढक	mendhak:3	mandhak:1
 मेंथा	mentha:3
@@ -21412,7 +21412,7 @@
 मेघवंशी	meghvanshi:2	meghavanshi:1
 मेघवाल	meghawal:1	meghval:1	meghwaal:1
 मेघा	megha:3
-मेघालय	meghalaya:3
+मेघालय	meghalay:3	meghalaya:3
 मेघों	meghon:3
 मेज	mej:2	maze:1
 मेजबान	mejbaan:2	mejban:1	mezbaan:1
@@ -21788,7 +21788,7 @@
 मोहनीश	mohnish:2	mohneesh:1
 मोहब्बत	mohabbat:6
 मोहब्बतें	mohabbatein:2	mohabbaten:1
-मोहम्मद	muhammad:4	mohammad:1	moihabbat:1
+मोहम्मद	mohammad:3	muhammad:4	moihabbat:1
 मोहर	mohar:3
 मोहरों	mohron:3
 मोहर्रम	moharram:1	mohharam:1	muharram:1
@@ -21814,8 +21814,8 @@
 मौज	mauj:3
 मौजपुर	maujpur:3
 मौजमपुर	maujampur:2	maijampur:1
-मौजूद	maujood:1	maujud:1	mujod:1
-मौजूदगी	maujoodagi:1	maujudagi:1	mujodgi:1
+मौजूद	maujud:17	maujood:1	mujod:1
+मौजूदगी	maujudagi:2	maujoodagi:1	mujodgi:1
 मौजूदा	maujooda:1	maujuda:1	mujoda:1
 मौत	maut:4	mot:1	mout:1	muat:1
 मौतें	mauten:2	mautey:1
@@ -21958,8 +21958,8 @@
 यादें	yaadein:2	yaden:1
 यादों	yadon:2	yaadon:1
 यान	yaan:2	yan:1
-यानि	yaani:2	yani:2
-यानी	yaani:2	yani:1
+यानि	yani:2	yaani:2
+यानी	yani:5	yaani:2
 याने	yane:2	yaane:1	yaaney:1
 यानों	yanon:2	yaanon:1
 यापन	yapan:3
@@ -21997,7 +21997,7 @@
 युगोस्लाविया	yugoslavia:3
 युग्म	yugam:2	yugm:1
 युग्मों	yugmon:3
-युद्ध	yudh:2	yudhh:1
+युद्ध	yuddh:32	yudh:2	yudhh:1
 युद्धकाल	yuddhkal:1	yudhkaal:1	yudhkal:1
 युद्धक्षेत्र	yuddhkshetar:1	yuddhkshetra:1	yudhkshetra:1
 युद्धपोतों	yuddhpoton:2	yudhpoton:1
@@ -22019,7 +22019,7 @@
 युवकों	yuvakon:2	yuvkon:1
 युवतियां	yuvtiyan:2	yuvatiyan:1
 युवतियों	yuvtiyon:2	yuvatiyon:1
-युवती	yuvti:2	yuvati:1
+युवती	yuvati:2	yuvti:2
 युवराज	yuvraj:3
 युवा	yuva:3
 युवाओं	yuvaon:3
@@ -22057,7 +22057,7 @@
 यूनाईटेड	united:3
 यूनान	unan:2	yoonaana:1	yunan:1	yunnan:1
 यूनानियों	unanion:1	unaniyon:1	yoonaaniyon:1	yunaniyon:1
-यूनानी	unani:2	yunaani:1	yunani:1	yunnani:1
+यूनानी	yunani:3	unani:2	yunaani:1	yunnani:1
 यूनिट	unit:3
 यूनिटें	uniten:3
 यूनिटों	uniton:2	unitone:1
@@ -22074,7 +22074,7 @@
 यूपीए	upa:3
 यूपीएससी	upsc:3
 यूबीएस	ubs:3
-यूरिक	uric:2	urike:1
+यूरिक	yurik:2	uric:2	urike:1
 यूरिन	urine:2	urin:1
 यूरिया	urea:2	uriya:1
 यूरेका	eureka:2	yureka:2
@@ -22086,7 +22086,7 @@
 यूरोपा	europa:3
 यूरोपिय	europea:1	europiy:1	europiya:1
 यूरोपियन	european:1	europian:1	europiyan:1
-यूरोपीय	europea:1	europiy:1	europiya:1
+यूरोपीय	yuropiy:2	europea:1	europiy:1	europiya:1
 यूरोपोल	europol:1	europoll:1	uropola:1
 यूलिप	ulip:2	yulip:1
 यूलिया	yulia:2	yuliya:1
@@ -22122,13 +22122,13 @@
 योगेश	yogesh:3
 योगों	yogon:3
 योग्य	yogya:3
-योग्यता	yogyata:3
+योग्यता	yogyta:3	yogyata:3
 योग्यताओं	yogyataon:3
 योग्यतानुसार	yogyatanusar:2	yogyataanusaar:1
-योजना	yojana:4	yojna:2
+योजना	yojna:7	yojana:4
 योजनाआें	yojanaon:3
 योजनाएं	yojanaein:1	yojanaen:1	yojanaye:1
-योजनाओं	yojanaon:2	yojnaon:1
+योजनाओं	yojnaon:3	yojanaon:2
 योजनाकार	yojanakaar:1	yojanakar:1	yojnakar:1
 योजनाकारों	yojanakaaron:1	yojanakaron:1	yojnakaron:1
 योजनागत	yojanagat:2	yojnagat:1
@@ -22165,7 +22165,7 @@
 रंगरसिया	rangrashiya:1	rangrasia:1	rangrasiya:1
 रंगरूप	rangrup:3	rangroop:2	rangaroop:1	rangarup:1
 रंगली	rangali:3	rangalee:1
-रंगहीन	rangheen:3
+रंगहीन	ranghin:2	rangheen:3
 रंगा	ranga:3
 रंगारंग	rangarang:3
 रंगीन	rangeen:3
@@ -22203,7 +22203,7 @@
 रक्तशोधक	raktshodhak:2	raktashodhak:1
 रक्तस्राव	rakatsrava:1	raktsrava:1	raktstraav:1
 रक्ताभ	raktabh:2	raktaabh:1
-रक्ताल्पता	raktalapata:1	raktalpata:1	raktalpta:1
+रक्ताल्पता	raktalpta:2	raktalapata:1	raktalpata:1
 रक्तिम	raktim:3
 रक्षक	rakshak:7
 रक्षकों	rakshakon:2	rakshkon:1
@@ -22260,7 +22260,7 @@
 रचते	rachte:2	rachtey:1
 रचना	rachna:3
 रचनाएं	rachnaein:1	rachnaen:1	rachnayen:1
-रचनाओं	rachnaon:2	rachanaon:1
+रचनाओं	rachnao:3	rachnaon:2	rachanaon:1
 रचनाकार	rachnakar:2	rachnakaar:1
 रचनाकारों	rachnakaron:2	rachnakaaron:1
 रचनाकाल	rachnakal:2	rachnakaal:1
@@ -22326,7 +22326,7 @@
 रत्नों	ratnon:3
 रथ	rath:3
 रथयात्रा	rathyatra:3
-रदरफोर्ड	ratherford:1	ruderford:1	rutherford:1
+रदरफोर्ड	rutherford:4	ratherford:1	ruderford:1
 रद्द	radd:2	raddh:1
 रद्दोबदल	raddobadal:3
 रन	run:3
@@ -22379,7 +22379,7 @@
 रवायत	ravayat:3
 रवि	ravi:6
 रविकांत	ravikant:3
-रविवार	ravivaar:1	ravivar:1	raviwar:1
+रविवार	ravivar:3	ravivaar:1	raviwar:1
 रविश	ravish:3
 रवी	ravi:3
 रवींद्र	ravindra:2	ravinder:1
@@ -22399,7 +22399,7 @@
 रसमय	rasamay:2	rasmay:1
 रसमलाई	rasmalai:2	rasamalaai:1
 रसल	rasal:2	rusel:1	russell:1
-रसायन	rasaayan:2	rasayan:1	rasyan:1
+रसायन	rasayan:5	rasaayan:2	rasyan:1
 रसायनज्ञ	rasaayanadnya:1	rasaayanajnya:1	rasayanagy:1	rasayanajna:1
 रसायनिक	rasaayanik:1	rasaayanika:1	rasayanika:1	rasyanik:1
 रसायनों	rasaayanon:2	rasayanon:2
@@ -22423,18 +22423,18 @@
 रस्सों	rasson:2	rsson:1
 रह	rah:5	reh:1
 रहकर	rahakar:2	rhakar:1
-रहता	rahata:2	rahataa:1	rhata:1
-रहती	rahati:1	rahti:1	rehti:1	rhati:1
-रहते	rahate:1	rahte:1	rhate:1
+रहता	rahta:17	rahata:2	rahataa:1	rhata:1
+रहती	rehti:2	rahati:1	rahti:1	rhati:1
+रहते	rahte:23	rahate:1	rhate:1
 रहन	rahan:2	rhan:1
 रहनसहन	rahansahan:2	rhansahan:1
-रहना	rahana:4	rahna:1	rehna:1	rhna:1
+रहना	rahna:3	rahana:4	rehna:1	rhna:1
 रहनी	rahanee:1	rahani:1	rhani:1
 रहनुमाई	rahanumaee:1	rahnumai:1	rhanumai:1
-रहने	rahane:2	rhane:1
+रहने	rahne:11	rahane:2	rhane:1
 रहमत	rahamat:1	rahmat:1	rhamat:1
 रहमतुल्लाह	rahamatullaah:1	rahmatullah:1	rahmtullah:1
-रहमान	rahaman:1	rahman:1	rehman:1	rhaman:1
+रहमान	rahman:2	rahaman:1	rehman:1	rhaman:1
 रहवासी	rahavaasi:1	rahwasi:1	rasvasi:1
 रहस्य	rahasey:1	rahsy:1	rhasya:1
 रहस्यपूर्ण	rahaseyapoorn:1	rahasypuran:1	rahsyapurn:1
@@ -22460,7 +22460,7 @@
 रांची	ranchi:3
 रांझणा	raanjhanaa:2	ranzna:1
 राइजिंग	rising:3
-राइट	right:2	wright:1	write:1
+राइट	wright:3	right:2	write:1
 राइटर्स	writers:2	writters:1
 राइट्स	rights:3
 राइड	ride:3
@@ -22538,10 +22538,10 @@
 राजनायिक	rajnayik:2	rajnayikaa:1
 राजनितिक	rajnitik:3
 राजनीतक	raajnitak:1	rajneetak:1	rajnitik:1
-राजनीति	raajneeti:1	rajneeti:1	rajniti:1
-राजनीतिक	raajneetik:1	rajneetik:1	rajnitik:1
+राजनीति	rajniti:5	raajneeti:1	rajneeti:1
+राजनीतिक	rajnitik:18	raajneetik:1	rajneetik:1
 राजनीतिकों	raatnitikon:1	rajneetikon:1	rajnitikon:1
-राजनीतिज्ञ	raajneetignya:1	rajneetigya:1	rajnitigya:1
+राजनीतिज्ञ	rajnitigya:2	raajneetignya:1	rajneetigya:1
 राजनीतिज्ञों	raajnitignyon:1	rajneetigyon:1	rajnitigyon:1
 राजनीतीकरण	raajneetikaran:1	rajneetikaran:1	rajnitikaran:1
 राजनेता	rajneta:2	raajneta:1
@@ -22584,7 +22584,7 @@
 राजसी	rajsi:3
 राजसूय	rajsooya:2	rajsuy:1
 राजस्थान	rajasthan:6
-राजस्थानी	rajasthani:6
+राजस्थानी	rajsthani:2	rajasthani:6
 राजस्व	rajasva:2	raajasva:1
 राज़	raaz:2	raaj:1	raj:1
 राजा	raja:6
@@ -22756,7 +22756,7 @@
 राष्ट्रधर्म	rashtradharm:3
 राष्ट्रध्वज	rashtradhwaj:2	rashtradhvaj:1
 राष्ट्रनिर्माण	rashtranirman:4	rashtranirmaan:2
-राष्ट्रपति	rashtrapati:3
+राष्ट्रपति	rashtrpati:2	rashtrapati:3
 राष्ट्रपतियों	rashtrapatiyon:2	rashpatiyon:1
 राष्ट्रपिता	rashtrapita:3
 राष्ट्रप्रमुख	rashtrapramukh:3
@@ -22775,7 +22775,7 @@
 राष्ट्रीयकरण	rashtriyakaran:1	rashtriyekaran:1	rashtriykaran:1
 राष्ट्रीयकृत	rashtriyakrit:1	rashtriyekrat:1	rashtriykrut:1
 राष्ट्रीयता	rashtriyata:2	rashtriyeta:1
-राष्ट्रों	rashtron:2	rashrton:1
+राष्ट्रों	rashtro:2	rashtron:2	rashrton:1
 रास	raas:2	ras:1
 रासबिहारी	rasbihari:3
 रासलीला	raasleela:1	rasleela:1	raslila:1
@@ -22937,9 +22937,9 @@
 रिस्क	risk:3
 रिस्टार्ट	restart:3
 रिस्पांस	response:2	responce:1
-रिहर्सल	rehearsal:2	rehersal:1
+रिहर्सल	rehersal:3	rehearsal:2
 रिहा	riha:3
-रिहाई	rehigh:1	rihai:1	rihayi:1
+रिहाई	rihai:2	rehigh:1	rihayi:1
 रिहाना	rihana:2	rihanna:1
 रिहायशी	rehayashi:1	rihayashi:1	rihayshi:1
 रीगल	regal:2	rigal:1
@@ -22954,7 +22954,7 @@
 रीडिजाइन	redesign:6
 रीढ	reedh:2	ridh:2
 रीता	reeta:3	rita:1
-रीति	reeti:2	riti:1
+रीति	riti:2	reeti:2
 रीतियों	ritiyon:2	reetiyon:1
 रीतिरिवाज	reetiriwaj:2	reetiriwaz:1	ritiriwaaz:1
 रीना	rina:2	reena:1
@@ -23058,7 +23058,7 @@
 रूद्राक्ष	rudraksh:2	rudraaksh:1
 रूधिर	rudhir:2	roodhir:1
 रूनवाल	roonval:1	runval:1	runwal:1
-रूप	roop:5	rup:4
+रूप	rup:181	roop:5
 रूपए	roopaeye:1	rupae:1	rupaye:1
 रूपक	roopak:2	rupak:2
 रूपकों	rupakon:2	roopkon:1
@@ -23083,12 +23083,12 @@
 रूरा	rura:2	roora:1
 रूल	rule:3
 रूल्स	rules:3
-रूस	rus:2	roos:1
+रूस	russia:3	rus:2	roos:1
 रूसियों	rusiyon:3	roosiyon:1
 रूसी	rusi:3	roosi:1
 रूसेफ	rusef:3	roosef:1
 रूसो	ruso:2	rooso:1
-रे	re:3
+रे	ray:2	re:3
 रेंगकर	rengkar:3
 रेंगती	rengagti:1	rengati:1	rengti:1
 रेंज	range:3
@@ -23215,7 +23215,7 @@
 रैपिंग	rapping:2	wrapping:1
 रैपिड	rapid:3
 रैम	raim:2	ram:1
-रैली	rally:5	raili:1
+रैली	raili:2	rally:5
 रॉ	raw:2	row:1
 रॉक	rock:3
 रॉकफेलर	rockefeller:2	rockfailer:1
@@ -23255,7 +23255,7 @@
 रोकते	rokate:2	roktey:1
 रोकथाम	roktham:2	rokthaam:1
 रोकना	rokana:2	rokna:1
-रोकने	rokane:2	rokaney:1	rokne:1
+रोकने	rokne:5	rokane:2	rokaney:1
 रोका	roka:3
 रोकी	roki:2	rocky:1
 रोके	roke:2	rokey:1
@@ -23316,7 +23316,7 @@
 रोबोटिक	robotic:3
 रोबोटिक्स	robotics:3
 रोबोटों	roboton:3
-रोम	rom:2	rome:1
+रोम	rome:3	rom:2
 रोमछिद्रों	romchhidron:2	romchidron:1
 रोमन	roman:3
 रोमा	roma:3
@@ -23326,7 +23326,7 @@
 रोमांचित	romanchit:3
 रोमांटिक	romantic:3
 रोमांस	romance:4
-रोमानियन	romanian:2	romaniyan:1
+रोमानियन	romaaniyan:2	romanian:2	romaniyan:1
 रोमानिया	romania:2	romaniya:1
 रोमानियाई	romaniyai:2	romania:1
 रोमानी	romani:3
@@ -23334,7 +23334,7 @@
 रोमेरो	romero:3
 रोया	roya:3
 रोरी	rori:2	rory:1
-रोल	roll:4	role:3
+रोल	role:3	roll:4
 रोलर	roller:3
 रोलर्स	rollers:3
 रोला	rola:2	rolla:1
@@ -23345,7 +23345,7 @@
 रोश	rosh:3
 रोशन	roshan:4
 रोशनाबाद	roshnabad:2	roshanbad:1
-रोशनी	roshani:3	roshni:1
+रोशनी	roshni:3	roshani:3
 रोष	rosh:3
 रोसारियो	rosariyo:2	rosario:1
 रोस्टर	roster:2	roaster:1
@@ -23364,7 +23364,7 @@
 रौबदार	raubdar:2	raubadaar:1	raubadar:1
 ल	l:2	la:1
 लंका	lanka:3
-लंकाशायर	lankashayar:2	lancashire:1
+लंकाशायर	lancashire:2	lankashayar:2
 लंगड़ा	langada:2	landara:1	langda:1
 लंगड़ाकर	langadakar:2	langarakar:1	langdakar:1
 लंगर	langar:3
@@ -23396,9 +23396,9 @@
 लक्षद्वीप	lakshadweep:3
 लक्षमण	lakshman:2	lakshamana:1	laxman:1
 लक्षित	lakshit:3
-लक्ष्मण	lakshman:7	lakshmana:1	laxman:1
+लक्ष्मण	laxman:2	lakshman:7	lakshmana:1
 लक्ष्मणगढ़	laxmangarh:2	lakshmangarh:1
-लक्ष्मी	lakshmi:7	laxmi:1
+लक्ष्मी	laxmi:3	lakshmi:7
 लक्ष्मीकांत	lakshmikant:2	laxmikant:1
 लक्ष्मीचंद्र	lakshmichandra:2	lakshmichandr:1
 लक्ष्मीधर	lakshmidhar:2	lakshmighar:1
@@ -23406,13 +23406,13 @@
 लक्ष्मीनारायण	lakshminarayan:3
 लक्ष्मीपुर	lakshmipur:3
 लक्ष्मीबाई	lakshmibai:5
-लक्ष्य	lakshy:5	lakshya:2
+लक्ष्य	lakshya:5	lakshy:5
 लक्ष्यों	lakshyon:3
 लक्स	lux:3
 लक्सर	laksar:2	luxor:1
 लखटकिया	lakhatkiya:2	lakhtakiya:1
 लखन	lakhan:3
-लखनऊ	lucknow:3
+लखनऊ	lakhanau:3	lucknow:3
 लखनवी	lakhanvi:1	lakhnavi:1	lakhnawi:1
 लखपत	lakhpat:3
 लखवी	lakhvi:3
@@ -23424,7 +23424,7 @@
 लगकर	lagkar:3
 लगता	lagta:2	lagata:1
 लगती	lagti:2	lagati:1
-लगते	lagate:1	lagte:1	lagtey:1
+लगते	lagte:8	lagate:1	lagtey:1
 लगन	lagan:3
 लगनशील	lagansheel:2	laganshil:1
 लगना	lagna:3
@@ -23632,16 +23632,16 @@
 लाखा	laakha:2	lakha:1
 लाखों	lakhon:2	laakhon:1
 लाग	laag:3
-लागत	laagat:2	lagat:1
+लागत	lagat:2	laagat:2
 लागने	laaganey:1	laagne:1	lagne:1
 लागातार	lagatar:2	lagataar:1
 लागु	lagu:2	laagu:1
 लागुना	laguna:3
-लागू	laagu:1	lagoo:1	lagu:1
+लागू	lagu:6	laagu:1	lagoo:1
 लागोस	lagos:3
 लाचार	lachar:2	lachaar:1
 लाज	laaj:3
-लाजपत	laajpat:1	lajapat:1	lajpat:1
+लाजपत	lajpat:2	laajpat:1	lajapat:1
 लाजपतराय	lajpatrai:2	lajpatraye:1
 लाज़मी	laazmi:1	lajami:1	lajmi:1
 लाजिमी	lajimi:2	lajmi:1
@@ -23662,7 +23662,7 @@
 लादने	laadney:1	ladane:1	ladne:1
 लादेन	laden:2	ladein:1
 लाना	lana:2	laana:1
-लाने	laane:1	laaney:1	lane:1
+लाने	lane:6	laane:1	laaney:1
 लानेवाले	laaneyvaley:1	lanevale:1	lanewale:1
 लापता	lapata:2	laapta:1
 लापरवाह	laparvaah:1	laparvah:1	laparwah:1
@@ -23732,7 +23732,7 @@
 लाहिड़ी	lahidi:2	lahiri:1
 लाहिरी	lahiri:3
 लाहोटी	lahoti:3
-लाहौर	lahaur:2	lahore:1
+लाहौर	lahore:9	lahaur:2
 लि	lee:2	li:2
 लिंक	link:3
 लिंकन	lincoln:1	linken:1	linking:1
@@ -23762,9 +23762,9 @@
 लिखत	likhat:3
 लिखता	likhata:2	likhataa:1	likhta:1
 लिखती	likhati:3	likhti:1
-लिखते	likhate:2	likhte:1
-लिखना	likhana:2	likhanaa:1	likhna:1
-लिखने	likhane:2	likhne:1
+लिखते	likhte:2	likhate:2
+लिखना	likhna:2	likhana:2	likhanaa:1
+लिखने	likhne:5	likhane:2
 लिखवाना	likhvana:2	likhawana:1	likhvaanaa:1	likhwaanaa:1
 लिखवाया	likhvaya:2	likhawaya:1	likhvaayaa:1	likhwaayaa:1
 लिखा	likha:3	likhaa:1
@@ -23833,7 +23833,7 @@
 लियोनेल	lionel:2	leonel:1
 लिरिक्स	lyrics:3
 लिल	lil:3
-लिली	lily:2	lilee:1	lilly:1
+लिली	lili:2	lily:2	lilee:1	lilly:1
 लिवर	liver:3
 लिवरपूल	liverpool:3
 लिवाइन	levine:1	livoin:1	liwaain:1	liwain:1
@@ -23843,7 +23843,7 @@
 लिस्टन	listen:3
 लिस्टिंग	listing:3
 लिहाज	lihaj:2	lihaaj:1
-ली	lee:6	le:1	li:1
+ली	li:10	lee:6	le:1
 लीओन	leone:2	leon:1
 लीक	leak:3
 लीकेज	leakage:3
@@ -23930,7 +23930,7 @@
 लेख	lekh:6
 लेखक	lekhak:5	lekhk:1
 लेखकीय	lekhkiy:2	lekhkiye:1
-लेखकों	lekhakon:2	lekhkon:1
+लेखकों	lekhako:3	lekhakon:2	lekhkon:1
 लेखन	lekhan:6
 लेखनी	lekhni:2	lekhani:1
 लेखमाला	lekhmala:3	lekhmaalaa:1
@@ -23986,7 +23986,7 @@
 लेप्टोस्पायरोसिस	leptospirosis:3
 लेप्स	laps:1	lapse:1	leps:1
 लेफ्ट	left:3
-लेफ्टिनेंट	lieutenant:2	leftinant:1
+लेफ्टिनेंट	leftinent:3	lieutenant:2	leftinant:1
 लेफ्टीनेंट	lieutenant:2	leftiness:1
 लेबनान	lebanon:2	labnan:1
 लेबर	labour:3	labor:1
@@ -24086,8 +24086,8 @@
 लोकनृत्य	loknritya:3	loknarity:2	loknrutya:1
 लोकनृत्यों	loknrityon:2	loknrutyon:1
 लोकपाल	lokpal:3
-लोकप्रिय	lokpriy:2	lokpriya:1
-लोकप्रियता	lokpriyata:3
+लोकप्रिय	lokpriya:8	lokpriy:2
+लोकप्रियता	lokpriyta:2	lokpriyata:3
 लोकभाषा	lokbhasha:3
 लोकमानस	lokmanas:3
 लोकमान्य	lokmanya:3
@@ -24175,7 +24175,7 @@
 वकालत	vakalat:3
 वकील	vakil:3	vakeel:1
 वकीलों	vakilon:3
-वक्त	waqt:5	vakt:3
+वक्त	vakt:3	waqt:5
 वक्ता	vakta:3
 वक्ताओं	vaktaon:3
 वक्र	vakra:2	varka:1
@@ -24202,7 +24202,7 @@
 वत्सराज	vatsaraja:1	vatsraj:1	watsraj:1
 वध	vadh:3
 वधू	vadhu:3
-वन	one:2	wan:1
+वन	van:12	one:2	wan:1
 वनडे	oneday:6
 वनम	vanam:3
 वनवास	vanvaas:1	vanvas:1	vanwas:1
@@ -24247,7 +24247,7 @@
 वर्क्स	works:4
 वर्ग	varg:6
 वर्गाकार	vargakar:2	vargakaar:1
-वर्गीकरण	vargeekaran:1	vargikaran:1	vergikaran:1
+वर्गीकरण	vargikaran:4	vargeekaran:1	vergikaran:1
 वर्गीकृत	vargikrit:2	vargikrat:1
 वर्गीय	vargeey:1	vargeeye:1	vargiy:1
 वर्गों	vargon:3
@@ -24286,7 +24286,7 @@
 वर्नोन	vernon:2	varnon:1
 वर्बल	verbal:3
 वर्मन	verman:2	varman:1
-वर्मा	verma:2	varma:1
+वर्मा	varma:2	verma:2
 वर्लपूल	whirlpool:3
 वर्ली	worli:2	varli:1
 वर्ल्ड	world:7
@@ -24298,7 +24298,7 @@
 वर्षा	varsha:5	varshaa:2	warsha:1
 वर्षारंभ	varshaarambh:1	varshaaranbh:1	varsharambh:1
 वर्षीय	varsheeye:1	varshiy:1	varshiya:1
-वर्षों	varshon:3
+वर्षों	varsho:7	varshon:3
 वर्साचे	varsaache:1	varsaryache:1	vasearche:1
 वर्साय	varsaaye:1	varsay:1	vasariya:1
 वर्सोवा	versova:2	varsova:1	varsowa:1
@@ -24310,7 +24310,7 @@
 वल्लभभाई	vallabhbhai:3
 वल्लभाचार्य	vallabhacharya:3
 वश	vash:3
-वशिष्ठ	vashishth:3	vashisth:1
+वशिष्ठ	vasistha:3	vashishth:3	vashisth:1
 वशीकरण	vashikaran:3
 वशीभूत	vashibhut:2	vashibhoot:1
 वस	vas:3
@@ -24342,7 +24342,7 @@
 वहाब	vahaab:1	vahab:1	wahab:1
 वहाबियों	vahabiyon:1	vhaabiyon:1	wahabiyon:1
 वही	vahi:2	wahi:1
-वहीं	vaheen:1	vahin:1	wahin:1
+वहीं	vahin:5	vaheen:1	wahin:1
 वहीद	vaheed:1	vahid:1	waheed:1
 वहीदा	wahida:2	vaheeda:1	vahida:1	waheeda:1
 वांग	vaang:1	vang:1	waang:1
@@ -24350,7 +24350,7 @@
 वांचू	vaanchoo:1	vanchu:1	wanchu:1
 वांछनीय	vaanchaneeye:1	vanchhniy:1	wanchhaniya:1
 वांछनीयता	vanchhniyata:1	vanchneeyata:1	wanchhaniyata:1
-वांछित	vaanchit:1	vanchhit:1	wanchhit:1
+वांछित	vanchhit:2	vaanchit:1	wanchhit:1
 वांट	want:3
 वांडा	wanda:3
 वाइज	vije:1	vise:1	wise:1
@@ -24399,7 +24399,7 @@
 वाडी	vadi:1	waadi:1	wadi:1
 वाण	vaan:2	waan:1
 वाणिज्य	vaanijya:1	vanijya:1	wanijaya:1
-वाणिज्यिक	vanijiyak:1	vanijyak:1	vanijyik:1
+वाणिज्यिक	vanijyik:2	vanijiyak:1	vanijyak:1
 वाणी	vani:2	vaani:1
 वाणों	vaanon:1	vanon:1	wanon:1
 वात	vaat:3
@@ -24432,7 +24432,7 @@
 वानिकी	vaniki:3
 वानी	vaani:2	vani:1
 वानुआ	vanua:1	vanuaa:1	wanua:1
-वापस	wapas:2	vaapas:1	vapas:1
+वापस	vaapas:5	wapas:2	vapas:1
 वापसी	vaapasi:1	vapasi:1	waapasi:1	wapasi:1
 वापिस	wapis:2	vaapis:1	vapis:1
 वापिसी	vaapisi:1	vapisi:1	waapisi:1	wapisi:1
@@ -24539,8 +24539,8 @@
 वासेपुर	vasepur:2	wasseypur:1
 वास्को	vasco:3	vasko:3
 वास्तव	vastav:2	vaastav:1
-वास्तविक	vastvik:2	vastavik:1
-वास्तविकता	vastvikata:2	vastavikta:1
+वास्तविक	vastavik:4	vastvik:2
+वास्तविकता	vastavikta:2	vastvikata:2
 वास्तविकताओं	vastaviktaon:2	vastvikataon:1
 वास्ता	vasta:2	vaasta:1
 वास्तु	vastu:3
@@ -24554,12 +24554,12 @@
 वाह	wah:2	vaah:1
 वाहक	vahak:2	wahak:1
 वाहकों	vahakon:2	wahakon:1
-वाहन	wahan:2	vaahan:1	vahan:1
+वाहन	vahan:4	wahan:2	vaahan:1
 वाहनचालकों	vahanchalakon:1	vahanchalkon:1	wahanchalakon:1
-वाहनों	vahanon:2	wahanon:1
+वाहनों	vaahanon:2	vahanon:2	wahanon:1
 वाहिका	vahika:2	vaahika:1	wahika:1
 वाहिकाएं	vahikayen:2	vaahikayen:1	wahikayan:1
-वाहिकाओं	vahikaon:2	vaahikaon:1	wahikaon:1
+वाहिकाओं	vaahikaon:2	vahikaon:2	wahikaon:1
 वाहिनी	vahini:2	wahini:1
 वाही	vahi:2	vaahi:1
 वाह्य	vaahya:1	vahay:1	vahya:1
@@ -24601,13 +24601,13 @@
 विकासपुरी	vikaspuri:3
 विकासवाद	vikaasvaad:1	vikasvad:1	vikaswaad:1
 विकासवादी	vikaasvaadi:1	vikasvadi:1	vikaswadi:1
-विकासशील	vikaasshil:1	vikashsheel:1	vikassheel:1
+विकासशील	vikasshil:2	vikaasshil:1	vikashsheel:1	vikassheel:1
 विकासात्मक	vikasatmak:2	vikaasaatmak:1
 विकिपीडिया	wikipedia:3
 विकिरण	vikiran:3
 विकिलीक्स	wikileaks:3
 विकी	vicky:2	wiki:1
-विकृत	vikrit:2	vikrut:1
+विकृत	vikrut:2	vikrit:2
 विकृति	vikriti:2	vikruti:1
 विकृतियां	vikritiyaan:1	vikritiyan:1	vikrutiyan:1
 विकृतियों	vikritiyon:2	vikrutiyon:1
@@ -24628,11 +24628,11 @@
 विक्रमशिला	vikramshila:2	vikramashila:1
 विक्रमादित्य	vikramaditya:3
 विक्रमी	vikrami:3
-विक्रय	vikraya:2	vikray:1
+विक्रय	vikray:3	vikraya:2
 विक्रांत	vikrant:3
 विक्री	vikri:3
 विक्रेता	vikreta:2	vikretaa:1
-विक्रेताओं	vikretaon:2	vikretaaon:1
+विक्रेताओं	vikretao:2	vikretaon:2	vikretaaon:1
 विक्षत	vikshat:3
 विक्षिप्त	vikshipt:2	vikshipta:1
 विक्षिप्तता	vikshiptata:2	vikshaptataa:1
@@ -24711,15 +24711,15 @@
 विडंबना	vidambana:1	vidambanaa:1	vidambna:1
 वितरक	vitrak:2	vitarak:1
 वितरकों	vitarakon:1	vitarkon:1	vitrakon:1
-वितरण	vitaran:2	vitran:1
+वितरण	vitran:3	vitaran:2
 वितरित	vitarit:2	vitrit:1
 वितर्क	vitark:3
-वित्त	vitt:2	vitta:1
+वित्त	vitta:4	vitt:2
 वित्तपोषण	vittaposhan:3	vittposhan:3
 वित्तपोषित	vittaposhit:2	vittposhit:1
 वित्तमंत्रियों	vittamantriyon:2	vittmantriyon:1
 वित्तमंत्री	vittamantri:2	vittmantri:1
-वित्तीय	viteeye:1	vittiy:1	vittiya:1
+वित्तीय	vittiy:5	viteeye:1	vittiya:1
 विद	vid:2	with:1
 विदर्भ	vidarbh:5	vidarbha:1
 विदा	vida:3
@@ -24754,7 +24754,7 @@
 विद्यावती	vidhyavati:1	vidyavati:1	vidyawati:1
 विद्यासागर	vidyasagar:2	vidhyasagar:1
 विद्युत	vidyut:2	vidhut:1
-विद्युतीय	vidyutiy:2	vidhuteeye:1
+विद्युतीय	vidyutiya:2	vidyutiy:2	vidhuteeye:1
 विद्युत्	vidyut:2	vidhut:1
 विद्रूपताओं	vidroopataon:1	vidrupataon:1	vidruptaon:1
 विद्रोह	vidroh:3
@@ -24764,8 +24764,8 @@
 विद्वज्जनों	vidvajjanon:3
 विद्वता	vidvata:3
 विद्वत्ता	vidvatta:3
-विद्वान	vidvaan:1	vidvan:1	vidwan:1
-विद्वानों	vidvaanon:1	vidvanon:1	vidwanon:1
+विद्वान	vidvan:5	vidvaan:1	vidwan:1
+विद्वानों	vidwanon:4	vidvaanon:1	vidvanon:1
 विद्वान्	vidwan:2	vidvaan:1
 विधयक	vidhayak:2	vidhyak:1
 विधर्मी	vidharmi:3
@@ -24880,7 +24880,7 @@
 विमर्श	vimarsh:3
 विमर्शों	vimarshon:2	vimarsho:1
 विमल	vimal:4
-विमान	viman:3
+विमान	vimaan:4	viman:3
 विमानतल	vimantal:3
 विमानपत्तन	vimanpattan:3
 विमानवाहक	vimanvahak:2	vimanwahak:1
@@ -24889,7 +24889,7 @@
 विमुख	vimukh:3
 विमेन	women:2	vimen:1
 विमोचन	vimochan:3
-वियतनाम	viyatnam:2	vietnam:1
+वियतनाम	vietnam:3	viyatnam:2
 वियतनामी	viyatnami:2	vietmani:1
 वियाग्रा	viyagra:2	viagra:1
 वियोग	viyog:3
@@ -24925,11 +24925,11 @@
 विल	will:6
 विलंब	vilamb:3
 विलंबित	vilambit:2	vilalbit:1
-विलक्षण	vilakshan:3
+विलक्षण	vilkshan:2	vilakshan:3
 विलक्षणता	vilakshanta:1	vilakshnata:1	vilakshnta:1
 विलग	vilag:3
 विलय	vilay:1	vilaya:1	wilay:1
-विलयन	vilayan:1	villain:1	william:1
+विलयन	vilyan:3	vilayan:1	villain:1	william:1
 विला	villa:3
 विलाप	vilap:2	wilap:1
 विलायत	vilayat:3
@@ -25006,8 +25006,8 @@
 विशेषणों	visheshanon:3
 विशेषत	visheshat:3
 विशेषतया	visheshataya:1	visheshtaya:1	visheshtayaa:1
-विशेषता	visheshata:1	visheshta:1	visheshtaa:1
-विशेषताएं	visheshtaayein:1	visheshtaen:1	visheshtayen:1
+विशेषता	visheshta:5	visheshata:1	visheshtaa:1
+विशेषताएं	vishestaayen:2	visheshtaayein:1	visheshtaen:1	visheshtayen:1
 विशेषताओं	visheshtaon:2	visheshtaaon:1
 विशेषांक	visheshank:2	visheshaank:1
 विशेषाधिकार	visheshadhikar:2	visheshaadhikaar:1
@@ -25022,11 +25022,11 @@
 विश्लेषणों	vishleshanon:2	vishleshan:1
 विश्लेषात्मक	vishleshatmak:2	vishleshaatmak:1
 विश्लेषित	vishleshit:3
-विश्व	vishva:2	vishwa:2
+विश्व	vishwa:11	vishva:2
 विश्वंभर	vishwambhar:2	vishwanbhar:1
 विश्वकर्मा	vishwakarma:3
 विश्वकल्याण	vishwakalyan:5	vishvakalyan:1
-विश्वकोश	vishwakosh:3
+विश्वकोश	vishwkosh:4	vishwakosh:3
 विश्वकोष	vishwakosh:2	vishvkosh:1
 विश्वगुरु	vishvaguru:1	vishwaguru:1	vishwaguruu:1
 विश्वनाथ	vishwanath:3
@@ -25037,26 +25037,26 @@
 विश्वयुद्ध	vishwayuddh:1	vishwayuddha:1	vishwayudh:1
 विश्वरूपम	vishwaroopam:2	vishwarupam:1
 विश्वविख्यात	vishwavikhyat:3	ishwavikhyat:1	vishvavikhyat:1	vishwavikhyaat:1
-विश्वविद्यालय	vishvavidyalay:2	vishwavidyalay:2	vishwavidyalaya:2	vishvidyalaya:1
+विश्वविद्यालय	vishvvidyalaya:8	vishvavidyalay:2	vishwavidyalay:2	vishwavidyalaya:2
 विश्वविद्यालयों	vishwavidyalayon:2	vishwavidhyalayon:1
 विश्वविद्लाय	vishwavidhyalay:1	vishwavidyalay:1	vishwavidyalaya:1
 विश्वव्यापी	vishwavyapi:2	vishwavyaapi:1
 विश्वशक्ति	vishwashakti:3
-विश्वसनीय	vishwasaniy:2	vishwasniiya:1
+विश्वसनीय	vishwasneey:2	vishwasaniy:2	vishwasniiya:1
 विश्वसनीयता	vishwasaniyata:2	vishwasniiyataa:1
 विश्वस्त	vishwast:2	vishvasta:1	vishwasta:1
 विश्वस्तर	vishwastar:2	vishvastar:1	vishvstar:1
 विश्वस्तरीय	vishvastariy:2	vishwastariya:2	vishvastariya:1	vishvstariy:1
-विश्वामित्र	vishvamitra:3
+विश्वामित्र	vishwamitra:5	vishvamitra:3
 विश्वाश	vishvash:1	vishwas:1	vishwash:1
-विश्वास	vishvas:3	vishwas:1
+विश्वास	vishwas:4	vishvas:3
 विश्वासपात्र	vishvasapatra:1	vishvaspatra:1	vishwaspatra:1
 विश्वासमत	vishvasamat:1	vishvasamata:1	vishwasmat:1
 विश्वासियों	vishvasiyon:2	vishwasiyon:1	visvasiyon:1
 विश्वासों	vishvason:2	vishwason:1
 विश्विद्यालय	vishvidyalay:2	vishvavidyalaya:1
 विश्वेश्वरैया	vishveshvaraiya:1	vishveshwaraiya:1	visvesvaraya:1
-विष	wish:3	vish:1
+विष	vish:2	wish:3
 विषपान	vishpan:2	vishapaan:1	vishapan:1	vishpaan:1
 विषम	visham:2	vishama:1
 विषमता	vishamata:1	vishamta:1	vishmata:1
@@ -25064,7 +25064,7 @@
 विषय	vishay:3	vishaya:1
 विषयवस्तु	vishayvastu:2	vishayavastu:1
 विषयुक्त	vishyukt:2	vishayukta:1
-विषयों	vishayon:3	vishyon:1
+विषयों	visayon:2	vishayon:3	vishyon:1
 विषहीन	vishhin:2	vishahin:1
 विषाक्त	vishakta:2	vishaakta:1	vishakt:1
 विषाक्तता	vishaktata:3	vishaaktata:1
@@ -25093,7 +25093,7 @@
 विस्तारित	vistarit:3
 विस्थापन	visthapan:3
 विस्थापित	visthapit:3
-विस्फोट	visfot:3	visphot:1
+विस्फोट	visphot:2	visfot:3
 विस्मय	vismay:3	vismaya:1
 विहार	vihar:3
 विहारों	viharon:3
@@ -25133,13 +25133,13 @@
 वीविंग	viviling:1	viving:1	weaving:1
 वीसा	visa:3
 वीसैट	viasat:1	viset:1	weset:1
-वुड	wood:3
+वुड	would:2	wood:3
 वुडलैंड	woodland:3
 वुड्स	woods:2	wood:1
 वुल्फ	wolf:3
 वूल्मर	woolmer:2	vulmar:1
 वृंदावन	vrindavan:4	vrundavan:2
-वृक्ष	vriksh:3	vriksha:2	variksh:1	vruksh:1
+वृक्ष	vruksh:7	vriksh:3	vriksha:2	variksh:1
 वृक्षारोपण	vruksharopan:2	vriksharopan:1
 वृक्षों	vrukshon:2	vrikshon:1
 वृतचित्र	vrutchitra:2	vritchitr:1
@@ -25161,7 +25161,7 @@
 वृषभानु	vrishbhanu:2	varishbhanu:1
 वृहत	vrihat:2	vriht:1
 वृहद	vrihad:2	varihad:1
-वे	way:3	ve:1
+वे	ve:131	way:3
 वेंकट	venkat:3	vekat:1	venkata:1
 वेंकटरमण	venkataraman:1	venkatraman:1	venktaraman:1
 वेंकटरमन	venkatraman:3	venkataraman:1
@@ -25242,7 +25242,7 @@
 वेश्या	veshya:3
 वेश्यालय	veshyalay:3
 वेश्यावृति	veshyavriti:3	veshyavritti:2	veshyavruti:1
-वेस्ट	waste:3	west:3
+वेस्ट	west:3	waste:3
 वेस्टर	wester:2	westor:1
 वेस्टर्न	western:5
 वेस्टलैंड	westland:2	wasteland:1
@@ -25250,7 +25250,7 @@
 वेस्टिंगहाउस	westinghouse:2	wastinghouse:1
 वेस्ले	vaisley:1	vesle:1	wesle:1
 वैंकूवर	vancouver:3	vainkuvar:1
-वैकल्पिक	vaikalip:1	vaikalpik:1	vaikplick:1
+वैकल्पिक	vaikalpik:4	vaikalip:1	vaikplick:1
 वैक्यूम	vaccum:3	vacuum:3
 वैक्सीन	waxin:2	vaccine:1
 वैगन	wagon:4	vagon:1	vaigan:1
@@ -25298,14 +25298,14 @@
 वैश्य	vaishya:3
 वैश्यावृत्ति	vaishyavrutti:2	vaishyavriti:1
 वैश्व	vaishv:1	vaishva:1	vasihva:1
-वैश्विक	vaishvik:3
+वैश्विक	vaishwik:2	vaishvik:3
 वैश्वीकरण	vaishvikaran:3
 वैष्णव	vaishnav:3
 वैष्णो	vaishno:3
 वैष्णोदेवी	vaishnodevi:3
 वैसा	vaisa:3
 वैसी	vaisi:2	waisi:1
-वैसे	waise:2	vaise:1
+वैसे	vaise:8	waise:2
 वॉइस	voice:3
 वॉक	walk:3
 वॉकर	walker:3
@@ -25358,7 +25358,7 @@
 व्यक्ति	vyakti:10	wyakti:1
 व्यक्तिओं	vyaktion:2	vyaktiyon:1
 व्यक्तिगत	vyaktigat:3
-व्यक्तित्व	vyaktittv:1	vyaktitv:1	vyaktitva:1
+व्यक्तित्व	vyaktitva:2	vyaktittv:1	vyaktitv:1
 व्यक्तित्वों	vyaktitvon:2	vyaktitatvon:1
 व्यक्तियों	vyaktiyon:5
 व्यक्तिवाद	vyaktivad:1	vyaktiwad:1	vyktivaad:1	vyktivad:1
@@ -25374,7 +25374,7 @@
 व्यर्थ	vyarth:3
 व्यवधान	vyavdhan:2	vyavadhan:1
 व्यवधानों	vyavdhanon:2	vyavadhanon:1
-व्यवसाय	vyavasay:1	vyavsay:1	vyvasay:1
+व्यवसाय	vyavsay:4	vyavasay:1	vyvasay:1
 व्यवसायिक	vyavsayik:2	vyavasayik:1
 व्यवसायी	vyavasayi:2	vyavsayi:1
 व्यवसायों	vyavasayon:2	vyavsayon:1
@@ -25551,7 +25551,7 @@
 शरफुद्दीन	sharfuddin:3
 शरमन	sharman:3
 शरापोवा	sharapova:3
-शराब	sharaab:1	sharab:1	shrab:1
+शराब	sharab:5	sharaab:1	shrab:1
 शराबखानों	shrabkhanon:2	sharaabkhanon:1
 शराबियों	sharaabiyon:1	sharabiyon:1	shrabiyon:1
 शराबी	shrabi:3	sharaabi:1
@@ -25564,7 +25564,7 @@
 शरीफ	sharif:2	shareef:1
 शरीयत	shariyat:3
 शरीया	shariya:3
-शरीर	shareer:2	sharir:1
+शरीर	sharir:23	shareer:2
 शरीरधारी	sharirdhari:3
 शरीरविज्ञान	sharirvigyan:3
 शरीरी	shariri:3
@@ -25604,16 +25604,16 @@
 शहद	shehad:2	shahad:1	shehed:1
 शहनवाज	shahnawaaz:1	shahnawaz:1	shehnawaz:1
 शहनाई	shehnai:2	shehnayi:1
-शहर	shehr:2	shahar:1	shehar:1
+शहर	shahar:27	shehr:2	shehar:1
 शहरवासियों	shaharwasiyon:1	shahrvasiyon:1	shervasiyon:1
 शहरवासी	shaharwasi:1	shahrwasi:1	shehrvasi:1
 शहरियों	shahriyon:2	shahariyon:1
 शहरी	shahari:1	shahri:1	shehri:1
 शहरीकरण	shaharikaran:1	shahrikaran:1	shehrikarn:1
-शहरों	shahron:2	shehron:1
+शहरों	sheharo:6	shahron:2	shehron:1
 शहादरा	shahdara:3
 शहाबुद्दीन	shahabuddin:2	shahaabuddin:1
-शहीद	shaheed:2	shahid:2
+शहीद	shahid:4	shaheed:2
 शहीदों	shahidon:2	shaheedon:1
 शांडिल्य	shandily:2	shandilya:1
 शांत	shant:2	shaant:1
@@ -25650,7 +25650,7 @@
 शाताब्दी	shatabdi:2	shaataabdi:1
 शादियां	shadiyan:2	shaadiyaan:1
 शादियों	shaadiyon:2	shadiyon:1
-शादी	shaadi:2	shadi:1
+शादी	shadi:5	shaadi:2
 शादीशुदा	shaadishuda:2	shaadishudaa:2	shadishuda:2
 शान	shan:2	shaan:1
 शानदार	shandar:2	shaandaar:1
@@ -25690,7 +25690,7 @@
 शावर	shower:3
 शासक	shasak:3	shaasaka:1
 शासकीय	shaasakiya:1	shasakiy:1	shasakiya:1	shaskiy:1
-शासकों	shasakon:2	sasakon:1	shaasakon:1
+शासकों	shaskon:2	shasakon:2	sasakon:1	shaasakon:1
 शासन	shasan:3	shaasan:1
 शासनकाल	shasankal:2	shaasankaal:1	shasankaal:1
 शासनाध्यक्ष	shaasanadhyaksha:1	shasanadhyaksh:1	shasanadhyaksha:1	shasnadhyaksh:1
@@ -25732,7 +25732,7 @@
 शिकन	shikan:3
 शिकस्त	shikast:3
 शिकागो	chicago:2	shikago:1
-शिकायत	shikayat:7
+शिकायत	sikhayat:2	shikayat:7
 शिकायती	shikayati:2	shikayti:1
 शिकायतें	shikayten:2	shikayaten:1
 शिकायतों	shikayaton:3
@@ -25777,7 +25777,7 @@
 शिबू	shibu:3
 शिमला	shimla:4
 शिमोगा	shimoga:3
-शिया	shiya:2	shia:1
+शिया	xia:2	shiya:2	shia:1
 शियाओं	shiyaon:2	xiaon:1
 शिर	shir:3
 शिरकत	shirkat:3
@@ -25854,7 +25854,7 @@
 शिष्या	shishya:2	shishyaa:1
 शिष्यों	shishyon:2	shishiyon:1
 शी	she:2	shi:1
-शीघ्र	sheeghra:1	shighar:1	shighra:1
+शीघ्र	shighra:3	sheeghra:1	shighar:1
 शीघ्रता	sheeghrata:1	shigharta:1	shigrata:1
 शीघ्रातिशीघ्र	shighratishighra:2	shighratishighar:1
 शीट	sheet:2	shit:1
@@ -25881,14 +25881,14 @@
 शुंग	shung:2	shng:1
 शुंभ	shumbh:2	shunbhu:1
 शुई	shui:3
-शुक्र	shukra:3	shukr:2	surk:1
+शुक्र	shukr:4	shukra:3	surk:1
 शुक्रवार	shukravaar:1	shukravar:1	shukrawar:1
 शुक्राचार्य	shukrachaarya:1	shukrachary:1	shukracharya:1
 शुक्राणु	shukranu:3
 शुक्राणुओं	shukranuon:3
 शुक्लपक्ष	shuklapaksh:1	shuklapaksha:1	shuklpaksh:1
 शुक्ला	shukla:3
-शुगर	sugar:2	shugar:1
+शुगर	shugar:2	sugar:2
 शुजा	shuja:3
 शुजात	shujat:2	shujaat:1
 शुजालपुर	shujalpur:3
@@ -25922,7 +25922,7 @@
 शुरुवात	shuraat:1	shuruvaat:1	shuruvat:1
 शुरू	shuru:2	shuruu:1
 शुरूआत	shuruaat:3
-शुरूआती	shuruaati:3
+शुरूआती	shuruati:2	shuruaati:3
 शुल्क	shulk:3
 शुष्क	shushk:3
 शुष्कता	shushkata:2	shushkataa:1
@@ -25933,7 +25933,7 @@
 शूटरों	shootaron:2	shutaron:1
 शूटिंग	shooting:3
 शूद्र	shudra:2	shoodra:1
-शून्य	shuny:3	shunya:2	shoony:1	shuunya:1
+शून्य	shunya:2	shuny:3	shoony:1	shuunya:1
 शून्यकाल	shoonyakal:1	shunyakal:1	shunykal:1
 शून्यता	shunyata:2	shoonyata:1
 शूर	shoor:2	shur:1
@@ -25986,7 +25986,7 @@
 शैतान	shaitaan:2	shaitan:1
 शैतानी	shaitani:2	shaitaani:1
 शैय्या	shaiyya:2	shaiyyaa:1
-शैलियां	shailiyan:2	shailiyaan:1
+शैलियां	shailiya:2	shailiyan:2	shailiyaan:1
 शैलियों	shailiyon:3
 शैली	shaili:5	shaly:1	sheli:1
 शैलेश	shailesh:3
@@ -26070,7 +26070,7 @@
 श्रव्य	shravya:2	shrvya:1
 श्राद्ध	shraddh:2	shradh:1
 श्राद्धकर्म	shraddhakarm:1	shraddhkarm:1	shradhkaram:1
-श्राप	shraap:2	shrap:1
+श्राप	shrap:2	shraap:2
 श्रावक	shravak:2	shraavak:1
 श्रावकों	shravakon:2	shravkon:1
 श्रावण	shravan:2	shrawan:1
@@ -26079,7 +26079,7 @@
 श्रीअरविंद	shriarvind:2	shriaravind:1
 श्रीकर	shrikar:3
 श्रीकांत	shrikant:2	srikant:1
-श्रीकृष्ण	shrikrishan:3	shrikrishna:2	shreekarushna:1	shrikrishn:1
+श्रीकृष्ण	shrikrishna:2	shrikrishan:3	shreekarushna:1	shrikrishn:1
 श्रीखंड	shrikhand:3
 श्रीगणेश	shriganesh:3
 श्रीचंद	shrichand:3
@@ -26105,15 +26105,15 @@
 श्रीराधाकृष्ण	shriradhakrishna:3	shriradhakrishan:2	shriradhakrishn:1
 श्रीराम	shriram:2	sriram:1
 श्रील	shril:2	shreel:1
-श्रीलंका	srilanka:3
+श्रीलंका	shrilanka:2	srilanka:3
 श्रीलंकाई	shrilankai:2	srilanka:1
 श्रीलाल	shrilal:2	srilal:1
-श्रीवास्तव	shrivastava:1	shrivtastav:1	srivastav:1
+श्रीवास्तव	shrivastav:3	shrivastava:1	shrivtastav:1	srivastav:1
 श्रीशैल	shrishail:2	srisail:1
 श्रीसंत	shreesant:1	shrisant:1	srisant:1
 श्रीहीन	shriheen:1	shrihin:1	sriheen:1
 श्रुति	shruti:6	sruti:1
-श्रृंखला	shrinkhala:3	shrinkhla:2	shrankhala:1	shrrnkhala:1
+श्रृंखला	shrunkhala:2	shrinkhala:3	shrinkhla:2	shrankhala:1
 श्रृंखलाएं	shrankhalayen:1	shrinkhalayen:1	shrrnkhalaen:1
 श्रृंखलाओं	shrankhlaon:1	shrinkhalaon:1	shrrnkhalaon:1
 श्रृंखलाबद्ध	shrankhlabandh:1	shrinkhalabaddh:1	shrrnkhalabaddh:1
@@ -26121,13 +26121,13 @@
 श्रृंगार	shringar:5	shingar:1	shringaar:1
 श्रृष्टि	shrishti:2	shrrshti:1
 श्रेणियां	shreniyan:3
-श्रेणियों	shreniyon:3
+श्रेणियों	shreniyo:2	shreniyon:3
 श्रेणी	shreni:3
 श्रेणीबद्ध	shrenibaddh:1	shrenibaddha:1	shrenibandh:1
 श्रेय	shrey:3
 श्रेयस्कर	shreshskar:1	shreyaskar:1	shreyskar:1
 श्रेया	shreya:3
-श्रेष्ठ	shreshth:4	shreshtha:2
+श्रेष्ठ	shresht:2	shreshth:4	shreshtha:2
 श्रेष्ठतम	shreshthtam:2	shresthatam:1
 श्रेष्ठता	shreshthata:1	shreshthta:1	shresthata:1
 श्रॉफ	shroff:5
@@ -26166,7 +26166,7 @@
 संकल्पना	sankalpana:3
 संकाय	sankay:2	sankaay:1
 संकायों	sankayon:2	sankaayon:1
-संकीर्ण	sankeern:1	sankirn:1	sankirna:1
+संकीर्ण	sankirn:2	sankeern:1	sankirna:1
 संकीर्तन	sankirtan:3
 संकुचन	sankuchan:3
 संकुचित	sankuchit:3
@@ -26192,7 +26192,7 @@
 संग	sang:6
 संगठन	sangathan:5
 संगठनात्मक	sangathanaatmak:1	sangathanatmak:1	sangathnatmak:1
-संगठनों	sangathanon:1	sangathnanon:1	sangathnon:1
+संगठनों	sangathano:2	sangathanon:1	sangathnanon:1	sangathnon:1
 संगठित	sangathit:3
 संगत	sangat:3
 संगम	sangam:6
@@ -26286,7 +26286,7 @@
 संतुष्टि	santushti:3
 संतूर	santoor:2	santur:1
 संतृप्त	santript:2	santrupt:1
-संतों	santon:3
+संतों	santo:2	santon:3
 संतोष	santosh:3
 संतोषजनक	santoshjanak:3
 संतोषपुर	santoshpur:3
@@ -26334,7 +26334,7 @@
 संपादन	sampadan:3
 संपादित	sampadit:3
 संपूरक	sampurak:2	sampurk:1
-संपूर्ण	sampuran:2	sampurna:1
+संपूर्ण	sampurn:4	sampuran:2	sampurna:1
 संपूर्णता	sampuranata:1	sampurnata:1	sampurnta:1
 संपूर्णानंद	sampurnanand:2	sampoornaanand:1
 संपोषित	samposhit:3
@@ -26373,7 +26373,7 @@
 संभाला	sambhala:3
 संभाली	sambhali:3
 संभालेगा	sambhalega:3
-संभावना	sambhalana:1	sambhavana:1	sambhavna:1
+संभावना	sambhavna:9	sambhalana:1	sambhavana:1
 संभावनाएं	sambhavnayen:2	sambhavnaen:1
 संभावनाओं	sambhavnaon:3
 संभावित	sambhavit:3
@@ -26381,7 +26381,7 @@
 संभाषण	sambhashan:2	sambhakshan:1
 संभोग	sambhog:4	sanbhog:2
 संभ्रांत	sambhrant:2	sanbharnt:1
-संयंत्र	sanyantr:3
+संयंत्र	sayantra:2	sanyantr:3
 संयंत्रों	sanyantron:3
 संयम	sanyam:3
 संयमी	sanyami:2	sanyamee:1
@@ -26401,7 +26401,7 @@
 संरक्षण	sanrakshan:6
 संरक्षणवादी	sanrakshanvadi:3
 संरक्षित	sanrakshit:2	sanrkshit:1
-संरचना	sanrachana:2	sanrachna:1
+संरचना	sanrachna:8	sanrachana:2
 संरचनाओं	sanrachnaon:2	sanrachanaon:1
 संरचनात्मक	sanrachanatmak:2	sanrachnatmak:1
 संरेखण	sanrekhan:3
@@ -26410,13 +26410,13 @@
 संवर्द्धन	samvarddhan:1	samvardhan:1	sanvarddhan:1
 संवर्धन	sanvardhan:5	samvardhan:2
 संवर्धित	samvardhit:2	sanvardhit:1
-संवाद	samvad:2	sanvad:2	samwad:1	sanvaad:1
+संवाद	sanvad:3	samvad:2	samwad:1	sanvaad:1
 संवादात्मक	samvadatmak:2	sanvadatmak:1
 संवादों	samvadon:2	sanvadon:1
 संवारते	samvarte:1	sanvarate:1	sanvarte:1
 संवाहक	samvahak:2	sanvahak:1
 संविदा	samvida:3	sanvida:3
-संविधान	samvidhaan:1	samvidhan:1	sanvidhan:1
+संविधान	sanvidhan:5	samvidhaan:1	samvidhan:1
 संविधानिक	sanvidhanik:2	samvidhanik:1	sanvidhaanik:1
 संविधानों	samvidhanon:1	sanvidhaanon:1	sanvidhano:1	sanvidhanon:1
 संवेग	sanveg:2	samveg:1
@@ -26431,7 +26431,7 @@
 संवेदनाएं	samvednayen:1	sanvedanayen:1	sanvednaen:1
 संवेदनाओं	samvednaon:1	sanvedanaaon:1	sanvedanaon:1	sanvednaon:1
 संवेदीकरण	sanvedikaran:2	samvedikaran:1
-संवैधानिक	samvaidhanik:1	sanvaidhanik:1	savedhaanik:1	savedhanik:1
+संवैधानिक	sanvaidhanik:3	samvaidhanik:1	savedhaanik:1	savedhanik:1
 संशय	sanshay:3
 संशयों	samshayon:1	sanshayon:1	sanshyon:1
 संशोधन	sanshodhan:3
@@ -26440,7 +26440,7 @@
 संश्लेषण	sanshleshan:3
 संश्लेषित	sanshleshit:3
 संसद	sansad:3
-संसदीय	sansadiy:2	sansadiya:1
+संसदीय	sansdiy:4	sansadiy:2	sansadiya:1
 संसर्ग	sansarg:3
 संसाधन	sansadhan:3
 संसाधनों	sansadhanon:3
@@ -26451,7 +26451,7 @@
 संस्कारित	sanskarit:2	sanskaarit:1	sanskarita:1
 संस्कारी	sanskari:3	sanskaari:1
 संस्कारो	sanskaro:2	sanskaaron:1	sanskaron:1
-संस्कारों	sanskaron:3	sanskaaron:1
+संस्कारों	sanskaro:2	sanskaron:3	sanskaaron:1
 संस्कृत	sanskrit:5	sanskurt:1
 संस्कृतनिष्ठ	sankritnishth:1	sanskritnisht:1	sanskrutnishth:1
 संस्कृतमय	sankrutmay:1	sanskritimay:1	sanskritmay:1
@@ -26467,7 +26467,7 @@
 संस्थान	sansthan:5	sansthaan:2
 संस्थानों	sansthanon:3	sansthaanon:1
 संस्थापक	sansthapak:3	sansthaapak:1
-संस्थापकों	sansthapakon:2	sansthapkon:1
+संस्थापकों	sansthapako:2	sansthapakon:2	sansthapkon:1
 संस्थापन	sansthapan:3	sansthaapan:1
 संस्थापिका	sansthapika:3	sansthaapika:1
 संस्थापित	sansthapit:3	sansthaapit:1
@@ -26529,7 +26529,7 @@
 सचदेव	sachdev:3
 सचमुच	sachmuch:2	sachmucch:1
 सचल	sachal:3
-सचित्र	sachitra:2	sachitr:1
+सचित्र	sachitr:2	sachitra:2
 सचिन	sachin:4
 सचिव	sachiv:3
 सचिवालय	sachivalay:3
@@ -26648,7 +26648,7 @@
 सदन	sadan:3
 सदमे	sadme:3
 सदर	sadar:3
-सदस्य	sadasy:2	sadsya:1
+सदस्य	sadasya:18	sadasy:2	sadsya:1
 सदस्यगण	sadasyagan:2	sadsyagan:1
 सदस्यता	sadasyata:2	sadsyata:1
 सदस्या	sadasya:2	sadsya:1
@@ -26665,14 +26665,14 @@
 सदियों	sadiyon:3
 सदी	sadi:3
 सदुपयोग	sadupayog:2	sadupyog:1
-सदृश	sadash:1	sadhash:1	sardish:1
+सदृश	sadrushya:2	sadash:1	sadhash:1	sardish:1
 सदैव	sadaiv:3
 सद्गति	sadnati:1	sadrati:1	sdanati:1
 सद्गुणों	sadganon:1	sadgunon:1	sandunon:1
 सद्दाम	saddam:2	sadham:1
 सद्भाव	sadbhav:3
 सद्भावना	sabhdavna:1	sadbhavana:1	sadbhavna:1
-सन	sun:4	san:3	son:3
+सन	san:3	sun:4	son:3
 सनई	sanai:2	sanaee:1	sanayi:1
 सनक	sanak:3
 सनकी	sanki:2	sanaki:1	sunki:1
@@ -26694,7 +26694,7 @@
 सन्यासी	sanyasi:4
 सपत्नीक	sapanteek:1	saptaniik:1	saptnik:1
 सपना	sapna:2	sapana:1
-सपने	sapane:1	sapne:1	sapney:1
+सपने	sapne:2	sapane:1	sapney:1
 सपनों	sapnon:2	sapanon:1
 सपरिवार	saparivaar:1	sapariwar:1	sparivar:1
 सपा	sapa:2	sapaa:1
@@ -26727,7 +26727,7 @@
 सफलता	safalta:3
 सफलताएं	safaltaein:1	safaltaen:1	safaltayen:1
 सफलताओं	safaltaon:3
-सफलतापूर्वक	safaltapoorvak:2	safaltapurvak:1
+सफलतापूर्वक	safalatapurvak:2	safaltapoorvak:2	safaltapurvak:1
 सफाई	safai:2	safaee:1
 सफाया	safaya:3
 सफारी	safari:3
@@ -26781,11 +26781,11 @@
 समंदर	samandar:2	samander:1
 समकक्षों	samkshon:2	samkakkshon:1
 समकालिक	samkalik:2	samkaalik:1
-समकालीन	samkaleen:2	samkalin:2
+समकालीन	samkalin:5	samkaleen:2
 समकालीनों	samkalinon:2	samkaleenon:1
 समकोण	samkon:3
 समक्ष	samaksh:4
-समग्र	samgra:2	samagra:1
+समग्र	samagra:2	samgra:2
 समग्रता	samgrata:2	samagrata:1
 समझ	samajh:3
 समझकर	samjhkar:2	samajhkar:1
@@ -26812,7 +26812,7 @@
 समझेगा	samjhega:2	samajhega:1	samajhegaa:1
 समझौता	samjhauta:2	samajhauta:1
 समझौतावादी	samajhautavaadi:1	samajhautavadi:1	samjhautavadi:1	samjhautawadi:1
-समझौते	samjhaute:3	samajhaute:1
+समझौते	samjhoute:2	samjhaute:3	samajhaute:1
 समझौतों	samjhauton:2	samajhauten:1
 समतल	samtal:2	samatam:1
 समतलीकरण	samtalikaran:2	samatamikaran:1
@@ -26831,7 +26831,7 @@
 समयबद्धता	samayabaddhata:1	samaybaddhta:1	samaybadhrta:1
 समयसीमा	samayseema:2	samaysima:1
 समयों	samayon:3
-समर	summer:2	samar:1
+समर	samar:4	summer:2
 समरस	samras:2	samarasa:1
 समरसता	samarasata:1	samarasta:1	samrasta:1
 समरूप	samrup:2	samaroop:1	samaruup:1
@@ -26854,8 +26854,8 @@
 समस्तीपुर	samastipur:3
 समस्या	samasya:3
 समस्याआें	samasyaon:2	samasyaaon:1
-समस्याएं	samasyaen:2	samasyaaein:1
-समस्याओं	samasyaon:2	samasyaaon:1
+समस्याएं	samsyayen:3	samasyaen:2	samasyaaein:1
+समस्याओं	samasyao:2	samasyaon:2	samasyaaon:1
 समस्याग्रस्त	samasyagrast:2	samasyaagrast:1	samsyagrast:1
 समहित	samhit:3
 समा	sama:4	samaa:2
@@ -26890,8 +26890,8 @@
 समाधियों	samadhiyon:2	samadjiyon:1
 समाधिस्थ	samadhisth:2	samadhistha:1
 समाधी	samadhi:3
-समान	samaan:2	saman:1
-समानता	samaanta:2	samanta:1
+समान	saman:16	samaan:2
+समानता	samanta:3	samaanta:2
 समानताएं	samantaen:2	samantaayen:1
 समानताओं	samantaon:2	samantapn:1
 समानार्थक	samanarthak:4	samaanarthak:2
@@ -26926,7 +26926,7 @@
 समीक्षाओं	sameekshaon:1	samikshaon:1	samikshon:1
 समीक्षात्मक	sameekshatmak:1	samikshatmak:1	samiskshatmak:1
 समीचीन	samichin:2	samachin:1
-समीप	sameep:2	samip:1
+समीप	samip:3	sameep:2
 समीपवर्ती	samiipwarti:1	samiparvati:1	samipvarti:1
 समीपी	samipi:2	sameepi:1
 समीर	sameer:6	samir:1
@@ -26947,9 +26947,9 @@
 समुन्नत	samunnat:2	saumannat:1
 समूचा	samoocha:1	samucha:1	samuucha:1
 समूची	samoochi:1	samuchi:1	samuuchi:1
-समूचे	samooche:2	samuche:1
-समूह	samooh:1	samuh:1	samuuh:1
-समूहों	samoohon:1	samuhon:1	samuuhon:1
+समूचे	samuche:2	samooche:2
+समूह	samuh:39	samooh:1	samuuh:1
+समूहों	samuhon:3	samoohon:1	samuuhon:1
 समृद्ध	samriddha:2	samrdh:1	samriddh:1	samruddha:1
 समृद्धि	samriddhi:3	samrdhi:1	samrudhdi:1	samrudhi:1
 समेकन	samekan:3
@@ -26963,8 +26963,8 @@
 समेटे	samete:3
 समेत	samet:3
 समोसा	samosa:3
-सम्पन्न	sampanna:2	sampann:1
-सम्पूर्ण	sampoorn:3	sampoorna:2	sampurn:2
+सम्पन्न	sampann:2	sampanna:2
+सम्पूर्ण	sampurn:3	sampoorn:3	sampoorna:2
 सम्मति	sammati:2	sammit:1	summit:1
 सम्मन	samman:2	summon:1
 सम्मनों	sammanon:3
@@ -26986,7 +26986,7 @@
 सम्मोहित	sammohit:3
 सम्यक	samyak:3
 सम्राज्ञी	samraagyi:1	samragyi:1	samraygi:1
-सम्राट	samrat:2	samraat:1
+सम्राट	samraat:3	samrat:2
 सम्राटों	samraton:3
 सम्हाल	samhal:2	samhaal:1
 सयाजी	sayaji:3
@@ -27028,7 +27028,7 @@
 सरयू	sarayu:1	saryu:1	saryuu:1
 सरल	saral:3
 सरलतम	saraltam:3
-सरलता	saralata:2	saralta:1
+सरलता	saralta:2	saralata:2
 सरलतापूर्वक	saraltapurvak:2	saralatapurvak:1
 सरला	sarla:2	sarala:1
 सरलीकरण	saralikaran:2	sarlikaran:1
@@ -27050,7 +27050,7 @@
 सरायों	sarayon:3
 सराह	sarah:2	saraah:1
 सराहना	sarahana:2	saraahna:1
-सराहनीय	saraahniiya:1	sarahniy:1	sarahniya:1
+सराहनीय	sarahniy:2	saraahniiya:1	sarahniya:1
 सराहा	saraha:2	saraaha:1
 सराही	sarahi:2	saraahi:1
 सरिता	sarita:3
@@ -27077,7 +27077,7 @@
 सर्कुलर	circular:3
 सर्च	search:6
 सर्चर	searcher:3
-सर्जन	surgeon:3
+सर्जन	sarjan:2	surgeon:3
 सर्जना	sarjana:1	sarjanaa:1	serjana:1
 सर्जनात्मकता	sarjanaatmakta:1	sarjanatmakata:1	serjanatmak:1
 सर्जनों	surgenon:2	sarjanon:1
@@ -27110,7 +27110,7 @@
 सर्वनाम	sarvnam:3	sarvanaam:2	sarvanam:1	sarvnaam:1
 सर्वनाश	sarvnash:2	sarvanash:1
 सर्वपल्ली	sarvapalli:2	sarvepalli:2	sarvpalli:2
-सर्वप्रथम	sarvapratham:3	sarvpratham:2	sarvapartham:1
+सर्वप्रथम	sarvpratham:3	sarvapratham:3	sarvapartham:1
 सर्वप्रमुख	sarvapramukh:2	sarvaprmukh:1
 सर्वभूतानां	sarvabhuutanaan:1	sarvbhutana:1	sarvbhutanan:1
 सर्वमान्य	sarvamaanya:1	sarvmany:1	sarvmanya:1
@@ -27118,9 +27118,9 @@
 सर्वरों	sarvaron:2	serveron:1
 सर्वर्स	servers:3
 सर्वविदित	sarvavidit:2	sarvvidit:1
-सर्वव्यापी	sarvavyaapi:1	sarvavyapi:1	sarvvyapi:1
+सर्वव्यापी	sarvavyapi:2	sarvavyaapi:1	sarvvyapi:1
 सर्वशक्तिमान	sarvshaktiman:3	sarvashaktimaan:2	sarvashaktiman:1
-सर्वश्रेष्ठ	sarvshreshth:2	sarvashreshth:1	sarvashreshtha:1	sarvashrestha:1
+सर्वश्रेष्ठ	sarvshresht:3	sarvshreshth:2	sarvashreshth:1	sarvashreshtha:1
 सर्वश्रेष्ठता	sarvashresthataa:1	sarvshreshthata:1	sarvshreshthta:1
 सर्वसमावेशी	sarvasamaveshi:1	sarvsamaveshi:1	sarvsmaveshi:1
 सर्वसम्मत	sarvsammat:2	saravasammat:1
@@ -27147,7 +27147,7 @@
 सर्वेक्षणों	sarvekshanon:2	sarvekshnon:1
 सर्वेक्षित	sarvekshit:2	survekshit:1
 सर्वेश्रेष्ठ	sarvashreshtha:1	sarveshreshth:1	sarvshreshth:1
-सर्वोच्च	sarvoccha:1	sarvoch:1	sarvochh:1
+सर्वोच्च	sarvocch:2	sarvoccha:1	sarvoch:1	sarvochh:1
 सर्वोच्चता	sarvocchata:1	sarvochchata:1	sarvochta:1
 सर्वोत्कृष्ट	sarvatkrusht:1	sarvotkrishta:1	sarwotkrisht:1
 सर्वोत्तम	sarvottam:2	sarwottam:1
@@ -27164,7 +27164,7 @@
 सलाम	salam:2	salaam:1
 सलामी	salami:2	salaami:1
 सलाह	salah:2	salaah:1
-सलाहकार	salaahkar:1	salahkaar:1	salahkar:1
+सलाहकार	salahkaar:2	salaahkar:1	salahkar:1
 सलाहकारों	salahkaron:2	salaahkaron:1
 सलाहियत	salahiyat:2	salaahiyat:1
 सलाहों	salahon:2	salaahon:1
@@ -27230,7 +27230,7 @@
 सहभागिता	sahbhagita:2	sahabhagita:1	sahabhagitaa:1
 सहभागितापूर्ण	sahbhagitapurn:2	sahbhagitapuran:1
 सहभागी	sahbhagi:3	sahbhaagi:1
-सहमत	sahmat:3
+सहमत	sahamat:2	sahmat:3
 सहमति	sahmati:3
 सहमती	sahmati:3
 सहमा	sahma:3	sahmaa:1
@@ -27241,7 +27241,7 @@
 सहयोगपूर्ण	sahyogpurn:3
 सहयोगात्मक	sahyogatmak:3	sahyogaatmak:1
 सहयोगियों	sahyogiyon:3
-सहयोगी	sahyogi:3
+सहयोगी	sehyogi:3	sahyogi:3
 सहर	sahar:3
 सहरावत	sahrawat:2	sherawat:1
 सहर्ष	saharsh:3
@@ -27281,11 +27281,11 @@
 सहेलियों	saheliyon:3
 सहेली	saheli:4
 सहोदर	sahodar:3
-सांकृत्यायन	saankrityaayan:1	sankrityayan:1	sankrutyayan:1
+सांकृत्यायन	sankrityayan:2	saankrityaayan:1	sankrutyayan:1
 सांकेतिक	sanketik:2	saanketika:1
 सांख्यिकीय	saankhikiya:1	saankhiyakiy:1	sankhikiya:1	sankhiyakiy:1
 सांगली	sangali:2	saangali:1	sangli:1
-सांगा	saanga:2	saangaa:1	sanga:1
+सांगा	sanga:2	saanga:2	saangaa:1
 सांगीतिक	sangitik:3	saangitik:1
 सांगोला	sangola:3	sangolaa:1
 सांची	sanchi:3	saanchi:1
@@ -27313,7 +27313,7 @@
 सांसारिक	sansarik:4
 सांसारिकता	sansarikata:2	sansarikta:1
 सांसी	sansi:3
-सांस्कृतिक	saanskritik:1	sanskritik:1	sanskrutik:1
+सांस्कृतिक	sanskrtik:3	saanskritik:1	sanskritik:1	sanskrutik:1
 सांस्थानिक	sansthanik:2	sansthanika:1
 साइंटिस्ट्स	scientists:6	scientistes:1
 साइंस	science:5
@@ -27378,11 +27378,11 @@
 सातारा	satara:2	saatara:1
 सातों	saton:2	saaton:1
 सात्विक	satvik:3
-साथ	saath:4	sath:3
+साथ	sath:123	saath:4
 साथसाथ	saathsaath:2	sathsath:1
 साथिया	sathiya:3
-साथियों	sathiyon:3
-साथी	sathi:4
+साथियों	saathiyon:2	sathiyon:3
+साथी	saathi:2	sathi:4
 साद	saad:2	sad:1
 सादगी	sadagi:2	sadgi:1
 सादर	sadar:3
@@ -27428,7 +27428,7 @@
 साबरमती	sabarmati:3
 साबरी	sabari:2	sabri:1
 साबाह	sabah:2	saabah:1
-साबित	saabit:2	sabit:2
+साबित	sabit:7	saabit:2
 साबी	sabi:3
 साबुत	sabut:3	saabut:1
 साबुन	sabun:3
@@ -27444,7 +27444,7 @@
 सामग्री	samagri:3
 सामना	samna:2	samana:1
 सामने	samne:2	samane:1
-सामयिक	samyik:3
+सामयिक	saamayik:2	samyik:3
 सामरिक	samrik:3
 सामरी	samari:2	samri:1
 सामर्थ्य	samarthy:2	samarthya:1
@@ -27464,7 +27464,7 @@
 सामूहिक	samuhik:2	samoohik:1
 सामोआ	samoa:2	samoaa:1
 साम्प्रदायिक	sampradayik:3
-साम्य	samya:2	samy:1
+साम्य	saamy:2	samya:2	samy:1
 साम्यवाद	samyavaad:1	samyavad:1	samyvaad:1
 साम्यवादी	samyavadi:2	saamyvaadi:1
 साम्यावस्था	samyaavasthaa:1	samyavastha:1	samyavstha:1
@@ -27503,7 +27503,7 @@
 सारिका	sarika:3
 सारिपुत्र	sariputra:2	sariputr:1
 सारी	sari:3	saari:1
-सारे	saare:2	sare:2
+सारे	sare:3	saare:2
 सार्क	sark:2	saarc:1
 सार्जेंट	sergeant:2	sargent:1
 सार्थक	sarthak:5	saarthak:1
@@ -27526,7 +27526,7 @@
 साले	sale:4	saale:3
 सालेम	salem:3
 सालेह	saleh:3
-सालों	saalon:2	salon:1
+सालों	salon:3	saalon:2
 साल्क	salk:1	salka:1	sulk:1
 साल्ट	salt:3
 साल्मन	salman:2	salmon:1
@@ -27871,7 +27871,7 @@
 सीढ़ियों	sidhiyon:2	sidhsyon:1
 सीढ़ी	sidhi:3
 सीढ़ीनुमा	sidhinuma:3
-सीता	sita:3
+सीता	seeta:3	sita:3
 सीताकुंड	sitakund:3
 सीताजी	sitaji:3
 सीतापुर	sitapur:3
@@ -27909,7 +27909,7 @@
 सीमा	seema:5	sema:1	sima:1
 सीमांत	simant:2	seemant:1
 सीमाएं	seemaein:1	seemaen:1	simayn:1
-सीमाओं	seemaon:2	simaon:1
+सीमाओं	simao:2	seemaon:2	simaon:1
 सीमापुरी	seemapuri:2	simapuri:1
 सीमाब	seemaab:1	seemab:1	simab:1
 सीमारेखा	seemarekha:2	simarekha:1
@@ -28056,9 +28056,9 @@
 सुनसरी	sunsari:3
 सुनहरा	sunhara:2	sunehra:1
 सुनहरी	sunhari:2	sunahri:1
-सुनहरे	sunahre:1	sunhare:1	sunharey:1
+सुनहरे	sunahare:2	sunahre:1	sunhare:1	sunharey:1
 सुना	suna:3
-सुनाई	sunaee:1	sunai:1	sunayi:1
+सुनाई	sunai:2	sunaee:1	sunayi:1
 सुनाता	sunata:3
 सुनाती	sunati:2	sunaati:1
 सुनाते	sunate:2	sunaatey:1
@@ -28072,7 +28072,7 @@
 सुनासीर	sunaseer:2	sunasir:1
 सुनिधि	sunidhi:3
 सुनियोजित	suniyojit:3
-सुनिश्चित	sunichhit:1	sunischit:1	sunishchit:1
+सुनिश्चित	sunishchit:5	sunichhit:1	sunischit:1
 सुनिश्चितता	sunichhitta:1	sunishchitata:1	sunishchittata:1
 सुनी	suni:3
 सुनीत	sunit:2	suneet:1
@@ -28147,7 +28147,7 @@
 सुरंगों	surangon:2	surango:1
 सुरक्षा	suraksha:6
 सुरक्षात्मक	surakshatmak:3
-सुरक्षित	surakshit:5	surkshit:1
+सुरक्षित	surkshit:4	surakshit:5
 सुरज	suraj:6	sooraj:1
 सुरजन	surjan:3
 सुरजेवाला	surjewala:2	surajevala:1
@@ -28280,7 +28280,7 @@
 सूचियों	suchiyon:2	soochiyon:1
 सूची	suchi:3	soochi:1
 सूचीबद्ध	suchibaddh:2	soochibadh:1
-सूजन	soojan:2	sujan:2
+सूजन	sujan:2	soojan:2
 सूजा	sooja:2	suja:2
 सूजी	suji:3	sooji:1
 सूजे	suje:2	sooje:1
@@ -28333,9 +28333,9 @@
 सृजनशील	srijansheel:1	srijanshil:1	srujanshil:1
 सृजनात्मक	srijanatmak:2	srujanatmak:1
 सृजित	srijit:2	srujit:1
-सृष्टि	srishti:2	srshti:1
+सृष्टि	srushti:6	srishti:2	srshti:1
 से	se:3	say:1
-सेंट	cent:1	saint:1	sent:1
+सेंट	saint:4	cent:1	sent:1
 सेंटर	center:3	centre:1
 सेंटर्स	centers:2	centres:2
 सेंटा	centa:1	santa:1	senta:1
@@ -28427,7 +28427,7 @@
 सेरी	seri:3
 सेरेना	serena:4
 सेरेमिक	ceramic:4
-सेल	sale:8	cell:1	sel:1
+सेल	sel:3	sale:8	cell:1
 सेलांगोर	selangor:3
 सेलिब्रिटी	celebrity:3	celebriti:1
 सेलीना	selina:2	celina:1
@@ -28450,7 +28450,7 @@
 सेवानिवृत्त	sevanivritt:2	sevanivritta:1
 सेवानिवृत्ति	sevanivritti:3
 सेवाभावी	sevabhavi:2	sevabhaavi:1
-सेवारत	sevarat:3
+सेवारत	sevarata:2	sevarat:3
 सेवार्थ	sevaarth:1	sevarth:1	sevartha:1
 सेवाश्रम	sevashram:3
 सेविंग	saving:3
@@ -28486,12 +28486,12 @@
 सैटेलाइट	satellite:5	satelite:1
 सैदपुर	saidpur:2	sedpur:1
 सैद्धांतिक	saidhantik:2	saiddhantik:1
-सैन	sen:2	sain:1
+सैन	san:3	sen:2	sain:1
 सैनिक	sainik:6
 सैनिकों	sainikon:3
 सैनिटरी	sanitary:3
 सैनी	saini:3
-सैन्य	sainy:2	sainya:1
+सैन्य	sainya:7	sainy:2
 सैन्यदल	sainyadal:2	sainydal:1
 सैन्यशक्ति	sainyashakti:2	sainyshakti:1
 सैफ	saif:4
@@ -28605,14 +28605,14 @@
 सोलर	solar:3
 सोलह	solah:3
 सोलहवां	solahavan:2	solhavan:1
-सोलहवीं	solahavin:2	solhavin:1
+सोलहवीं	solahvin:2	solahavin:2	solhavin:1
 सोलहवें	solahaven:2	solhaven:1
 सोलिटेयर	solitaire:3
 सोलो	solo:3
 सोलोमन	soloman:2	solomon:1
 सोल्जर	soldier:3
 सोल्यूशन	solution:3
-सोवियत	soviyat:3
+सोवियत	soviet:4	soviyat:3
 सोशल	social:2	soshal:1
 सोशलिज्म	socialism:2	socialization:1
 सोशलिस्ट	socialist:3
@@ -28687,7 +28687,7 @@
 स्केटर	skater:3
 स्केटिंग	skating:2	sketing:1
 स्केरी	scary:2	skeri:1
-स्केल	scale:3
+स्केल	skel:2	scale:3
 स्केलिंग	scaling:2	scylling:1
 स्कैंडलों	scandalon:2	skaendalon:1
 स्कैंडिनेविया	scandinavia:3
@@ -28696,7 +28696,7 @@
 स्कैनर्स	scanners:3
 स्कैनिंग	scanning:2	scaining:1
 स्कॉच	scotch:3
-स्कॉट	scot:2	scott:1
+स्कॉट	scott:2	scot:2
 स्कॉटलैंड	scotland:3
 स्कॉटिश	scottish:2	scotish:1
 स्कॉर्पियो	scorpio:3
@@ -28895,13 +28895,13 @@
 स्थानक	sthanak:3	sthaanak:1
 स्थानांतरण	sthanantaran:6
 स्थानांतरित	sthanantarit:2	sthaanantarit:1	sthanitarit:1
-स्थानापन्न	sthanapann:2	sthaanapann:1	sthnapanna:1
+स्थानापन्न	sthanapanna:2	sthanapann:2	sthaanapann:1	sthnapanna:1
 स्थानिक	sthanik:3	sthaanik:1
 स्थानीय	sthaniya:2	sthaaniy:1	sthaniy:1
 स्थानों	sthanon:3	sthaanon:1
 स्थापत्यकला	sthapatyakala:2	sthaapatykala:1	sthaptyakala:1
 स्थापन	sthapan:2	sthaapan:1	sthapana:1
-स्थापना	sthapana:2	sthaapana:1	sthapna:1
+स्थापना	sthapna:9	sthapana:2	sthaapana:1
 स्थापित	sthapit:3	sthaapit:1
 स्थायित्व	sthayitv:2	sthayitva:2	sthaayitv:1	sthaayitva:1
 स्थायी	sthayi:3	sthaayi:1
@@ -28983,7 +28983,7 @@
 स्पेक्ट्रा	spectra:3
 स्पेन	spain:3
 स्पेनिश	spanish:5
-स्पेनी	spaini:2	speni:1
+स्पेनी	speni:2	spaini:2
 स्पेयर	spare:2	spear:1
 स्पेल	spell:3
 स्पेलर	speller:2	spelar:1
@@ -29024,7 +29024,7 @@
 स्मूथ	smooth:3
 स्मूथरिंग	smoothering:1	smoothing:1	smothering:1
 स्मूद	smooth:3
-स्मृति	smriti:5	smruti:1
+स्मृति	smruti:2	smriti:5
 स्मृतियों	smritiyon:2	smrutiyon:1
 स्मृतिलेख	smritilekh:2	smrutilekh:1
 स्मेल	smale:1	smel:1	smell:1
@@ -29068,9 +29068,9 @@
 स्वच्छता	swachhta:2	savachhata:1	swacchataa:1	swachchata:1
 स्वछंद	swachhand:2	swacchand:1
 स्वछता	swacchataa:1	swachchata:1	swachhata:1
-स्वत	swat:3
-स्वतंत्र	swatantra:10	svatantr:1	swatantr:1
-स्वतंत्रता	swatantrata:4	svatantrata:1	swatantrataa:1
+स्वत	swatah:2	swat:3
+स्वतंत्र	svatantra:3	swatantra:10	svatantr:1	swatantr:1
+स्वतंत्रता	svatantrata:7	swatantrata:4	swatantrataa:1
 स्वतंत्रतासंग्राम	swatantraasangraam:1	swatantrasangram:1	swatantratasangram:1
 स्वतंत्ररूप	swatantrarup:2	svatantrarupa:1	swatantraruup:1
 स्वदेश	swadesh:3
@@ -29080,7 +29080,7 @@
 स्वनिर्मित	swanirmit:3
 स्वप्न	swapn:2	swapna:2	svapn:1	swapan:1
 स्वप्निल	swapnil:3
-स्वभाव	svabhav:1	swabhaav:1	swabhav:1
+स्वभाव	swabhav:2	svabhav:1	swabhaav:1
 स्वभावत	svabhavat:1	swabhaavat:1	swabhavat:1
 स्वभावतया	svabhavataya:1	swabhaavatayaa:1	swabhavatya:1
 स्वभावों	svabhabon:1	swabhaavon:1	swabhavon:1
@@ -29098,22 +29098,22 @@
 स्वराज्य	swarajya:2	swaraajya:1
 स्वरुप	swarup:3
 स्वरुपों	swarupon:2	swaroopon:1
-स्वरूप	swarup:2	swaroop:1
+स्वरूप	svarup:8	swarup:2	swaroop:1
 स्वरूपानंद	swarupanand:2	swaruupanand:1
 स्वरूपों	swarupon:2	swaroopon:1
 स्वरों	swaron:3
 स्वरोजगार	swarojgar:3	swarojgaar:2	swarrojgar:1
-स्वर्ग	swarg:5	svarg:1
+स्वर्ग	svarg:2	swarg:5
 स्वर्गवास	swargavas:1	swargawaas:1	swargvas:1
 स्वर्गवासी	swargvasi:2	swargavasi:1	swargwaasi:1
 स्वर्गारोहण	swargarohan:2	swargaarohan:1
 स्वर्गाश्रम	swargaashram:1	swargashram:1	swargasram:1
 स्वर्गीय	swargiy:2	swargiiya:1	swargiya:1
-स्वर्ण	swarn:5	svarn:2	swarna:2
+स्वर्ण	swarna:2	swarn:5	svarn:2
 स्वर्णकाल	swarkal:1	swarnakaal:1	swarnakal:1
 स्वशासन	swashasan:2	swashaasan:1
 स्वस्तिक	swastik:3
-स्वस्थ	swasth:2	swastha:1
+स्वस्थ	svastha:2	swasth:2	swastha:1
 स्वा	swa:3
 स्वां	swan:3
 स्वांग	swang:3
@@ -29125,14 +29125,14 @@
 स्वादिष्ट	swadisht:2	swaadisht:1
 स्वाधिष्ठान	swaadhishthaan:1	swadhishthan:1	swadhishttan:1
 स्वाधीन	swadhin:2	swaadheen:1
-स्वाधीनता	swadhinta:2	swaadheenta:1	swadhinata:1
+स्वाधीनता	svadhinta:2	swadhinta:2	swaadheenta:1	swadhinata:1
 स्वाध्याय	swadhyay:2	swadhyaay:1
 स्वान	swan:3
-स्वाभाविक	swabhavik:2	swaabhaavik:1
+स्वाभाविक	svabhavik:3	swabhavik:2	swaabhaavik:1
 स्वाभाविकता	swaabhaavikta:1	swabhavikata:1	swabhavikta:1
 स्वाभिमान	swaabhiman:1	swabhimaan:1	swabhiman:1
 स्वाभिमानी	swaabhimaani:1	swabhimaani:1	swabhimani:1
-स्वामित्व	swaamitva:1	swamitv:1	swamitva:1
+स्वामित्व	swamitv:2	swaamitva:1	swamitva:1
 स्वामिभक्त	swamibhakt:2	swaamibhakta:1
 स्वामियों	swaamiyon:1	swamion:1	swamiyon:1
 स्वामी	swami:2	swaami:1
@@ -29146,7 +29146,7 @@
 स्वार्थपरक	swarthparak:2	swaarthparak:1
 स्वार्थी	swarthi:2	swaarthi:1
 स्वास्थ	swasth:2	swastha:1
-स्वास्थ्य	swaasthya:1	swasthey:1	swasthya:1
+स्वास्थ्य	swasthya:4	swaasthya:1	swasthey:1
 स्वास्थ्यकर्मियों	swaasthyakarmiyon:1	swasthyakarmiyon:1	swasthykarmiyon:1
 स्वाहा	swaha:2	swaaha:1
 स्विंग	swing:3
@@ -29160,7 +29160,7 @@
 स्विमिंग	swimming:2	swiming:1
 स्विस	swiss:2	swis:1
 स्वीकर	swikar:2	sweekar:1
-स्वीकार	swikar:2	sweekar:1
+स्वीकार	svikar:9	swikar:2	sweekar:1
 स्वीकारती	swikarti:2	sweekaarti:1
 स्वीकारते	swikarte:2	sweekarte:1
 स्वीकारना	swikarna:2	sweekaarna:1
@@ -29170,7 +29170,7 @@
 स्वीकार्य	swikarya:2	sweekaarya:1
 स्वीकार्यता	swikaryata:2	sweekaryakarta:1
 स्वीकृत	swikrat:1	swikrit:1	swikrut:1
-स्वीकृति	swikrati:1	swikriti:1	swikruti:1
+स्वीकृति	svikriti:3	swikrati:1	swikriti:1	swikruti:1
 स्वीकृतियों	sweekritiyon:1	swikritiyon:1	swikrutiyon:1
 स्वीट	sweet:3
 स्वीटनर	sweetener:2	sweetner:1
@@ -29193,7 +29193,7 @@
 स्वैप	swap:4	swipe:1
 ह	h:2	ha:1
 हंगर	hunger:3
-हंगरी	hungry:3
+हंगरी	hungary:2	hungry:3
 हंगल	hungal:2	hangal:1
 हंगामा	hungama:2	hangama:1
 हंट	hunt:3
@@ -29221,7 +29221,7 @@
 हक्सर	haksar:3
 हज	haj:3
 हजरत	hazrat:2	hajrat:1
-हजार	hajar:3
+हजार	hajaar:3	hajar:3
 हजारिका	hajarika:3
 हजारी	hajari:3
 हजारीप्रसाद	hajariprasad:3
@@ -29251,7 +29251,7 @@
 हठयोग	hathyog:2	hatyog:1
 हठी	hathi:3
 हडसन	hudson:2	hadsan:1
-हड़ताल	hadtaal:2	hadtal:1
+हड़ताल	hadtal:2	hadtaal:2
 हड़तालें	hadtalen:2	hadtalein:1
 हड़तालों	hadtalon:3
 हड़पे	hadpe:2	hadape:1
@@ -29295,7 +29295,7 @@
 हनु	hanu:3
 हनुत	hanut:3
 हनुमंत	hanumant:3
-हनुमान	hanuman:6
+हनुमान	hanumaan:4	hanuman:6
 हनुमानगढ़	hanumangarh:2	hanumangadh:1
 हफ्ते	hafte:3
 हफ्तों	hafton:3
@@ -29330,7 +29330,7 @@
 हमीर	hamir:2	hameer:1
 हमीरपुर	hamirpur:4
 हमे	hame:1	hamen:1	hume:1
-हमें	hamein:3	humein:2	hame:1	hamen:1
+हमें	hamen:4	hamein:3	humein:2	hame:1
 हमेशा	hamesha:3
 हम्ज़ा	hamja:2	hamza:1
 हम्मीर	hammir:2	hammeer:1
@@ -29428,8 +29428,8 @@
 हवन	havan:2	hawan:1
 हवलदार	havaldar:2	hawaldar:1
 हवस	hawas:2	havas:1
-हवा	hawa:5	hava:1
-हवाई	hawai:2	havai:1
+हवा	hava:3	hawa:5
+हवाई	havai:7	hawai:2
 हवाएं	havaen:1	hawayein:1	hawayen:1
 हवाओ	havao:1	hawaao:1	hawao:1
 हवाओं	havaon:1	hawaaon:1	hawaon:1
@@ -29618,7 +29618,7 @@
 हिंसक	hinsak:3
 हिंसा	hinsa:3
 हिंसात्मक	hinsatmak:3
-हिअर	hear:2	here:2
+हिअर	here:2	hear:2
 हिक	heek:1	hick:1	hik:1
 हिकी	hiki:2	hickey:1
 हिक्स	hicks:2	hiks:1
@@ -29645,7 +29645,7 @@
 हितेश	hitesh:3
 हितैषियों	hitaishiyon:3
 हितैषी	hitaishi:2	hitaushi:1
-हितों	hiton:3
+हितों	hito:2	hiton:3
 हितोपदेश	hitopadesh:3
 हिदायत	hidayat:3
 हिना	hina:3	heena:1
@@ -29666,7 +29666,7 @@
 हिमाचल	himachal:3
 हिमाच्छादित	himaachchhaadit:1	himachadit:1	himachhadit:1
 हिमानी	himani:3	himaani:1
-हिमालय	himalaya:2	himalay:1
+हिमालय	himalay:3	himalaya:2
 हिमालयन	himalayan:3
 हिमालया	himalaya:3
 हिमाली	himali:3
@@ -29718,7 +29718,7 @@
 हीनता	heenata:2	hinata:2	hinta:1
 हीनयान	heenayaana:1	hinayan:1	hinayana:1	hinyan:1
 हीना	hina:2	heena:1
-हीमोग्लोबिन	hemoglobin:3
+हीमोग्लोबिन	himoglobin:3	hemoglobin:3
 हीर	heer:2	hir:2
 हीरक	hirak:3
 हीरा	hira:3
@@ -29744,8 +29744,8 @@
 हुआंग	huang:2	huaang:1
 हुइ	hui:3
 हुई	hui:5
-हुईं	huin:2	hui:1
-हुए	hue:6	huye:2
+हुईं	hui:2	huin:2
+हुए	huye:63	hue:6
 हुऐ	hue:3
 हुक	hook:2	huk:1
 हुकम	hukam:3
@@ -29773,17 +29773,17 @@
 हुल्लड़	hullad:3
 हुसैन	husain:3	hussain:1
 हूँ	hun:2	hoon:1
-हूं	hoon:3	hun:1	huun:1
+हूं	hun:7	hoon:3	huun:1
 हूण	hun:2	hoon:1
 हूणों	hunon:3
 हूपर	hooper:1	huppar:1	hupper:1
 हूरों	huron:3
 हूवर	huvar:2	huwar:1
-हृदय	hriday:3	hridya:1
+हृदय	hrudya:2	hriday:3	hridya:1
 हृदयंगम	hridyangam:2	hridayamgam:1
 हृदयाघात	hridayaghat:1	hridyaghat:1	hriyaghat:1
 हृास	haas:1	hras:1	hyas:1
-हे	hey:3	he:2	hai:1
+हे	he:2	hey:3	hai:1
 हेंडरसन	handerson:2	hendarsan:1
 हेक्टर	hector:2	hektar:1
 हेगडे	hegde:3
@@ -29819,7 +29819,7 @@
 हेरोन	heron:3
 हेरोल्ड	herold:3
 हेल	hel:2	hell:1
-हेलन	halen:1	helan:1	helen:1
+हेलन	helen:2	halen:1	helan:1
 हेलमंद	helmand:3
 हेलमेट	helmet:3
 हेलिकॉप्टर	helicopter:3
@@ -29913,7 +29913,7 @@
 हॉस्टलों	hostelon:3
 हॉस्पिटल	hospital:6
 हो	ho:6
-हों	hon:3
+हों	ho:6	hon:3
 होंगी	hongi:3
 होंगे	honge:2	hongey:1
 होंठ	honth:3
@@ -29925,7 +29925,7 @@
 होगा	hoga:7
 होगी	hogi:3
 होजरी	hosiery:2	hojri:1	hojry:1
-होटल	hotel:6
+होटल	hotal:5	hotel:6
 होटलों	hotelon:3
 होटल्स	hotels:3
 होटेल्स	hotels:3

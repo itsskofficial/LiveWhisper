@@ -25,6 +25,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from livewhisper.onboarding import Onboarding  # noqa: E402
 
+from livewhisper.console import setup as _console
+
+_console()
+
 failures: list = []
 
 

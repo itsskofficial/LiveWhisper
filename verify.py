@@ -15,6 +15,10 @@ import sys
 import time
 from pathlib import Path
 
+from livewhisper.console import setup as _console
+
+_console()
+
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 

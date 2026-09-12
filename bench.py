@@ -17,6 +17,10 @@ import yaml
 from livewhisper.audio import TARGET_RATE, Recorder
 from livewhisper.transcribe import build_backend
 
+from livewhisper.console import setup as _console
+
+_console()
+
 SENTENCE = (
     "The quarterly review is scheduled for Thursday afternoon. "
     "Priya will present the migration timeline. We still need a decision on the "

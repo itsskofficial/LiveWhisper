@@ -20,6 +20,10 @@ from livewhisper.notes import NoteBook
 from livewhisper.pipeline import Pipeline
 from livewhisper.profile import Habits, ProfileStore
 
+from livewhisper.console import setup as _console
+
+_console()
+
 PASS, FAIL = "  ok  ", " FAIL "
 failures: list[str] = []
 

@@ -17,8 +17,9 @@ from __future__ import annotations
 
 import difflib
 import logging
-import re
 from dataclasses import dataclass, field
+
+from .languages import WORD
 
 log = logging.getLogger(__name__)
 
@@ -218,8 +219,12 @@ def similarity(a: str, b: str) -> float:
     return difflib.SequenceMatcher(a=a.lower(), b=b.lower()).ratio()
 
 
-_WORD = re.compile(r"[^\W\d_]+", re.UNICODE)
-
-
 def tokenize(text: str) -> list[str]:
-    return _WORD.findall(text)
+    """Split into words, keeping native script words whole.
+
+    Uses the shared mark-aware pattern rather than `[^\\W\\d_]+`. This path sees
+    native script whenever a word failed to romanize or the user forced the
+    original script, and the naive pattern shreds those into fragments - which
+    then get aligned against Latin words and learned from.
+    """
+    return WORD.findall(text)

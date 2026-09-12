@@ -19,6 +19,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from livewhisper.script.languages import CODES, LANGUAGES  # noqa: E402
 
+from livewhisper.console import setup as _console
+
+_console()
+
 DATA = Path(__file__).resolve().parent.parent / "data"
 MAX_VARIANTS = 4        # beyond this the tail is noise and costs disk
 

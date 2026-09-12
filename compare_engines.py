@@ -21,6 +21,10 @@ import yaml
 from livewhisper.transcribe import build_backend
 from test_accuracy import normalise, wer
 
+from livewhisper.console import setup as _console
+
+_console()
+
 
 def main() -> int:
     wav = Path(sys.argv[1] if len(sys.argv) > 1

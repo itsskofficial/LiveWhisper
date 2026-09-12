@@ -21,6 +21,10 @@ import yaml
 
 from livewhisper.transcribe import build_backend
 
+from livewhisper.console import setup as _console
+
+_console()
+
 OUT = Path("accuracy_runs/hinglish_variants.md")
 
 # An initial_prompt written in the target style is the standard trick: Whisper

@@ -41,6 +41,10 @@ app.styles = ProfileStore(path=tmp / "profiles.json")
 print("=== wizard ===")
 from livewhisper.wizard import Wizard      # noqa: E402
 
+from livewhisper.console import setup as _console
+
+_console()
+
 w = Wizard(app)
 app.root.update()
 check("wizard opens", w.winfo_exists())

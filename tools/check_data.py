@@ -17,6 +17,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from livewhisper.script.languages import CODES, LANGUAGES, run_pattern  # noqa: E402
 from livewhisper.script.lexicon import get_lexicon  # noqa: E402
 
+from livewhisper.console import setup as _console
+
+_console()
+
 MIN_WORDS = 15_000
 failures: list = []
 

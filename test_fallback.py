@@ -23,6 +23,10 @@ import yaml
 from livewhisper.audio import TARGET_RATE
 from livewhisper.transcribe import AutoBackend, GroqUnavailable, build_backend
 
+from livewhisper.console import setup as _console
+
+_console()
+
 SENTENCE = ("The migration timeline slipped by two weeks. "
             "Marcus will raise it with the vendor on Thursday.")
 

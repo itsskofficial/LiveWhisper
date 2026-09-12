@@ -18,6 +18,10 @@ import yaml
 
 from livewhisper.transcribe import GroqBackend, LocalBackend
 
+from livewhisper.console import setup as _console
+
+_console()
+
 OUT = Path("accuracy_runs/groq_hinglish.md")
 
 HINGLISH_PROMPT = (

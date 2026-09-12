@@ -22,6 +22,10 @@ import yaml
 from livewhisper.audio import Recorder, write_wav
 from livewhisper.transcribe import build_backend
 
+from livewhisper.console import setup as _console
+
+_console()
+
 OUT = Path("accuracy_runs")
 
 
