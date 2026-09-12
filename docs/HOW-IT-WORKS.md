@@ -12,8 +12,14 @@ You hold a hotkey, speak, and the words appear wherever your cursor is.
 
 That is the whole promise. Everything else in this document exists to make
 those words come out **the way you would have typed them yourself** — including
-your capitalisation habits, your punctuation habits, and, if you speak Hindi or
-Marathi, the Latin spellings you actually use rather than Devanagari script.
+your capitalisation habits, your punctuation habits, and, if you speak any of
+twelve South Asian languages, the Latin spellings you actually use rather than
+the native script.
+
+Hindi, Bengali, Urdu, Punjabi, Marathi, Telugu, Tamil, Gujarati, Kannada,
+Malayalam, Sinhala and Sindhi — about **1.67 billion speakers**, all of whom
+have the same problem and none of whom are served by existing dictation
+tools.
 
 Four things it does:
 
@@ -75,6 +81,20 @@ But on WhatsApp, essentially everyone writes Hindi in **Latin** letters —
 kya kar rahe ho.
 
 Same language. Same words. Different script.
+
+This is not a Hindi quirk. It happens everywhere, and people have names for the
+result:
+
+| Language | Native script | What people type | Called |
+| --- | --- | --- | --- |
+| Hindi | क्या कर रहे हो | kya kar rahe ho | Hinglish |
+| Tamil | நான் வருவேன் | naan varuven | Tanglish |
+| Bengali | আমি কাল আসব | ami kal asbo | Banglish |
+| Telugu | నేను వస్తాను | nenu vastanu | Thanglish |
+| Malayalam | ഞാൻ വരും | njaan varum | Manglish |
+
+Twelve of these are supported, because that is how many Google's Dakshina
+dataset covers.
 
 Speech recognition software gets the language right and the script wrong. It
 outputs क्या कर रहे हो because that is "correct" Hindi. But if the app pastes
@@ -200,14 +220,15 @@ assumption.
 
 ### 4.2 The dictionary — 92% of the work, no AI at all
 
-Google published a dataset called **Dakshina**: a list of Hindi words alongside
-how real people spell them in Latin letters, collected from actual humans.
+Google published a dataset called **Dakshina**: lists of words alongside how
+real people spell them in Latin letters, collected from actual humans, for
+twelve South Asian languages.
 
 We measured it against real Whisper output from a real Hinglish podcast:
 
 | | |
 | --- | --- |
-| Words in the dictionary | 30,000 |
+| Words in the dictionary | 30,000 per language |
 | **Tokens it could handle** | **92.3%** |
 | Size on disk | 1.1 MB |
 | Time per lookup | microseconds |
@@ -218,7 +239,49 @@ app's architecture: the hard-looking problem is mostly a dictionary.
 
 `livewhisper/script/lexicon.py`, `experiments/exp2_dakshina_coverage.py`
 
-### 4.3 The small model — the remaining 8%
+### 4.3 Does this work outside Hindi?
+
+That 92% is one language on one clip. The whole twelve-language expansion rests
+on it holding elsewhere, so we measured each language separately — against
+running text, weighted by how often words actually occur, because that is what
+speech is made of.
+
+| Language | Coverage | | Language | Coverage |
+| --- | --- | --- | --- | --- |
+| Urdu | 92.1% | | Kannada | 88.2% |
+| Punjabi | 91.4% | | Malayalam | 88.1% |
+| Marathi | 90.9% | | Sindhi | 88.0% |
+| Gujarati | 90.8% | | Hindi | 87.3% |
+| Tamil | 86.9% | | Telugu | 86.2% |
+| Bengali | 83.4% | | Sinhala | 76.2% |
+
+**87.4% average.** The approach generalises. Sinhala is the weakest and would
+benefit most from a curated word list — which is a contribution a native speaker
+can make in an afternoon.
+
+Total cost: 350,000 words, 17 MB, loaded only for the language you actually
+speak.
+
+`experiments/exp7_multilingual_coverage.py`
+
+### 4.4 A bug worth knowing about
+
+Adding eleven languages surfaced something invisible in Hindi.
+
+Indic scripts use two invisible characters — the **zero-width joiner** and
+**non-joiner** — *inside* words, to control how letters fuse together. Marathi
+अधिकार्‍यांच्या contains one. So does Malayalam അക്‌ബർ and Sinhala අංශුමාත්‍ර.
+
+The code that found words in a sentence didn't know about them, so it **split
+those words in half**, looked up two meaningless fragments, found neither, and
+left the word in its original script. Five percent of Sinhala words were
+affected.
+
+It was found by a data check that verified every dictionary key was actually
+written in that language's script. The fix was one line. The lesson is that the
+cheap automated check earned its keep immediately.
+
+### 4.5 The small model — the remaining 8%
 
 Some words aren't in the dictionary. Usually grammatical variations — `लेंगी`
 (feminine future tense) rather than a base word.
@@ -256,7 +319,7 @@ better than **plausibly** wrong, because you'll notice and correct it.
 
 `livewhisper/script/oov.py`, `experiments/exp4_oov_seq2seq.py`
 
-### 4.4 Deciding which script you want
+### 4.6 Deciding which script you want
 
 Sometimes you *do* want Devanagari — a formal document, a Hindi form.
 
@@ -523,15 +586,22 @@ livewhisper/
   onboarding.py    turns typed sentences into a spelling profile
   wizard.py        the one-minute setup window
   script/
-    lexicon.py     the 30k-word dictionary + curated common words
-    oov.py         the 2.56M character model for unknown words
+    languages.py   the twelve languages, their scripts and unicode ranges
+    lexicon.py     the 30k-word dictionaries + curated common words
+    oov.py         the character model for unknown words
     conventions.py your personal spelling rules, learned letter by letter
     romanize.py    puts the three together
 
+tools/
+    build_lexicons.py       rebuild the shipped dictionaries from Dakshina
+    train_transliterator.py train the character model
+    check_data.py           lexicon integrity, runs in CI
+    check_core.py           romanization + learning, runs in CI
+
 data/
-  hi.lexicon.tsv   30,000 Hindi words (CC BY-SA 4.0, see LICENSE-DATA.md)
-  mr.lexicon.tsv   30,000 Marathi words
-  translit_hi.pt   the trained character model
+  <code>.lexicon.tsv   30,000 words each, twelve languages, 17 MB total
+                       (CC BY-SA 4.0, see LICENSE-DATA.md)
+  translit.pt          the trained character model
 
 experiments/       every measurement quoted in this document, reproducible
 ```
@@ -559,7 +629,8 @@ Every number in this document comes from a script in `experiments/` that you can
 re-run. Being clear about their limits:
 
 **Measured:**
-- 92.3% dictionary coverage — on one 75-second podcast clip
+- 87.4% dictionary coverage averaged across all twelve languages, on running text
+- 92.3% dictionary coverage for Hindi — on one 75-second podcast clip
 - 63.2% model accuracy — on Dakshina's own held-out test data
 - 27x real-time transcription — on your RTX 4060
 - 57% of spelling variation from 10 conventions — across 30,000 words
@@ -583,6 +654,10 @@ re-run. Being clear about their limits:
   improve it meaningfully.
 - Dakshina is Wikipedia-derived, so it under-represents chat slang and heavy
   clipping (`nhi`, `krna`, `h`).
+- **Nobody has checked the eleven non-Hindi languages by eye.** The coverage
+  numbers say the dictionary contains the words; they do not say a native
+  speaker would agree with the spellings chosen. That is the single most
+  valuable thing a contributor can tell us.
 
 ---
 
