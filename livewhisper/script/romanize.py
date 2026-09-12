@@ -89,8 +89,13 @@ class Romanizer:
         self._last_native = native_text
 
     def learn_from_correction(self, before: str, after: str) -> list:
-        """Compare what we produced with what the user changed it to."""
-        from .conventions import similarity, tokenize
+        """Compare what we produced with what the user changed it to.
+
+        Only respellings are learned. A nearby token that merely resembles our
+        word is a different word, and an override taken from one is permanent and
+        applies everywhere, so the bar to cross is `plausible_correction`.
+        """
+        from .conventions import plausible_correction, similarity, tokenize
 
         notes: list = []
         b_words, a_words = tokenize(before), tokenize(after)
@@ -102,14 +107,24 @@ class Romanizer:
             spelling, _ = self.word(native)
             produced[spelling.lower()] = native
 
+        # Words the user left alone are evidence that they are already spelled
+        # right, so they must not be claimed as the correction for some other
+        # word sitting next to them.
+        unchanged = {w.lower() for w in a_words} & {w.lower() for w in b_words}
+
         for i, bw in enumerate(b_words):
             native = produced.get(bw.lower())
             if not native:
                 continue
             window = a_words[max(0, i - 2):i + 3] or a_words
-            best = max(window, key=lambda aw: similarity(bw, aw), default=None)
-            if best and best.lower() != bw.lower() and similarity(bw, best) > 0.45:
-                notes += self.conventions.learn(native, bw, best)
+            cands = [aw for aw in window
+                     if aw.lower() != bw.lower()
+                     and aw.lower() not in unchanged
+                     and plausible_correction(bw, aw)]
+            if not cands:
+                continue
+            best = max(cands, key=lambda aw: similarity(bw, aw))
+            notes += self.conventions.learn(native, bw, best)
         return notes
 
 

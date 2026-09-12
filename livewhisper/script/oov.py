@@ -24,6 +24,17 @@ LEGACY_CHECKPOINT = DATA / "translit_hi.pt"      # hindi-only, older builds
 PAD, BOS, EOS = 0, 1, 2
 MAX_OUT = 24
 
+# The positional embedding has 64 slots, so a longer input indexes off the end
+# and raises IndexError deep inside the encoder. Real words never come close -
+# the longest in any shipped lexicon is 39 characters - but a transcript can
+# arrive with no spaces at all, and then the whole utterance is one "word".
+# Whisper does exactly this on run-on speech in Indic languages.
+#
+# 48 leaves headroom under 64 for the language tag and EOS. Anything longer is
+# not a word the model was trained to spell anyway, so it is left in the native
+# script: visible and correctable, which is the better failure.
+MAX_IN = 48
+
 
 def _architecture(state: dict) -> dict:
     """Recover the model's shape from its own weights.
@@ -139,6 +150,14 @@ class OOVModel:
         if self.multilingual and lang not in self.languages:
             return {}
         import torch
+
+        # Over-long inputs would index past the positional embedding. Drop them
+        # here rather than truncating: a spelling derived from the first 48
+        # characters of a 600-character blob would be confidently wrong, and
+        # leaving the native script is the honest outcome.
+        words = [w for w in words if len(w) <= MAX_IN]
+        if not words:
+            return {}
 
         tag = [self._src[f"<{lang}>"]] if (self.multilingual
                                            and f"<{lang}>" in self._src) else []

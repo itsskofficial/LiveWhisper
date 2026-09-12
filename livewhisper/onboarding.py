@@ -23,6 +23,8 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass
 
+from .script.conventions import LEN_RATIO as _LEN_RATIO
+from .script.conventions import MIN_SIMILARITY as _MIN_SIMILARITY
 from .script.conventions import Conventions, similarity, tokenize
 from .script.languages import DEFAULT, LANGUAGES, run_pattern, supported
 from .script.lexicon import get_lexicon
@@ -193,11 +195,11 @@ class Onboarding:
             return 0.0
         return similarity(a + b, latin)
 
-    # Tuned against real failures rather than guessed. similarity alone is not
-    # enough: "aa" vs "araha" scores 0.57, but so does "mujhe" vs "muze", and
-    # the first is nonsense while the second is exactly what we want to learn.
-    MIN_SIMILARITY = 0.60
-    LEN_RATIO = (0.5, 1.8)      # transliteration roughly preserves length
+    # Shared with correction learning, which had its own looser threshold until
+    # that let a markdown link teach मैं -> "link". One place to tune, so the two
+    # paths cannot drift apart again. See conventions.MIN_SIMILARITY.
+    MIN_SIMILARITY = _MIN_SIMILARITY
+    LEN_RATIO = _LEN_RATIO
 
     def _score(self, native: str, latin: str) -> float:
         """How believable is this Latin token as a spelling of that word?

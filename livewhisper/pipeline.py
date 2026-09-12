@@ -17,6 +17,7 @@ from dataclasses import dataclass
 
 from . import context as ctx_mod
 from .profile import ProfileStore
+from .script import conventions as conv_mod
 from .script.languages import detect_script, has_indic, supported
 from .script.romanize import Romanizer, script_ratio
 
@@ -108,6 +109,42 @@ class Pipeline:
 
     # -------------------------------------------------------------- reverse
 
+    # How much of what we pasted has to still be there for the field to count as
+    # an edit of our text. Below this the user has moved on, cleared the box, or
+    # written something else entirely, and there is nothing to learn from.
+    EDIT_OVERLAP = 0.5
+
+    @staticmethod
+    def _is_edit_of_mine(mine: str, current: str) -> bool:
+        """Is this field plausibly our text with corrections applied?
+
+        The old test was `len(current) < 4`, which only rejected near-empty
+        fields. Everything else was treated as a correction of our dictation -
+        including a field the user had since filled with unrelated text, whose
+        words then got aligned against ours and learned as respellings.
+
+        Containment is the common case (the user fixed a word or two, or typed
+        around our text). Otherwise require that most of our words survived -
+        where a word counts as surviving if it is still there verbatim OR a
+        plausible respelling of it is.
+
+        That second clause is essential, not a nicety: correcting a one-word
+        dictation replaces the only word we produced, so an exact-match test
+        scores 0% and refuses the clearest correction there is.
+        """
+        if mine in current:
+            return True
+        mine_words = [w.lower() for w in conv_mod.tokenize(mine)]
+        if not mine_words:
+            return False
+        theirs = [w.lower() for w in conv_mod.tokenize(current)]
+        if not theirs:
+            return False
+        kept = sum(w in theirs
+                   or any(conv_mod.plausible_correction(w, t) for t in theirs)
+                   for w in mine_words)
+        return kept / len(mine_words) >= Pipeline.EDIT_OVERLAP
+
     def learn_from_screen(self, screen: ctx_mod.ScreenContext | None) -> list:
         """Compare what we pasted with what is in the field now.
 
@@ -118,9 +155,10 @@ class Pipeline:
         if not self._last or not screen:
             return []
         current = (screen.focused_text or "").strip()
-        if not current or current == self._last.text.strip():
+        mine = self._last.text.strip()
+        if not current or current == mine:
             return []
-        if self._last.text.strip() not in current and len(current) < 4:
+        if not self._is_edit_of_mine(mine, current):
             return []
 
         notes: list = []

@@ -219,6 +219,36 @@ def similarity(a: str, b: str) -> float:
     return difflib.SequenceMatcher(a=a.lower(), b=b.lower()).ratio()
 
 
+# Tuned against real failures rather than guessed. Similarity alone is not
+# enough: "aa" vs "araha" scores 0.57, but so does "mujhe" vs "muze", and the
+# first is nonsense while the second is exactly what we want to learn. So the
+# length guard does the work that the ratio cannot.
+#
+# Both the onboarding aligner and correction learning use these. They were
+# separate numbers once, and the correction path's looser 0.45 let a markdown
+# link in the field teach मैं -> "link": SequenceMatcher scores those 0.50,
+# because two four-letter words sharing "in" is enough. One override like that
+# rewrites every future "main".
+MIN_SIMILARITY = 0.60
+LEN_RATIO = (0.5, 1.8)          # transliteration roughly preserves length
+
+
+def plausible_correction(default: str, candidate: str) -> bool:
+    """Could `candidate` be this user's spelling of the same word?
+
+    A correction is a respelling, not a replacement. Anything that fails this is
+    a different word that happens to sit nearby - the field had other text in
+    it, or the user rewrote the sentence - and learning from it corrupts the
+    profile permanently.
+    """
+    if not default or not candidate:
+        return False
+    ratio = len(candidate) / len(default)
+    if not (LEN_RATIO[0] <= ratio <= LEN_RATIO[1]):
+        return False
+    return similarity(default, candidate) >= MIN_SIMILARITY
+
+
 def tokenize(text: str) -> list[str]:
     """Split into words, keeping native script words whole.
 
