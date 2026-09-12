@@ -151,7 +151,7 @@ Three stages, and only one is a neural network:
 
 ```
   87% of words  →  dictionary lookup     instant · 17 MB · no AI
-  13% of words  →  2.5M character model  runs on CPU
+  13% of words  →  4.5M character model  18 MB · runs on CPU · 12 languages
   every word    →  your own conventions  learned from your corrections
 ```
 
@@ -187,7 +187,7 @@ real capability, not parity.
 | --- | --- |
 | Lexicon coverage, 12 languages | **87.4%** average on running text |
 | Transcription | 27x realtime (`large-v3`, RTX 4060) |
-| Character model (Hindi) | 63.2% exact match, 2.56M params, CPU |
+| Character model, 12 languages | 65.4% exact match, 4.5M params, CPU |
 | 10 corrections | 57% of spelling variation |
 | Whisper → romanized via prompting | **Impossible** — 10 approaches, all failed |
 

@@ -25,6 +25,22 @@ PAD, BOS, EOS = 0, 1, 2
 MAX_OUT = 24
 
 
+def _architecture(state: dict) -> dict:
+    """Recover the model's shape from its own weights.
+
+    Hardcoding the architecture here as well as in the trainer meant the two
+    could drift apart - and they did: the trainer moved to d=256 while this
+    still said 192, so the checkpoint failed to load and the app silently fell
+    back to dictionary-only. Reading it off the tensors cannot drift.
+    """
+    d = state["src_emb.weight"].shape[1]
+    ff = state["core.encoder.layers.0.linear1.weight"].shape[0]
+    layers = len({k.split(".")[3] for k in state
+                  if k.startswith("core.encoder.layers.")})
+    heads = 4 if d % 4 == 0 else 8         # not recoverable; 4 is what we train
+    return {"d": d, "ff": ff, "layers": layers, "heads": heads}
+
+
 def _build():
     import torch
     import torch.nn as nn
@@ -100,12 +116,13 @@ class OOVModel:
             self._src = {c: i for i, c in enumerate(ck["src_itos"])}
             self._tgt = ck["tgt_itos"]
             cls = _build()
-            self._model = cls(len(ck["src_itos"]), len(ck["tgt_itos"]))
+            arch = ck.get("arch") or _architecture(ck["model"])
+            self._model = cls(len(ck["src_itos"]), len(ck["tgt_itos"]), **arch)
             self._model.load_state_dict(ck["model"])
             self._model.eval()
             self.available = True
-            log.info("transliteration model ready: %d chars, languages %s",
-                     len(self._src), ",".join(sorted(self.languages)))
+            log.info("transliteration model ready: d=%d, %d chars, languages %s",
+                     arch["d"], len(self._src), ",".join(sorted(self.languages)))
         except Exception:
             log.warning("could not load transliteration model", exc_info=True)
         return self.available

@@ -10,5 +10,6 @@ shot*.png
 accuracy_runs/
 
 *.pt
+!data/translit.pt
 
 .github/workflows/

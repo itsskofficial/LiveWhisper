@@ -233,6 +233,8 @@ def main() -> int:
     out = DATA / "translit.pt"
     torch.save({"model": model.state_dict(), "src_itos": sv.itos,
                 "tgt_itos": tv.itos, "languages": CODES,
+                # Recorded so inference never has to guess or hardcode it.
+                "arch": {"d": 256, "heads": 4, "layers": 3, "ff": 640},
                 "accuracy": {c: a for c, a, _ in report}}, out)
     print(f"\nwrote {out} ({out.stat().st_size/1e6:.1f} MB)")
     return 0

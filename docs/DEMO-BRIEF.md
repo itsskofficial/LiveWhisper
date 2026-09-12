@@ -11,7 +11,8 @@ described, plus the things that will ruin a take.*
 ## The app
 
 **LiveWhisper** — voice dictation for Windows that writes the way *you* write,
-not the way a dictionary thinks you should.
+not the way a dictionary thinks you should. **Twelve South Asian languages**,
+about 1.67 billion speakers.
 
 | | |
 | --- | --- |
@@ -121,6 +122,26 @@ Linger on the final summary screen, which reports what it learned:
 write **ज** as `z`, which applies to every word containing that letter.
 
 ---
+
+### 2.5 — Twelve languages · 30s  **[NEW - lead with this on social]**
+
+The reach is the story for anyone who isn't Indian, and the *names* are the hook
+for anyone who is. Quick montage, one line each, same hotkey:
+
+```
+   हिन्दी   कल मैं ऑफिस जाऊंगा      →  kal main office jaunga     Hinglish
+   தமிழ்    நான் நாளைக்கு வருவேன்    →  naan naalaikku varuven     Tanglish
+   বাংলা    আমি কাল আসব             →  ami kal asbo               Banglish
+   తెలుగు   నేను రేపు వస్తాను        →  nenu repu vastanu          Thanglish
+```
+
+**Caption:** *"Twelve languages. 1.67 billion people. Same problem, nobody
+solved it."*
+
+You can shoot this without speaking each language — set **Settings → Writing →
+Language**, paste native text into the field, and show the conversion. Say
+plainly in the caption that it's a text demo if you do; don't imply you spoke
+Tamil.
 
 ### 3 — The script fix · 30s
 
@@ -388,12 +409,21 @@ no longer a local-only demo, so don't claim local in that beat.
 | 10 corrections ≈ 57% of spelling variation | Measured across 30,000 words |
 | 27x realtime transcription | Measured on an RTX 4060 |
 | Whisper can't be prompted into romanized output | Tested 10 ways, all failed |
+| 12 languages, 87.4% average coverage | Measured per language on running text |
+| ~1.67 billion speakers reached | Sum of the twelve |
 | Wispr Flow discards capitalization-only changes | Their own documentation |
 | Runs fully offline | True for dictation, romanization and style |
 
 **Do not claim:** extensive real-user testing (there has been none), that the
 local writing assistant matches cloud models (it doesn't), or any accuracy
 figure for English dictation (not measured).
+
+**Especially do not claim** the non-Hindi languages are verified. Eleven of the
+twelve have never been checked by a native speaker - the numbers say the
+dictionary contains the words, not that the spellings are ones a speaker would
+choose. If a demo shows Tamil or Bengali, say the coverage is measured and the
+quality is unreviewed. Getting this wrong in public would be the fastest way to
+lose the people we most want contributing.
 
 ---
 
