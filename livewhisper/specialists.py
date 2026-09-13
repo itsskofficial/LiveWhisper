@@ -61,6 +61,12 @@ CATALOGUE: list = [
                   "delivered Tanglish": "22.4% (large-v3 51.8%)"},
         note="Whisper-medium fine-tuned on Tamil by SPRING Lab, IIT Madras. "
              "1.5 GB once converted."),
+    Specialist(
+        "te", "vasista22/whisper-telugu-medium", "te-medium", 3.06, "apache-2.0",
+        measured={"FLEURS word error": "37.1% (large-v3 74.4%)",
+                  "delivered Telugu romanized": "36.2% (large-v3 71.6%)"},
+        note="Whisper-medium fine-tuned on Telugu by SPRING Lab, IIT Madras. "
+             "1.5 GB once converted."),
 ]
 
 
