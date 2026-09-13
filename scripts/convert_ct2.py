@@ -25,6 +25,33 @@ import sys
 from pathlib import Path
 
 
+def _conversion_lock(folder: Path):
+    """Block until no other conversion holds the lock; return the open handle.
+
+    Keep the returned object alive for as long as the lock should be held.
+    """
+    import time
+    folder.mkdir(parents=True, exist_ok=True)
+    handle = open(folder / ".convert.lock", "a+b")
+    try:
+        import msvcrt
+    except ImportError:                       # not Windows
+        import fcntl
+        fcntl.flock(handle, fcntl.LOCK_EX)
+        return handle
+    waited = False
+    while True:
+        try:
+            handle.seek(0)
+            msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
+            return handle
+        except OSError:
+            if not waited:
+                print("waiting for another conversion to finish...", flush=True)
+                waited = True
+            time.sleep(10)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("repo")
@@ -43,6 +70,12 @@ def main() -> int:
     src = Path(snapshot_download(args.repo, local_dir=str(src_dir), allow_patterns=[
         "*.json", "*.safetensors", "pytorch_model.bin", "*.txt", "*.model"]))
     print(f"source {src}")
+
+    # One conversion at a time, machine-wide. Downloads can run in parallel, but
+    # converting loads the whole model into RAM - 3-6 GB for large-v2/v3 - and
+    # four overlapping ones pushed a 15 GB machine to 1 GB free with the commit
+    # limit nearly exhausted. The OS releases the lock if this process dies.
+    lock = _conversion_lock(args.out.parent)
 
     # Normalise the tokenizer and preprocessor next to the weights first, so the
     # converter can copy them across.

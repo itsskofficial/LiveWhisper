@@ -55,6 +55,12 @@ CATALOGUE: list = [
                   "delivered Banglish": "31.7% (large-v3 66.5%)"},
         note="Winner of the Bengali.AI speech recognition competition. Half "
              "the size of large-v3 and faster, 1.5 GB once converted."),
+    Specialist(
+        "ta", "vasista22/whisper-tamil-medium", "ta-medium", 3.06, "apache-2.0",
+        measured={"FLEURS word error": "23.2% (large-v3 56.9%)",
+                  "delivered Tanglish": "22.4% (large-v3 51.8%)"},
+        note="Whisper-medium fine-tuned on Tamil by SPRING Lab, IIT Madras. "
+             "1.5 GB once converted."),
 ]
 
 
