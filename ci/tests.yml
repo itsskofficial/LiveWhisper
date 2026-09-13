@@ -13,7 +13,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, ubuntu-latest]
+        # The app is Windows-only - screen reading, hotkeys and loopback capture
+        # are Windows APIs - and several suites import those modules.
+        os: [windows-latest]
         python: ["3.10", "3.12"]
 
     steps:
@@ -24,22 +26,23 @@ jobs:
           python-version: ${{ matrix.python }}
           cache: pip
 
-      - name: Install the parts that do not need audio hardware
+      - name: Install dependencies (CPU only)
         shell: bash
         run: |
           python -m pip install --upgrade pip
-          # CI has no sound card and no GPU, so the audio and ASR stack is not
-          # installed here. The logic worth testing - romanization, the learning
-          # rules, the profile store - is pure Python and runs anywhere.
-          pip install numpy pyyaml "ruamel.yaml>=0.18" python-dotenv
+          # No GPU here, so skip the ~1 GB of CUDA runtime wheels and take the
+          # CPU build of torch, which is all the 4.5M-parameter spelling model
+          # needs. No model weights are downloaded: speech-model suites use
+          # stand-ins, and the real-speech suites are behind --audio.
+          grep -v '^nvidia-' requirements.txt > requirements-ci.txt
+          pip install -r requirements-ci.txt
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
 
-      - name: Lexicons are present and well formed
+      - name: Test suites
         shell: bash
-        run: python -m tools.check_data
-
-      - name: Romanization and learning
-        shell: bash
-        run: python -m tools.check_core
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python run_tests.py
 
   lint:
     runs-on: ubuntu-latest

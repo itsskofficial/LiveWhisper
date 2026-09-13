@@ -31,6 +31,7 @@ FAST = [
     ("hinglish respelling", ["tests/test_respell.py"]),
     ("specialist install", ["tests/test_specialists.py"]),
     ("compound splitting", ["tests/test_compounds.py"]),
+    ("language routing", ["tests/test_routing.py"]),
     ("learning convergence", ["tests/test_learning.py"]),
 ]
 AUDIO = [

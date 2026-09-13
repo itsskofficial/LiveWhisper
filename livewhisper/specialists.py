@@ -113,7 +113,9 @@ def install(spec: Specialist, config_path: Path, progress=print) -> Path:
     from huggingface_hub import snapshot_download
 
     from . import config as cfgio
+    from .hub import plain_http
 
+    plain_http()
     cfg = cfgio.load(config_path)
     base = models_dir(cfg)
     out = base / spec.name

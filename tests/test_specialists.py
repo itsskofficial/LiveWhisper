@@ -72,6 +72,9 @@ def main() -> int:
               str(dict(models["hi"])))
         check("downloads go to plain folders, never the symlink cache",
               all(ld and "hub" not in ld for _, ld in downloads))
+        from huggingface_hub import constants
+        check("downloads use plain HTTP, not the xet backend that stalls",
+              constants.HF_HUB_DISABLE_XET is True)
         text = cfg_path.read_text(encoding="utf-8")
         check("config comments survive", "# The languages you dictate in" in text
               and "# Specialist models per language" in text)

@@ -295,13 +295,14 @@ Simple diagram or captions over the Settings → Engine panel:
     8% of words   →   2.5M character model  10 MB, runs on CPU
     every word    →   your conventions      learned from you
                                             ────────────
-                                            ~97% correct
+                                            93% as people spell it
 ```
 
 **Caption:** *"The hardest part isn't a model. It's a table."*
 
-Then, briefly: transcription is Whisper `large-v3` on your GPU at **27x
-realtime**. Writing and grammar use Ollama locally. Show the provider dropdown
+Then, briefly: transcription is Whisper `large-v3` on your GPU — about **three
+seconds** for a spoken sentence — listening only for the languages you speak.
+Writing and grammar use Ollama locally. Show the provider dropdown
 in Settings → Engine to make it concrete that it's swappable.
 
 ---
@@ -314,7 +315,7 @@ in Settings → Engine to make it concrete that it's swappable.
    Open source.
 ```
 
-Optional final card: *~97% of Hindi words correctly romanized · 27x realtime ·
+Optional final card: *93% of Hindi words spelled the way people type them ·
 all local.*
 
 ---
@@ -381,7 +382,7 @@ no longer a local-only demo, so don't claim local in that beat.
 **Do**
 
 - Show text changing. Don't describe it.
-- Use the real numbers — 92%, 316 words, two corrections, 27x. They're measured,
+- Use the real numbers — 93%, 316 words, two corrections, 73% → 21%. They're measured,
   and more persuasive than adjectives.
 - Let the Hinglish be Hinglish. Captions carry non-Hindi viewers; don't overlay
   a translation on every line.
@@ -404,10 +405,12 @@ no longer a local-only demo, so don't claim local in that beat.
 | Claim | Basis |
 | --- | --- |
 | 92.3% of Hindi words covered by dictionary lookup | Measured on real Whisper output |
-| ~97% of words correctly romanized end to end | Dictionary + model combined |
+| 93% of Hindi words spelled acceptably | Against 500 sentences humans romanized by hand |
 | 316 words affected by one `jh → z` correction | Counted in the lexicon |
 | 10 corrections ≈ 57% of spelling variation | Measured across 30,000 words |
-| 27x realtime transcription | Measured on an RTX 4060 |
+| ~3 seconds to transcribe a spoken sentence | Measured on an RTX 4060; 37x realtime on long audio |
+| Limiting detection to your languages: Hindi word errors 46% → 29% | 40 real recordings (FLEURS) |
+| Bengali specialist model: word errors 73% → 21% | 40 real recordings (FLEURS) |
 | Whisper can't be prompted into romanized output | Tested 10 ways, all failed |
 | 12 languages, 87.4% average coverage | Measured per language on running text |
 | ~1.67 billion speakers reached | Sum of the twelve |

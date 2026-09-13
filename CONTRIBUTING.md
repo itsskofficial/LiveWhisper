@@ -92,19 +92,27 @@ python -m venv .venv; .\.venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Tests, fastest first:
+Tests:
 
 ```powershell
-python -m tools.check_data      # lexicon integrity, no hardware needed
-python -m tools.check_core      # romanization + learning, no hardware needed
-python test_pipeline.py         # end-to-end personalisation
-python test_alignment.py        # wizard alignment regressions
-python test_gui.py              # wizard + settings, on a throwaway profile
-python verify.py                # everything, including audio and models
+python run_tests.py             # 12 suites in ~25 seconds, no GPU or network
+python run_tests.py --audio     # + real speech through the model, loopback capture
+python run_tests.py --all       # + Groq fallback (needs a key), install readiness
 ```
 
-The first two run in CI. The rest need a microphone, a GPU or Ollama, so they
-run locally only.
+The default set is what CI runs. Any suite also runs on its own, for example
+`python tests/test_routing.py`.
+
+Measurements, which take longer and need data:
+
+```powershell
+python scripts/fetch_fleurs.py build/fleurs --n 40              # real speech, 12 languages
+python tests/bench_asr.py build/fleurs --mode constrained       # speech models
+python tests/bench_romanization.py <dakshina-root>              # spelling vs humans
+```
+
+A change that claims to improve accuracy should come with the before and after
+from one of these.
 
 ### House style
 

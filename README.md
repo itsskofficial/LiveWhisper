@@ -172,6 +172,35 @@ people actually use.
 **The hardest part isn't a model. It's a table.** That's why this is free and
 instant where cloud tools charge monthly and count your words.
 
+### Hearing the right language in the first place
+
+Romanization can't fix a transcript in the wrong language, and on short clips
+Whisper guesses wrong more than you'd expect — it wrote 8 of 40 real Hindi
+recordings in Urdu's Arabic script. So LiveWhisper only lets it choose among the
+languages **you** speak (the one you picked at install, plus English):
+
+| Hindi, 40 real recordings | Word error | Right language |
+| --- | --- | --- |
+| Whisper choosing from 99 languages | 46.4% | 78% |
+| Choosing from Hindi + English | **29.0%** | **98%** |
+
+And where one model for 99 languages is simply weak, a **specialist** takes
+over decoding for that language while large-v3 keeps working out which language
+you spoke:
+
+| Bengali, 40 real recordings | Word error |
+| --- | --- |
+| Whisper large-v3 | 73.3% |
+| Bengali.AI's fine-tuned model | **20.9%** |
+
+```powershell
+python -m livewhisper.specialists list        # what's been measured
+python -m livewhisper.specialists install bn  # download, convert, configure
+```
+
+Only specialists that beat large-v3 on the same recordings are offered. The
+installer suggests one for your language when it exists.
+
 ---
 
 ## Local by default
@@ -353,9 +382,9 @@ Also wanted: curated common-word lists per language, macOS and Linux support,
 and anyone who can tell us the romanization looks wrong for their language.
 
 ```powershell
-python -m tools.check_data    # lexicon integrity, all 12 languages
-python -m tools.check_core    # romanization, learning rules, profiles
-python verify.py              # full readiness check, 22 checks
+python run_tests.py           # 12 suites, ~25 seconds, no GPU or network
+python run_tests.py --audio   # also real speech and loopback capture
+python run_tests.py --all     # also Groq fallback and install readiness
 ```
 
 ## Licence

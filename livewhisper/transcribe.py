@@ -51,6 +51,7 @@ class LocalBackend:
         self.languages = [c for c in (languages or []) if c]
         self._routed: dict = {}                 # path -> (model, batched), LRU order
         self.last_latin_output = False          # last text came from a Hinglish model
+        self.notify = lambda msg: None          # set by the app to reach the tray
         self.cfg = cfg
         self.vocabulary = vocabulary.strip()
         self._model = None
@@ -75,6 +76,9 @@ class LocalBackend:
         """Fetch the weights without loading them onto the GPU."""
         from huggingface_hub import snapshot_download
 
+        from .hub import plain_http
+
+        plain_http()             # the xet backend stalls silently on big files
         repo = _repo_id(self.cfg.get("model", "large-v3"))
         log.info("downloading %s", repo)
         if progress:
@@ -112,6 +116,12 @@ class LocalBackend:
                 except Exception:
                     log.warning("batched pipeline unavailable; sequential decode",
                                 exc_info=True)
+
+        # Load the specialist for the main language now rather than on the first
+        # dictation in it, which would otherwise stall for several seconds while
+        # 1.5-6 GB reach the GPU. Outside the lock: _model_for takes it too.
+        if self.languages and self._route(self.languages[0]).get("path"):
+            self._model_for(self.languages[0])
 
     def _batch_size(self) -> int:
         return int(self.cfg.get("batch_size", 8))
@@ -186,6 +196,12 @@ class LocalBackend:
                 log.info("unloaded specialist %s", evicted)
             if limit == 0:
                 return self._model, self._batched
+            try:
+                from .script.languages import LANGUAGES
+                name = LANGUAGES[language].name if language in LANGUAGES else language
+            except Exception:
+                name = language
+            self.notify(f"Loading the {name} speech model - only slow the first time.")
             try:
                 from faster_whisper import BatchedInferencePipeline, WhisperModel
                 device = self.cfg.get("device", "cuda")

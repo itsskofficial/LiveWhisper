@@ -97,8 +97,11 @@ class App:
         if self._backend is None:
             self._backend = build_backend(self.backend_name, self.cfg["transcription"],
                                           languages=speaker_languages(self.cfg))
-            if isinstance(self._backend, AutoBackend):
-                self._backend.notify = self.notify
+            # Both the combined backend and the local one it wraps talk to the
+            # tray: fallback events come from one, specialist loading from the other.
+            for b in (self._backend, getattr(self._backend, "local", None)):
+                if b is not None and hasattr(b, "notify"):
+                    b.notify = self.notify
         return self._backend
 
     def apply_config(self, cfg: dict) -> None:
