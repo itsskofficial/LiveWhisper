@@ -65,10 +65,22 @@ class Romanizer:
     # Agglutinative languages glue words together; the others mostly do not, and
     # a false split of a name hurts them. So the choice is per language, set from
     # tests/bench_romanization.py --compounds on two disjoint samples.
-    # Off until a language is shown to gain on BOTH samples. On the first 500
-    # sentences "first" helped Kannada by 1.2 points but cost Urdu, Punjabi and
-    # Tamil 0.2, so a blanket default would trade a real gain for small losses.
-    COMPOUND_POLICY = {"default": "off"}
+    # Measured on two disjoint 500-sentence samples of Dakshina's human
+    # romanizations. The rule was fixed before the second sample was run:
+    # "first" only where it beat "fallback" on both, otherwise "fallback".
+    #
+    #                 first vs fallback, WER points    fallback vs off
+    #                 sample 1     sample 2            (never worse anywhere)
+    #   Kannada        -1.1         -1.1
+    #   Gujarati       -0.3         -0.3
+    #   Sindhi         -0.3         -0.3
+    #   Sinhala        -0.2         -0.4
+    #   Tamil          +0.2         +0.2               splitting names hurts it
+    #
+    # "fallback" also cuts the words left in native script (Malayalam 2.8% ->
+    # 2.5%) without second-guessing a single word the model could spell.
+    COMPOUND_POLICY = {"default": "fallback",
+                       "kn": "first", "gu": "first", "sd": "first", "si": "first"}
 
     # A mode string here overrides the policy for every language. The benchmark
     # uses it to compare modes; None means "follow COMPOUND_POLICY".
