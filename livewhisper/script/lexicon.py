@@ -145,6 +145,55 @@ class Lexicon:
         scored.sort(reverse=True)
         return [w for _n, w in scored[:limit]]
 
+    # ------------------------------------------------------------ compounds
+
+    COMPOUND_MIN = 6        # codepoints; shorter unknown words are not compounds
+    COMPOUND_PARTS = 4      # more pieces than this is guessing, not segmenting
+    PART_MIN = 2
+
+    def segment(self, word: str) -> list[str] | None:
+        """Split an unknown word into known words, or None if it cannot be.
+
+        Malayalam, Tamil, Telugu and Kannada glue words together - a noun, its
+        plural, its case ending and a conjunction can be one written word:
+        അധ്യാപകസംഘടനകളും is "teachers' organisations, too". No 30,000 word list
+        will ever contain every such combination, and on the benchmark accuracy
+        fell from 68% on short words to 32% on words of 15+ characters, with
+        three quarters of those errors being words simply absent from the
+        lexicon. The pieces usually are present.
+
+        Only splits where EVERY piece is a known word, and only between whole
+        letters - never before a vowel sign or joiner, never after a virama -
+        so a conjunct is never cut in half. Fewest pieces wins, then the split
+        whose pieces are longest, since short pieces match by accident.
+        """
+        self.load()
+        if len(word) < self.COMPOUND_MIN:
+            return None
+        curated = COMMON_WORDS.get(self.lang, {})
+        known = lambda s: s in self._entries or s in curated      # noqa: E731
+
+        n = len(word)
+        ok = [True] + [_boundary(word, i) for i in range(1, n)] + [True]
+        # best[j] = (pieces, -sum of squared lengths, split points) for word[:j]
+        best: list = [None] * (n + 1)
+        best[0] = (0, 0, [])
+        for j in range(self.PART_MIN, n + 1):
+            if not ok[j]:
+                continue
+            for i in range(0, j - self.PART_MIN + 1):
+                if best[i] is None or not ok[i]:
+                    continue
+                if best[i][0] >= self.COMPOUND_PARTS or not known(word[i:j]):
+                    continue
+                cand = (best[i][0] + 1, best[i][1] - (j - i) ** 2, best[i][2] + [j])
+                if best[j] is None or cand[:2] < best[j][:2]:
+                    best[j] = cand
+        if best[n] is None or best[n][0] < 2:
+            return None
+        cuts = [0] + best[n][2]
+        return [word[a:b] for a, b in zip(cuts, cuts[1:])]
+
     def variants(self, word: str) -> list[str]:
         """All attested spellings - the surface the user's preference selects from."""
         self.load()
@@ -153,6 +202,17 @@ class Lexicon:
     def __len__(self) -> int:
         self.load()
         return len(self._entries)
+
+
+def _boundary(word: str, i: int) -> bool:
+    """Can `word` be cut before position i without breaking a letter apart?"""
+    import unicodedata
+    here, prev = word[i], word[i - 1]
+    if unicodedata.category(here).startswith("M") or here in "‌‍":
+        return False                      # vowel sign, anusvara, joiner
+    if "VIRAMA" in unicodedata.name(prev, "") or prev in "‌‍":
+        return False                      # inside a conjunct
+    return True
 
 
 @lru_cache(maxsize=16)

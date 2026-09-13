@@ -118,9 +118,18 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("root", type=Path)
     ap.add_argument("--n", type=int, default=600, help="sentences per language")
+    ap.add_argument("--compounds", choices=("first", "fallback", "off"),
+                    default=None, help="override Romanizer.COMPOUNDS")
+    ap.add_argument("--langs", default="", help="only these languages")
+    ap.add_argument("--offset", type=int, default=0,
+                    help="skip this many shuffled sentences first, for a second "
+                         "sample disjoint from the default one")
     args = ap.parse_args()
 
     random.seed(SEED)
+    if args.compounds:
+        Romanizer.COMPOUNDS = args.compounds
+    only = set(filter(None, args.langs.split(",")))
     OUT.mkdir(parents=True, exist_ok=True)
 
     lines = ["# Benchmark: romanization vs human ground truth\n\n",
@@ -137,6 +146,8 @@ def main() -> int:
 
     totals = []
     for code in CODES:
+        if only and code not in only:
+            continue
         rom_path = (args.root / code / "romanized" /
                     f"{code}.romanized.rejoined.dev.roman.txt")
         nat_path = (args.root / code / "romanized" /
@@ -150,7 +161,7 @@ def main() -> int:
         pairs = [(n, r) for n, r in zip(natives, romans)
                  if n.strip() and r.strip() and len(n) < 400]
         random.shuffle(pairs)
-        pairs = pairs[:args.n]
+        pairs = pairs[args.offset:args.offset + args.n]
         if not pairs:
             continue
 

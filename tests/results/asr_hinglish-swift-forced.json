@@ -1,0 +1,258 @@
+{
+ "model": "D:/models/ct2/hinglish-swift",
+ "mode": "forced",
+ "rows": [
+  {
+   "lang": "hi",
+   "n": 40,
+   "wer": NaN,
+   "cer": NaN,
+   "lang_ok": 1.0,
+   "script_ok": 1.0,
+   "delivered_wer": 0.31831255992329816,
+   "xrt": 18.852834893686047
+  }
+ ],
+ "samples": [
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "कुछ अणुओं में अस्थिर केंद्रक होता है, जिसका मतलब यह है कि उनमें थोड़े या बिना किसी झटके से टूटने की प्रवृत्ति होती है,",
+   "hyp": "Kuchh anumon mein aaj tak kendr hota hai jiska matlab yahaan ki unmen thode ya bina kisi jhatke se tootne ki pravatti hoti hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "ग्रीनलैंड को बहुत कम जगह बसाया गया था. नॉर्स सगास में वे कहते हैं कि एरिक रेड हत्या के लिए आइसलैंड से निर्वासित किया गया था, और आगे पश्चिम की यात्रा करते समय, ग्रीनलैंड मिला जिसे ग्रीनलैंड नाम दिया गया.",
+   "hyp": "Greenland ko bahut kam jagah basaaya gaya tha. North se sagha samay bhi kahte hain ki air ek red hatya ke lie ice land se nirvaasit kiya gaya tha. Aur aage pashchim ki yaatra karte samay Greenland mila jise Greenland naam diya gaya."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "ऐसी कोई वैश्विक परिभाषा नहीं है जिसके लिए निर्मित सामान एंटीक होते हैं. कुछ कर एजेंसियाँ 100 साल से पुराने सामान को एंटीक के तौर पर परिभाषित करती हैं.",
+   "hyp": "Aisi koi vah aisehik paribhaasha nahin hai jiske lie nirmit saamaan antik hote hain kuchh kar againchhiyaan shav saal se puraane saamaan ko antik ke taur par paribhaashit karti hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "टेलीविजन रिपोर्टों में प्लांट से निकलने वाला सफेद धुआँ दिखाया गया है।",
+   "hyp": "Television report mein plant se niklane vaala saphed dhuaan dikhaaya gaya hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "इंटरनेट पर यह खोज 'शत्रुतापूर्ण पर्यावरण पाठ्यक्रम' के लिए अक्सर आपको एक स्थानीय कंपनी का पता प्रदान करेगी।",
+   "hyp": "Internet par yah khoj satrtaapuran paryaavran paathyakram ke lie aksar aapko ek sthaaniy company ka pata pradaan karegi."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "अपनी सरकार के अलावा आप अन्य देशों की सरकारों की सलाह ले सकते हैं. हालाँकि, उनकी सलाह उनके नागरिकों को ध्यान में रखकर दी जाती हैं.",
+   "hyp": "Apni sarkaar ke alaava any deshon ki sarkaaron ki salaah le sakte hain. Haalaanki unki salaah unke naagrikon ko dhyaan mein rakhakar di jaati hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "प्राचीनकाल से ही लोग सोने, चाँदी, और तांबे जैसे रासायनिक तत्वों के बारे में ही जानकारी रखते हैं, क्योंकि इन्हें प्रकृति में मूल स्वरूप में ढूँढा जा सकता है और इन्हें प्राथमिक उपकरणों के ज़रिए ढूँढना अपेक्षाकृत आसान है.",
+   "hyp": "Praachin kaal se hi log sone shaadi aur taambe jaise rasaaynik tatv ke baare mein hi jaankaari rakhate hain kyonki inhen prakrti mein mool svariy mein dhoondha ja sakta hai aur inhen praathamik upkaranon ke jarie dhoondhana apeksha krt aasaan hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "इसे केमिकल का pH कहा जाता है. आप लाल गोभी के जूस का इस्तेमाल करके एक संकेतक बना सकते हैं.",
+   "hyp": "Ise chemical ka PH kaha jaata hai aap laal gobhi ke juice ko istemaal karke ek sanketak bana sakte hain."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "सबसे नज़दीकी सिरे पर क्रस्ट की मोटाई करीब 70 किलोमीटर है और सबसे दूर के सिरे पर यह 100 किलोमीटर है.",
+   "hyp": "Sabse nazdiki sire par krshn ki motai karen vah sattar kilometer hai aur sabse door ke sire par yah sau kilometer hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "यह संबंधित है, लेकिन आम तौर पर इसमें अल्पाइन शैली की स्की टूरिंग या माउंटेनीयरिंग शामिल नहीं होती है, जिसे खड़े इलाकों में किया जाता है और जिसके लिए बहुत कड़ी स्की और बूट की ज़रूरत होती है.",
+   "hyp": "Yah sab mandat hai lekin aamtaur par ismen Alpine shaili ki skin, touring ya mountain ear rang saamil nahin hoti hai. Jise khade ilaakon mein kiya jaata hai aur jiske lie bahut khadi iski aur boot ki zaroorat hoti hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "पुरुषों के स्टैंडिंग सुपर-जी में ऑस्ट्रेलिया के मिशेल गौरले ग्यारहवें स्थान पर रहे. चेक प्रतियोगी ओल्डरिच जेलिनेक पुरुषों के सिटिंग सुपर-जी में सोलहवें स्थान पर रहे.",
+   "hyp": "Purushon ke standing super gym ya Australia ke missile gaurle gyaarhaven sthaan par rahe, check pratiyogi aur drshy jalinek purushon ke sitting super gymen solah mein sthaan par rahe."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "केवल दो हफ़्तों में अमेरिकियों और फ़्री फ़्रेंच बलों ने दक्षिणी फ़्रांस को मुक्त कर दिया था और जर्मनी की ओर बढ़ रहे थे.",
+   "hyp": "Keval do haphton mein America aur free French balon ne dakshini France ko mukt kar diya tha aur Germany ki or badh rahe the."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "MS, बीमारी केंद्रीय तंत्रिका तंत्र पर असर करती है, जिसमें दिमाग, स्पाइनल कॉर्ड और ऑप्टिक नर्व शामिल हैं.",
+   "hyp": "MS bimaari kendriy tantr ka tantr par asar karti hai jismen dimaang is final code aur optic narv shaamil hain."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "हर कोई समाज से जुड़ा होता है और ट्रांसपोर्ट सिस्टम का उपयोग करता है. लगभग सभी लोग ट्रांसपोर्ट सिस्टम के बारे में शिकायत करते हैं.",
+   "hyp": "Har koi samaaj se juda hota hai aur transport system ka upyog karta hai. lagabhag sabhi log transport system ke baare mein shikaayat karte hain."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "एक पूरी तरह से विकसित एथलीट की तरह, बाघ चढ़ाई कर सकता है (हालाँकि अच्छी तरह से नहीं), तैर सकता है, बड़ी दूरी तक छलांग लगा सकता है और एक शक्तिशाली मनुष्य के पाँच गुना बल के साथ खींच सकता है.",
+   "hyp": "Ek poori tarah se viksit athlete ki tarah bhaag chadhae kar sakta hai. Haalaanki achchhi tarah se nahin tej sakta hai. Badi doori tak chhalang laga sakta hai aur ek sakhti saale manushy ke paanch guna bal ke saath khinch sakta hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "विशेष रूप से सवाना पर बेहतरीन अफ़्रीकी वन्य जीवन को संपूर्ण रूप से देखने के लिए आमतौर पर सफ़ारी शब्द का उपयोग किया जाता है.",
+   "hyp": "Vishesh roop se savarn par behtarin Africa ne jivan ko sampoorn roop se dekhane ke lie aamtaur par sapaari shabd ka upyog kiya jaata hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "गंभीर मौसम किसी भी खतरनाक मौसमी घटना के लिए वर्गीय शब्द है जिसमें नुकसान, गंभीर सामाजिक व्यवधान, या मानव जीवन की हानि की संभावना है।",
+   "hyp": "Gambhir mausam kisi bhi khatranaak mausmi ghatna ke lie vargiy shabd hai jismen nuksaan gambhir saamaajik vyavadhaan ya maanav jivan ki haani ki sambhaavna hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "हालाँकि यह अकेला नहीं है, प्रयोग करना, और प्रयोग एक ऐसा परीक्षण होता है जिसका इस्तेमाल करके एक या इससे ज़्यादा संभावित परिकल्पनाओं को ख़त्म करने, सवाल करने, और अवलोकन करने से भी वैज्ञानिक शोध को मार्गदर्शन मिलता है.",
+   "hyp": "Haalaanki yah akela nahin hai prayog karna aur prayog ek aisa parikshan hota hai jiska istemaal karne ek ya isse zyaada sambhaavit parikalpanaon ko khatm karne ke savaal karne aur aap logon ka karne se hi vaigyaanik sudh kumaar darshan milta hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "कैल्शियम और पोटैशियम जैसे तत्वों को धातु माना जाता है। बेशक, चांदी और सोने जैसी धातुएं भी हैं।",
+   "hyp": "KLCM aur OPSCM jaise tatv ko daaton mana jaata hai, bechak chaandi aur sone jaisi daat hue bhi hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "हॉट चॉकलेट बेल्जियम के मानकों पर बनी है. फलों का जूस महंगा है लेकिन बहुत अच्छा है.",
+   "hyp": "Hot chocolate, Belgium ki maankon par banti hai, follow ka juice mahanga hai, lekin bahut achchha hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "जिस समय घटनाएँ हुई उसके युग को सामान्य रूप से यूरोप के इतिहास में 11वीं, 12वीं और 13वीं सदी (AD 1000-1300) में यूरोपियन इतिहास के उच्च मध्य युग की अवधि के रूप में बताया जाता है.",
+   "hyp": "Jis samay ghatnaen hue uske yug ko saamaany roop se Europe ke itihaas mein gyaarhavin, baarhavin aur terhavin shadi mein european itihaas ke uchch madhy yug ki avadhi ke roop mein bataaya jaata hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "कुछ लोगों ये सोचते थे की कि वह सही था लेकिन बहुत से लोग इसके विपरीत मानते थे; की सौर मंडल सूर्य (और यहां तक कि अन्य सितारों) सहित पृथ्वी के चारों और चक्कर लगता था ।",
+   "hyp": "Kuchh log yah sochate the ki ki yah sahi tha lekin bahut se log iske viprit maante the ki sormandal soory aur yahaan tak ki any sitaare sahit prthvi ke chaaron aur chakkar lagaata tha."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "यदि आप केवल शिपबोर्ड भ्रमण का उपयोग करके किनारे तक जाते हैं तो आपको एक अलग वीज़ा की आवश्यकता नहीं होगी (2009 तक).",
+   "hyp": "Yadi aap keval shiv board pramaan ka upyog karke kinaare tak jaate hain to aapko ek alag visa ki aavashyakta nahin hogi do hazaar nau tak."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "यहूदी और गैर-यहूदी की तरह, अभी भी ऐसे कई पुरुष और महिलाएं जीवित हैं जो उस समय बचने में सफल रहे और कई जिनके प्रियजनों को मार दिया गया या उनके मरने तक उनसे काम करवाया गया.",
+   "hyp": "Yah hoti aur gair yuvti ki tarah abhi bhi aise kai purush aur mahilaen jivit hain jo us samay bachane mein saphal ladhe aur kai jinke priyjanon ko maar diya gaya ya unke marne tak unse kaam karvaaya gaya."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "इटैलियन भी रोज़ाना इस्तेमाल होने वाली भाषा है जिसे राज्य में काम करने वाले अधिकांश लोग उपयोग में लाते हैं, जबकि लेटिन का धार्मिक रस्मों में इस्तेमाल किया जाता है.",
+   "hyp": "Italyan bhi rozaana istemaal hone vaali bhaasha hai jise raajy mein kaam karne vaale adhikaansh log upyog milaate hain. Jabki latin ka dhaarmik rasmav mein istemaal kiya jaata hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "लोग यह अनुमान नहीं लगा सकते हैं कि घर लौटने वाले यात्रियों के लिए धैर्य और समझ भी आवश्यक है.",
+   "hyp": "Log yah anumaan nahin laga sakte hain ki ghar lautne vaale yaatriyon ke lie dhairy aur samajh bhi aavashyak hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "उन्होंने अफवाहों को “राजनीतिक बकवास और मूर्खतापूर्ण” कहा.",
+   "hyp": "Unhonne khaav ko raajnitik vaqt aur mukt apna kaha."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "इंटरनेट, लोगों और अंतर-परस्पर संचार, दोनों के तत्वों को मिलाता है.",
+   "hyp": "Internet logon aur antarparaspa sanchaat donon ke tatvon ko milaata hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "तकनीकी निर्धारण की ज़्यादातर व्याख्याएँ दो सामान्य विचारों के बारे में बताती हैं: तकनीकी विकास पर सांस्कृतिक या राजनीतिक असर का कोई भी प्रभाव नहीं पड़ता है और परिणामस्वरूप सामाजिक रूप से अनुकूलित होने के बजाय वह तकनीक निहित समाजों को “प्रभावित” करती है.",
+   "hyp": "Techniki nirdhaaran ki zyaadaatar vyaakhyaen hain do saamaany vichaaron ke baare mein bataati hain. Technique vikaas par saanskrtik ya raajnitik asar ka koi bhi prabhaav nahin padta hai aur parinaam svaroop samaajik roop se anukoolit hone ke bajaay vah technique technique nihit samaajon ko prabhaavit karti hain."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "केवल दो हफ़्तों में अमेरिकियों और फ़्री फ़्रेंच बलों ने दक्षिणी फ़्रांस को मुक्त कर दिया था और जर्मनी की ओर बढ़ रहे थे.",
+   "hyp": "Keval do haphton mein amrtiyon aur free French balon ne lakshin phaansh ko mukt kar diya tha aur Germany ke or badh rahe the."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "यूनिवर्सिटी ऑफ़ डंडी के प्रोफ़ेसर पामेला फ़र्ग्यूसन लिखते हैं, “अगर संदिग्धों के फ़ोटो आदि प्रकाशित होते हैं तो पत्रकारों को यह ख़तरनाक मार्ग पर चलना लगता है”.",
+   "hyp": "University of dandi ke professor paamela filmarshan likhate hain. Agar sandigdhon ki photo aadi prakaashit hoti hai to patrakaaron ko yah khatrana maarg par chalna lagta hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "उनका सिंगापुर के उप-प्रधान मंत्री वोंग कान सेंग ने स्वागत किया और उन्होंने सिंगापुर के प्रधानमंत्री ली सिएन लूंग के साथ व्यापार और आतंकवाद के मामले पर बातचीत की.",
+   "hyp": "Unka sinhaapur ke up pradhaanmantri ghoom paanch sau mein svaagat kiya aur unhonne sinhaapur ke pradhaanmantri lie CN loongh ke saath vyaapaar aur aatankavaad ke maamle par baatachit ki."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "विखंडन बम इस सिद्धांत पर काम करता है कि कई प्रोटॉन और न्यूट्रॉन वाले एक नाभिक को एक साथ रखने के लिए ऊर्जा लगती है।",
+   "hyp": "Vikhandan bam is siddhaant par kaam karta hai ki kai proton aur neutron vaale ek naabhik ko ek saath rakhane ke lie oorja lagti hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "ऐसा माना जाता है कि पेरिस के निवासी अहंकारी, असभ्य और अभिमानी होते हैं।",
+   "hyp": "Aisa maana jaata hai ki paris ke nivaasi aankaari asabdh aur abhimaani hote hain."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "1963 में बाँध बनने के बाद, मौसमी बाढ़ जो पूरे नदी में तलछट फैला देगी वह रुक गई थी.",
+   "hyp": "Ek hazaar nau sau tirsath mein baad banne ke baad mausmi baadh jo poore nadi mein thalachat phaila degi vah ruk gai thi."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "यह ऑरोरा बोरेलिस को देखने का एक अच्छा अवसर प्रदान करता है, क्योंकि आकाश में उस समय अंधकार सा ही रहेगा।",
+   "hyp": "Yah aarora borealis ko dekhane ka ek achchha avsar pradaan karta hai kyonki aakaash mein us samay andhakaar sahi rahega."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "यह शहर देश के बाकी शहरों से अलग है क्योंकि यह किसी अफ्रीकी शहर की बजाय अरब शहर लगता है.",
+   "hyp": "Yah shahar desh ke baaki shahron se alag hai kyonki yah kisi afri ki shahar ki bajaay arab shahar lagta hai."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "पुलिस अधीक्षक चंद्र शेखर सोलंकी ने कहा कि आरोपी ढके हुए चेहरे के साथ अदालत में पेश हुए थे.",
+   "hyp": "Police adhikshak chandrashekhar solanki ne kaha ki aaropi dhakke hue chehre ke saath adaalat mein pesh hue the."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "ज़्यादा परंपरागत चर्चों में ईस्टर सप्ताहांत में शनिवार रात को ईस्टर विजिल का आयोजन किया जाता है, जिसमें लोग क्रिस के पुनर्जन्म का उत्सव मनाने के लिए आधी रात के समय उत्सव मनाना शुरू करते हैं.",
+   "hyp": "Zyaada paramparaagat charchon mein register saptaah haan mein shanivaar raat ko register vijal ka aayojan kiya jaata hai jismen log krsh ke puny jarnan ka utsav manaane ke lie aadi raat ke samay utsav manaana shuroo karte hain."
+  },
+  {
+   "lang": "hi",
+   "heard": "hi",
+   "ref": "29 वर्षीय डॉ. मलार बालासुब्रमण्यम सिनसिनाटी के उत्तर में लगभग 15 मील की दूरी पर एक उपनगर ब्लू ऐश, ओहियो में मिले, जो एक टी-शर्ट और अंडरवियर में सड़क के किनारे बहुत अधिक नशे की हालत में जमीन पर पड़े थे।",
+   "hyp": "Unhattis varshiy doctor malaal baala sugramaniyam. Sancinati ke uttar mein lagabhag pandrah mil ki doori par ek upnagar blue age ohiyon mein mile. Jo ek t shirt aur under ear mein sadak ke kinaare bahut adhik nashe ki haalat mein zamin par pade the."
+  }
+ ]
+}

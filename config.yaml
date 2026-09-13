@@ -26,6 +26,12 @@ transcription:
   fallback_cooldown_minutes: 60   # after Groq refuses, stop retrying it for this
                                   # long instead of stalling every recording
 
+  # The languages you dictate in. Whisper otherwise picks from all 99, and on
+  # a two-second clip it will hear Malayalam as Romanian. Blank = the language
+  # set under `script.language` plus English. A list such as [hi, mr, en]
+  # overrides that; "all" removes the restriction entirely.
+  languages:
+
   groq:
     model: whisper-large-v3
     api_key_env: GROQ_API_KEY # read from .env or the environment
@@ -45,6 +51,17 @@ transcription:
     device: cuda              # cuda | cpu
     compute_type: int8_float16  # ~3 GB VRAM. float16 (~5 GB) for max quality.
     language:                 # null = auto-detect. Or force e.g. "en", "hi", "mr".
+    # Specialist models per language. Detection always runs on `model` above;
+    # decoding switches to a specialist when the detected language has one.
+    # Install them with `python -m livewhisper.specialists install <lang>`, which
+    # downloads, converts and writes the entry here. Hand-written form:
+    #   models:
+    #     ta: D:/models/ct2/ta-medium
+    #     hi: {path: D:/models/ct2/hinglish-prime, latin_output: true, language: en}
+    # latin_output = the model writes romanized text itself; language = the
+    # token to decode with. At most max_extra_models stay loaded at once.
+    models: {}
+    max_extra_models: 1
     beam_size: 5
     batch_size: 8             # decode VAD chunks in parallel. Big speedup on long
                               # meetings. Lower to 4 if you run out of VRAM; 1
@@ -65,6 +82,8 @@ output:
                               # failed auto-paste is recoverable with a manual Ctrl+V
   save_transcripts: true
   transcript_dir: transcripts
+  remove_fillers: true        # drop "um", "uh", "erm". Repeated words are never
+                              # touched: "dheere dheere" is Hindi grammar
 
 ui:
   theme: dark-amber           # dark-amber | dark-indigo | system

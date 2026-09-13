@@ -16,10 +16,12 @@ import logging
 from dataclasses import dataclass
 
 from . import context as ctx_mod
+from .cleanup import remove_fillers
 from .profile import ProfileStore
 from .script import conventions as conv_mod
 from .script.languages import (DEFAULT, has_indic, languages_for_script,
                                supported)
+from .script.respell import respell
 from .script.romanize import Romanizer, script_ratio
 
 log = logging.getLogger(__name__)
@@ -126,7 +128,8 @@ class Pipeline:
 
     def process(self, transcript: str, screen: ctx_mod.ScreenContext | None = None,
                 force_script: str | None = None,
-                heard_language: str | None = None) -> Delivery:
+                heard_language: str | None = None,
+                latin_output: bool = False) -> Delivery:
         app = (screen.app if screen else "") or ""
         profile = self.profiles.get(app)
         notes: list = []
@@ -144,7 +147,18 @@ class Pipeline:
             romanized = True
             self._romanizer = r
             text = self._romanize_leftovers(text, app, exclude=lang)
+        elif (latin_output and script == "latin" and heard_language
+              and supported(heard_language)):
+            # A Hinglish speech model already wrote Latin text. Nothing to
+            # romanize, but its long-vowel spellings (saamaan, vaala) are not
+            # how people type. Gated on latin_output because the same rule run
+            # over ordinary English could turn an unattested word into a Hindi
+            # one.
+            lang = heard_language
+            text = respell(transcript, lang)
 
+        if (self.cfg.get("output") or {}).get("remove_fillers", True):
+            text = remove_fillers(text)
         text = profile.habits.apply(text)
 
         d = Delivery(text=text, raw=transcript, app=app, script=script,

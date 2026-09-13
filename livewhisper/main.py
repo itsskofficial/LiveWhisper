@@ -35,6 +35,7 @@ from .profile import ProfileStore
 from .audio import AudioError, Recorder, write_wav
 from .overlay import RecordingOverlay
 from .theme import palette
+from .script.languages import speaker_languages
 from .transcribe import AutoBackend, TranscriptionError, build_backend
 
 log = logging.getLogger("livewhisper")
@@ -94,7 +95,8 @@ class App:
 
     def backend(self):
         if self._backend is None:
-            self._backend = build_backend(self.backend_name, self.cfg["transcription"])
+            self._backend = build_backend(self.backend_name, self.cfg["transcription"],
+                                          languages=speaker_languages(self.cfg))
             if isinstance(self._backend, AutoBackend):
                 self._backend.notify = self.notify
         return self._backend
@@ -202,9 +204,10 @@ class App:
                 log.info("learned: %s", note)
                 self.notify(note)
             heard = getattr(self.backend(), "last_language", None)
-            delivery = self.pipeline.process(transcript, screen,
-                                             force_script=self._force_script,
-                                             heard_language=heard)
+            delivery = self.pipeline.process(
+                transcript, screen, force_script=self._force_script,
+                heard_language=heard,
+                latin_output=bool(getattr(self.backend(), "last_latin_output", False)))
             self._force_script = None
             log.info("app=%s script=%s romanized=%s lang=%s",
                      delivery.app, delivery.script, delivery.romanized,

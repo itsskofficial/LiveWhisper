@@ -52,10 +52,53 @@ class Romanizer:
         if base is not None:
             return self.conventions.apply(base), "lexicon"
 
-        guess = self._oov.spell([native], self.lang).get(native)
+        guess = self._resolve_unknown([native]).get(native)
         if guess:
             return self.conventions.apply(guess), "model"
         return native, "none"
+
+    # How to treat a long word the lexicon does not contain:
+    #   "first"     split it into known words before asking the character model
+    #   "fallback"  split only when the model gives up (it refuses words over 22
+    #               characters and its own looping output)
+    #   "off"       never split
+    # Agglutinative languages glue words together; the others mostly do not, and
+    # a false split of a name hurts them. So the choice is per language, set from
+    # tests/bench_romanization.py --compounds on two disjoint samples.
+    # Off until a language is shown to gain on BOTH samples. On the first 500
+    # sentences "first" helped Kannada by 1.2 points but cost Urdu, Punjabi and
+    # Tamil 0.2, so a blanket default would trade a real gain for small losses.
+    COMPOUND_POLICY = {"default": "off"}
+
+    # A mode string here overrides the policy for every language. The benchmark
+    # uses it to compare modes; None means "follow COMPOUND_POLICY".
+    COMPOUNDS: str | None = None
+
+    @property
+    def compound_mode(self) -> str:
+        if self.COMPOUNDS:
+            return self.COMPOUNDS
+        return self.COMPOUND_POLICY.get(self.lang, self.COMPOUND_POLICY["default"])
+
+    def _resolve_unknown(self, words: list) -> dict:
+        """Spell words the lexicon does not contain: compounds, then the model."""
+        out: dict = {}
+        mode = self.compound_mode
+        if mode == "first":
+            for w in words:
+                parts = self._lex.segment(w)
+                if parts:
+                    out[w] = "".join(self._lex.lookup(p) for p in parts)
+        rest = [w for w in words if w not in out]
+        if rest:
+            out.update(self._oov.spell(rest, self.lang))
+        if mode == "fallback":
+            for w in words:
+                if w not in out:
+                    parts = self._lex.segment(w)
+                    if parts:
+                        out[w] = "".join(self._lex.lookup(p) for p in parts)
+        return out
 
     # ------------------------------------------------------------ one text
 
@@ -69,7 +112,7 @@ class Romanizer:
         unknown = [w for w in dict.fromkeys(natives)
                    if w not in self.conventions.overrides
                    and self._lex.lookup(w) is None]
-        guesses = self._oov.spell(unknown, self.lang) if unknown else {}
+        guesses = self._resolve_unknown(unknown) if unknown else {}
 
         def repl(m: re.Match) -> str:
             native = m.group(0)

@@ -165,8 +165,40 @@ We don't run OpenAI's original code. We use **faster-whisper**, a
 reimplementation that produces the same output about four times faster by using
 the GPU more efficiently.
 
-On your RTX 4060 this runs at roughly **27 times real time** — a 30-minute
-recording transcribes in about a minute. Measured, not estimated.
+How fast depends on what you ask. A two-minute recording transcribes in about
+3.5 seconds — 37 times real time. A four-second dictation takes about 2.8
+seconds, because most of the wait is a fixed cost that doesn't shrink with the
+clip. That second number is the one you feel. (`tests/bench_latency.py`)
+
+**Telling it which languages you speak.** Left alone, Whisper picks from all 99
+languages. On short clips it guesses wrong surprisingly often: it heard Hindi as
+Urdu on 8 of 40 real recordings and wrote them in Urdu's Arabic script, and it
+heard Malayalam as Romanian. So the app only lets it choose among *your*
+languages — by default the one you picked at install, plus English. Nothing
+else changes, but on real Hindi speech that alone cut word errors from 46.4% to
+29.0%. (`transcription.languages` in `config.yaml`, or Settings → Engine.)
+
+**Specialist models.** One model for 99 languages is a compromise, and for some
+of ours it shows: on real Bengali speech large-v3 gets 73% of words wrong while
+identifying the language perfectly. People have fine-tuned Whisper on single
+languages, and those can do much better. The app can keep large-v3 for working
+out *which* language you spoke and hand the actual decoding to a specialist for
+that language, loading it only when needed. Only specialists that beat large-v3
+on the same recordings are offered, and installing one is one command:
+`python -m livewhisper.specialists install bn`.
+
+**Models that write Hinglish directly.** A few specialists skip the native
+script entirely and write romanized text straight from audio. That has one big
+advantage — English words come out as English (`Television report`) instead of
+being spelled out letter by letter from Devanagari — and one quirk: they spell
+long vowels like a textbook (`saamaan`, `vaala`) where people type `samaan`,
+`wala`. The app fixes only that: a word nobody in the dictionary spells that
+way gets its doubled vowels shortened *until it matches a spelling people do
+use*. Words already spelled a known way, English words and names are left alone.
+
+**Filler words.** "um", "uh" and "erm" are removed. Repeated words are never
+touched, because in Hindi they're grammar, not stuttering — `dheere dheere`
+means "slowly", not "slow slow".
 
 Two ways to run it:
 
@@ -612,7 +644,8 @@ experiments/       every measurement quoted in this document, reproducible
 
 | Model | Job | Size | Where it runs |
 | --- | --- | --- | --- |
-| **Whisper large-v3** | speech → text | 1.5B params, 3 GB | your GPU |
+| **Whisper large-v3** | speech → text, and which language it was | 1.5B params, 3 GB | your GPU |
+| *Specialists (optional)* | speech → text for one language | 0.15–3 GB each | your GPU, loaded on demand |
 | **Our transliterator** | unknown Hindi words → Latin | 2.56M params, 10 MB | your CPU |
 | **Qwen 2.5 7B** (Ollama) | compose & grammar | 7B params, 4.7 GB | your GPU |
 | *Dakshina lexicon* | 92% of Hindi words | 30k entries, 1.1 MB | a lookup, not a model |
@@ -630,9 +663,17 @@ re-run. Being clear about their limits:
 
 **Measured:**
 - 87.4% dictionary coverage averaged across all twelve languages, on running text
-- 92.3% dictionary coverage for Hindi — on one 75-second podcast clip
+- 83.7% of words spelled acceptably, against 6,000 sentences humans romanized
+  by hand (`tests/bench_romanization.py`)
+- Real speech from Google's FLEURS recordings, 40 people per language
+  (`tests/bench_asr.py`): Hindi word error 46.4% with open language detection,
+  29.0% when detection is limited to your languages
+- A 0.15 GB Hinglish model delivers Hindi within a few points of the 3 GB
+  large-v3, at seven times the speed
+- 2.8 seconds to transcribe a four-second dictation; 37x real time on long audio
+- One spelling habit, learned from two corrections, applies to 100% of words
+  you never corrected (`tests/test_learning.py`)
 - 63.2% model accuracy — on Dakshina's own held-out test data
-- 27x real-time transcription — on your RTX 4060
 - 57% of spelling variation from 10 conventions — across 30,000 words
 - Prompting fails — ten variations, all negative
 
@@ -640,8 +681,10 @@ re-run. Being clear about their limits:
   guard exists
 
 **Not yet measured:**
-- Accuracy on *your* voice and *your* vocabulary
-- Whether the learning loop converges pleasantly in daily use
+- Accuracy on *your* voice and *your* vocabulary. FLEURS is people reading
+  sentences aloud; relaxed chat with background noise is harder for every model
+- Whether the learning loop *feels* pleasant in daily use — it converges in
+  simulation, which is not the same thing
 - How well UI Automation reads Chrome and Electron apps (Slack, Discord, web
   Gmail expose text only reluctantly — this is the weakest part of the app).
   The screenshot fallback works but takes ~2.3s for a full screen.

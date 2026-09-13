@@ -274,6 +274,31 @@ c.save('config.yaml', cfg); print('  engine set to local')
     } else {
         Say "  Skipped - downloads on first use." "DarkGray"
     }
+
+    # --- specialist speech model for the chosen language ---
+    # large-v3 is one model for 99 languages and is weak on some of ours. Only
+    # models measured against it on real speech are offered; see
+    # livewhisper/specialists.py.
+    if (-not $Unattended -and $Language -and $Language -ne "auto") {
+        $spec = & $vpy -c @"
+import sys
+from livewhisper.specialists import recommended
+s = recommended(sys.argv[1].strip().lower())
+print(f'{s.name}|{s.size_gb}|{s.note}' if s else '')
+"@ $Language | Select-Object -Last 1
+        if ($spec) {
+            $parts = $spec -split '\|', 3
+            Say ""
+            Say "  A speech model tuned for this language is available: $($parts[0]) (~$($parts[1]) GB)." "Yellow"
+            if ($parts[2]) { Say "  $($parts[2])" "DarkGray" }
+            if (AskYesNo "Install it? It is used automatically whenever you speak this language." $true) {
+                Say "  Installing the converter and downloading, this takes a while..." "DarkGray"
+                & $vpy -m pip install --quiet "transformers>=4.44,<5" | Out-Null
+                & $vpy -m livewhisper.specialists install $Language
+                if ($LASTEXITCODE -ne 0) { Warn "Specialist install failed; large-v3 will be used for everything." }
+            }
+        }
+    }
 } finally {
     Pop-Location
 }

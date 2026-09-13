@@ -422,6 +422,20 @@ class SettingsWindow(ctk.CTkToplevel):
 
     # --------------------------------------------------------------- Engine
 
+    @staticmethod
+    def _specialists_text(loc: dict) -> str:
+        """One line per language that decodes with its own tuned model."""
+        routes = loc.get("models") or {}
+        if not routes:
+            return ("None - large-v3 handles every language. Add one with "
+                    "python -m livewhisper.specialists install <lang>")
+        parts = []
+        for lang, route in routes.items():
+            path = route.get("path", "") if isinstance(route, dict) else str(route)
+            name = path.replace("\\", "/").rstrip("/").rsplit("/", 1)[-1]
+            parts.append(f"{lang}: {name}")
+        return ", ".join(parts)
+
     def _build_engine(self, p) -> None:
         t = self.cfg["transcription"]
         self._heading(p, "Engine",
@@ -506,6 +520,16 @@ class SettingsWindow(ctk.CTkToplevel):
                     loc.get("language") or "",
                     "Blank = auto-detect across 99 languages. Or force en, hi, mr...",
                     width=90)
+        spoken = t.get("languages")
+        if isinstance(spoken, (list, tuple)):
+            spoken = ", ".join(spoken)
+        self._entry(card, "Languages you speak", "transcription.languages",
+                    spoken or "",
+                    "Detection only chooses among these, which fixes most "
+                    "wrong-language transcripts on short clips. Blank = your "
+                    "romanization language plus English. 'all' = no limit. "
+                    "Example: hi, mr, en", width=140)
+        self._row(card, "Specialist models", self._specialists_text(loc))
 
         self._dlrow = self._row(card, "Model files", self._model_status_text())
         self._dlbtn = ctk.CTkButton(self._dlrow, text="Download", width=120, height=32,
@@ -758,6 +782,13 @@ class SettingsWindow(ctk.CTkToplevel):
                                                "int8_float16")
         t["local"]["batch_size"] = self._get("transcription.local.batch_size", int, 8)
         t["local"]["language"] = self._get("transcription.local.language", str, None)
+        spoken = (self._get("transcription.languages", str, "") or "").strip()
+        if not spoken:
+            t["languages"] = None
+        elif spoken.lower() == "all":
+            t["languages"] = "all"
+        else:
+            t["languages"] = [c.strip().lower() for c in spoken.split(",") if c.strip()]
         t["vocabulary"] = self._vocab.get("1.0", "end-1c").strip()
 
         o = cfg["output"]

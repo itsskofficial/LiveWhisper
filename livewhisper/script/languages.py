@@ -220,3 +220,30 @@ def latin_ratio(text: str) -> float:
 
 def total_speakers() -> int:
     return sum(l.speakers_m for l in LANGUAGES.values())
+
+
+def speaker_languages(cfg: dict) -> list:
+    """The languages this person dictates in, for restricting speech detection.
+
+    Whisper otherwise chooses among 99 languages, and on a two or three second
+    clip - the length of a normal dictation - it measurably gets it wrong: in
+    tests/test_audio_e2e.py it heard Malayalam as Romanian, Bengali as
+    Indonesian and Marathi as Punjabi. Nobody dictating in Malayalam needs
+    Romanian considered at all.
+
+    `transcription.languages` wins when set: a list, or "all" for no
+    restriction. Otherwise the language picked at install plus English, which is
+    what a code-switching speaker actually uses.
+    """
+    t = (cfg.get("transcription") or {})
+    explicit = t.get("languages")
+    if isinstance(explicit, str):
+        if explicit.strip().lower() in ("all", "auto", ""):
+            return []
+        explicit = [c.strip() for c in explicit.split(",")]
+    if explicit:
+        return [str(c).lower() for c in explicit if c]
+    primary = (cfg.get("script") or {}).get("language")
+    if primary and primary != "auto" and supported(primary):
+        return [primary, "en"]
+    return []
