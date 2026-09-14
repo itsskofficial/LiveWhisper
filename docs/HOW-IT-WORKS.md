@@ -701,6 +701,21 @@ re-run. Being clear about their limits:
   numbers say the dictionary contains the words; they do not say a native
   speaker would agree with the spellings chosen. That is the single most
   valuable thing a contributor can tell us.
+- **large-v3 cannot write Malayalam.** Told the audio is Malayalam, it hears it
+  reasonably but writes it in another alphabet — across 40 real recordings,
+  Gurmukhi on 22, Devanagari on 9, Telugu on 6, and Malayalam only once. We
+  tried the obvious fix: Indian scripts sit in parallel Unicode blocks, so
+  letters can be shifted from one to another. That cut *character* errors from
+  99.7% to 64.3%, but the words were still wrong and the text you'd receive got
+  slightly worse (109.0% → 110.1%), so it was removed. Malayalam needs a model
+  that writes Malayalam.
+- **Sindhi has no usable speech model yet.** large-v3 wrote Sindhi in
+  Devanagari on 26 of 40 recordings and decided it was English on the other 13,
+  and no Sindhi fine-tune could be found to replace it.
+- **Short Marathi clips can come out as English.** Even limited to Marathi and
+  English, on 7 of 40 recordings Whisper chose English — and then produced
+  fluent English that had nothing to do with what was said. The word error
+  numbers catch this; a user would see a confident, wrong sentence.
 
 ---
 
