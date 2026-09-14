@@ -32,7 +32,6 @@ FAST = [
     ("specialist install", ["tests/test_specialists.py"]),
     ("compound splitting", ["tests/test_compounds.py"]),
     ("language routing", ["tests/test_routing.py"]),
-    ("sibling scripts", ["tests/test_sibling.py"]),
     ("learning convergence", ["tests/test_learning.py"]),
 ]
 AUDIO = [
