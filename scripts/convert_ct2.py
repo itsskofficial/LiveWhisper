@@ -27,10 +27,16 @@ from pathlib import Path
 
 # Converting loads the whole checkpoint before writing the half-size copy. When
 # Windows cannot commit that much memory, torch's native loader does not raise
-# MemoryError - it dies with an access violation and no traceback, which is how
-# the Kannada conversion failed six times in a row with an intact, hash-verified
-# download. 1.5x the weights leaves room for the float16 copy being built.
-MEMORY_FACTOR = 1.5
+# MemoryError - it dies with an access violation and no traceback. That is how
+# the Kannada conversion failed seven times with an intact, hash-verified
+# download, and how a plain torch.load of the Tamil checkpoint crashed while
+# benchmarks ran alongside it: Windows logged "low virtual memory condition"
+# (Resource-Exhaustion-Detector, event 2004) in the same minutes.
+#
+# A single check before loading was not enough - other processes keep growing
+# during a conversion that takes minutes - so the bar includes a fixed margin.
+MEMORY_FACTOR = 2.0
+MEMORY_MARGIN_GB = 3.0
 
 
 def _available_commit_gb() -> float | None:
@@ -113,9 +119,14 @@ def main() -> int:
     # A plain folder, not the shared cache: the cache builds its snapshots out of
     # symlinks, and Windows refuses to create those without Developer Mode
     # ("WinError 1314: A required privilege is not held by the client").
-    src_dir = args.out.with_name(args.out.name + ".src")
-    src = Path(snapshot_download(args.repo, local_dir=str(src_dir), allow_patterns=[
-        "*.json", "*.safetensors", "pytorch_model.bin", "*.txt", "*.model"]))
+    if Path(args.repo).is_dir():
+        # A local folder, e.g. a checkpoint re-saved as clean safetensors after
+        # the original would not load through transformers.
+        src = Path(args.repo)
+    else:
+        src_dir = args.out.with_name(args.out.name + ".src")
+        src = Path(snapshot_download(args.repo, local_dir=str(src_dir), allow_patterns=[
+            "*.json", "*.safetensors", "pytorch_model.bin", "*.txt", "*.model"]))
     print(f"source {src}")
 
     # One conversion at a time, machine-wide. Downloads can run in parallel, but
@@ -125,7 +136,7 @@ def main() -> int:
     lock = _conversion_lock(args.out.parent)
     weights_gb = sum(f.stat().st_size for f in list(src.glob("*.bin")) +
                      list(src.glob("*.safetensors"))) / 1e9
-    _wait_for_memory(weights_gb * MEMORY_FACTOR)
+    _wait_for_memory(weights_gb * MEMORY_FACTOR + MEMORY_MARGIN_GB)
 
     # Normalise the tokenizer and preprocessor next to the weights first, so the
     # converter can copy them across.

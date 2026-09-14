@@ -91,6 +91,37 @@ def load_audio(path: Path):
     return np.ascontiguousarray(audio, dtype="float32")
 
 
+def _available_commit_gb() -> float | None:
+    """How much more memory Windows can commit right now, in GB."""
+    try:
+        import ctypes
+
+        class MEMORYSTATUSEX(ctypes.Structure):
+            _fields_ = [("dwLength", ctypes.c_ulong), ("dwMemoryLoad", ctypes.c_ulong),
+                        ("ullTotalPhys", ctypes.c_ulonglong),
+                        ("ullAvailPhys", ctypes.c_ulonglong),
+                        ("ullTotalPageFile", ctypes.c_ulonglong),
+                        ("ullAvailPageFile", ctypes.c_ulonglong),
+                        ("ullTotalVirtual", ctypes.c_ulonglong),
+                        ("ullAvailVirtual", ctypes.c_ulonglong),
+                        ("ullAvailExtendedVirtual", ctypes.c_ulonglong)]
+
+        st = MEMORYSTATUSEX()
+        st.dwLength = ctypes.sizeof(MEMORYSTATUSEX)
+        if not ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(st)):
+            return None
+        return st.ullAvailPageFile / 1e9
+    except Exception:
+        return None
+
+
+# Each benchmark process commits 4-5 GB (CUDA and cuDNN reserve a great deal of
+# address space). Four of them plus a conversion exhausted Windows' commit limit
+# and crashed a conversion with no traceback; waiting for this much headroom
+# before loading keeps them from stacking that far.
+COMMIT_NEED_GB = 6.0
+
+
 def _free_vram_mb() -> int | None:
     import subprocess
     try:
@@ -131,14 +162,16 @@ class _LoadGate:
                 time.sleep(15)
                 continue
             free = _free_vram_mb()
-            if free is None or free >= self.need_mb:
+            commit = _available_commit_gb()
+            if (free is None or free >= self.need_mb) and                     (commit is None or commit >= COMMIT_NEED_GB):
                 return self
             # Hold nothing while waiting for memory, so a finishing run can exit.
             self.handle.seek(0)
             msvcrt.locking(self.handle.fileno(), msvcrt.LK_UNLCK, 1)
             if not said:
-                print(f"waiting for {self.need_mb} MB of free VRAM (have {free})...",
-                      flush=True)
+                print(f"waiting for {self.need_mb} MB free VRAM (have {free}) and "
+                      f"{COMMIT_NEED_GB:.0f} GB committable memory (have "
+                      f"{commit if commit is None else round(commit, 1)})...", flush=True)
                 said = True
             time.sleep(30)
 
