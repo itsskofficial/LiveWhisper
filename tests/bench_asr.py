@@ -91,14 +91,76 @@ def load_audio(path: Path):
     return np.ascontiguousarray(audio, dtype="float32")
 
 
+def _free_vram_mb() -> int | None:
+    import subprocess
+    try:
+        out = subprocess.run(["nvidia-smi", "--query-gpu=memory.free",
+                              "--format=csv,noheader,nounits"],
+                             capture_output=True, text=True, timeout=10).stdout
+        return int(out.strip().splitlines()[0])
+    except Exception:
+        return None
+
+
+class _LoadGate:
+    """Let one benchmark at a time load a model, and only when it will fit.
+
+    Running every language in parallel pushed an 8 GB card to 7.9 GB in use; the
+    next model to load would have died with CUDA out-of-memory and taken that
+    language's result with it. The lock serializes loads, not whole runs: once a
+    model is on the GPU its memory is visible to nvidia-smi and the next waiter
+    can judge for itself. The OS drops the lock if a holder crashes.
+    """
+
+    def __init__(self, need_mb: int):
+        self.need_mb = need_mb
+        OUT.mkdir(parents=True, exist_ok=True)
+        self.handle = open(OUT.parent / ".gpu-load.lock", "a+b")
+
+    def __enter__(self):
+        import msvcrt
+        said = False
+        while True:
+            try:
+                self.handle.seek(0)
+                msvcrt.locking(self.handle.fileno(), msvcrt.LK_NBLCK, 1)
+            except OSError:
+                if not said:
+                    print("waiting for another benchmark to load its model...", flush=True)
+                    said = True
+                time.sleep(15)
+                continue
+            free = _free_vram_mb()
+            if free is None or free >= self.need_mb:
+                return self
+            # Hold nothing while waiting for memory, so a finishing run can exit.
+            self.handle.seek(0)
+            msvcrt.locking(self.handle.fileno(), msvcrt.LK_UNLCK, 1)
+            if not said:
+                print(f"waiting for {self.need_mb} MB of free VRAM (have {free})...",
+                      flush=True)
+                said = True
+            time.sleep(30)
+
+    def __exit__(self, *exc):
+        import msvcrt
+        try:
+            self.handle.seek(0)
+            msvcrt.locking(self.handle.fileno(), msvcrt.LK_UNLCK, 1)
+        except OSError:
+            pass
+        return False
+
+
 class Model:
-    def __init__(self, name: str, compute_type: str, beam: int):
+    def __init__(self, name: str, compute_type: str, beam: int, need_mb: int = 3000):
         from faster_whisper import WhisperModel
-        t0 = time.perf_counter()
-        self.name = name
-        self.m = WhisperModel(name, device="cuda", compute_type=compute_type)
-        self.beam = beam
-        self.load_s = time.perf_counter() - t0
+        with _LoadGate(need_mb):
+            t0 = time.perf_counter()
+            self.name = name
+            self.m = WhisperModel(name, device="cuda", compute_type=compute_type)
+            self.beam = beam
+            self.load_s = time.perf_counter() - t0
 
     def detect(self, audio, allowed: list | None) -> tuple:
         """-> (language, its probability, {language: probability}).
