@@ -196,11 +196,11 @@ receive after romanization, against every accepted spelling:
 | Bengali | 66.5% | **31.7%** | Bengali.AI whisper-medium |
 | Tamil | 51.8% | **22.4%** | IIT Madras whisper-medium |
 | Telugu | 71.6% | **36.2%** | IIT Madras whisper-medium |
-| Urdu | 19.6% | *measuring* | |
+| Urdu | **19.6%** | — | large-v3 is already best (a turbo fine-tune measured 24.1%) |
 | Punjabi | 68.6% | **56.3%** | whisper-large-v2 fine-tune (still weak) |
 | Marathi | 73.2% | *measuring* | |
-| Gujarati | 63.3% | *measuring* | |
-| Kannada | 59.8% | *measuring* | |
+| Gujarati | 63.3% | **48.5%** | IIT Madras whisper-medium (still weak) |
+| Kannada | 59.8% | **30.2%** | IIT Madras whisper-medium |
 | Malayalam | 108.7% | **58.8%** | whisper-large-v3 Malayalam fine-tune (still weak) |
 | Sindhi | 77.7% | — | no fine-tune found |
 
@@ -226,10 +226,13 @@ python -m livewhisper.specialists install bn  # download, convert, configure
 Only specialists that beat large-v3 on the same recordings are offered. The
 installer suggests one for your language when it exists.
 
-Installing converts the model, which briefly needs a few GB of free memory —
-roughly 1.5× the download plus 1.5 GB. If your machine doesn't have that
-spare, the install **waits and tells you** instead of crashing, and closing a
-browser or other large program lets it continue.
+Installing converts the model, which briefly uses about 2× the download in
+memory — measured between 1.9× and 2.4×, so 7–8 GB for a 3 GB model. With Windows' default pagefile that
+only needs a few GB actually free to start, because Windows grows the pagefile
+to cover the rest; with a fixed-size pagefile it waits for the whole amount.
+Either way the install **waits and tells you** instead of crashing, runs one
+conversion at a time, and closing a browser or other large program lets it
+continue sooner.
 
 ---
 

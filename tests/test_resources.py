@@ -36,9 +36,63 @@ def main() -> int:
               isinstance(have, float) and have > 0, f"{have}")
     else:
         check("reads None off Windows rather than guessing", have is None)
-    check("need scales with the checkpoint and includes the margin",
-          abs(resources.memory_needed_gb(3.0) - (3.0 * resources.MEMORY_FACTOR
-                                                 + resources.MEMORY_MARGIN_GB)) < 1e-9)
+    print("\n=== pagefile ===")
+    parse = resources._managed_from_paging_files
+    check("'?:\\pagefile.sys' is system-managed", parse(["?:\\pagefile.sys"]) is True)
+    check("sizes of 0 0 are system-managed", parse(["C:\\pagefile.sys 0 0"]) is True)
+    check("a bare path is system-managed", parse(["D:\\pagefile.sys"]) is True)
+    check("custom sizes are not", parse(["C:\\pagefile.sys 4096 8192"]) is False)
+    check("no pagefile at all is not", parse([]) is False and parse([""]) is False)
+    check("any managed entry among several counts",
+          parse(["C:\\pagefile.sys 2048 2048", "D:\\pagefile.sys 0 0"]) is True)
+    if sys.platform == "win32":
+        live = resources.pagefile_is_system_managed()
+        check("this machine's setting is readable", live in (True, False), f"{live}")
+
+    saved_managed = resources.pagefile_is_system_managed
+    try:
+        resources.pagefile_is_system_managed = lambda: True
+        managed = resources.memory_needed_gb(3.06)
+        resources.pagefile_is_system_managed = lambda: False
+        fixed = resources.memory_needed_gb(3.06)
+        resources.pagefile_is_system_managed = lambda: None
+        unknown = resources.memory_needed_gb(3.06)
+    finally:
+        resources.pagefile_is_system_managed = saved_managed
+    check("a growable pagefile needs only enough to start safely",
+          abs(managed - (3.06 * resources.MANAGED_FACTOR
+                         + resources.MANAGED_MARGIN_GB)) < 1e-9, f"{managed:.2f} GB")
+    check("a fixed pagefile needs the whole measured peak",
+          abs(fixed - (3.06 * resources.PEAK_FACTOR
+                       + resources.FIXED_MARGIN_GB)) < 1e-9, f"{fixed:.2f} GB")
+    # Every conversion measured so far: (checkpoint GB, peak commit GB).
+    measured = {"Gujarati": (3.06, 6.9), "Urdu": (3.24, 7.9), "Marathi": (6.17, 11.4)}
+    try:
+        resources.pagefile_is_system_managed = lambda: False
+        for name, (weights, peak) in measured.items():
+            bar = resources.memory_needed_gb(weights)
+            check(f"{name}'s measured peak ({peak} GB) fits under the fixed-pagefile bar",
+                  bar >= peak, f"bar {bar:.1f} GB")
+    finally:
+        resources.pagefile_is_system_managed = saved_managed
+    check("every lone success observed (started at 3.9 GB) passes the managed bar",
+          managed <= 3.9, f"{managed:.2f} GB")
+    check("an unreadable setting falls back to Windows' default, managed",
+          unknown == managed)
+
+    if sys.platform == "win32":
+        # The first version returned None on 64-bit Windows because ctypes
+        # truncated the process handle - and nothing noticed, since None is a
+        # legal answer. So check the number moves with a real allocation.
+        before = resources.peak_commit_gb()
+        blob = bytearray(300 * 1024 * 1024)
+        for i in range(0, len(blob), 4096):
+            blob[i] = 1
+        after = resources.peak_commit_gb()
+        del blob
+        check("peak commit is readable and rises across a 300 MB allocation",
+              before is not None and after is not None and after - before > 0.25,
+              f"{before} -> {after}")
 
     t = time.time()
     resources.wait_for_memory(0.001, progress=lambda m: None, poll_s=0.01)
