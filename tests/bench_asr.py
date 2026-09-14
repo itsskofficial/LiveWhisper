@@ -101,16 +101,24 @@ class Model:
         self.load_s = time.perf_counter() - t0
 
     def detect(self, audio, allowed: list | None) -> tuple:
+        """-> (language, its probability, {language: probability}).
+
+        The distribution is kept so decision rules can be tested offline - for
+        instance "only choose English when it clearly beats the Indic language",
+        after Marathi audio detected as English came out as fluent, unrelated
+        English on 7 of 40 clips.
+        """
         lang, p, probs = self.m.detect_language(audio)
         if not allowed:
-            return lang, p
+            top = dict(sorted(probs, key=lambda x: -x[1])[:5])
+            return lang, p, top
         # Renormalise over the languages this user actually speaks.
         pool = [(l, q) for l, q in probs if l in allowed]
         if not pool:
-            return lang, p
+            return lang, p, {}
         total = sum(q for _, q in pool) or 1.0
         best = max(pool, key=lambda x: x[1])
-        return best[0], best[1] / total
+        return best[0], best[1] / total, {l: q / total for l, q in pool}
 
     def transcribe(self, audio, language: str | None) -> str:
         segs, info = self.m.transcribe(audio, language=language,
@@ -164,14 +172,15 @@ def main() -> int:
             audio = load_audio(args.data / c["name"])
             audio_s += len(audio) / 16000
             t0 = time.perf_counter()
+            probs: dict = {}
             if args.mode == "forced":
                 heard = lang
             elif args.mode == "constrained":
                 allowed = (args.allowed.split(",") if args.allowed
                            else sorted({lang, "en"}))
-                heard, _ = model.detect(audio, allowed)
+                heard, _, probs = model.detect(audio, allowed)
             else:
-                heard, _ = model.detect(audio, None)
+                heard, _, probs = model.detect(audio, None)
             hyp = model.transcribe(audio, heard)
             wall += time.perf_counter() - t0
 
@@ -182,9 +191,14 @@ def main() -> int:
             elif args.latin_output:
                 script_ok += not has_indic(hyp)
             else:
-                script_ok += lang in languages_for_script(hyp) or (
-                    lang in ("hi", "mr") and bool(
-                        set(languages_for_script(hyp)) & {"hi", "mr"}))
+                # Hindi/Marathi share Devanagari and Urdu/Sindhi share Arabic
+                # script, and the script counter credits each character to
+                # whichever language it checks first. Without this, Sindhi
+                # could never score, whatever the model wrote.
+                present = set(languages_for_script(hyp))
+                shared = next((pair for pair in ({"hi", "mr"}, {"ur", "sd"})
+                               if lang in pair), {lang})
+                script_ok += bool(present & shared)
 
             if not args.latin_output:
                 e_w += edit(ref_w, hyp_w)
@@ -203,8 +217,12 @@ def main() -> int:
                 ok_sets = accepted_spellings(lang, ref_w)
                 e_d += edit(ok_sets, out_w, same=lambda s, w: w in s)
                 n_d += len(ok_sets)
-            if len(samples) < 200:
+            # Per language, not overall: a global cap of 200 filled up after the
+            # first five languages of a 12-language run and silently dropped
+            # every Malayalam and Sindhi transcript.
+            if sum(1 for x in samples if x["lang"] == lang) < 60:
                 samples.append({"lang": lang, "heard": heard,
+                                "probs": {k: round(v, 4) for k, v in probs.items()},
                                 "ref": c["reference"], "hyp": hyp})
 
         k = len(clips)

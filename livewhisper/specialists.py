@@ -67,6 +67,16 @@ CATALOGUE: list = [
                   "delivered Telugu romanized": "36.2% (large-v3 71.6%)"},
         note="Whisper-medium fine-tuned on Telugu by SPRING Lab, IIT Madras. "
              "1.5 GB once converted."),
+    Specialist(
+        # Measured decoding with the "hi" token, so no language override: the
+        # route decodes with whatever detection chose. Oriserve's card suggests
+        # "en"; that setting has not been measured here.
+        "hi", "Oriserve/Whisper-Hindi2Hinglish-Prime", "hinglish-prime", 6.17,
+        "apache-2.0", latin_output=True,
+        measured={"delivered Hinglish, held-out": "19.1% (large-v3 22.0%)",
+                  "delivered Hinglish, test": "19.5% (large-v3 24.4%)"},
+        note="Writes Hinglish straight from audio, so English words stay English. "
+             "Large-v3 sized: with the main model loaded too, allow ~6 GB of VRAM."),
 ]
 
 
