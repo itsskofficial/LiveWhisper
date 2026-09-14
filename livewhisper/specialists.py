@@ -105,6 +105,14 @@ CATALOGUE: list = [
                   "delivered Gujlish": "48.5% (large-v3 63.3%)"},
         note="Clearly better than large-v3, but still misses about half the words. "
              "Whisper-medium fine-tuned by SPRING Lab, IIT Madras; 1.5 GB converted."),
+    Specialist(
+        "mr", "DrishtiSharma/whisper-large-v2-marathi", "mr-large-v2", 6.17,
+        "apache-2.0",
+        measured={"FLEURS word error": "47.2% (large-v3 78.7%)",
+                  "delivered Minglish": "51.6% (large-v3 73.2%)"},
+        note="Large-v2 sized: as fast as large-v3 on the same clips (2.5x "
+             "realtime), allow ~6 GB of VRAM with the main model. Converting "
+             "peaks near 11.5 GB of memory."),
 ]
 
 

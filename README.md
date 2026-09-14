@@ -198,7 +198,7 @@ receive after romanization, against every accepted spelling:
 | Telugu | 71.6% | **36.2%** | IIT Madras whisper-medium |
 | Urdu | **19.6%** | — | large-v3 is already best (a turbo fine-tune measured 24.1%) |
 | Punjabi | 68.6% | **56.3%** | whisper-large-v2 fine-tune (still weak) |
-| Marathi | 73.2% | *measuring* | |
+| Marathi | 73.2% | **51.6%** | whisper-large-v2 Marathi fine-tune (still weak) |
 | Gujarati | 63.3% | **48.5%** | IIT Madras whisper-medium (still weak) |
 | Kannada | 59.8% | **30.2%** | IIT Madras whisper-medium |
 | Malayalam | 108.7% | **58.8%** | whisper-large-v3 Malayalam fine-tune (still weak) |
