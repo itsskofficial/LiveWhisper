@@ -99,6 +99,12 @@ CATALOGUE: list = [
                   "delivered Kanglish": "30.2% (large-v3 59.8%)"},
         note="Whisper-medium fine-tuned on Kannada by SPRING Lab, IIT Madras. "
              "1.5 GB once converted; converting peaks near 7 GB of memory."),
+    Specialist(
+        "gu", "vasista22/whisper-gujarati-medium", "gu-medium", 3.06, "apache-2.0",
+        measured={"FLEURS word error": "49.8% (large-v3 67.7%)",
+                  "delivered Gujlish": "48.5% (large-v3 63.3%)"},
+        note="Clearly better than large-v3, but still misses about half the words. "
+             "Whisper-medium fine-tuned by SPRING Lab, IIT Madras; 1.5 GB converted."),
 ]
 
 
