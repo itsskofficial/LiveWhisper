@@ -85,6 +85,14 @@ CATALOGUE: list = [
         note="Better than large-v3, but still gets more than half of words wrong - "
              "trained on Common Voice's small Punjabi set. Large-v2 sized, "
              "allow ~6 GB of VRAM with the main model."),
+    Specialist(
+        "ml", "rontroy/whisper-large-v3-malayalam-ct2", "ml-large-v3", 3.09,
+        "apache-2.0", kind="ct2",
+        measured={"FLEURS word error": "61.3% (large-v3 114.9%)",
+                  "delivered Manglish": "58.8% (large-v3 109.0%)"},
+        note="large-v3 writes Malayalam in Gurmukhi, Devanagari or Telugu script; "
+             "this model writes Malayalam every time. Still gets most words "
+             "wrong. Already converted, so install is a download only."),
 ]
 
 

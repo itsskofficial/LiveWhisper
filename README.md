@@ -201,7 +201,7 @@ receive after romanization, against every accepted spelling:
 | Marathi | 78.6% | *measuring* | |
 | Gujarati | 63.3% | *measuring* | |
 | Kannada | 59.8% | *measuring* | |
-| Malayalam | 108.7% | *measuring* | |
+| Malayalam | 108.7% | **58.8%** | whisper-large-v3 Malayalam fine-tune (still weak) |
 | Sindhi | 86.2% | — | no fine-tune found |
 
 Lower is better. The large-v3 column is already limited to your languages; the
