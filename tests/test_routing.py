@@ -85,6 +85,37 @@ def main() -> int:
     check("no restriction configured leaves detection to Whisper",
           free._pick_language(audio) is None)
 
+    print("\n=== a borderline English loses to the user's other language ===")
+
+    class Detector(FakeWhisper):
+        def __init__(self, dist):
+            super().__init__("main")
+            self.dist = dist
+
+        def detect_language(self, audio, vad_filter=False):
+            top = max(self.dist, key=self.dist.get)
+            return top, self.dist[top], list(self.dist.items())
+
+    def picks(dist, languages):
+        d = LocalBackend({"batch_size": 1}, languages=languages)
+        d._model = Detector(dist)
+        return d._pick_language(audio)
+
+    # The measured failure: Marathi speech with English at 0.54-0.89.
+    check("English at 0.70 against Marathi decodes as Marathi",
+          picks({"en": 0.70, "mr": 0.30, "hi": 0.001}, ["mr", "en"]) == "mr")
+    check("English at 0.89 still loses",
+          picks({"en": 0.89, "mr": 0.11}, ["mr", "en"]) == "mr")
+    # Real English scored at least 0.9998.
+    check("clear English stays English",
+          picks({"en": 0.9999, "mr": 0.0001}, ["mr", "en"]) == "en")
+    check("an English-only user is never second-guessed",
+          picks({"en": 0.60, "mr": 0.40}, ["en", "fr"]) == "en")
+    check("a detected Indic language is left alone",
+          picks({"mr": 0.60, "en": 0.40}, ["mr", "en"]) == "mr")
+    check("the threshold uses the renormalised probability",
+          picks({"en": 0.30, "mr": 0.0001, "de": 0.69}, ["mr", "en"]) == "en")
+
     print("\n=== switching ===")
     b.cfg["language"] = "ta"
     check("plain path route", b.transcribe(audio) == "[ta-spec:ta]"

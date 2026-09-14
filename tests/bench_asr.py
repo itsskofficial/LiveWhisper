@@ -186,8 +186,10 @@ class _LoadGate:
 
 
 class Model:
-    def __init__(self, name: str, compute_type: str, beam: int, need_mb: int = 3000):
+    def __init__(self, name: str, compute_type: str, beam: int, need_mb: int = 3000,
+                 english_min: float = 0.0):
         from faster_whisper import WhisperModel
+        self.english_min = english_min
         with _LoadGate(need_mb):
             t0 = time.perf_counter()
             self.name = name
@@ -213,7 +215,13 @@ class Model:
             return lang, p, {}
         total = sum(q for _, q in pool) or 1.0
         best = max(pool, key=lambda x: x[1])
-        return best[0], best[1] / total, {l: q / total for l, q in pool}
+        dist = {l: q / total for l, q in pool}
+        # Same rule as LocalBackend._second_guess_english: a borderline English
+        # loses to the user's other language.
+        others = [(l, q) for l, q in pool if l != "en"]
+        if best[0] == "en" and others and dist.get("en", 0) < self.english_min:
+            best = max(others, key=lambda x: x[1])
+        return best[0], best[1] / total, dist
 
     def transcribe(self, audio, language: str | None) -> str:
         segs, info = self.m.transcribe(audio, language=language,
@@ -237,6 +245,9 @@ def main() -> int:
     ap.add_argument("--n", type=int, default=40)
     ap.add_argument("--compute", default="int8_float16")
     ap.add_argument("--beam", type=int, default=5)
+    ap.add_argument("--english-min", type=float, default=0.0,
+                    help="constrained mode: choose English only above this "
+                         "probability (the app uses 0.99; 0 = plain argmax)")
     ap.add_argument("--latin-output", action="store_true",
                     help="model emits romanized text directly (Hinglish models)")
     args = ap.parse_args()
@@ -251,7 +262,7 @@ def main() -> int:
         if len(by_lang[c["lang"]]) < args.n:
             by_lang[c["lang"]].append(c)
 
-    model = Model(args.model, args.compute, args.beam)
+    model = Model(args.model, args.compute, args.beam, english_min=args.english_min)
     label = args.label or f"{Path(args.model).name}-{args.mode}"
     print(f"{label}: loaded in {model.load_s:.0f}s")
     print(f"{'lang':<5} {'n':>3} {'WER':>6} {'CER':>6} {'lang ok':>8} "

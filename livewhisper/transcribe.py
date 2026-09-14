@@ -150,7 +150,35 @@ class LocalBackend:
         pool = [(code, p) for code, p in probs if code in self.languages]
         if not pool:
             return None
-        return max(pool, key=lambda x: x[1])[0]
+        best = max(pool, key=lambda x: x[1])[0]
+        return self._second_guess_english(best, pool)
+
+    # Measured on FLEURS: Marathi recordings that detection called English had
+    # English at 0.54-0.89 once renormalised over {mr, en}; real English speech
+    # scored at least 0.9998 against Hindi and 1.0 against Marathi and Sindhi.
+    # 0.99 sits between the two on a log-odds scale.
+    ENGLISH_MIN = 0.99
+
+    def _second_guess_english(self, best: str, pool: list) -> str:
+        """Refuse a borderline "English" when the user also speaks another language.
+
+        Detection choosing English for Indic speech is the worst failure in the
+        app: large-v3 then writes fluent English that was never said - on 7 of
+        40 Marathi recordings, "May God bless you with the best of luck" for a
+        sentence about organisational resources. The opposite mistake, decoding
+        mostly-English speech as Hindi, degrades into romanizable text instead.
+        So English has to be clearly ahead, not merely ahead.
+        """
+        others = [(code, p) for code, p in pool if code != "en"]
+        if best != "en" or not others:
+            return best
+        total = sum(p for _, p in pool) or 1.0
+        p_en = dict(pool).get("en", 0.0) / total
+        if p_en >= self.ENGLISH_MIN:
+            return best
+        fallback = max(others, key=lambda x: x[1])[0]
+        log.info("english only %.2f likely; decoding as %s instead", p_en, fallback)
+        return fallback
 
     def _route(self, language: str | None) -> dict:
         """The configured specialist for a language, normalised to a dict.

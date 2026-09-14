@@ -198,11 +198,11 @@ receive after romanization, against every accepted spelling:
 | Telugu | 71.6% | **36.2%** | IIT Madras whisper-medium |
 | Urdu | 19.6% | *measuring* | |
 | Punjabi | 68.6% | **56.3%** | whisper-large-v2 fine-tune (still weak) |
-| Marathi | 78.6% | *measuring* | |
+| Marathi | 73.2% | *measuring* | |
 | Gujarati | 63.3% | *measuring* | |
 | Kannada | 59.8% | *measuring* | |
 | Malayalam | 108.7% | **58.8%** | whisper-large-v3 Malayalam fine-tune (still weak) |
-| Sindhi | 86.2% | — | no fine-tune found |
+| Sindhi | 77.7% | — | no fine-tune found |
 
 Lower is better. The large-v3 column is already limited to your languages; the
 specialist column is the same recordings through the specialist.
@@ -210,7 +210,11 @@ specialist column is the same recordings through the specialist.
 Two failures behind the worst numbers, both measured rather than guessed:
 **large-v3 hears Malayalam correctly and writes it in Telugu script**, so nearly
 every character counts as wrong; and on **7 of 40 Marathi recordings it decided
-the speech was English and produced fluent, unrelated English**. English itself,
+the speech was English and produced fluent, unrelated English**. That one is
+fixed: English now has to be clearly ahead (99% likely) before it wins over
+your own language. Every misfire scored between 54% and 89%, while real English
+speech never dropped below 99.98% — so all 7 Marathi clips and 13 Sindhi ones
+now decode correctly, and none of 40 English recordings were misrouted. English itself,
 as a check that the scoring is sound, comes out at 4.8% word error — in line
 with large-v3's published results.
 

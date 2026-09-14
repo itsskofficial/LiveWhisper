@@ -712,10 +712,15 @@ re-run. Being clear about their limits:
 - **Sindhi has no usable speech model yet.** large-v3 wrote Sindhi in
   Devanagari on 26 of 40 recordings and decided it was English on the other 13,
   and no Sindhi fine-tune could be found to replace it.
-- **Short Marathi clips can come out as English.** Even limited to Marathi and
-  English, on 7 of 40 recordings Whisper chose English — and then produced
-  fluent English that had nothing to do with what was said. The word error
-  numbers catch this; a user would see a confident, wrong sentence.
+- **Short Marathi clips used to come out as English — now fixed.** Even limited
+  to Marathi and English, on 7 of 40 recordings Whisper chose English and then
+  produced fluent English that had nothing to do with what was said. Looking at
+  how sure it was settled it: those 7 had English at 54–89% likely, while 40
+  real English recordings never dropped below 99.98%. So English now has to be
+  at least 99% likely before it beats your own language. On the same
+  recordings, Marathi landed in the right language 100% of the time instead of
+  82%, delivered errors fell from 77.9% to 73.2%, Sindhi's from 84.6% to 77.7%,
+  and none of the English recordings were misrouted.
 
 ---
 
