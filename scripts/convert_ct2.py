@@ -33,10 +33,22 @@ from pathlib import Path
 # benchmarks ran alongside it: Windows logged "low virtual memory condition"
 # (Resource-Exhaustion-Detector, event 2004) in the same minutes.
 #
-# A single check before loading was not enough - other processes keep growing
-# during a conversion that takes minutes - so the bar includes a fixed margin.
-MEMORY_FACTOR = 2.0
-MEMORY_MARGIN_GB = 3.0
+# Calibration, and two design mistakes it took to get here:
+#
+# - 2x the checkpoint plus 3 GB assumed benchmarks growing alongside every
+#   conversion. With a 16 GB machine's everyday applications open, that bar was
+#   never reached: a Kannada conversion waited indefinitely for 9.1 GB.
+# - It waited while holding the conversion lock, so every conversion queued
+#   behind it waited too. Memory is now awaited before the lock is taken, and
+#   re-checked once it is held.
+# - Waiting processes had already imported torch and transformers, holding
+#   ~1.2 GB each for nothing. Those imports now happen after the gate.
+#
+# 1.5x covers the full-precision load plus the float16 copy being written; the
+# margin is for everything else. Each run prints its real peak commit, which is
+# what this number should eventually be set from.
+MEMORY_FACTOR = 1.5
+MEMORY_MARGIN_GB = 1.5
 
 
 def _available_commit_gb() -> float | None:
@@ -78,10 +90,12 @@ def _wait_for_memory(need_gb: float) -> None:
         time.sleep(30)
 
 
-def _conversion_lock(folder: Path):
-    """Block until no other conversion holds the lock; return the open handle.
+def _acquire_slot(folder: Path, need_gb: float):
+    """Wait for memory, take the machine-wide lock, confirm memory still fits.
 
-    Keep the returned object alive for as long as the lock should be held.
+    Returns the open lock handle; keep it alive while converting. A process that
+    is short of memory never holds the lock, so it cannot block a conversion
+    that would fit. The OS releases the lock if the holder dies.
     """
     import time
     folder.mkdir(parents=True, exist_ok=True)
@@ -90,19 +104,62 @@ def _conversion_lock(folder: Path):
         import msvcrt
     except ImportError:                       # not Windows
         import fcntl
+        _wait_for_memory(need_gb)
         fcntl.flock(handle, fcntl.LOCK_EX)
         return handle
-    waited = False
+    said_lock = False
     while True:
+        _wait_for_memory(need_gb)
         try:
             handle.seek(0)
             msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
-            return handle
         except OSError:
-            if not waited:
+            if not said_lock:
                 print("waiting for another conversion to finish...", flush=True)
-                waited = True
+                said_lock = True
             time.sleep(10)
+            continue
+        have = _available_commit_gb()
+        if have is None or have >= need_gb:
+            return handle
+        handle.seek(0)                        # memory went while we waited
+        msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
+
+
+def _peak_commit_gb() -> float | None:
+    """This process's peak committed memory - the number to calibrate from."""
+    try:
+        import ctypes
+        from ctypes import wintypes
+
+        class PMC(ctypes.Structure):
+            _fields_ = [("cb", wintypes.DWORD), ("PageFaultCount", wintypes.DWORD),
+                        ("PeakWorkingSetSize", ctypes.c_size_t),
+                        ("WorkingSetSize", ctypes.c_size_t),
+                        ("QuotaPeakPagedPoolUsage", ctypes.c_size_t),
+                        ("QuotaPagedPoolUsage", ctypes.c_size_t),
+                        ("QuotaPeakNonPagedPoolUsage", ctypes.c_size_t),
+                        ("QuotaNonPagedPoolUsage", ctypes.c_size_t),
+                        ("PagefileUsage", ctypes.c_size_t),
+                        ("PeakPagefileUsage", ctypes.c_size_t)]
+
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        # Without these declarations ctypes passes the process handle as a
+        # 32-bit int; on 64-bit Windows the handle is truncated, the call fails,
+        # and the peak silently reads as unavailable.
+        kernel32.GetCurrentProcess.restype = wintypes.HANDLE
+        get_info = getattr(kernel32, "K32GetProcessMemoryInfo", None)
+        if get_info is None:
+            get_info = ctypes.WinDLL("psapi").GetProcessMemoryInfo
+        get_info.argtypes = [wintypes.HANDLE, ctypes.POINTER(PMC), wintypes.DWORD]
+        get_info.restype = wintypes.BOOL
+
+        counters = PMC()
+        counters.cb = ctypes.sizeof(PMC)
+        ok = get_info(kernel32.GetCurrentProcess(), ctypes.byref(counters), counters.cb)
+        return counters.PeakPagefileUsage / 1e9 if ok else None
+    except Exception:
+        return None
 
 
 def main() -> int:
@@ -113,8 +170,6 @@ def main() -> int:
     args = ap.parse_args()
 
     from huggingface_hub import snapshot_download
-    import ctranslate2
-    from transformers import WhisperProcessor, WhisperTokenizerFast
 
     # A plain folder, not the shared cache: the cache builds its snapshots out of
     # symlinks, and Windows refuses to create those without Developer Mode
@@ -133,10 +188,14 @@ def main() -> int:
     # converting loads the whole model into RAM - 3-6 GB for large-v2/v3 - and
     # four overlapping ones pushed a 15 GB machine to 1 GB free with the commit
     # limit nearly exhausted. The OS releases the lock if this process dies.
-    lock = _conversion_lock(args.out.parent)
     weights_gb = sum(f.stat().st_size for f in list(src.glob("*.bin")) +
                      list(src.glob("*.safetensors"))) / 1e9
-    _wait_for_memory(weights_gb * MEMORY_FACTOR + MEMORY_MARGIN_GB)
+    lock = _acquire_slot(args.out.parent, weights_gb * MEMORY_FACTOR + MEMORY_MARGIN_GB)
+
+    # Only now, with room to use them: torch and transformers alone commit over
+    # a gigabyte, which waiting processes used to hold for nothing.
+    import ctranslate2
+    from transformers import WhisperProcessor, WhisperTokenizerFast
 
     # Normalise the tokenizer and preprocessor next to the weights first, so the
     # converter can copy them across.
@@ -181,7 +240,9 @@ def main() -> int:
 
     mels = json.loads((args.out / "preprocessor_config.json").read_text()).get("feature_size")
     size = sum(f.stat().st_size for f in args.out.iterdir()) / 1e9
-    print(f"converted -> {args.out}  ({size:.2f} GB, {mels} mel bins)")
+    peak = _peak_commit_gb()
+    peak_txt = f", peak commit {peak:.1f} GB for {weights_gb:.1f} GB weights" if peak else ""
+    print(f"converted -> {args.out}  ({size:.2f} GB, {mels} mel bins{peak_txt})")
     return 0
 
 

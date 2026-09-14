@@ -100,6 +100,10 @@ NASTY = [
 def main() -> int:
     print("=== 1. romanizer eats anything, in every language ===")
     # 24 inputs x 12 languages = 288 calls through lexicon, model and conventions.
+    # Load the shared spelling model first. Otherwise the first timed input pays
+    # the one-time model load, and the "nothing hangs" check becomes a check on
+    # how busy the machine is - it failed at 5.01s under load for exactly that.
+    Romanizer("hi").text("क्या")
     worst = (0.0, "")
     for code in CODES:
         r = Romanizer(code)

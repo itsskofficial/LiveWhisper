@@ -87,6 +87,43 @@ def main() -> int:
         check("released lock can be taken again", h2 is not None)
         resources.release(h2)
 
+        # The deadlock this guards against: a conversion that did not fit held
+        # the lock while waiting for memory, and every conversion behind it -
+        # including ones that would have fit - waited too.
+        # The starved process ends itself. Killing it is not enough on Windows:
+        # a venv's python.exe is a launcher that runs the real interpreter as a
+        # child, kill() stops only the launcher, and the orphan keeps looping
+        # with the lock file open.
+        starved = subprocess.Popen(
+            [sys.executable, "-c",
+             "import os, sys, threading, time; sys.path.insert(0, r'%s'); "
+             "from livewhisper import resources; from pathlib import Path; "
+             "resources.available_commit_gb = lambda: 0.1; "
+             "threading.Thread(target=resources.acquire_conversion_slot, "
+             "args=(Path(r'%s'), 5.0), "
+             "kwargs={'progress': lambda m: None, 'poll_s': 0.05}, "
+             "daemon=True).start(); "
+             "print('waiting', flush=True); time.sleep(4); os._exit(0)"
+             % (ROOT, folder)],
+            stdout=subprocess.PIPE, text=True)
+        try:
+            starved.stdout.readline()                   # it is now in its wait
+            time.sleep(1.0)
+            t = time.time()
+            h3 = resources.acquire_conversion_slot(folder, 0.001,
+                                                   progress=lambda m: None,
+                                                   poll_s=0.05)
+            took = time.time() - t
+            check("a conversion short of memory does not hold the lock",
+                  h3 is not None and took < 2.0, f"took {took:.2f}s")
+            resources.release(h3)
+        finally:
+            try:
+                starved.wait(timeout=20)
+            except subprocess.TimeoutExpired:
+                starved.kill()
+                starved.wait(timeout=10)
+
     print(f"\n{'all passed' if not fails else f'{fails} FAILED'}")
     return 1 if fails else 0
 

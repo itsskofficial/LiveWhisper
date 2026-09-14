@@ -123,17 +123,17 @@ def convert(src: Path, out: Path, quantization: str = "float16",
     Takes the machine-wide conversion lock and waits for enough memory first -
     see livewhisper.resources for why skipping that crashes silently.
     """
-    import ctranslate2
-    from transformers import WhisperProcessor, WhisperTokenizerFast
-
     from . import resources
 
-    lock = resources.conversion_lock(out.parent, progress=progress)
+    weights_gb = sum(f.stat().st_size for f in list(src.glob("*.bin")) +
+                     list(src.glob("*.safetensors"))) / 1e9
+    lock = resources.acquire_conversion_slot(
+        out.parent, resources.memory_needed_gb(weights_gb), progress=progress)
     try:
-        weights_gb = sum(f.stat().st_size for f in list(src.glob("*.bin")) +
-                         list(src.glob("*.safetensors"))) / 1e9
-        resources.wait_for_memory(resources.memory_needed_gb(weights_gb),
-                                  progress=progress)
+        # Imported only once there is room: torch and transformers alone commit
+        # over a gigabyte, which a waiting install would otherwise hold.
+        import ctranslate2
+        from transformers import WhisperProcessor, WhisperTokenizerFast
         return _convert_locked(src, out, quantization, ctranslate2,
                                WhisperProcessor, WhisperTokenizerFast)
     finally:
