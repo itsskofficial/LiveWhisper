@@ -186,12 +186,33 @@ languages **you** speak (the one you picked at install, plus English):
 
 And where one model for 99 languages is simply weak, a **specialist** takes
 over decoding for that language while large-v3 keeps working out which language
-you spoke:
+you spoke. Here is every language, measured the same way — 40 people reading
+aloud from Google's FLEURS recordings, scored on the text you would actually
+receive after romanization, against every accepted spelling:
 
-| Bengali, 40 real recordings | Word error |
-| --- | --- |
-| Whisper large-v3 | 73.3% |
-| Bengali.AI's fine-tuned model | **20.9%** |
+| Language | large-v3 | With specialist | Specialist |
+| --- | --- | --- | --- |
+| Hindi | 24.4% | **19.5%** | Oriserve Hinglish-Prime (writes Hinglish directly) |
+| Bengali | 66.5% | **31.7%** | Bengali.AI whisper-medium |
+| Tamil | 51.8% | **22.4%** | IIT Madras whisper-medium |
+| Telugu | 71.6% | **36.2%** | IIT Madras whisper-medium |
+| Urdu | 19.6% | *measuring* | |
+| Punjabi | 68.6% | *measuring* | |
+| Marathi | 78.6% | *measuring* | |
+| Gujarati | 63.3% | *measuring* | |
+| Kannada | 59.8% | *measuring* | |
+| Malayalam | 108.7% | *measuring* | |
+| Sindhi | 86.2% | — | no fine-tune found |
+
+Lower is better. The large-v3 column is already limited to your languages; the
+specialist column is the same recordings through the specialist.
+
+Two failures behind the worst numbers, both measured rather than guessed:
+**large-v3 hears Malayalam correctly and writes it in Telugu script**, so nearly
+every character counts as wrong; and on **7 of 40 Marathi recordings it decided
+the speech was English and produced fluent, unrelated English**. English itself,
+as a check that the scoring is sound, comes out at 4.8% word error — in line
+with large-v3's published results.
 
 ```powershell
 python -m livewhisper.specialists list        # what's been measured
@@ -286,10 +307,12 @@ Every number here is reproducible. Experiments live in
 [`experiments/`](experiments/), measurements in [`tests/`](tests/):
 
 ```powershell
-python tests/bench_romanization.py <dakshina-root>   # accuracy vs humans
+python scripts/fetch_fleurs.py build/fleurs --n 40   # real speech, 12 languages
+python tests/bench_asr.py build/fleurs               # speech models, per language
+python tests/bench_romanization.py <dakshina-root>   # spelling vs humans
 python tests/test_learning.py                        # convergence
-python tests/test_robustness.py                      # 118 adversarial checks
 python tests/bench_latency.py                        # per-stage timings
+python run_tests.py                                  # 13 suites, ~20 seconds
 ```
 
 ---
@@ -382,7 +405,7 @@ Also wanted: curated common-word lists per language, macOS and Linux support,
 and anyone who can tell us the romanization looks wrong for their language.
 
 ```powershell
-python run_tests.py           # 12 suites, ~25 seconds, no GPU or network
+python run_tests.py           # 13 suites, ~20 seconds, no GPU or network
 python run_tests.py --audio   # also real speech and loopback capture
 python run_tests.py --all     # also Groq fallback and install readiness
 ```

@@ -95,7 +95,7 @@ pip install -r requirements.txt
 Tests:
 
 ```powershell
-python run_tests.py             # 12 suites in ~25 seconds, no GPU or network
+python run_tests.py             # 13 suites in ~20 seconds, no GPU or network
 python run_tests.py --audio     # + real speech through the model, loopback capture
 python run_tests.py --all       # + Groq fallback (needs a key), install readiness
 ```
