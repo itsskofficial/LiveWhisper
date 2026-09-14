@@ -93,6 +93,12 @@ CATALOGUE: list = [
         note="large-v3 writes Malayalam in Gurmukhi, Devanagari or Telugu script; "
              "this model writes Malayalam every time. Still gets most words "
              "wrong. Already converted, so install is a download only."),
+    Specialist(
+        "kn", "vasista22/whisper-kannada-medium", "kn-medium", 3.06, "apache-2.0",
+        measured={"FLEURS word error": "32.3% (large-v3 67.4%)",
+                  "delivered Kanglish": "30.2% (large-v3 59.8%)"},
+        note="Whisper-medium fine-tuned on Kannada by SPRING Lab, IIT Madras. "
+             "1.5 GB once converted; converting peaks near 7 GB of memory."),
 ]
 
 
