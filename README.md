@@ -197,7 +197,7 @@ receive after romanization, against every accepted spelling:
 | Tamil | 51.8% | **22.4%** | IIT Madras whisper-medium |
 | Telugu | 71.6% | **36.2%** | IIT Madras whisper-medium |
 | Urdu | 19.6% | *measuring* | |
-| Punjabi | 68.6% | *measuring* | |
+| Punjabi | 68.6% | **56.3%** | whisper-large-v2 fine-tune (still weak) |
 | Marathi | 78.6% | *measuring* | |
 | Gujarati | 63.3% | *measuring* | |
 | Kannada | 59.8% | *measuring* | |

@@ -77,6 +77,14 @@ CATALOGUE: list = [
                   "delivered Hinglish, test": "19.5% (large-v3 24.4%)"},
         note="Writes Hinglish straight from audio, so English words stay English. "
              "Large-v3 sized: with the main model loaded too, allow ~6 GB of VRAM."),
+    Specialist(
+        "pa", "DrishtiSharma/whisper-large-v2-punjabi", "pa-large-v2", 6.17,
+        "apache-2.0",
+        measured={"FLEURS word error": "60.9% (large-v3 79.8%)",
+                  "delivered Punglish": "56.3% (large-v3 68.6%)"},
+        note="Better than large-v3, but still gets more than half of words wrong - "
+             "trained on Common Voice's small Punjabi set. Large-v2 sized, "
+             "allow ~6 GB of VRAM with the main model."),
 ]
 
 
