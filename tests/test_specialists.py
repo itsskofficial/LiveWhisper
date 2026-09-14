@@ -52,7 +52,7 @@ def main() -> int:
             return local_dir
 
         huggingface_hub.snapshot_download = fake_snapshot
-        sp.convert = lambda src, out, quantization="float16": (
+        sp.convert = lambda src, out, quantization="float16", **kw: (
             Path(out).mkdir(parents=True, exist_ok=True), out)[1]
         quiet = lambda m: None                                    # noqa: E731
 

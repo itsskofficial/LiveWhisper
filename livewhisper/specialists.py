@@ -112,16 +112,36 @@ def recommended(lang: str) -> Specialist | None:
 
 # ------------------------------------------------------------------ convert
 
-def convert(src: Path, out: Path, quantization: str = "float16") -> Path:
+def convert(src: Path, out: Path, quantization: str = "float16",
+            progress=print) -> Path:
     """HF Whisper weights -> CTranslate2, fixing the two things that break loading.
 
     Older fine-tunes ship no tokenizer.json, which faster-whisper requires, and
     large-v3 derivatives need their 128-mel preprocessor config or faster-whisper
     assumes 80 and transcribes garbage.
+
+    Takes the machine-wide conversion lock and waits for enough memory first -
+    see livewhisper.resources for why skipping that crashes silently.
     """
     import ctranslate2
     from transformers import WhisperProcessor, WhisperTokenizerFast
 
+    from . import resources
+
+    lock = resources.conversion_lock(out.parent, progress=progress)
+    try:
+        weights_gb = sum(f.stat().st_size for f in list(src.glob("*.bin")) +
+                         list(src.glob("*.safetensors"))) / 1e9
+        resources.wait_for_memory(resources.memory_needed_gb(weights_gb),
+                                  progress=progress)
+        return _convert_locked(src, out, quantization, ctranslate2,
+                               WhisperProcessor, WhisperTokenizerFast)
+    finally:
+        resources.release(lock)
+
+
+def _convert_locked(src: Path, out: Path, quantization: str, ctranslate2,
+                    WhisperProcessor, WhisperTokenizerFast) -> Path:
     work = out.with_name(out.name + ".hf")
     work.mkdir(parents=True, exist_ok=True)
     WhisperTokenizerFast.from_pretrained(src).save_pretrained(work)
@@ -167,7 +187,7 @@ def install(spec: Specialist, config_path: Path, progress=print) -> Path:
         snapshot_download(spec.repo, local_dir=str(src), allow_patterns=[
             "*.json", "*.safetensors", "pytorch_model.bin", "*.txt", "*.model"])
         progress("Converting for faster-whisper...")
-        convert(src, out)
+        convert(src, out, progress=progress)
         shutil.rmtree(src, ignore_errors=True)
 
     route: dict | str = str(out)
