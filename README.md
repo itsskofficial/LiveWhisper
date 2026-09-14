@@ -226,6 +226,11 @@ python -m livewhisper.specialists install bn  # download, convert, configure
 Only specialists that beat large-v3 on the same recordings are offered. The
 installer suggests one for your language when it exists.
 
+Installing converts the model, which briefly needs a few GB of free memory —
+roughly 1.5× the download plus 1.5 GB. If your machine doesn't have that
+spare, the install **waits and tells you** instead of crashing, and closing a
+browser or other large program lets it continue.
+
 ---
 
 ## Local by default
