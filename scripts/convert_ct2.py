@@ -25,6 +25,53 @@ import sys
 from pathlib import Path
 
 
+# Converting loads the whole checkpoint before writing the half-size copy. When
+# Windows cannot commit that much memory, torch's native loader does not raise
+# MemoryError - it dies with an access violation and no traceback, which is how
+# the Kannada conversion failed six times in a row with an intact, hash-verified
+# download. 1.5x the weights leaves room for the float16 copy being built.
+MEMORY_FACTOR = 1.5
+
+
+def _available_commit_gb() -> float | None:
+    """How much more memory Windows can commit right now, in GB."""
+    try:
+        import ctypes
+
+        class MEMORYSTATUSEX(ctypes.Structure):
+            _fields_ = [("dwLength", ctypes.c_ulong), ("dwMemoryLoad", ctypes.c_ulong),
+                        ("ullTotalPhys", ctypes.c_ulonglong),
+                        ("ullAvailPhys", ctypes.c_ulonglong),
+                        ("ullTotalPageFile", ctypes.c_ulonglong),
+                        ("ullAvailPageFile", ctypes.c_ulonglong),
+                        ("ullTotalVirtual", ctypes.c_ulonglong),
+                        ("ullAvailVirtual", ctypes.c_ulonglong),
+                        ("ullAvailExtendedVirtual", ctypes.c_ulonglong)]
+
+        status = MEMORYSTATUSEX()
+        status.dwLength = ctypes.sizeof(MEMORYSTATUSEX)
+        if not ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(status)):
+            return None
+        return status.ullAvailPageFile / 1e9      # commit limit minus committed
+    except Exception:
+        return None
+
+
+def _wait_for_memory(need_gb: float) -> None:
+    """Block until the machine can commit need_gb more, rather than crash."""
+    import time
+    said = False
+    while True:
+        have = _available_commit_gb()
+        if have is None or have >= need_gb:
+            return
+        if not said:
+            print(f"waiting for {need_gb:.1f} GB of committable memory "
+                  f"(have {have:.1f})...", flush=True)
+            said = True
+        time.sleep(30)
+
+
 def _conversion_lock(folder: Path):
     """Block until no other conversion holds the lock; return the open handle.
 
@@ -76,6 +123,9 @@ def main() -> int:
     # four overlapping ones pushed a 15 GB machine to 1 GB free with the commit
     # limit nearly exhausted. The OS releases the lock if this process dies.
     lock = _conversion_lock(args.out.parent)
+    weights_gb = sum(f.stat().st_size for f in list(src.glob("*.bin")) +
+                     list(src.glob("*.safetensors"))) / 1e9
+    _wait_for_memory(weights_gb * MEMORY_FACTOR)
 
     # Normalise the tokenizer and preprocessor next to the weights first, so the
     # converter can copy them across.
