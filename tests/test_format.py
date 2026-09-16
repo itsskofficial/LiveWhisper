@@ -86,6 +86,9 @@ def main() -> int:
     same("scratch that drops the cancelled sentence",
          finish("that plan is fine. scratch that. let us do it next week"),
          "Let us do it next week.")
+    same("a lead-in before scratch that does not save the cancelled sentence",
+         finish("The deadline is fine. Actually scratch that. We need one more week."),
+         "We need one more week.")
     # The discourse marker, which is the reason the pass is restricted to a
     # closed set of kinds. Removing "I mean" here would change the sentence.
     for text in ("I mean it is fine either way",

@@ -13,10 +13,12 @@ changed and feed it back into the profile.
 from __future__ import annotations
 
 import logging
+import time
 from dataclasses import dataclass
 
 from . import context as ctx_mod
 from . import format as fmt_mod
+from . import llm_format
 from .cleanup import remove_fillers
 from .profile import ProfileStore
 from .script import conventions as conv_mod
@@ -38,6 +40,7 @@ class Delivery:
     notes: list
     language: str | None = None   # which lexicon was used
     style: str = "prose"          # formatting the target app asked for
+    formatted_by: str = "rules"   # model | rules | shortcut | none
 
 
 class Pipeline:
@@ -45,6 +48,41 @@ class Pipeline:
         self.cfg = cfg
         self.profiles = profiles
         self._last: Delivery | None = None
+        self._formatter = None
+        self._formatter_key = None
+        self._formatter_seen = (0.0, False)
+
+    # ----------------------------------------------------------- formatter
+
+    # How often to look again for the formatting model. Ollama being closed
+    # must cost a dictation nothing, and being opened later must be noticed.
+    FORMATTER_RECHECK_S = 60.0
+
+    def formatter(self):
+        """The small-model formatter when configured and reachable, else None."""
+        fmt_cfg = ((self.cfg.get("output") or {}).get("format") or {})
+        key = repr(sorted((k, str(v)) for k, v in fmt_cfg.items() if k != "shortcuts"))
+        if key != self._formatter_key:
+            self._formatter_key = key
+            self._formatter = llm_format.build(fmt_cfg, self.profiles.path.parent)
+            self._formatter_seen = (0.0, False)
+        if self._formatter is None:
+            return None
+        checked, ok = self._formatter_seen
+        if time.monotonic() - checked > self.FORMATTER_RECHECK_S:
+            try:
+                ok = bool(self._formatter.backend.available())
+            except Exception:
+                ok = False
+            self._formatter_seen = (time.monotonic(), ok)
+        return self._formatter if ok else None
+
+    def warm_formatter(self) -> None:
+        """Load the formatting model now, off the path anyone waits on."""
+        model = self.formatter()
+        warm = getattr(getattr(model, "backend", None), "warm", None)
+        if warm:
+            warm()
 
     # --------------------------------------------------------------- script
 
@@ -168,13 +206,27 @@ class Pipeline:
         fmt_cfg = out_cfg.get("format") or {}
         style = fmt_mod.style_for(app, override=profile.style or fmt_cfg.get("style"),
                                   cfg=fmt_cfg)
+        formatted_by = "none"
         if fmt_cfg.get("enabled", True):
-            text = fmt_mod.finish(text, style, shortcuts=fmt_cfg.get("shortcuts"))
+            expansion = fmt_mod.shortcut(text, fmt_cfg.get("shortcuts"))
+            # Native script stays with the rules: the model is prompted for
+            # Latin text, and a Devanagari reply has no capitals to add.
+            model = (self.formatter()
+                     if expansion is None and not has_indic(text) else None)
+            if expansion is not None:
+                text, formatted_by = expansion, "shortcut"
+            elif model is not None:
+                text = model.format(text, style.name, rules_style=style)
+                formatted_by = "model" if model.last_reason == "ok" else "rules"
+                if formatted_by == "rules":
+                    log.info("formatted by rules: %s", model.last_reason)
+            else:
+                text, formatted_by = fmt_mod.finish(text, style), "rules"
         text = profile.habits.apply(text)
 
         d = Delivery(text=text, raw=transcript, app=app, script=script,
                      romanized=romanized, notes=notes, language=lang,
-                     style=style.name)
+                     style=style.name, formatted_by=formatted_by)
         self._last = d
         return d
 

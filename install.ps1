@@ -275,6 +275,24 @@ c.save('config.yaml', cfg); print('  engine set to local')
         Say "  Skipped - downloads on first use." "DarkGray"
     }
 
+    # --- small local model for formatting ---
+    # Optional. Without it the rules format the text; with it punctuation and
+    # lists are noticeably better (tests/results/format_llm.md). It can only
+    # add punctuation and capitals, never change a word.
+    $ollama = Get-Command ollama -ErrorAction SilentlyContinue
+    if ($ollama) {
+        $have = (& ollama list 2>$null | Select-String -SimpleMatch "qwen3:0.6b")
+        if ($have) {
+            Say "  Formatting model qwen3:0.6b is already installed." "DarkGray"
+        } elseif (AskYesNo "Download the small formatting model (qwen3:0.6b, ~520 MB) for Ollama?" $true) {
+            & ollama pull qwen3:0.6b
+            if ($LASTEXITCODE -ne 0) { Warn "Could not pull qwen3:0.6b; formatting will use rules." }
+        }
+    } else {
+        Say "  Ollama is not installed, so formatting uses rules. Install Ollama and run" "DarkGray"
+        Say "  'ollama pull qwen3:0.6b' any time for better punctuation - no restart needed." "DarkGray"
+    }
+
     # --- specialist speech model for the chosen language ---
     # large-v3 is one model for 99 languages and is weak on some of ours. Only
     # models measured against it on real speech are offered; see

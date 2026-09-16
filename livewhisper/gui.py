@@ -706,6 +706,10 @@ class SettingsWindow(ctk.CTkToplevel):
                      (o.get("format") or {}).get("enabled", True),
                      "Spoken punctuation, lists, paragraphs, and corrections like "
                      "\"Monday, I mean Tuesday\". Chat apps get no full stop added.")
+        self._switch(card, "Use a small local model for formatting", "output.format.model_on",
+                     ((o.get("format") or {}).get("engine") or "auto") != "rules",
+                     "Better punctuation and lists from qwen3:0.6b in Ollama, if installed. "
+                     "It can only add punctuation - never change your words.")
         self._switch(card, "Use names on screen", "context.bias",
                      (self.cfg.get("context") or {}).get("bias", True),
                      "Names in the thread you are replying to come out spelled "
@@ -804,6 +808,11 @@ class SettingsWindow(ctk.CTkToplevel):
         o["auto_paste"] = self._get("output.auto_paste", bool)
         o["restore_clipboard"] = self._get("output.restore_clipboard", bool)
         o.setdefault("format", {})["enabled"] = self._get("output.format.enabled", bool)
+        engine = o["format"].get("engine") or "auto"
+        if self._get("output.format.model_on", bool):
+            o["format"]["engine"] = "auto" if engine == "rules" else engine
+        else:
+            o["format"]["engine"] = "rules"
         cfg.setdefault("context", {})["bias"] = self._get("context.bias", bool)
         o["save_transcripts"] = self._get("output.save_transcripts", bool)
 

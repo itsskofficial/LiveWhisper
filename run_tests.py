@@ -29,6 +29,7 @@ FAST = [
     ("robustness (118 checks)", ["tests/test_robustness.py"]),
     ("filler removal", ["tests/test_cleanup.py"]),
     ("text formatting", ["tests/test_format.py"]),
+    ("model formatting, free tier", ["tests/test_llm_format.py"]),
     ("screen-name biasing", ["tests/test_bias.py"]),
     ("hinglish respelling", ["tests/test_respell.py"]),
     ("specialist install", ["tests/test_specialists.py"]),

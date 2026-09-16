@@ -50,9 +50,31 @@ in this app."
 ## It hands you a message, not a sentence
 
 A speech model returns words. What you wanted was the thing you would have
-typed — so the last step before the paste is a formatting pass, in rules rather
-than a model: **0.6 ms per 100 words**, no second-long wait, and no way for it
-to invent a word you never said.
+typed — so the last step before the paste is a formatting pass.
+
+It runs in two layers. **Rules** handle what can be done exactly: spoken
+commands, lists, emails, corrections it can verify, per-app style — 0.6 ms per
+100 words. Then, if you have [Ollama](https://ollama.com), **a very small local
+model** (qwen3 0.6B, 522 MB) handles what rules cannot: punctuating a run-on
+sentence, capitalising names, spotting a list you never announced.
+
+A small model left to itself is dangerous — asked to format "what is the capital
+of france" it answers *Paris*, and it will translate Hinglish or "fix" your
+spelling. So its answer is never pasted. Only its **punctuation, capitals and
+line breaks** are taken, and laid back over the exact words you said. An
+invented word has nothing to attach to and disappears; a dropped word comes
+back; an answer instead of formatting is thrown out and the rules result is
+used.
+
+| | Rules | + qwen3 0.6B |
+| --- | --- | --- |
+| Exactly what a careful typist would paste | 40% | **67%** |
+| Words it invented | none | **none** |
+| Time per dictation | 0 ms | 155 ms GPU · 371 ms CPU |
+
+[Measured on 42 cases](tests/results/format_llm.md), including a question, a
+dictated instruction and 16 Hinglish sentences. No Ollama, no problem: the rules
+alone are what you get, and nothing slows down.
 
 ```
    "hey Sarthak comma how are you question mark"
@@ -428,7 +450,7 @@ actually stands — including the parts that are still worse:
 
 | What the paid tools do | Here |
 | --- | --- |
-| Smart formatting, lists, paragraphs | Yes — rules, 0.6 ms, [above](#it-hands-you-a-message-not-a-sentence) |
+| Smart formatting, lists, paragraphs | Yes — rules plus a 522 MB local model that can punctuate but never change a word, [above](#it-hands-you-a-message-not-a-sentence) |
 | Auto-edits: "Monday, I mean Tuesday" | Yes, for corrections it can verify are corrections |
 | Context awareness: names from your screen | Yes — read locally, used for that one dictation, never stored or sent |
 | Learns your vocabulary and spelling | Yes, and it keeps the capitalisation habits they discard |

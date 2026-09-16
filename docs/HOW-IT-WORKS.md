@@ -248,10 +248,23 @@ paragraph", a list when you said "bullet point", and the correction you made
 out loud already applied — "let's meet Monday, I mean Tuesday" arrives as
 "let's meet Tuesday."
 
-This is done with rules, not a second AI model. A model would take about a
-second, could quietly rewrite words you actually said, and would not fit on the
-machines this app has to run on. The rules take about half a millisecond for a
-hundred words.
+Most of this is done with rules, which take about half a millisecond for a
+hundred words. Rules cannot do everything, though: they cannot tell where a
+run-on sentence should end, or that "marcus" and "london" are names. For that
+the app can use a very small language model — qwen3 0.6B, about half a
+gigabyte, running locally through Ollama in roughly a sixth of a second.
+
+A language model is a program that continues text, and a small one has poor
+judgement about what it was asked. Told to format "what is the capital of
+france", it answers the question. So the app never pastes what the model wrote.
+It lines the model's words up against the words you said, and copies across
+only the punctuation, capital letters and line breaks. The words themselves
+always come from your speech, so the model can improve how the text looks but
+cannot change what it says. If the model's words do not line up at all — it
+answered, or wrote something new — its suggestion is ignored and the rules'
+result is used. On 42 test cases this took exact matches from 40% to 67% and
+never introduced a word. (`livewhisper/llm_format.py`,
+`tests/results/format_llm.md`)
 
 The difficult part is knowing when *not* to act, because every command word is
 also an ordinary word. "Send it today period" ends the sentence; "the period of

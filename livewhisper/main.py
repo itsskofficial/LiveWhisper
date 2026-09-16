@@ -189,6 +189,12 @@ class App:
         adds a third of the wait for nothing. Best effort throughout: if this
         thread does not finish, transcription detects the language itself.
         """
+        try:
+            # The formatting model may have been unloaded while idle; bring it
+            # back while the user is talking, not after.
+            self.pipeline.warm_formatter()
+        except Exception:
+            log.debug("formatter warm-up failed", exc_info=True)
         settle = getattr(self.backend(), "prime", None)
         if settle is None:
             return
@@ -619,6 +625,7 @@ class App:
             warm = getattr(backend, "warm", None)
             (warm or backend.load)()
             log.info("%s backend ready", self.backend_name)
+            self.pipeline.warm_formatter()
         except Exception as e:
             log.warning("backend warm-up: %s", e)
 

@@ -134,7 +134,10 @@ def run_style(label: str, style: list, rounds: int, lang: str = "hi") -> list:
     curve = []
     with tempfile.TemporaryDirectory() as td:
         store = ProfileStore(Path(td) / "p.json")
-        pipe = Pipeline({"language": lang, "script": {"mode": "auto"}}, store)
+        # Rules formatting: learning is measured on words, and a model call
+        # per word would make it slow and dependent on Ollama running.
+        pipe = Pipeline({"language": lang, "script": {"mode": "auto"},
+                         "output": {"format": {"engine": "rules"}}}, store)
         plain = Romanizer(lang)
 
         curve.append((0, accuracy(pipe, probes, style, lang)))

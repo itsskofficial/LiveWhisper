@@ -126,7 +126,12 @@ def main() -> int:
     check_true("habits persisted", again.get("whatsapp.exe").habits.capitalize < 0.1)
 
     print("\n=== 9. the text is finished before it is delivered ===")
-    finished = Pipeline(cfg, ProfileStore(path=tmp / "formatted.json"))
+    # Rules only, so this does not depend on Ollama running on the test
+    # machine; the model path has its own suite in tests/test_llm_format.py.
+    ruled = {**cfg, "output": {**(cfg.get("output") or {}),
+                               "format": {**((cfg.get("output") or {}).get("format") or {}),
+                                          "engine": "rules"}}}
+    finished = Pipeline(ruled, ProfileStore(path=tmp / "formatted.json"))
     d = finished.process("kal milte hain comma theek hai", screen)   # whatsapp
     check_true("a spoken comma becomes punctuation", "," in d.text, d.text)
     check_true("a chat app gets no full stop added", not d.text.endswith("."), d.text)
@@ -145,7 +150,7 @@ def main() -> int:
     # therefore contains a capital too. Learning has to see past that: it once
     # recorded M -> m as the user's spelling habit and missed the real one.
     fresh_store = ProfileStore(path=tmp / "learn_formatted.json")
-    learner = Pipeline(cfg, fresh_store)
+    learner = Pipeline(ruled, fresh_store)
     learner.process("मुझे", ctx_app := ScreenContext(
         app="t.exe", title="t", text="", focused_text="", method="uia"))
     learner.learn_from_screen(ScreenContext(app="t.exe", title="t", text="",

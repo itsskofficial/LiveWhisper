@@ -98,6 +98,23 @@ output:
   # sentence case. Rules, not a model: about half a millisecond per 100 words.
   format:
     enabled: true
+    # Who does the formatting.
+    #   auto        a very small local model when Ollama has it, else the rules.
+    #               qwen3:0.6b (522 MB) got 67% of test cases exactly right
+    #               against 40% for rules, in 0.16 s on a GPU and 0.4 s on a CPU.
+    #               Its output can only add punctuation, capitals and line
+    #               breaks: the words are always the ones you said.
+    #   rules       no model; instant
+    #   openrouter  a free OpenRouter model, for machines that cannot run
+    #               Ollama. Sends the dictation off this PC. Needs
+    #               OPENROUTER_API_KEY; only models OpenRouter currently prices
+    #               at zero are used, and usage stops short of the free daily
+    #               limit (50 requests, or 1,000 after a credit purchase), so it
+    #               cannot cost anything - past the limit the rules take over.
+    engine: auto
+    model: qwen3:0.6b         # the Ollama model, for auto/ollama
+    timeout_seconds: 1.5      # past this, the rules result is pasted instead
+    openrouter_model: auto    # or a specific id ending in :free
     style: auto               # auto picks from the app in front of you:
                               #   prose    everywhere else - full sentences
                               #   chat     Slack, Discord, Teams, WhatsApp:

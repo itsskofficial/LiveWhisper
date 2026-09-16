@@ -398,6 +398,12 @@ def _drop_scratched(text: str) -> str:
         if not m:
             return text
         before = text[:m.start()].rstrip()
+        # "Actually, scratch that" and "no wait, scratch that" are the same
+        # marker with a lead-in; the lead-in is not a sentence to keep.
+        lead = re.search(r"(?:\b(?:actually|no|wait|oh|ok|okay|sorry|so)\b[\s,]*)+$",
+                         before, re.IGNORECASE)
+        if lead:
+            before = before[:lead.start()].rstrip()
         body = before[:-1] if before[-1:] in ".!?" else before
         cut = max(body.rfind("."), body.rfind("!"), body.rfind("?"),
                   body.rfind("\n"))

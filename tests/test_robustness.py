@@ -184,7 +184,8 @@ def main() -> int:
     print("\n=== 6. full pipeline, including the learning path ===")
     with tempfile.TemporaryDirectory() as td:
         store = ProfileStore(Path(td) / "p.json")
-        cfg = {"language": "hi", "script": {"mode": "auto"}}
+        cfg = {"language": "hi", "script": {"mode": "auto"},
+               "output": {"format": {"engine": "rules"}}}
         pipe = Pipeline(cfg, store)
         for label, text in NASTY:
             d = survives(f"process({label})", pipe.process, text,
@@ -208,7 +209,8 @@ def main() -> int:
 
     print("\n=== 7. language resolution never throws ===")
     with tempfile.TemporaryDirectory() as td:
-        pipe = Pipeline({"language": "hi"}, ProfileStore(Path(td) / "p.json"))
+        pipe = Pipeline({"language": "hi", "output": {"format": {"engine": "rules"}}},
+                        ProfileStore(Path(td) / "p.json"))
         for heard in (None, "", "hi", "xx", "zz-ZZ", "HINDI", "en", 0, [], {}):
             survives(f"resolve_language(heard={heard!r})",
                      pipe.resolve_language, "क्या हो",

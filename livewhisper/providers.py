@@ -14,6 +14,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import re
 import urllib.error
 import urllib.request
 
@@ -24,6 +25,17 @@ TIMEOUT = 120
 
 class ProviderError(RuntimeError):
     pass
+
+
+def loopback(host: str) -> str:
+    """Address a local server by IP, never by the name "localhost".
+
+    On Windows "localhost" resolves to the IPv6 address first. Ollama listens
+    on IPv4 only, so every request waited for the IPv6 attempt to fail before
+    retrying - measured at 2.3 s on every call, for a model that answered in
+    0.13 s. Composing and grammar fixes paid it too.
+    """
+    return re.sub(r"//localhost(?=[:/]|$)", "//127.0.0.1", host.rstrip("/"))
 
 
 def _post(url: str, payload: dict, headers: dict | None = None) -> dict:
@@ -45,9 +57,9 @@ class Ollama:
     name = "ollama"
     default_model = "qwen2.5:7b"
 
-    def __init__(self, model: str | None = None, host: str = "http://localhost:11434"):
+    def __init__(self, model: str | None = None, host: str = "http://127.0.0.1:11434"):
         self.model = model or self.default_model
-        self.host = host.rstrip("/")
+        self.host = loopback(host)
 
     def available(self) -> bool:
         try:
