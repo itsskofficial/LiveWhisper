@@ -110,14 +110,20 @@ def recommend(m: Machine | None = None) -> Recommendation:
     m = m or detect()
 
     if not m.has_cuda:
-        # CPU-only. large-v3 is unusably slow here; small is the honest ceiling.
+        # CPU-only. Measured on a 16-core CPU, a 4-second English dictation:
+        # small 2.4 s (5.6% WER), large-v3-turbo 9.5 s - turbo is small in its
+        # decoder only, and on a CPU the encoder is the whole cost. For Hindi,
+        # small delivers 52.9% word error, so Hindi speakers are offered the
+        # Hinglish-Swift specialist instead: 25.6% in 0.84 s. See
+        # tests/results/cpu.md.
         model = "small" if m.cpus >= 8 else "base"
         return Recommendation(
             model=model, device="cpu", compute_type="int8",
             batch_size=4 if m.cpus >= 8 else 1,
-            reason=(f"No CUDA GPU detected, {m.cpus} CPU cores. "
-                    f"'{model}' is the largest model that stays practical on CPU."),
-            speed="roughly 1-3x realtime; a 30 min meeting takes 10-30 min",
+            reason=(f"No CUDA GPU detected, {m.cpus} CPU cores. '{model}' keeps a "
+                    f"short English dictation to a couple of seconds; Hindi "
+                    f"speakers get a dedicated CPU model that is faster still."),
+            speed="about 2.4 s for a 4-second dictation on 16 cores",
         )
 
     vram = m.vram_mb

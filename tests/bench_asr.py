@@ -187,11 +187,13 @@ class _LoadGate:
 
 class Model:
     def __init__(self, name: str, compute_type: str, beam: int, need_mb: int = 3000,
-                 english_min: float = 0.0, batch: int = 0, chunk_length: int = 0):
+                 english_min: float = 0.0, batch: int = 0, chunk_length: int = 0,
+                 timestamps: bool = False):
         from faster_whisper import BatchedInferencePipeline, WhisperModel
         self.english_min = english_min
         self.batch = batch
         self.chunk_length = chunk_length
+        self.timestamps = timestamps
         with _LoadGate(need_mb):
             t0 = time.perf_counter()
             self.name = name
@@ -231,7 +233,8 @@ class Model:
             segs, info = self.batched.transcribe(
                 audio, batch_size=self.batch, language=language,
                 beam_size=self.beam,
-                chunk_length=self.chunk_length or None)
+                chunk_length=self.chunk_length or None,
+                without_timestamps=not self.timestamps)
         else:
             segs, info = self.m.transcribe(audio, language=language,
                                            beam_size=self.beam, vad_filter=True,
@@ -263,6 +266,9 @@ def main() -> int:
     ap.add_argument("--chunk-length", type=int, default=0,
                     help="seconds of speech per decoded window in batched mode. "
                          "0 = the library default, which is the model maximum")
+    ap.add_argument("--timestamps", action="store_true",
+                    help="batched mode: decode with timestamp tokens, as the "
+                         "sequential path does (the batched default omits them)")
     ap.add_argument("--latin-output", action="store_true",
                     help="model emits romanized text directly (Hinglish models)")
     args = ap.parse_args()
@@ -278,7 +284,8 @@ def main() -> int:
             by_lang[c["lang"]].append(c)
 
     model = Model(args.model, args.compute, args.beam, english_min=args.english_min,
-                  batch=args.batch, chunk_length=args.chunk_length)
+                  batch=args.batch, chunk_length=args.chunk_length,
+                  timestamps=args.timestamps)
     label = args.label or f"{Path(args.model).name}-{args.mode}"
     print(f"{label}: loaded in {model.load_s:.0f}s")
     print(f"{'lang':<5} {'n':>3} {'WER':>6} {'CER':>6} {'lang ok':>8} "

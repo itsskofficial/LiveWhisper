@@ -1,0 +1,44 @@
+{
+ "model": "D:/models/ct2/hinglish-swift",
+ "device": "cpu",
+ "compute": "int8",
+ "lang": "hi",
+ "clips": 6,
+ "load_s": 0.6397462999993877,
+ "first_decode_ms": 1112.0306000011624,
+ "second_decode_ms": 911.536999999953,
+ "by_length": [
+  {
+   "seconds": 2.0,
+   "detect_ms": 661.5453499998694,
+   "decode_ms": 772.2143499995582,
+   "total_ms": 1433.7596999994275
+  },
+  {
+   "seconds": 4.0,
+   "detect_ms": 687.6381000001857,
+   "decode_ms": 844.4675999999163,
+   "total_ms": 1532.105700000102
+  },
+  {
+   "seconds": 8.0,
+   "detect_ms": 693.4435500006657,
+   "decode_ms": 1016.0765000018728,
+   "total_ms": 1709.5200500025385
+  },
+  {
+   "seconds": 11.91,
+   "detect_ms": 706.4146000029723,
+   "decode_ms": 1147.7424499989866,
+   "total_ms": 1854.1570500019589
+  }
+ ],
+ "options_4s_ms": {
+  "baseline_beam5_vad": 854.668899997705,
+  "beam 1": 799.6929500004626,
+  "beam 2": 819.6037000016076,
+  "no VAD": 857.465900000534,
+  "beam 1 no VAD": 807.6204999997572,
+  "batched 8": 870.9387500002777
+ }
+}

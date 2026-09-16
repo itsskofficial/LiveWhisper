@@ -282,8 +282,9 @@ c.save('config.yaml', cfg); print('  engine set to local')
     if (-not $Unattended -and $Language -and $Language -ne "auto") {
         $spec = & $vpy -c @"
 import sys
+from livewhisper.hardware import detect
 from livewhisper.specialists import recommended
-s = recommended(sys.argv[1].strip().lower())
+s = recommended(sys.argv[1].strip().lower(), cpu=not detect().has_cuda)
 print(f'{s.name}|{s.size_gb}|{s.note}' if s else '')
 "@ $Language | Select-Object -Last 1
         if ($spec) {

@@ -1,0 +1,44 @@
+{
+ "model": "D:/models/ct2/large-v3-turbo",
+ "device": "cpu",
+ "compute": "int8",
+ "lang": "en",
+ "clips": 4,
+ "load_s": 6.250374799998099,
+ "first_decode_ms": 9896.15970000159,
+ "second_decode_ms": 9580.27889999721,
+ "by_length": [
+  {
+   "seconds": 2.0,
+   "detect_ms": 9438.026300002093,
+   "decode_ms": 9704.60665000246,
+   "total_ms": 19142.632950004554
+  },
+  {
+   "seconds": 4.0,
+   "detect_ms": 9584.830000001602,
+   "decode_ms": 9879.43284999892,
+   "total_ms": 19464.262850000523
+  },
+  {
+   "seconds": 8.0,
+   "detect_ms": 9497.380450000492,
+   "decode_ms": 9799.099849999038,
+   "total_ms": 19296.48029999953
+  },
+  {
+   "seconds": 9.66,
+   "detect_ms": 9590.243849999752,
+   "decode_ms": 10017.782000000807,
+   "total_ms": 19608.02585000056
+  }
+ ],
+ "options_4s_ms": {
+  "baseline_beam5_vad": 9522.11884999997,
+  "beam 1": 9531.819450001422,
+  "beam 2": 9695.956550000119,
+  "no VAD": 9630.63560000046,
+  "beam 1 no VAD": 9593.12840000166,
+  "batched 8": 9754.575100001603
+ }
+}

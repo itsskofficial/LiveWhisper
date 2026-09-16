@@ -168,10 +168,28 @@ We don't run OpenAI's original code. We use **faster-whisper**, a
 reimplementation that produces the same output about four times faster by using
 the GPU more efficiently.
 
-How fast depends on what you ask. A two-minute recording transcribes in about
-3.5 seconds — 37 times real time. A four-second dictation takes about 2.8
-seconds, because most of the wait is a fixed cost that doesn't shrink with the
-clip. That second number is the one you feel. (`tests/bench_latency.py`)
+How fast depends on what you ask, and on the language. A four-second English
+dictation takes about 0.9 seconds on a mid-range graphics card. Hindi takes
+longer — about 2 seconds with large-v3 — because Devanagari is expensive for
+Whisper to write: each word costs several of the model's tokens (2.5), and
+writing is paid for one token at a time. A model that writes Hinglish directly
+spends far fewer, and does the same dictation in 1.1 seconds.
+
+Two pieces of work are moved out of the wait entirely. Working out which
+language you are speaking is a separate pass over the audio, so it runs while
+you are still talking. And the very first transcription after the app starts
+used to be slow while the graphics card set itself up, so the app now does one
+practice transcription when it launches.
+
+Without a graphics card, the model has to be much smaller. The app picks one
+that was measured for that case: for Hindi, a 144 MB Hinglish model that takes
+0.84 seconds on an ordinary 16-core processor and is only about two points less
+accurate than the big model on a GPU. (`tests/results/cpu.md`)
+
+**Long recordings.** Whisper reads audio in windows. Handed a full 30-second
+window it tends to stop early, so dictating a paragraph used to lose about a
+quarter of the words without any error. The app now uses 15-second windows,
+which keep nearly all of them. (`tests/results/decode_windows.md`)
 
 **Telling it which languages you speak.** Left alone, Whisper picks from all 99
 languages. On short clips it guesses wrong surprisingly often: it heard Hindi as

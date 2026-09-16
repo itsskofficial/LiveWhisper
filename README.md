@@ -333,13 +333,34 @@ is Whisper, and almost all of it is fixed cost:
 | Romanize 156 words | **0.12 ms** |
 | Learn from a correction | **3.4 ms** |
 | First word in a new language | 80–105 ms (loads that lexicon) |
-| Transcribe a 4-second dictation | **2.8 s** — 1.5x realtime |
+| Format the text before pasting | **0.6 ms** per 100 words |
+| Transcribe a 4-second English dictation | **0.87 s** |
+| Transcribe a 4-second Hindi dictation | **1.1 s** with Hinglish-Prime, 2.05 s with large-v3 |
+| The same, on a CPU with no GPU at all | **0.84 s** Hindi (Hinglish-Swift), 2.4 s English (`small`) |
 | Transcribe two minutes | 3.5 s — 37x realtime |
-| Speech model load, once per launch | ~13 s |
+| Speech model load, once per launch | ~13 s, plus one warm-up decode |
 
-So a short dictation lands in about three seconds. Throughput figures like "37x
-realtime" are true only for long recordings; on a one-sentence dictation the
-fixed cost dominates, which is the number you actually feel.
+Measured warm, on an RTX 4060 and a 16-core CPU; full tables in
+[`tests/results/cpu.md`](tests/results/cpu.md).
+
+Three things were cut from that wait, each measured first:
+
+- **The language is worked out while you are still talking.** Detection is a
+  whole extra pass over the audio — 0.4 s on a GPU, up to 2 s on a CPU — and it
+  only ever looks at the start of the recording, so it now runs 2.5 seconds in.
+- **The first dictation after launch is no longer the slow one.** It used to
+  pay for GPU warm-up: 1.8 s instead of 0.8 s. The app now does a throwaway
+  decode at launch. (That warm-up is also where this table's old "2.8 s" figure
+  came from.)
+- **Hindi is faster in Latin letters.** A Devanagari word costs several tokens
+  and decoding is paid per token, so the Hinglish model decodes twice as fast
+  as large-v3 *and* is more accurate.
+
+And one thing was lost: **long recordings used to come back a quarter short.**
+The decoder was handed 30-second windows and stopped early on full ones —
+paragraphs kept 74% of their Hindi words and 77% of their English, with no
+error. 15-second windows keep 96% and 93% at no cost to single sentences.
+[Measured here.](tests/results/decode_windows.md)
 
 ### Learning
 
@@ -413,9 +434,10 @@ actually stands — including the parts that are still worse:
 | Learns your vocabulary and spelling | Yes, and it keeps the capitalisation habits they discard |
 | Per-app tone and style | Yes, per app, and you can override it |
 | Works offline | Yes. That is the whole design |
+| Voice shortcuts, code identifiers | Say the cue, get the saved text; "camel case user name" types `userName` in an editor |
 | English accuracy | 4.8% word error on FLEURS — the model's own number, not ours |
 | Code-switched Hindi/English | Better than the cloud default: they transliterate English into Devanagari ([measured](#just-ask-whisper-for-romanized-output)) |
-| Latency on a short dictation | 0.8 s for a 4-second English sentence on an RTX 4060, about 2 s for Hindi, nothing to upload ([measured](tests/results/)) |
+| Latency on a short dictation | 0.87 s English, 1.1 s Hindi on an RTX 4060; 0.84 s Hindi on a CPU with no GPU. Nothing to upload ([measured](tests/results/cpu.md)) |
 | Indic accuracy beyond Hindi | **Worse.** Gujarati, Punjabi, Malayalam and Marathi still miss about half the words, and Sindhi has no usable model at all |
 | Polish on long-form rewriting | **Worse** unless you point it at a frontier model, which is not local |
 

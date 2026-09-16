@@ -101,6 +101,20 @@ def main() -> int:
         check("unmeasured candidate refused without --force",
               sp.main(["--config", str(cfg_path), "install", "ta"]) == 1)
         sp.CATALOGUE[:] = saved
+
+        print("\n=== the model offered depends on the machine ===")
+        gpu, cpu = sp.recommended("hi"), sp.recommended("hi", cpu=True)
+        check("a GPU machine is offered the most accurate Hindi model",
+              gpu is not None and gpu.name == "hinglish-prime", str(gpu and gpu.name))
+        check("a CPU-only machine is offered the fast one",
+              cpu is not None and cpu.name == "hinglish-swift", str(cpu and cpu.name))
+        check("a CPU model is never offered to a GPU machine",
+              all(sp.recommended(c.lang) is None or sp.recommended(c.lang).device == "gpu"
+                  for c in sp.CATALOGUE))
+        check("a language with no measured CPU model offers nothing on CPU",
+              sp.recommended("ta", cpu=True) is None)
+        check("every CPU entry is small enough to be one",
+              all(c.size_gb < 1.0 for c in sp.CATALOGUE if c.device == "cpu"))
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 

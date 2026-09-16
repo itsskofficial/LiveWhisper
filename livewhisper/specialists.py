@@ -43,6 +43,7 @@ class Specialist:
     language: str | None = None    # token to decode with, if not the language
     measured: dict = field(default_factory=dict)   # metric -> value, bench_asr
     note: str = ""
+    device: str = "gpu"            # gpu | cpu: which kind of machine it is for
 
 
 # Filled from tests/bench_asr.py runs. An entry without measurements is a
@@ -77,6 +78,17 @@ CATALOGUE: list = [
                   "delivered Hinglish, test": "19.5% (large-v3 24.4%)"},
         note="Writes Hinglish straight from audio, so English words stay English. "
              "Large-v3 sized: with the main model loaded too, allow ~6 GB of VRAM."),
+    Specialist(
+        # For machines without a usable GPU. Measured on the batched path the
+        # app decodes with, scored after respelling as the app delivers it
+        # (tests/rescore_delivered.py). The CPU default before it, `small`,
+        # delivered 52.9% on the same clips in 2.5 s.
+        "hi", "Oriserve/Whisper-Hindi2Hinglish-Swift", "hinglish-swift", 0.28,
+        "apache-2.0", latin_output=True, device="cpu",
+        measured={"delivered Hinglish, CPU": "25.6% (small 52.9%, large-v3 23.9%)",
+                  "4-second dictation on CPU": "0.84 s (small 2.4 s)"},
+        note="Whisper-base sized, 144 MB converted: close to large-v3 on Hindi "
+             "and fast on an ordinary CPU."),
     Specialist(
         "pa", "DrishtiSharma/whisper-large-v2-punjabi", "pa-large-v2", 6.17,
         "apache-2.0",
@@ -125,9 +137,16 @@ def candidates(lang: str) -> list:
     return [s for s in CATALOGUE if s.lang == lang]
 
 
-def recommended(lang: str) -> Specialist | None:
-    """The measured specialist for a language, if one beat large-v3."""
-    return next((s for s in candidates(lang) if s.measured), None)
+def recommended(lang: str, cpu: bool = False) -> Specialist | None:
+    """The measured specialist for a language and this kind of machine.
+
+    A GPU entry is the most accurate model that fits beside large-v3; a CPU
+    entry is the one that stays fast without a GPU. Neither is offered to the
+    other kind of machine: a large-v3-sized model on a CPU takes tens of seconds
+    per dictation, and a CPU model on a GPU gives away accuracy for nothing.
+    """
+    want = "cpu" if cpu else "gpu"
+    return next((s for s in candidates(lang) if s.measured and s.device == want), None)
 
 
 # ------------------------------------------------------------------ convert
@@ -255,6 +274,8 @@ def main(argv: list | None = None) -> int:
     p.add_argument("lang")
     p.add_argument("--force", action="store_true",
                    help="install an unmeasured candidate anyway")
+    p.add_argument("--cpu", action="store_true", default=None,
+                   help="pick the CPU model (default: detected from the machine)")
     p = sub.add_parser("remove")
     p.add_argument("lang")
     p.add_argument("--keep-files", action="store_true")
@@ -272,7 +293,11 @@ def main(argv: list | None = None) -> int:
         return 0
 
     if args.cmd == "install":
-        spec = recommended(args.lang)
+        cpu = args.cpu
+        if cpu is None:
+            from .hardware import detect
+            cpu = not detect().has_cuda
+        spec = recommended(args.lang, cpu=cpu)
         if spec is None and args.force and candidates(args.lang):
             spec = candidates(args.lang)[0]
         if spec is None:
