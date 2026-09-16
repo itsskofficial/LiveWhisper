@@ -702,6 +702,14 @@ class SettingsWindow(ctk.CTkToplevel):
                      o.get("restore_clipboard", False),
                      "Off is safer: the transcript stays on the clipboard so a "
                      "failed paste is recoverable with a manual Ctrl+V.")
+        self._switch(card, "Format before pasting", "output.format.enabled",
+                     (o.get("format") or {}).get("enabled", True),
+                     "Spoken punctuation, lists, paragraphs, and corrections like "
+                     "\"Monday, I mean Tuesday\". Chat apps get no full stop added.")
+        self._switch(card, "Use names on screen", "context.bias",
+                     (self.cfg.get("context") or {}).get("bias", True),
+                     "Names in the thread you are replying to come out spelled "
+                     "right. Read on this PC, used once, never stored.")
         self._switch(card, "Save transcripts to disk", "output.save_transcripts",
                      o.get("save_transcripts", True))
         row = self._row(card, "Transcripts folder", str(ROOT / o.get("transcript_dir",
@@ -795,6 +803,8 @@ class SettingsWindow(ctk.CTkToplevel):
         o["copy_to_clipboard"] = self._get("output.copy_to_clipboard", bool)
         o["auto_paste"] = self._get("output.auto_paste", bool)
         o["restore_clipboard"] = self._get("output.restore_clipboard", bool)
+        o.setdefault("format", {})["enabled"] = self._get("output.format.enabled", bool)
+        cfg.setdefault("context", {})["bias"] = self._get("context.bias", bool)
         o["save_transcripts"] = self._get("output.save_transcripts", bool)
 
         sc = cfg.setdefault("script", {})

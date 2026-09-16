@@ -43,6 +43,24 @@ def _repo_id(model: str) -> str:
     return model if "/" in model else f"Systran/faster-whisper-{model}"
 
 
+# faster-whisper packs the speech it finds into windows as long as the model
+# allows, 30 seconds, and Whisper stops early on a full one - nothing reports
+# it, the transcript just ends sooner than the recording did. On paragraphs of
+# three FLEURS sentences, 30-second windows kept 74% of the Hindi words and 77%
+# of the English. 15-second windows kept 96% and 93%, and cost nothing on single
+# sentences (27.6% -> 27.5% Hindi WER, 5.3% English either way). Shorter still
+# starts cutting sentences mid-speech: 10 seconds raised single-sentence Hindi
+# to 31.2%. Deciding by recording length was tried and lost too - recordings
+# just under the cut-off still lost words. Measured in tests/bench_windows.py.
+DECODE_WINDOW_S = 15
+
+
+def window_for(seconds: float, configured: int | None = None) -> int:
+    """Seconds of speech per decoded window. `seconds` is kept for callers that
+    want to vary it; the measurements say a fixed window is best."""
+    return int(configured) if configured else DECODE_WINDOW_S
+
+
 def _join_segments(segments, gap_s: float = 1.6) -> str:
     """Join the decoded segments, breaking a paragraph where the speaker did.
 
@@ -85,6 +103,7 @@ class LocalBackend:
         self.vocabulary = vocabulary.strip()
         self._model = None
         self._batched = None
+        self._primed: str | None = None     # language settled while recording
         self._lock = threading.Lock()
 
     # -- model availability -------------------------------------------------
@@ -273,12 +292,68 @@ class LocalBackend:
             self._routed[path] = (m, b)
             return m, b
 
-    def transcribe(self, audio: np.ndarray) -> str:
+    def prime(self, audio: np.ndarray) -> str | None:
+        """Settle the language now, on the audio captured so far.
+
+        Detection is a whole extra encoder pass - measured at ~300 ms of the
+        ~900 ms a four-second dictation takes on this machine, a third of the
+        wait, and it is spent *after* the speaker has stopped. It only ever
+        looks at the opening of the recording, so it can just as well run while
+        they are still talking. `transcribe` then uses the answer and the
+        critical path is decoding alone.
+
+        Nothing here is required: any failure, and detection happens as before.
+        """
+        if self.cfg.get("language") or len(self.languages) < 2:
+            return None                    # nothing to detect
+        try:
+            self.load()
+            language = self._pick_language(audio)
+        except Exception:
+            log.debug("could not settle the language early", exc_info=True)
+            return None
+        if language:
+            self._primed = language
+            log.info("language settled during recording: %s", language)
+        return language
+
+    def warm(self) -> None:
+        """Run one throwaway decode, so the first real dictation is not the slow one.
+
+        Loading puts the weights on the GPU but compiles nothing: the first
+        decode afterwards pays for CUDA kernel selection and allocator warm-up,
+        which the latency benchmark once measured as a 2.8 s wait for a
+        4-second clip that takes about a second every time after. Paying it at
+        launch, where nobody is waiting, moves it off the first dictation.
+
+        Silence would be dropped by VAD before reaching the decoder, so the
+        warm-up turns VAD off and decodes one second of it directly, with the
+        beam size real dictations use.
+        """
         self.load()
+        try:
+            segments, _ = self._model.transcribe(
+                np.zeros(TARGET_RATE, dtype=np.float32), language="en",
+                beam_size=int(self.cfg.get("beam_size", 5)), vad_filter=False,
+                without_timestamps=True)
+            list(segments)
+        except Exception:
+            log.debug("warm-up decode failed; the first dictation will be slower",
+                      exc_info=True)
+
+    def forget_priming(self) -> None:
+        """Drop a primed language - the recording it belonged to is gone."""
+        self._primed = None
+
+    def transcribe(self, audio: np.ndarray, hotwords: str = "") -> str:
+        """`hotwords` are names worth expecting - see livewhisper/bias.py."""
+        self.load()
+        primed, self._primed = self._primed, None
         common = dict(
-            language=self.cfg.get("language") or self._pick_language(audio),
+            language=self.cfg.get("language") or primed or self._pick_language(audio),
             beam_size=int(self.cfg.get("beam_size", 5)),
             initial_prompt=self.vocabulary or None,
+            hotwords=hotwords or None,
         )
         model, batched = self._model_for(common["language"])
         route = self._route(common["language"])
@@ -291,10 +366,20 @@ class LocalBackend:
         else:
             heard_as = None
         if batched is not None:
-            # Batched mode always applies VAD and never conditions across
-            # segments - which is what we want for code-switching anyway.
+            # Batched mode applies VAD and never conditions across segments -
+            # what we want for code-switching anyway - but it then merges the
+            # speech it found into windows as long as the model allows, 30
+            # seconds, and asks for all of it in one go. Whisper answers a long
+            # window by stopping early: on a 40-second Hindi recording it
+            # returned 62 of the 92 words spoken, silently. Asking for shorter
+            # windows returns the missing third and is faster as well, because
+            # more of them decode in parallel (measured in
+            # tests/results/decode_windows.md).
             segments, info = batched.transcribe(
-                audio, batch_size=self._batch_size(), **common
+                audio, batch_size=self._batch_size(),
+                chunk_length=window_for(len(audio) / TARGET_RATE,
+                                        self.cfg.get("chunk_length")),
+                **common
             )
         else:
             segments, info = model.transcribe(
@@ -335,12 +420,15 @@ class GroqBackend:
                 f"{self.cfg.get('api_key_env', 'GROQ_API_KEY')} is not set"
             )
 
-    def transcribe(self, audio: np.ndarray) -> str:
+    def transcribe(self, audio: np.ndarray, hotwords: str = "") -> str:
         key = self.api_key()
         if not key:
             raise GroqUnavailable(
                 f"{self.cfg.get('api_key_env', 'GROQ_API_KEY')} is not set"
             )
+        # Whisper takes one prompt, so the names on screen join the user's own
+        # vocabulary rather than replacing it.
+        self._bias = ", ".join(x for x in (self.vocabulary, hotwords) if x)
         chunk = int(self.cfg.get("chunk_seconds", 600)) * TARGET_RATE
         parts = [self._chunk(c, key) for c in _split_on_silence(audio, chunk)]
         return " ".join(p for p in parts if p).strip()
@@ -385,8 +473,9 @@ class GroqBackend:
                 "response_format": "verbose_json"}
         if language:
             data["language"] = language
-        if self.vocabulary:
-            data["prompt"] = self.vocabulary
+        prompt = getattr(self, "_bias", "") or self.vocabulary
+        if prompt:
+            data["prompt"] = prompt
 
         try:
             r = requests.post(
@@ -451,6 +540,12 @@ class AutoBackend:
         if self.local.is_downloaded():
             self.local.load()
 
+    def warm(self) -> None:
+        if self.groq.is_configured():
+            return
+        if self.local.is_downloaded():
+            self.local.warm()
+
     def _block_groq(self) -> None:
         self._blocked_until = time.monotonic() + self.cooldown
         log.info("groq benched for %d minutes", self.cooldown // 60)
@@ -461,11 +556,11 @@ class AutoBackend:
         return (not self._groq_served
                 and bool(getattr(self.local, "last_latin_output", False)))
 
-    def transcribe(self, audio: np.ndarray) -> str:
+    def transcribe(self, audio: np.ndarray, hotwords: str = "") -> str:
         self._groq_served = False
         if self.groq_available:
             try:
-                out = self.groq.transcribe(audio)
+                out = self.groq.transcribe(audio, hotwords=hotwords)
                 self._last_language = self.groq.last_language
                 self._groq_served = True
                 return out
@@ -483,7 +578,7 @@ class AutoBackend:
             self.notify("Downloading local model (~3 GB). This happens once.")
             self.local.download()
             self.notify("Local model ready.")
-        out = self.local.transcribe(audio)
+        out = self.local.transcribe(audio, hotwords=hotwords)
         self._last_language = self.local.last_language
         return out
 

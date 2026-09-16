@@ -71,9 +71,12 @@ class _Track:
             log.warning("failed to close %s stream cleanly", self.label, exc_info=True)
 
     def mono_16k(self) -> np.ndarray:
-        if not self._chunks:
+        # Copy the list first: this is called while the capture callback is
+        # still appending to it, both at stop and for a mid-recording snapshot.
+        chunks = self._chunks[:]
+        if not chunks:
             return np.zeros(0, dtype=np.float32)
-        x = np.frombuffer(b"".join(self._chunks), dtype=np.float32)
+        x = np.frombuffer(b"".join(chunks), dtype=np.float32)
         if self.channels > 1:
             # Trailing partial frame would break the reshape.
             x = x[: len(x) - (len(x) % self.channels)]
@@ -137,25 +140,44 @@ class Recorder:
             self._teardown()
             raise
 
-    def stop(self) -> Recording:
-        system = self._system.mono_16k() if self._system else np.zeros(0, np.float32)
-        mic = self._mic.mono_16k() if self._mic else np.zeros(0, np.float32)
-        self._teardown()
+    def _mix(self, system: np.ndarray, mic: np.ndarray) -> np.ndarray:
+        """Sum the two tracks into the single mono stream Whisper wants.
 
-        # The two devices run off independent clocks, so their lengths drift
-        # slightly over a long meeting. Pad to the longer one and mix: a small
-        # relative offset between the two speakers is irrelevant once both are
-        # summed into a single mono track for transcription.
+        The two devices run off independent clocks, so their lengths drift
+        slightly over a long meeting. Pad to the longer one and mix: a small
+        relative offset between the two speakers is irrelevant once both are
+        summed into one track for transcription.
+        """
         n = max(len(system), len(mic))
         mixed = np.zeros(n, dtype=np.float32)
         if len(system):
             mixed[: len(system)] += system * self.system_gain
         if len(mic):
             mixed[: len(mic)] += mic * self.mic_gain
-
         peak = float(np.abs(mixed).max()) if n else 0.0
         if peak > 1.0:
             mixed /= peak
+        return mixed
+
+    def snapshot(self) -> np.ndarray:
+        """Everything captured so far, without stopping the recording.
+
+        This is what lets the app start working before the speaker has
+        finished: the language can be settled, and the sentences already spoken
+        decoded, while the recording is still running. Safe to call from
+        another thread - it copies the buffers it reads.
+        """
+        system = self._system.mono_16k() if self._system else np.zeros(0, np.float32)
+        mic = self._mic.mono_16k() if self._mic else np.zeros(0, np.float32)
+        return self._mix(system, mic)
+
+    def stop(self) -> Recording:
+        system = self._system.mono_16k() if self._system else np.zeros(0, np.float32)
+        mic = self._mic.mono_16k() if self._mic else np.zeros(0, np.float32)
+        self._teardown()
+
+        mixed = self._mix(system, mic)
+        n = len(mixed)
 
         return Recording(
             audio=mixed,

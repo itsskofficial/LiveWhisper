@@ -135,6 +135,11 @@ def main() -> int:
     # are not natural speech, but they isolate the question being asked: how much
     # of the wait is fixed cost?
     base, _ = load_audio(clips[0])
+    # The first decode after a load compiles CUDA kernels and fills caches, and
+    # timing it measured that instead of dictation: this benchmark reported
+    # 2.8 s for a 4-second clip that decodes in about 1 s once warm. The app
+    # warms up at launch, so warm is what a user waits for.
+    backend.transcribe(base)
     print(f"  {'audio':>8} {'wall':>9} {'xRT':>7} {'fixed cost share':>18}")
     single = None
     for mult in (1, 3, 10, 30):

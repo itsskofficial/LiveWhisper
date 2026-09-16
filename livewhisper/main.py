@@ -27,12 +27,12 @@ import keyboard
 import pystray
 
 from . import config as cfgio
-from . import context, icons, output
+from . import bias, context, icons, output
 from .actions import Actions
 from .notes import NoteBook
 from .pipeline import Pipeline
 from .profile import ProfileStore
-from .audio import AudioError, Recorder, write_wav
+from .audio import TARGET_RATE, AudioError, Recorder, write_wav
 from .overlay import RecordingOverlay
 from .theme import palette
 from .script.languages import speaker_languages
@@ -77,6 +77,7 @@ class App:
         self.notebook = NoteBook()
         self.note_mode = False
         self._force_script: str | None = None
+        self._prime_stop = threading.Event()
         self._screen_at_start = None
 
     # ---------------------------------------------------------------- config
@@ -167,11 +168,47 @@ class App:
         except Exception:
             self._screen_at_start = None
         self._started_at = time.monotonic()
+        self._prime_stop = threading.Event()
+        threading.Thread(target=self._settle_language, args=(self.recorder,),
+                         daemon=True).start()
         self._set_state(State.RECORDING)
         if self.cfg.get("ui", {}).get("overlay", True) and self.root:
             self.root.after(0, self._show_overlay)
 
+    # When to look at the audio so far and settle the language. Early enough
+    # to be off the critical path even for a short dictation, late enough to
+    # have real speech to judge from; the second look costs nothing anybody
+    # waits for and gives a long dictation more audio to work with.
+    SETTLE_AT_S = (2.5, 12.0)
+
+    def _settle_language(self, recorder) -> None:
+        """Detect the language while the speaker is still talking.
+
+        Detection is an entire encoder pass, and it only ever looks at the
+        start of the recording, so running it after the hotkey is released
+        adds a third of the wait for nothing. Best effort throughout: if this
+        thread does not finish, transcription detects the language itself.
+        """
+        settle = getattr(self.backend(), "prime", None)
+        if settle is None:
+            return
+        waited = 0.0
+        for mark in self.SETTLE_AT_S:
+            if self._prime_stop.wait(mark - waited):
+                return                          # recording already ended
+            waited = mark
+            if self.recorder is not recorder:
+                return
+            try:
+                audio = recorder.snapshot()
+            except Exception:
+                log.debug("could not read the recording so far", exc_info=True)
+                return
+            if len(audio) >= 1.5 * TARGET_RATE:
+                settle(audio)
+
     def _stop(self) -> None:
+        self._prime_stop.set()
         recorder, self.recorder = self.recorder, None
         if self.root:
             self.root.after(0, self._hide_overlay)
@@ -304,6 +341,10 @@ class App:
         with self._lock:
             if self.state is not State.RECORDING:
                 return
+            self._prime_stop.set()
+            forget = getattr(self.backend(), "forget_priming", None)
+            if forget:
+                forget()                    # it belonged to a recording we threw away
             recorder, self.recorder = self.recorder, None
             if self.root:
                 self.root.after(0, self._hide_overlay)
@@ -316,7 +357,8 @@ class App:
         try:
             mins, secs = divmod(int(recording.seconds), 60)
             log.info("transcribing %dm%02ds via %s", mins, secs, self.backend_name)
-            transcript = self.backend().transcribe(recording.audio)
+            transcript = self.backend().transcribe(
+                recording.audio, hotwords=self._names_in_front_of_me())
             if not transcript:
                 self.notify("No speech detected in the recording.")
                 return
@@ -355,6 +397,25 @@ class App:
             self._save_audio_on_failure(recording)
         finally:
             self._set_state(State.IDLE)
+
+    def _names_in_front_of_me(self) -> str:
+        """Names on screen worth expecting, for the decoder to lean on.
+
+        Off by default for nobody: this is the app already reading the window
+        for its other features, so it costs one string and never leaves the
+        machine. Set context.bias to false to stop it.
+        """
+        if not (self.cfg.get("context") or {}).get("bias", True):
+            return ""
+        screen = self._screen_at_start
+        try:
+            return bias.phrases(
+                screen_text=(screen.text if screen else ""),
+                focused_text=(screen.focused_text if screen else ""),
+                extra=(self.cfg.get("transcription") or {}).get("vocabulary", ""))
+        except Exception:
+            log.debug("could not read names off the screen", exc_info=True)
+            return ""
 
     def _transcript_dir(self) -> Path:
         d = ROOT / self.cfg["output"].get("transcript_dir", "transcripts")
@@ -554,7 +615,9 @@ class App:
     def _warm_up(self) -> None:
         """Prepare what is ready. Must never trigger a 3 GB download by itself."""
         try:
-            self.backend().load()
+            backend = self.backend()
+            warm = getattr(backend, "warm", None)
+            (warm or backend.load)()
             log.info("%s backend ready", self.backend_name)
         except Exception as e:
             log.warning("backend warm-up: %s", e)

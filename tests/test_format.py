@@ -117,6 +117,24 @@ def main() -> int:
     same("a Hinglish command still works",
          finish("theek hai comma kal baat karte hain"),
          "Theek hai, kal baat karte hain.")
+    same("a Hinglish correction: matlab",
+         finish("Monday matlab Tuesday ko milte hain"),
+         "Tuesday ko milte hain.")
+    same("a Hinglish correction: nahi nahi",
+         finish("main 5 nahi nahi 6 baje aaunga"),
+         "Main 6 baje aaunga.")
+    # "matlab" is also the most common filler in Hinglish. Nothing may move
+    # unless the words either side of it are the same kind of thing.
+    same("a Hinglish correction between days",
+         finish("kal matlab parso tak ho jayega"), "Parso tak ho jayega.")
+    same("an English day corrected to a Hindi one",
+         finish("Monday matlab mangalvar ko milte hain"), "Mangalvar ko milte hain.")
+    for text in ("matlab kya hai ye",
+                 "wo aaya matlab kaam ho gaya",
+                 "kal aana matlab zaroor aana",
+                 "nahi nahi aisa mat karo"):
+        out = auto_edit(text)
+        check(f"Hinglish left alone: {text!r}", out == text, f"got {out!r}")
 
     print("\n=== styles ===")
     same("chat gets no trailing full stop", finish("lets ship it today", CHAT),
@@ -139,6 +157,34 @@ def main() -> int:
          finish("let us meet Monday I mean Tuesday",
                 style_for("", cfg={"auto_edit": False})),
          "Let us meet Monday I mean Tuesday.")
+
+    print("\n=== voice shortcuts ===")
+    saved = {"my address": "221B Baker Street, London NW1",
+             "sign off": "Thanks,\nSarthak"}
+    same("a cue on its own expands, exactly as saved",
+         finish("My address.", PROSE, shortcuts=saved), "221B Baker Street, London NW1")
+    same("line breaks in an expansion survive",
+         finish("sign off", CHAT, shortcuts=saved), "Thanks,\nSarthak")
+    same("a cue inside a sentence is just words",
+         finish("I changed my address", PROSE, shortcuts=saved), "I changed my address.")
+    same("no shortcuts configured changes nothing",
+         finish("my address", PROSE, shortcuts=None), "My address")
+
+    print("\n=== identifiers in code ===")
+    same("camel case stops at an operator",
+         finish("camel case user name equals five", CODE), "userName equals five")
+    same("snake case stops at a spoken comma",
+         finish("define snake case max retry count comma then", CODE),
+         "define max_retry_count, then")
+    same("pascal case", finish("new pascal case http client", CODE), "new HttpClient")
+    same("constant case", finish("constant case max retries", CODE), "MAX_RETRIES")
+    same("kebab case", finish("kebab case main nav bar", CODE), "main-nav-bar")
+    same("talking about a convention is not using it",
+         finish("the camel case convention is nice", CODE),
+         "the camel case convention is nice")
+    same("prose never builds identifiers",
+         finish("we discussed the camel case convention", PROSE),
+         "We discussed the camel case convention.")
 
     print("\n=== tidying ===")
     same("space before a comma", finish("hello , world and more"),

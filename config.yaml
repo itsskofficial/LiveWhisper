@@ -68,6 +68,11 @@ transcription:
     batch_size: 8             # decode VAD chunks in parallel. Big speedup on long
                               # meetings. Lower to 4 if you run out of VRAM; 1
                               # disables batching.
+    chunk_length: 15          # seconds of speech per decoded window. The library
+                              # default, 30, makes Whisper stop early: paragraphs
+                              # kept 74% of Hindi words and 77% of English.
+                              # 15 kept 96% and 93% at no cost to single
+                              # sentences. tests/results/decode_windows.md
     vad_filter: true
     condition_on_previous_text: false  # keep false: stops language context
                                        # bleeding across segments when speakers
@@ -110,6 +115,13 @@ output:
     entities: true            # sarthak at gmail dot com -> sarthak@gmail.com
     capitals: true            # sentence case, and a lone "i" -> "I"
     final_stop: true          # finish a sentence that ran out without one
+    # Voice shortcuts: dictate only the cue and the saved text is pasted
+    # instead, exactly as written. A cue said inside a sentence is just words.
+    shortcuts: {}
+    #   my address: "221B Baker Street, London NW1"
+    #   sign off: "Thanks,\nSarthak"
+    # In code editors, "camel case user name" types userName (also snake,
+    # pascal, kebab and constant case).
 
 ui:
   theme: dark-amber           # dark-amber | dark-indigo | system
@@ -171,6 +183,11 @@ context:
   ocr_fallback: false         # screenshot+OCR when UI Automation finds nothing.
                               # Needed for some Chrome/Electron apps. Requires
                               # `pip install rapidocr_onnxruntime`.
+  bias: true                  # tell the speech model about the names already on
+                              # screen, so the people in the thread you are
+                              # replying to get spelled right. Read locally,
+                              # used for that one dictation, never stored and
+                              # never sent anywhere.
 
 # Text generation. Local by default so nothing leaves the machine.
 actions:

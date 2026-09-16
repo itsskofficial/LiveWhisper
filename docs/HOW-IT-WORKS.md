@@ -131,15 +131,18 @@ those few.
    │ 3. SCRIPT       │  Devanagari -> your Latin spelling
    └───┬─────────────┘
    ┌───▼─────────────┐
-   │ 4. STYLE        │  your capitalisation & punctuation habits
+   │ 4. FORMAT       │  "comma", "new paragraph", "I mean Tuesday"
    └───┬─────────────┘
    ┌───▼─────────────┐
-   │ 5. DELIVER      │  paste at your cursor
+   │ 5. STYLE        │  your capitalisation & punctuation habits
+   └───┬─────────────┘
+   ┌───▼─────────────┐
+   │ 6. DELIVER      │  paste at your cursor
    └─────────────────┘
 ```
 
-Steps 3 and 4 are what make this app different. Every dictation tool does 1, 2
-and 5.
+Steps 3 and 5 are what make this app different. Every dictation tool does 1, 2
+and 6, and the paid ones do 4 on their servers.
 
 ### 3.2 Step 1 — Capture
 
@@ -196,6 +199,15 @@ long vowels like a textbook (`saamaan`, `vaala`) where people type `samaan`,
 way gets its doubled vowels shortened *until it matches a spelling people do
 use*. Words already spelled a known way, English words and names are left alone.
 
+**Names from your screen.** Whisper writes what it expects to hear, and it has
+never heard of the people you work with. So when you start dictating, the app
+looks at the window you are typing into — the same accessibility text it
+already reads for its other features — and picks out the words a speech model
+is likely to get wrong: names, product names, acronyms. Those are given to the
+model as hints for that one dictation. The paid apps do the same thing by
+uploading your screen to their servers; here the text never leaves your
+computer and is forgotten as soon as the dictation is done. (`livewhisper/bias.py`)
+
 **Filler words.** "um", "uh" and "erm" are removed. Repeated words are never
 touched, because in Hindi they're grammar, not stuttering — `dheere dheere`
 means "slowly", not "slow slow".
@@ -210,7 +222,38 @@ one is unavailable.
 
 `livewhisper/transcribe.py`
 
-### 3.4 Step 5 — Deliver
+### 3.4 Step 4 — Format
+
+A speech model gives you words. What you wanted is the message you would have
+typed: a comma where you said "comma", a blank line where you said "new
+paragraph", a list when you said "bullet point", and the correction you made
+out loud already applied — "let's meet Monday, I mean Tuesday" arrives as
+"let's meet Tuesday."
+
+This is done with rules, not a second AI model. A model would take about a
+second, could quietly rewrite words you actually said, and would not fit on the
+machines this app has to run on. The rules take about half a millisecond for a
+hundred words.
+
+The difficult part is knowing when *not* to act, because every command word is
+also an ordinary word. "Send it today period" ends the sentence; "the period of
+the wave" must not. So a command like "period" only converts when nothing
+around it looks like a noun phrase — no "the" or "a" before it, no "of" after
+it. Spoken corrections are stricter still: "I mean" (or, in Hinglish, "matlab")
+only replaces a word when the old word and the new one are the same *kind* of
+thing — two weekdays, two numbers, two times. "Monday matlab Tuesday" is a
+correction. "Wo aaya matlab kaam ho gaya" is someone talking, and is left alone.
+
+Where you are typing changes the result. Chat apps get no full stop added at the
+end, because a trailing period in a chat box reads as annoyance. Code editors
+and terminals keep your capitalisation and turn "dash m" into `-m`.
+
+Paragraph breaks come partly from the recording: Whisper reports where it
+skipped silence, and a pause of 1.6 seconds or longer becomes a blank line.
+
+`livewhisper/format.py`
+
+### 3.5 Step 6 — Deliver
 
 The app puts text on the clipboard and sends a synthetic `Ctrl+V` to whatever
 window has focus. Simple, and it works in every application because every

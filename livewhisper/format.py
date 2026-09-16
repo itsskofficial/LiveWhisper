@@ -56,12 +56,13 @@ class Style:
     capitals: bool = True          # sentence case
     final_stop: bool = True        # finish a sentence that has no ending
     flag_dash: bool = False        # "dash m" -> "-m", the way a flag is typed
+    identifiers: bool = False      # "camel case user name" -> userName
 
 
 PROSE = Style("prose")
 CHAT = Style("chat", final_stop=False)
 CODE = Style("code", capitals=False, final_stop=False, entities=False,
-             auto_edit=False, flag_dash=True)
+             auto_edit=False, flag_dash=True, identifiers=True)
 VERBATIM = Style("verbatim", marks=False, auto_edit=False, entities=False,
                  capitals=False, final_stop=False)
 
@@ -340,14 +341,25 @@ _SCRATCH = re.compile(
     r"\b(?:scratch|strike|delete|ignore|forget)\s+(?:that|this)\b[\s,.:;-]*",
     re.IGNORECASE)
 
+# The Hinglish ones are how the same correction is actually said: "Monday
+# matlab Tuesday", "5 nahi nahi 6". Both words are everyday discourse fillers
+# too ("matlab kya hai"), which is safe only because of _same_kind below - the
+# words on either side have to be the same sort of thing before anything moves.
 _MEANT = re.compile(
-    r"[\s,;.]*\b(?:i\s+mean(?:t)?|sorry|no\s+wait|wait\s+no|rather|correction)\b"
+    r"[\s,;.]*\b(?:i\s+mean(?:t)?|sorry|no\s+wait|wait\s+no|rather|correction"
+    r"|matlab|nahi\s+nahi|nahin\s+nahin)\b"
     r"[\s,:-]+(?P<fix>[^.!?,\n]{1,40})", re.IGNORECASE)
 
 _WEEKDAYS = {"monday", "tuesday", "wednesday", "thursday", "friday",
              "saturday", "sunday"}
 _MONTHS = {"january", "february", "march", "april", "may", "june", "july",
            "august", "september", "october", "november", "december"}
+# The same idea in romanized Hindi: relative days and weekday names, in the
+# spellings people actually type.
+_DIN = {"aaj", "aj", "kal", "parso", "parson", "narso", "narson"}
+_VAAR = {"somvar", "somwar", "mangalvar", "mangalwar", "budhvar", "budhwar",
+         "guruvar", "guruwar", "brihaspativar", "shukravar", "shukrawar",
+         "shanivar", "shaniwar", "ravivar", "raviwar", "itvaar", "itwar"}
 _TIME = re.compile(r"^\d{1,2}(?::\d{2})?(?:am|pm)?$", re.IGNORECASE)
 
 
@@ -363,7 +375,7 @@ def _same_kind(old: str, new: str) -> bool:
     old, new = old.strip().lower(), new.strip().lower()
     if not old or not new or old == new:
         return False
-    for group in (_WEEKDAYS, _MONTHS):
+    for group in (_WEEKDAYS, _MONTHS, _DIN, _VAAR, _WEEKDAYS | _VAAR):
         if old in group and new in group:
             return True
     if old.replace(",", "").isdigit() and new.replace(",", "").isdigit():
@@ -507,12 +519,100 @@ def final_stop(text: str) -> str:
 # -------------------------------------------------------------------- driver
 
 
-def finish(text: str, style: Style = PROSE) -> str:
+# --------------------------------------------------------------- shortcuts
+
+
+def shortcut(text: str, shortcuts: dict | None) -> str | None:
+    """The expansion when the whole dictation is a shortcut's cue, else None.
+
+    "my address" -> the full address, typed out. Only a dictation that is
+    nothing but the cue expands: matching cues inside sentences would turn
+    "I changed my address" into a street name, and the cost of saying the cue
+    on its own is one press of the hotkey.
+    """
+    if not shortcuts or not text:
+        return None
+    said = " ".join(_bare(t) for t in text.split() if _bare(t))
+    for cue, expansion in shortcuts.items():
+        if said and said == " ".join(_bare(t) for t in str(cue).split() if _bare(t)):
+            return str(expansion)
+    return None
+
+
+# ---------------------------------------------------------------- case words
+
+_CASES = {("camel", "case"): "camel", ("snake", "case"): "snake",
+          ("pascal", "case"): "pascal", ("kebab", "case"): "kebab",
+          ("constant", "case"): "constant"}
+_CASE_WORDS = 4          # "camel case user account id" - identifiers are short
+# Words that end an identifier: what comes next in a line of code is an
+# operator or a keyword, not more of the name.
+_CASE_STOP = {"equals", "equal", "plus", "minus", "times", "is", "to", "in",
+              "of", "and", "or", "not", "then", "with", "from", "for", "as",
+              "at", "on", "if", "else", "return", "into", "by"}
+
+
+def _identifier(words: list, how: str) -> str:
+    low = [w for w in (re.sub(r"[^\w]", "", w).lower() for w in words) if w]
+    if not low:
+        return ""
+    if how == "camel":
+        return low[0] + "".join(w.capitalize() for w in low[1:])
+    if how == "pascal":
+        return "".join(w.capitalize() for w in low)
+    if how == "kebab":
+        return "-".join(low)
+    if how == "constant":
+        return "_".join(low).upper()
+    return "_".join(low)
+
+
+def case_words(text: str) -> str:
+    """"camel case user name" -> userName, the way an identifier is typed.
+
+    The identifier runs until punctuation, a line break, or four words -
+    identifiers are short, and without a limit "snake case user id equals
+    five" would swallow the whole line. Say "comma" to end one early.
+    """
+    lines = text.split("\n")
+    for n, line in enumerate(lines):
+        words = line.split(" ")
+        out: list = []
+        i = 0
+        while i < len(words):
+            key = (_bare(words[i]), _bare(words[i + 1]) if i + 1 < len(words) else "")
+            before = _bare(words[i - 1]) if i else ""
+            if key in _CASES and i + 2 < len(words) and before not in _DETERMINERS:
+                taken: list = []
+                j = i + 2
+                while j < len(words) and len(taken) < _CASE_WORDS:
+                    if taken and _bare(words[j]) in _CASE_STOP:
+                        break
+                    taken.append(words[j])
+                    j += 1
+                    if re.search(r"[,.;:!?]$", taken[-1]):
+                        break
+                tail = re.search(r"[,.;:!?]+$", taken[-1])
+                out.append(_identifier(taken, _CASES[key]) + (tail.group(0) if tail else ""))
+                i = j
+                continue
+            out.append(words[i])
+            i += 1
+        lines[n] = " ".join(out)
+    return "\n".join(lines)
+
+
+def finish(text: str, style: Style = PROSE, shortcuts: dict | None = None) -> str:
     """Run the passes this style asks for. The one entry point."""
     if not text or not text.strip() or style is VERBATIM or style.name == "verbatim":
         return text
+    expansion = shortcut(text, shortcuts)
+    if expansion is not None:
+        return expansion                   # typed exactly as the user saved it
     if style.marks:
         text = spoken_marks(text, flag_dash=style.flag_dash)
+    if style.identifiers:
+        text = case_words(text)
     if style.auto_edit:
         text = auto_edit(text)
     if style.entities:

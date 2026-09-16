@@ -47,6 +47,51 @@ in this app."
 
 ---
 
+## It hands you a message, not a sentence
+
+A speech model returns words. What you wanted was the thing you would have
+typed — so the last step before the paste is a formatting pass, in rules rather
+than a model: **0.6 ms per 100 words**, no second-long wait, and no way for it
+to invent a word you never said.
+
+```
+   "hey Sarthak comma how are you question mark"
+       -> Hey Sarthak, how are you?
+
+   "the meeting is at five new paragraph bring the deck"
+       -> The meeting is at five
+          (blank line)
+          Bring the deck.
+
+   "let us meet Monday I mean Tuesday"   -> Let us meet Tuesday.
+   "that plan is fine. scratch that."    -> (the cancelled sentence is gone)
+   "write to sarthak at gmail dot com"   -> write to sarthak@gmail.com
+   "bullet point ship it bullet point measure it"
+       -> - Ship it
+          - Measure it
+```
+
+Paragraphs also come from the recording itself: the transcriber knows how long
+you paused, so a pause of 1.6 seconds or more becomes a blank line.
+
+And it writes differently depending on where you are typing, because a chat box
+and a terminal want different things:
+
+| Where | What changes |
+| --- | --- |
+| Slack, Discord, Teams, WhatsApp | No full stop added at the end — a trailing period in a chat box reads as annoyance |
+| VS Code, terminals, JetBrains | Case left alone, and "dash m" becomes `-m` |
+| Everywhere else | Full sentences |
+| Any app you mark `verbatim` | Nothing is touched |
+
+The hard part is not the conversion, it is knowing when *not* to convert. "The
+period of the wave", "a dash of salt" and "two commas" all survive, while "send
+it today period" ends the sentence. Romanized Indic text comes through
+untouched — `dheere dheere` keeps its reduplication, because that is Hindi
+grammar and not a stutter.
+
+---
+
 ## Twelve languages
 
 | | Language | Romanized as | Speakers | Lexicon coverage |
@@ -355,6 +400,27 @@ and style fixes. That is a deliberate design choice forced by its data model, a
 flat word→word dictionary. Per-app style needs per-app profiles.
 
 They are also cloud services with word limits and subscriptions. This is neither.
+
+The usual argument for the cloud is that on-device dictation cannot do the
+things that make these tools feel good. Point by point, here is where this one
+actually stands — including the parts that are still worse:
+
+| What the paid tools do | Here |
+| --- | --- |
+| Smart formatting, lists, paragraphs | Yes — rules, 0.6 ms, [above](#it-hands-you-a-message-not-a-sentence) |
+| Auto-edits: "Monday, I mean Tuesday" | Yes, for corrections it can verify are corrections |
+| Context awareness: names from your screen | Yes — read locally, used for that one dictation, never stored or sent |
+| Learns your vocabulary and spelling | Yes, and it keeps the capitalisation habits they discard |
+| Per-app tone and style | Yes, per app, and you can override it |
+| Works offline | Yes. That is the whole design |
+| English accuracy | 4.8% word error on FLEURS — the model's own number, not ours |
+| Code-switched Hindi/English | Better than the cloud default: they transliterate English into Devanagari ([measured](#just-ask-whisper-for-romanized-output)) |
+| Latency on a short dictation | 0.8 s for a 4-second English sentence on an RTX 4060, about 2 s for Hindi, nothing to upload ([measured](tests/results/)) |
+| Indic accuracy beyond Hindi | **Worse.** Gujarati, Punjabi, Malayalam and Marathi still miss about half the words, and Sindhi has no usable model at all |
+| Polish on long-form rewriting | **Worse** unless you point it at a frontier model, which is not local |
+
+No word limits, no account, no subscription, and the numbers above are in
+[`tests/results/`](tests/results/) with the scripts that produced them.
 
 ### Just ask Whisper for romanized output
 

@@ -1,0 +1,15 @@
+{
+ "model": "large-v3",
+ "rows": [
+  {
+   "lang": "en",
+   "clips": 15,
+   "wer_none": 0.05625,
+   "names_none": 0.9074074074074074,
+   "wer_right": 0.046875,
+   "names_right": 0.9259259259259259,
+   "wer_wrong": 0.059375,
+   "names_wrong": 0.8888888888888888
+  }
+ ]
+}

@@ -187,13 +187,16 @@ class _LoadGate:
 
 class Model:
     def __init__(self, name: str, compute_type: str, beam: int, need_mb: int = 3000,
-                 english_min: float = 0.0):
-        from faster_whisper import WhisperModel
+                 english_min: float = 0.0, batch: int = 0, chunk_length: int = 0):
+        from faster_whisper import BatchedInferencePipeline, WhisperModel
         self.english_min = english_min
+        self.batch = batch
+        self.chunk_length = chunk_length
         with _LoadGate(need_mb):
             t0 = time.perf_counter()
             self.name = name
             self.m = WhisperModel(name, device="cuda", compute_type=compute_type)
+            self.batched = BatchedInferencePipeline(model=self.m) if batch > 1 else None
             self.beam = beam
             self.load_s = time.perf_counter() - t0
 
@@ -224,9 +227,15 @@ class Model:
         return best[0], best[1] / total, dist
 
     def transcribe(self, audio, language: str | None) -> str:
-        segs, info = self.m.transcribe(audio, language=language,
-                                       beam_size=self.beam, vad_filter=True,
-                                       condition_on_previous_text=False)
+        if self.batched is not None:
+            segs, info = self.batched.transcribe(
+                audio, batch_size=self.batch, language=language,
+                beam_size=self.beam,
+                chunk_length=self.chunk_length or None)
+        else:
+            segs, info = self.m.transcribe(audio, language=language,
+                                           beam_size=self.beam, vad_filter=True,
+                                           condition_on_previous_text=False)
         return " ".join(s.text.strip() for s in segs).strip()
 
 
@@ -248,6 +257,12 @@ def main() -> int:
     ap.add_argument("--english-min", type=float, default=0.0,
                     help="constrained mode: choose English only above this "
                          "probability (the app uses 0.99; 0 = plain argmax)")
+    ap.add_argument("--batch", type=int, default=0,
+                    help="decode through the batched pipeline, as the app does. "
+                         "0 = the sequential path")
+    ap.add_argument("--chunk-length", type=int, default=0,
+                    help="seconds of speech per decoded window in batched mode. "
+                         "0 = the library default, which is the model maximum")
     ap.add_argument("--latin-output", action="store_true",
                     help="model emits romanized text directly (Hinglish models)")
     args = ap.parse_args()
@@ -262,7 +277,8 @@ def main() -> int:
         if len(by_lang[c["lang"]]) < args.n:
             by_lang[c["lang"]].append(c)
 
-    model = Model(args.model, args.compute, args.beam, english_min=args.english_min)
+    model = Model(args.model, args.compute, args.beam, english_min=args.english_min,
+                  batch=args.batch, chunk_length=args.chunk_length)
     label = args.label or f"{Path(args.model).name}-{args.mode}"
     print(f"{label}: loaded in {model.load_s:.0f}s")
     print(f"{'lang':<5} {'n':>3} {'WER':>6} {'CER':>6} {'lang ok':>8} "

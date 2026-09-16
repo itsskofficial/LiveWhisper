@@ -155,10 +155,42 @@ def main() -> int:
     b.transcribe(audio)
     check("no second load message once it is warm", not messages, str(messages))
 
+    print("\n=== the language is settled while the recording runs ===")
+    b = backend()
+    b.load = lambda: None
+    detections: list = []
+    detect = b._pick_language
+    b._pick_language = lambda a: (detections.append(len(a)), detect(a))[1]
+    check("priming detects the language from the audio so far",
+          b.prime(audio) == "hi", str(b._primed))
+    out = b.transcribe(audio)
+    check("transcription uses it instead of detecting a second time",
+          len(detections) == 1, f"detections={len(detections)}")
+    check("and routes exactly as it would have", out == "[hinglish:en]", out)
+    check("a primed language is used once, not remembered", b._primed is None)
+    b.prime(audio)
+    b.forget_priming()
+    check("a cancelled recording forgets its language", b._primed is None)
+    out = b.transcribe(audio)
+    check("with nothing primed it detects as before", len(detections) == 3,
+          f"detections={len(detections)}")
+    one = LocalBackend({"batch_size": 1, "models": {}}, languages=["hi"])
+    one.load = lambda: None
+    check("a single-language user has nothing to detect", one.prime(audio) is None)
+    forced = backend(language="ta")
+    forced.load = lambda: None
+    check("a forced language is not second-guessed", forced.prime(audio) is None)
+
+    print("\n=== decode windows ===")
+    from livewhisper.transcribe import DECODE_WINDOW_S, window_for
+    check("recordings decode in 15-second windows, not the 30-second default",
+          window_for(12.0) == DECODE_WINDOW_S == 15 and window_for(40.0) == 15)
+    check("an explicit setting wins", window_for(5.0, 20) == 20)
+
     print("\n=== combined backend ===")
     g = GroqBackend({})
     g.is_configured = lambda: True
-    g.transcribe = lambda a: "groq text"
+    g.transcribe = lambda a, **kw: "groq text"
     g.last_language = "hi"
     local = backend()
     local.last_latin_output = True                # stale, from an earlier local run

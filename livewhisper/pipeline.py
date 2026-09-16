@@ -169,7 +169,7 @@ class Pipeline:
         style = fmt_mod.style_for(app, override=profile.style or fmt_cfg.get("style"),
                                   cfg=fmt_cfg)
         if fmt_cfg.get("enabled", True):
-            text = fmt_mod.finish(text, style)
+            text = fmt_mod.finish(text, style, shortcuts=fmt_cfg.get("shortcuts"))
         text = profile.habits.apply(text)
 
         d = Delivery(text=text, raw=transcript, app=app, script=script,
