@@ -16,6 +16,7 @@ import logging
 from dataclasses import dataclass
 
 from . import context as ctx_mod
+from . import format as fmt_mod
 from .cleanup import remove_fillers
 from .profile import ProfileStore
 from .script import conventions as conv_mod
@@ -36,6 +37,7 @@ class Delivery:
     romanized: bool
     notes: list
     language: str | None = None   # which lexicon was used
+    style: str = "prose"          # formatting the target app asked for
 
 
 class Pipeline:
@@ -157,12 +159,22 @@ class Pipeline:
             lang = heard_language
             text = respell(transcript, lang)
 
-        if (self.cfg.get("output") or {}).get("remove_fillers", True):
+        out_cfg = self.cfg.get("output") or {}
+        if out_cfg.get("remove_fillers", True):
             text = remove_fillers(text)
+
+        # Formatting runs before habits, not after: habits are what this user
+        # does that the rules do not know about, so they get the last word.
+        fmt_cfg = out_cfg.get("format") or {}
+        style = fmt_mod.style_for(app, override=profile.style or fmt_cfg.get("style"),
+                                  cfg=fmt_cfg)
+        if fmt_cfg.get("enabled", True):
+            text = fmt_mod.finish(text, style)
         text = profile.habits.apply(text)
 
         d = Delivery(text=text, raw=transcript, app=app, script=script,
-                     romanized=romanized, notes=notes, language=lang)
+                     romanized=romanized, notes=notes, language=lang,
+                     style=style.name)
         self._last = d
         return d
 

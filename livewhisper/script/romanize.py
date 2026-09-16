@@ -179,7 +179,15 @@ class Romanizer:
             if not cands:
                 continue
             best = max(cands, key=lambda aw: similarity(bw, aw))
-            notes += self.conventions.learn(native, bw, best)
+            # Case is formatting, not spelling. Our text is capitalised at the
+            # start of a sentence before the user ever sees it, and what they
+            # type back is too, so "Mujhe" against "muze" would be recorded as
+            # the substitution M -> m and the jh -> z that was actually
+            # corrected would be missed. Capitalisation is learned separately,
+            # as a per-app habit.
+            if bw.lower() == best.lower():
+                continue
+            notes += self.conventions.learn(native, bw.lower(), best.lower())
         return notes
 
 

@@ -50,6 +50,8 @@ transcription:
                               # non-English audio.
     device: cuda              # cuda | cpu
     compute_type: int8_float16  # ~3 GB VRAM. float16 (~5 GB) for max quality.
+    paragraph_gap_seconds: 1.6  # a pause at least this long starts a new
+                                # paragraph. 0 joins everything with spaces.
     language:                 # null = auto-detect. Or force e.g. "en", "hi", "mr".
     # Specialist models per language. Detection always runs on `model` above;
     # decoding switches to a specialist when the detected language has one.
@@ -84,6 +86,30 @@ output:
   transcript_dir: transcripts
   remove_fillers: true        # drop "um", "uh", "erm". Repeated words are never
                               # touched: "dheere dheere" is Hindi grammar
+
+  # Finishing the text before it is pasted: spoken punctuation ("comma", "new
+  # paragraph", "bullet point"), corrections you make out loud ("Monday, I mean
+  # Tuesday"), emails and percentages written the way they are typed, and
+  # sentence case. Rules, not a model: about half a millisecond per 100 words.
+  format:
+    enabled: true
+    style: auto               # auto picks from the app in front of you:
+                              #   prose    everywhere else - full sentences
+                              #   chat     Slack, Discord, Teams, WhatsApp:
+                              #            no full stop added at the end
+                              #   code     editors and terminals: no capitals,
+                              #            and "dash m" becomes -m
+                              #   verbatim nothing is changed at all
+                              # Set one here to use it everywhere, or per app
+                              # in the profile store.
+    # Each pass can be turned off on its own. false disables it
+    # everywhere; true leaves the choice to the style above, so a
+    # chat app still gets no full stop added.
+    marks: true               # spoken punctuation and line breaks
+    auto_edit: true           # apply corrections said aloud
+    entities: true            # sarthak at gmail dot com -> sarthak@gmail.com
+    capitals: true            # sentence case, and a lone "i" -> "I"
+    final_stop: true          # finish a sentence that ran out without one
 
 ui:
   theme: dark-amber           # dark-amber | dark-indigo | system

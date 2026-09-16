@@ -43,6 +43,35 @@ def _repo_id(model: str) -> str:
     return model if "/" in model else f"Systran/faster-whisper-{model}"
 
 
+def _join_segments(segments, gap_s: float = 1.6) -> str:
+    """Join the decoded segments, breaking a paragraph where the speaker did.
+
+    The recording already knows where the paragraphs are: a speaker who stops
+    for a second and a half has finished a thought. Whisper reports the silence
+    it skipped as a gap between segment timestamps, so the structure costs
+    nothing to recover - and recovering it here, rather than in the formatter,
+    means romanization and every later pass see the text already laid out.
+
+    `gap_s` of 0 turns it off and joins with spaces, as before.
+    """
+    parts: list = []
+    previous_end = None
+    for s in segments:
+        piece = (getattr(s, "text", "") or "").strip()
+        if not piece:
+            continue
+        # Timestamps are optional: a backend that does not report them, or a
+        # test stub, simply gets the spaces it would have had before.
+        start, end = getattr(s, "start", None), getattr(s, "end", None)
+        if parts:
+            gap = (start - previous_end) if (start is not None
+                                             and previous_end is not None) else 0.0
+            parts.append("\n\n" if gap_s and gap >= gap_s else " ")
+        parts.append(piece)
+        previous_end = end
+    return "".join(parts).strip()
+
+
 class LocalBackend:
     name = "local"
 
@@ -276,7 +305,7 @@ class LocalBackend:
                 ),
                 **common,
             )
-        text = " ".join(s.text.strip() for s in segments).strip()
+        text = _join_segments(segments, float(self.cfg.get("paragraph_gap_seconds", 1.6)))
         self.last_language = heard_as or info.language
         self.language_probability = float(info.language_probability or 0)
         log.info("detected language %s (p=%.2f)", info.language,

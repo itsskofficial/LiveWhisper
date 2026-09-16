@@ -28,6 +28,7 @@ FAST = [
     ("settings GUI", ["test_gui.py"]),
     ("robustness (118 checks)", ["tests/test_robustness.py"]),
     ("filler removal", ["tests/test_cleanup.py"]),
+    ("text formatting", ["tests/test_format.py"]),
     ("hinglish respelling", ["tests/test_respell.py"]),
     ("specialist install", ["tests/test_specialists.py"]),
     ("install memory guards", ["tests/test_resources.py"]),

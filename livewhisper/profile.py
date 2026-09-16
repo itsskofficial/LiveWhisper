@@ -91,12 +91,14 @@ class AppProfile:
     conventions: Conventions = field(default_factory=Conventions)
     vocabulary: dict = field(default_factory=dict)
     script: str | None = None        # "latin" | "devanagari" | None = auto
+    style: str | None = None         # formatting: prose | chat | code | verbatim
 
     def to_dict(self) -> dict:
         return {"habits": self.habits.to_dict(),
                 "conventions": self.conventions.to_dict(),
                 "vocabulary": dict(self.vocabulary),
-                "script": self.script}
+                "script": self.script,
+                "style": self.style}
 
     @classmethod
     def from_dict(cls, app: str, d: dict) -> "AppProfile":
@@ -104,7 +106,8 @@ class AppProfile:
                    habits=Habits.from_dict(d.get("habits")),
                    conventions=Conventions.from_dict(d.get("conventions")),
                    vocabulary=dict(d.get("vocabulary") or {}),
-                   script=d.get("script"))
+                   script=d.get("script"),
+                   style=d.get("style"))
 
 
 class ProfileStore:

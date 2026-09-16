@@ -56,7 +56,9 @@ def main() -> int:
 
     print("\n=== the pipeline only respells a Hinglish model's output ===")
     with tempfile.TemporaryDirectory() as td:
-        pipe = Pipeline({"script": {"language": "hi"}}, ProfileStore(Path(td) / "p.json"))
+        pipe = Pipeline({"script": {"language": "hi"},
+                         "output": {"format": {"enabled": False}}},
+                        ProfileStore(Path(td) / "p.json"))
         screen = ScreenContext(app="t.exe", title="t", text="", focused_text="",
                                method="uia")
         spoken = "yeh saamaan vaala hai"

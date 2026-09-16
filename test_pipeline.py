@@ -47,7 +47,11 @@ def main() -> int:
     cfg = cfgio.load("config.yaml")
     tmp = Path(tempfile.mkdtemp())
     store = ProfileStore(path=tmp / "profiles.json")
-    pipe = Pipeline(cfg, store)
+    # The sections below compare romanized words, so formatting - which
+    # capitalises and punctuates - is off for them. Section 9 turns it on.
+    plain = {**cfg, "output": {**(cfg.get("output") or {}),
+                               "format": {"enabled": False}}}
+    pipe = Pipeline(plain, store)
 
     print("\n=== 1. romanization ===")
     screen = ScreenContext(app="whatsapp.exe", title="Chat", text="",
@@ -120,6 +124,40 @@ def main() -> int:
     check("rules persisted",
           again.get(ProfileStore.GLOBAL).conventions.rules.get("jh"), "z")
     check_true("habits persisted", again.get("whatsapp.exe").habits.capitalize < 0.1)
+
+    print("\n=== 9. the text is finished before it is delivered ===")
+    finished = Pipeline(cfg, ProfileStore(path=tmp / "formatted.json"))
+    d = finished.process("kal milte hain comma theek hai", screen)   # whatsapp
+    check_true("a spoken comma becomes punctuation", "," in d.text, d.text)
+    check_true("a chat app gets no full stop added", not d.text.endswith("."), d.text)
+    check("the style came from the app", d.style, "chat")
+    mail = ScreenContext(app="outlook.exe", title="Mail", text="",
+                         focused_text="", method="uia")
+    d = finished.process("i will send it tonight", mail)
+    check("a mail window is prose", d.style, "prose")
+    check_true("prose finishes the sentence", d.text.endswith("."), d.text)
+    check_true("and capitalises it", d.text.startswith("I will"), d.text)
+    d = finished.process("मुझे लगता है", mail)
+    check_true("romanized Hindi is formatted too, not skipped",
+               d.text.endswith(".") and "मुझे" not in d.text, d.text)
+
+    # Formatting capitalises the first word, and the field the user corrects
+    # therefore contains a capital too. Learning has to see past that: it once
+    # recorded M -> m as the user's spelling habit and missed the real one.
+    fresh_store = ProfileStore(path=tmp / "learn_formatted.json")
+    learner = Pipeline(cfg, fresh_store)
+    learner.process("मुझे", ctx_app := ScreenContext(
+        app="t.exe", title="t", text="", focused_text="", method="uia"))
+    learner.learn_from_screen(ScreenContext(app="t.exe", title="t", text="",
+                                            focused_text="muze", method="uia"))
+    learner.process("समझो", ctx_app)
+    learner.learn_from_screen(ScreenContext(app="t.exe", title="t", text="",
+                                            focused_text="samzo", method="uia"))
+    learned = fresh_store.get(ProfileStore.GLOBAL).conventions
+    check("a habit is learned through formatted text", learned.rules.get("jh"), "z")
+    check_true("and not the capital the formatter added",
+               "M" not in learned.rules and "m" not in learned.rules,
+               f"rules={learned.rules}")
 
     print()
     if failures:
