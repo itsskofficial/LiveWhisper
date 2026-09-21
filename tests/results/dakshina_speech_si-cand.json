@@ -1,0 +1,42 @@
+{
+ "rows": [
+  {
+   "lang": "si",
+   "n": 15,
+   "native_wer": 0.7762237762237763,
+   "native_cer": 0.3475274725274725,
+   "roman_wer_typed": 0.8041958041958042,
+   "roman_wer_acceptable": 0.7692307692307693
+  }
+ ],
+ "samples": [
+  {
+   "lang": "si",
+   "native_ref": "පලෙයි ප්‍රාදේශීය ලේකම් කොට්ඨාසය",
+   "native": "පොළිය පරදේශයේ ලේකම් කොට්ටාස.",
+   "typed": "Palai pradeshiya lekam kottashaya",
+   "romanized": "Poliya paradesaye lekam kottasa."
+  },
+  {
+   "lang": "si",
+   "native_ref": "පාසැල හැරයන්නන් සඳහා වෘත්තීමය පුහුණු පාඨමාලා පැවැත්වීම.",
+   "native": "පාසල් හැරියන් එන සඳහා වෘත්ත මේ පුහුණු පටමාල පැවැත්තීම.",
+   "typed": "Pasala herayannan sandaha wurthiyamaya puhunu patamala pawathweema.",
+   "romanized": "Pasal harryyan ena sandaha wurtha me puhunu patamala pawaththima."
+  },
+  {
+   "lang": "si",
+   "native_ref": "අ)භාෂණයේ නිදහසට සහ ප්‍රකාශනය ඇතුළු අදහස් පළ කිරීමේ නිදහසට",
+   "native": "අවවාෂනය නිදහසට සහ පරිකශනය ඇතුළු අදහස් බලකිරීම නිදහසට.",
+   "typed": "a)Bhashanaye nidahasata saha prakashanaya athulu adahas pala kireema nidahasata",
+   "romanized": "Avavasanaya nidahasata saha parikasanaya aethulu adahas balakirima nidahasata."
+  },
+  {
+   "lang": "si",
+   "native_ref": "පහළ බෝධියට උතුරු පසින් මෙම බුදු මැදුර පිහිටා ඇත.",
+   "native": "පහළ බවදයට යුතුරු පසුන් මැම බදු මැදර පිහිට ඇති.",
+   "typed": "pahala bodhiyata uthuru pasin mema budu medura pihita etha.",
+   "romanized": "Pahala bawadayata yuthuru pasun maema badu maedara pihita athi."
+  }
+ ]
+}

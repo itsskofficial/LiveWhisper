@@ -14,6 +14,8 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 
+from . import paths
+
 log = logging.getLogger(__name__)
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -56,7 +58,7 @@ class NoteBook:
     """One active note at a time; finished notes stay on disk."""
 
     def __init__(self, directory: Path | None = None):
-        self.dir = directory or (ROOT / "notes")
+        self.dir = directory or paths.NOTES
         self.dir.mkdir(parents=True, exist_ok=True)
         self.active: Note | None = None
 

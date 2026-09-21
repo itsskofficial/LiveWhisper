@@ -93,6 +93,13 @@ class Romanizer:
             return self.COMPOUNDS
         return self.COMPOUND_POLICY.get(self.lang, self.COMPOUND_POLICY["default"])
 
+    # Where the model's extra consonants are real: Tamil and Malayalam write
+    # one letter for sounds romanized as two (ழ "zh"), so counting consonants
+    # against the letter spelling flags good spellings. Measured: the guard
+    # took 0.5-1.8 WER points off the other ten languages and added 3.1
+    # (Tamil) and 2.6 (Malayalam) - see _padded.
+    UNPADDED_EXEMPT = frozenset({"ta", "ml"})
+
     def _resolve_unknown(self, words: list) -> dict:
         """Spell words the lexicon does not contain: compounds, then the model."""
         out: dict = {}
@@ -104,7 +111,9 @@ class Romanizer:
                     out[w] = "".join(self._lex.lookup(p) for p in parts)
         rest = [w for w in words if w not in out]
         if rest:
-            out.update(self._oov.spell(rest, self.lang))
+            guard = self.lang not in self.UNPADDED_EXEMPT
+            for w, guess in self._oov.spell(rest, self.lang).items():
+                out[w] = spell_letters(w) if guard and _padded(guess, w) else guess
         if mode == "fallback":
             for w in words:
                 if w not in out:
@@ -192,6 +201,23 @@ class Romanizer:
                 continue
             notes += self.conventions.learn(native, bw.lower(), best.lower())
         return notes
+
+
+_VOWELS = re.compile(r"[aeiouy]+")
+
+
+def _padded(guess: str, native: str) -> bool:
+    """Did the character model add consonants the word does not have?
+
+    Its failure mode on word endings is a short stutter - कोर्टात as
+    "kortatat", गेऊन as "geunan" - that its own loop guard, tuned for long
+    repeats, lets through. The letter-by-letter spelling has exactly one
+    consonant per consonant written, so a model spelling with more consonants
+    than that invented them. Measured on two disjoint 500-sentence samples of
+    Dakshina's human romanizations (tests/bench_romanization.py --offset).
+    """
+    letters = spell_letters(native)
+    return len(_VOWELS.sub("", guess.lower())) > len(_VOWELS.sub("", letters.lower()))
 
 
 def romanize_text(text: str, lang: str = DEFAULT,

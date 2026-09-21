@@ -27,6 +27,7 @@ time, to synthesise the clips. Takes over the foreground window while running.
 from __future__ import annotations
 
 import argparse
+import os
 import asyncio
 import json
 import re
@@ -239,13 +240,18 @@ def make_app(backend: str, routes: dict | None = None):
     if routes:
         cfg["transcription"]["local"]["models"] = routes
         cfg["transcription"]["local"]["max_extra_models"] = 2
-    cfg["ui"]["overlay"] = False
+    # The pill is on, as it is for users: the run shows it recording and working.
+    cfg["ui"]["overlay"] = not os.environ.get("LW_E2E_NO_PILL")
     path = tmp / "config.yaml"
     cfgio.save(path, cfg)
     app = App(path)
     app.styles = ProfileStore(tmp / "profiles.json")
+    from livewhisper.history import History
+    app.history = History(tmp / "history.jsonl")
     app.pipeline = Pipeline(app.cfg, app.styles)
-    app.notify = lambda msg, title="": print(f"      [tray] {msg}")
+    notify = app.notify
+    app.notify = lambda msg, title="LiveWhisper": (print(f"      [note] {msg}"),
+                                                   notify(msg, title))
     return app
 
 

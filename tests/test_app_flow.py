@@ -260,15 +260,22 @@ def main() -> int:
     saved = os.environ.pop("GROQ_API_KEY", None)
     os.environ["GROQ_API_KEY"] = "test"
     providers.Ollama.available = lambda self: False
+    real_builtin = providers.Builtin.available
+    providers.Builtin.available = lambda self: True
+    check("auto writes with the app's own model when it is downloaded",
+          providers.build({"provider": "auto"}).name == "builtin")
+    providers.Builtin.available = lambda self: False
     p = providers.build({"provider": "ollama", "model": "qwen2.5:7b"})
     check("falling back to Groq uses Groq's own model, not the Ollama one",
           p.name == "groq" and p.model == "llama-3.3-70b-versatile", p.model)
     del os.environ["GROQ_API_KEY"]
     try:
         providers.build({"provider": "ollama", "model": "qwen2.5:7b"})
-        check("no model anywhere names the fix", False)
+        check("no model anywhere says where to get one", False)
     except providers.ProviderError as e:
-        check("no model anywhere names the fix", "ollama pull qwen2.5:7b" in str(e), str(e))
+        check("no model anywhere says where to get one", "download it in LiveWhisper" in str(e),
+              str(e))
+    providers.Builtin.available = real_builtin
     if saved is not None:
         os.environ["GROQ_API_KEY"] = saved
 

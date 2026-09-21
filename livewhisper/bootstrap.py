@@ -20,11 +20,11 @@ import sys
 from pathlib import Path
 
 from . import config as cfgio
-from . import hardware, icons
+from . import hardware, icons, paths
 
 ROOT = Path(__file__).resolve().parent.parent
-CONFIG = ROOT / "config.yaml"
-ENV = ROOT / ".env"
+CONFIG = paths.CONFIG
+ENV = paths.ENV
 
 
 def _local_backend(cfg: dict):
@@ -37,14 +37,8 @@ def cmd_recommend(_) -> int:
 
 
 def cmd_apply_recommended(_) -> int:
-    rec = hardware.recommend()
     cfg = cfgio.load(CONFIG)
-    loc = cfg["transcription"]["local"]
-    loc["model"] = rec.model
-    loc["device"] = rec.device
-    loc["compute_type"] = rec.compute_type
-    loc["batch_size"] = rec.batch_size
-    loc["max_extra_models"] = rec.extra_models
+    rec = hardware.fit(cfg)
     cfgio.save(CONFIG, cfg)
     print(f"local model set to {rec.model} / {rec.compute_type} / batch {rec.batch_size}")
     return 0

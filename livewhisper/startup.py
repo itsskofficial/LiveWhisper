@@ -19,6 +19,8 @@ _NAME = "LiveWhisper"
 
 def _command() -> str:
     """The pythonw + run.py invocation for this installation, console-free."""
+    if getattr(sys, "frozen", False):
+        return f'"{sys.executable}" --background'
     exe = Path(sys.executable)
     pythonw = exe.with_name("pythonw.exe")
     if not pythonw.exists():

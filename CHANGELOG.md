@@ -6,6 +6,29 @@ The first release meant for people other than its author. Everything below was
 measured on a mid-range laptop (RTX 4060 8 GB, 16-core CPU); the scripts that
 produced each number are in `tests/`, and their output in `tests/results/`.
 
+### A desktop app
+
+- **One installer, no command line.** `LiveWhisper-Setup-1.0.0.exe` (100 MB)
+  installs per user, without administrator rights. No Python, no pip.
+- **Set up on first launch.** You pick your languages, and it downloads what
+  your PC should run, with progress and resume: the speech model, GPU support
+  (just the two cuBLAS files Whisper needs, 550 MB instead of 1.3 GB), the
+  formatting model, and faster English on a GPU.
+- **An app window** for your History (searchable, kept on your PC), words to
+  know, learned spellings, languages and their accuracy models, AI settings,
+  and shortcuts you set by pressing them.
+- **A recording pill** at the bottom of the screen: a live waveform, ✓ to
+  finish, ✕ to discard, and short notes in place of pop-ups. It never takes
+  focus from the field you are dictating into.
+- **Language models built in.** Formatting and `Ctrl+Alt+W` run on llama.cpp
+  inside the app, on any GPU (NVIDIA, AMD, Intel) or the processor. Ollama is
+  no longer needed. The writing model is unloaded as soon as it has written, so
+  dictation keeps the GPU.
+- **No PyTorch.** The romanizer's character model now runs on numpy, with
+  identical output on 2,400 test words and faster than before. The language
+  models download already converted.
+- **One copy at a time.** Launching it again opens the running app.
+
 ### Dictation
 
 - **Press, speak, press** (`Ctrl+Alt+Space`). Records your microphone only;
@@ -19,9 +42,9 @@ produced each number are in `tests/`, and their output in `tests/results/`.
   Tuesday", "kal matlab parso"), emails, percentages and money, and a style per
   app: no trailing full stop in chat, identifiers in code editors
   (`camel case user name` → `userName`).
-- **A 522 MB local model for punctuation**, if Ollama is installed: 67% of test
-  cases exactly as a careful typist would write them, against 40% for rules
-  alone. It can add punctuation and capitals but never change a word.
+- **A 640 MB local model for punctuation**: 67% of test cases exactly as a
+  careful typist would write them, against 40% for rules alone. It can add
+  punctuation and capitals but never change a word.
 - **Names from your screen** help the names in the thread you are replying to
   come out right. Read locally, used once, never stored or sent.
 - **Voice shortcuts**: dictate a cue alone and saved text is pasted instead.

@@ -173,9 +173,10 @@ def main() -> int:
         report("all hotkeys configured", OK if not missing else BAD,
                ", ".join(f"{k}={hk.get(k)}" for k in need))
         from livewhisper.main import App  # noqa
-        from livewhisper.wizard import Wizard  # noqa
-        from livewhisper.gui import SECTIONS
-        report("app + gui import", OK, f"panels: {', '.join(SECTIONS)}")
+        from livewhisper import paths
+        from livewhisper.window import Api  # noqa
+        page = paths.UI / "index.html"
+        report("app + window import", OK if page.exists() else BAD, str(page))
     except Exception as e:
         report("app wiring", BAD, str(e))
 
@@ -190,11 +191,11 @@ def main() -> int:
                 g = (d.get("_global") or {}).get("conventions", {})
                 report("install profile", WARN,
                        f"exists - rules={g.get('rules')} "
-                       f"(wizard will NOT auto-run; delete to demo it)")
+                       f"(first-run setup will NOT show; delete to demo it)")
             except Exception:
                 report("install profile", WARN, "exists but unreadable")
         else:
-            report("install profile", OK, "absent - wizard runs on first launch")
+            report("install profile", OK, "absent - first-run setup shows on launch")
     else:
         report("install present", BAD, "E:/Apps/LiveWhisper missing")
 

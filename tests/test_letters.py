@@ -32,7 +32,8 @@ def main() -> int:
     print("=== readable spellings ===")
     for native, want in (("करूंगा", "karoonga"), ("কাল", "kal"), ("ಕಚೇರಿಗೆ", "kacherige"),
                          ("ഓഫീസിൽ", "opheesil"), ("ज़रूर", "zaroor"), ("फ़ाइल", "faail"),
-                         ("මම", "mam"), ("කරන්ට", "karant")):
+                         ("මම", "mama"), ("කරන්ට", "karanta"),
+                         ("కమల", "kamala"), ("ಕಮಲ", "kamala"), ("कमल", "kamal")):
         check(f"{native} -> {want}", spell(native) == want, spell(native))
 
     print("\n=== nothing native survives, in any language ===")
@@ -48,7 +49,7 @@ def main() -> int:
 
     print("\n=== text around it is left alone ===")
     check("English and punctuation pass through",
-          spell_text("Mininta කරන්ට api.") == "Mininta karant api.",
+          spell_text("Mininta කරන්ට api.") == "Mininta karanta api.",
           spell_text("Mininta කරන්ට api."))
     check("text with no native script is untouched",
           spell_text("send it at 5, ok?") == "send it at 5, ok?")

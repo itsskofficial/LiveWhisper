@@ -1,0 +1,74 @@
+{
+ "rows": [
+  {
+   "lang": "ur",
+   "n": 20,
+   "native_wer": 0.20272904483430798,
+   "native_cer": 0.07933972310969116,
+   "roman_wer": 0.18518518518518517,
+   "usual_spelling": 0.8756839995524879,
+   "leaks": 0,
+   "language_ok": 1.0,
+   "xrt": 1.1251811300850625,
+   "route": "large-v3"
+  }
+ ],
+ "samples": [
+  {
+   "lang": "ur",
+   "reference": "آپ اہرام کو تاریکی میں دیکھ سکتے ہیں اور آپ ان کو شو شروع ہونے سے پہلے کے سکون میں بھی دیکھ سکتے ہیں۔",
+   "native": "آپ احرام کو تاریخی میں دیکھ سکتے ہیں اور ان کو شو شروع ہونے سے پہلے کے سکون میں بھی دیکھ سکتے ہیں.",
+   "romanized": "Aap ahraam ko taareekhi mein dekh sakte hain aur un ko show shuroo hone se pehle ke sakoon mein bhi dekh sakte hain.",
+   "heard": "ur"
+  },
+  {
+   "lang": "ur",
+   "reference": "یہ پارک 19،500 کلومیٹر رقبے پر محیط ہے اور یہ 14 مختلف ماحولیاتی علاقوں میں تقسیم کیا ہوا ہے، جن میں سے ہر علاقہ ایک الگ جنگلی حیات کے لیے سازگار ہے۔",
+   "native": "یہ پارک انیس ہزار پانچ سو کلومیٹر رقبے پر محیط ہے یہ چودہ مختلف ماحولیاتی علاقوں میں تقسیم ہوا ہے جن میں سے ہر ایک کی الگ جنگلی حیات کے لیے کارساز ہے.",
+   "romanized": "Ye park anees hazaar panch sau kilometer raqbe par muheet hai ye chaudah mukhtalif maahauliyaati ilaaqon mein taqseem hua hai jin mein se har aik ki alag junglee hayat ke liye karsaz hai.",
+   "heard": "ur"
+  },
+  {
+   "lang": "ur",
+   "reference": "پوائنٹ میرین اور فیئرماؤنٹ کے درمیان پھیلاؤ کے سبب بفیلو-پٹسبرگ ہائیوے پر الگ تھلگ اندرونی جنگلی علاقے کے درمیان سے کثرت سے گزرتے ہوئے گاڑی چلانا مشکل بھرا کام ہوتا ہے۔",
+   "native": "موائنٹ میرین اور فیر ماؤنٹ کے درمیان پھیلاو کے سب سبب بیفیلو پہ سٹرک برگ ہائیوے پہ الگ تلگ اندرونی جنگل جنگلی علاقے کے درمیان سے کسرت سے گزرتے ہوئے گاڑی جلانا مشکل بھرا کام ہوتا ہے.",
+   "romanized": "Mawaint mareen aur fair mount ke darmiyan phelawo ke sab sabab befeelo pe strikk barg hyve pe alag talg andruni jangal junglee ilaqe ke darmiyan se kasrat se guzarte huye gari jalaana mushkil bhara kaam hota hai.",
+   "heard": "ur"
+  },
+  {
+   "lang": "ur",
+   "reference": "ذیلی ثقافت کے ارکان اکثر اپنی رکنیت کا اشارہ امتیازی اور علامتی طرز، جسمیں فیشن، خاص اسلوب اور بول چال کا استعمال کرتے ہوئے کرتے ہیں۔",
+   "native": "زیلی ثقافت کے ارکان اکثر اپنی رکھنیت کا اشارہ امتیازی اور آرامتی طرز جس میں فیشن خاص اسلوب اور بول چال کا استعمال کرتے ہوئے کرتے ہیں.",
+   "romanized": "Zeli saqafat ke arkaan aksar apni rakhniyat ka isharah amtiyazi aur aramati tarz jis mein faishon khaas usloob aur bol chaal ka istemaal karte huye karte hain.",
+   "heard": "ur"
+  },
+  {
+   "lang": "ur",
+   "reference": "مجھے معلوم نہیں آیا آپ نے محسوس کیا ہے یا نہیں، اس ملک میں سنٹرل امریکا سے آئی زیادہ تر اشیاء ڈیوٹی فری ہیں۔",
+   "native": "مجھے معلوم نہیں آیا آپ نے محسوس کیا یا نہیں اس ملک میں سینٹرل امریکہ سے آئی زیادہ تر اشیاء ڈیوٹی فری ہیں.",
+   "romanized": "Mujhe maloom nahin aaya aap ne mahsoos kiya ya nahin is mulk mein central america se aayi ziyada tar ashya duty free hain.",
+   "heard": "ur"
+  },
+  {
+   "lang": "ur",
+   "reference": "وقت گزرنے کے ساتھ ساتھ، جیسا کہ نئی آبادی اپنے نئے ماحول میں ڈھلتی ہے، وہ آہستہ آہستہ دیگر آبادی کی طرح کم دکھنے لگتے ہیں۔",
+   "native": "وقت گزرنے کے ساتھ ساتھ جیسا کہ نئی آبادی اپنے نئے ماحول میں ڈھکتی ہے وہ آہستہ آہستہ دیگر آبادی کی طرح کم دکھنے لگتے ہیں.",
+   "romanized": "Waqt guzarne ke saath saath jaisa ke nai aabaadi apne naye maahaul mein dhakti hai wo aahista aahista deegar aabaadi ki tarah kam dikhne lagte hain.",
+   "heard": "ur"
+  },
+  {
+   "lang": "ur",
+   "reference": "اس کے بنسبت ناقابل رسائی پر مشتمل \"ٹمبٹو\" کا نام غیر ملکی، دور دراز علاقے کے استعارے کے طور پر استعمال ہوتا تھا۔",
+   "native": "اس کی بنسبت ناقابل رسائی پر مشتمل تمٹو کا نام غیر ملکی دور دراز علاقے کے ستارے کے طور پر استعمال ہوتا ہے.",
+   "romanized": "Is ki banasbat naqabil rasai par mushtamil tamto ka naam ghair mulki daur daraaz ilaqe ke satare ke taur par istemaal hota hai.",
+   "heard": "ur"
+  },
+  {
+   "lang": "ur",
+   "reference": "کسی بھی ترمیمات یا درخواستوں کو ٹریول ایجنٹ کی معرفت ارسال کیا جائے، نہ کہ براہ راست ہوٹل کو۔",
+   "native": "کسی بھی ترمیمات یا درخواستوں کو ٹریول ایجنٹ کے معرفت اٹھ سال کیا جائے نہ کہ براہ راست ہوتل کو.",
+   "romanized": "Kisi bhi tarmeemat ya darkhwaston ko travel agent ke maaruft uth saal kiya jaaye na ke baraah raast hotal ko.",
+   "heard": "ur"
+  }
+ ]
+}

@@ -106,7 +106,8 @@ def _to_devanagari(ch: str) -> str:
     return ch
 
 
-def _brahmic(word: str, cons: dict, vowels: dict, signs: dict, marks: dict) -> str:
+def _brahmic(word: str, cons: dict, vowels: dict, signs: dict, marks: dict,
+             final_a: bool = False) -> str:
     out = []
     pending = False                     # a consonant still owes its inherent "a"
     chars = list(word)
@@ -151,9 +152,17 @@ def _brahmic(word: str, cons: dict, vowels: dict, signs: dict, marks: dict) -> s
                 out.append("a")
                 pending = False
             out.append(ch if ch.isascii() else "")
-    # A word-final consonant is said without its vowel in these languages
-    # ("kar", not "kara"), so the owed "a" is dropped at the end.
+    # In the northern languages a word-final consonant is said without its
+    # vowel ("kar", not "kara"); in the southern ones and Sinhala it keeps it
+    # ("kala", not "kal").
+    if pending and final_a:
+        out.append("a")
     return "".join(out)
+
+
+# Scripts whose final consonant keeps its inherent vowel: Tamil, Telugu,
+# Kannada, Malayalam.
+_KEEPS_FINAL_A = ((0x0B80, 0x0D7F),)
 
 
 def spell(word: str) -> str:
@@ -162,11 +171,13 @@ def spell(word: str) -> str:
         return word
     if any(0x0D80 <= ord(c) <= 0x0DFF for c in word):
         return _brahmic(word, _SINHALA_CONS, _SINHALA_VOWELS, _SINHALA_SIGNS,
-                        _SINHALA_MARKS)
+                        _SINHALA_MARKS, final_a=True)
     if any(0x0600 <= ord(c) <= 0x06FF or 0x0750 <= ord(c) <= 0x077F for c in word):
         return "".join(_ARABIC.get(c, c if c.isascii() else "") for c in word)
     deva = unicodedata.normalize("NFC", "".join(_to_devanagari(c) for c in word))
-    return _brahmic(deva, _DEVA_CONS, _DEVA_VOWELS, _DEVA_SIGNS, _DEVA_MARKS)
+    final_a = any(lo <= ord(c) <= hi for c in word for lo, hi in _KEEPS_FINAL_A)
+    return _brahmic(deva, _DEVA_CONS, _DEVA_VOWELS, _DEVA_SIGNS, _DEVA_MARKS,
+                    final_a=final_a)
 
 
 _NATIVE = re.compile(r"[؀-ۿݐ-ݿऀ-෿‌‍]+")

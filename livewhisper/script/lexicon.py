@@ -14,9 +14,11 @@ import logging
 from functools import lru_cache
 from pathlib import Path
 
+from .. import paths
+
 log = logging.getLogger(__name__)
 
-DATA = Path(__file__).resolve().parent.parent.parent / "data"
+DATA = paths.DATA
 
 # Dakshina's lexicon is a 30k sample, so some extremely common forms are simply
 # absent - जाऊंगा and खाऊंगा are missing while करूंगा and आऊंगा are present. The

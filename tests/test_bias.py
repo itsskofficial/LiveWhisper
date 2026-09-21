@@ -122,8 +122,11 @@ def main() -> int:
         b.transcribe(np.zeros(16000, "float32"), hotwords="Priya, Marcus")
         check("the names are passed as hotwords", seen.get("hotwords") == "Priya, Marcus",
               str(seen.get("hotwords")))
+        prompt = seen.get("initial_prompt") or ""
         check("the configured vocabulary still goes in as the prompt",
-              seen.get("initial_prompt") == "Dakshina", str(seen.get("initial_prompt")))
+              prompt.endswith("Dakshina"), prompt)
+        check("English is told to expect spoken punctuation",
+              prompt.startswith(LocalBackend.SPOKEN_PUNCTUATION), prompt)
         b.transcribe(np.zeros(16000, "float32"))
         check("no names on screen means no hotwords at all",
               seen.get("hotwords") is None, str(seen.get("hotwords")))

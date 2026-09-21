@@ -1,0 +1,298 @@
+{
+ "model": "D:/models/ct2/large-v3-turbo",
+ "mode": "forced",
+ "rows": [
+  {
+   "lang": "en",
+   "n": 40,
+   "wer": 0.045828437132784956,
+   "cer": 0.023572296476306195,
+   "lang_ok": 1.0,
+   "script_ok": 1.0,
+   "delivered_wer": NaN,
+   "xrt": 4.313243862056749
+  }
+ ],
+ "samples": [
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "However, due to the slow communication channels, styles in the west could lag behind by 25 to 30 year.",
+   "hyp": "However, due to the slow communication channels, styles in the West could lag behind by 25 to 30 years."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+   "hyp": "All nouns alongside the words say for you always begin with a capital letter, even in the middle of a sentence."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "To the north and within easy reach is the romantic and fascinating town of Sintra and which was made famous to foreigners after a glowing account of its splendours recorded by Lord Byron.",
+   "hyp": "To the north and within easy reach is the romantic and fascinating town of Cintra and which was made famous to foreigners after a glowing account of its splendorous recorded by Lord Byron."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "The cabbage juice changes color depending on how acidic or basic (alkaline) the chemical is.",
+   "hyp": "The cabbage juice changes color depending on how acidic, basic, alkaline the chemical is."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "Many people don't think about them as dinosaurs because they have feathers and can fly.",
+   "hyp": "Many people don't think about them as dinosaurs because they have feathers and can fly."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "The hospital has followed protocol for infection control, including separating the patient from others to prevent possible infection of others.",
+   "hyp": "The hospital has followed protocol for infection control, including separating the patient from others to prevent possible infection of others."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "The Northern Marianas emergency management office said that there were no damages reported in the nation.",
+   "hyp": "The Northern Mariana's Emergency Management Office said that there were no damages reported in the nation."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "Twentieth century research has shown that there are two pools of genetic variation: hidden and expressed.",
+   "hyp": "20th century research has shown that there are two pools of genetic variation hidden and expressed."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "The aspect ratio of this format (dividing by twelve to obtain the simplest whole-number ratio) is therefore said to be 3:2.",
+   "hyp": "The aspect ratio of this format, dividing by 12 to obtain the simplest whole number ratio, is therefore said to be 3 to 2."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "As light pollution in their heyday was not the kind of problem it is today, they are usually located in cities or at campuses, easier to reach than those built in modern times.",
+   "hyp": "As light pollution in their heyday was not the kind of problem it is today, they are usually located in cities or at campuses easier to reach than those built in modern times."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "Through the night between 150 and 200 copies were made, now known as \"Dunlap broadsides\".",
+   "hyp": "For the night, between 150 and 200 copies were made, now known as Dunlap broadsides."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "For example, each year students from Bennet School in North Carolina design a website about their trip to the State Capital, each year the website gets remodeled, but old versions are kept online to serve as a scrapbook.",
+   "hyp": "For example, each year students from Bennett School in North Carolina design a website about their trip to the state capitol. Each year the website gets remodeled, but old versions are kept online to serve as a scrapbook."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "Lion prides act much like packs of wolves or dogs, animals surprisingly similar to lions (but not other big cats) in behavior, and also very deadly to their prey.",
+   "hyp": "Lion pride acts much like packs of wolves or dogs, animals surprisingly similar to lions, but not other big cats in behavior, and also very deadly to their prey."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "The city is also the base to climb the Nyiragongo volcano along with some of the cheapest Mountain Gorilla tracking in Africa.",
+   "hyp": "The city is also the base to climb the Nairaigango volcano along with some of the cheapest mountain gorilla trafficking in Africa."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "The Internet combines elements of both mass and interpersonal communication.",
+   "hyp": "The internet combines elements of both mass and interpersonal communication."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "These theories look at what it is about certain people that make them want the things that they do and what things in their environment will make them do or not do certain things.",
+   "hyp": "These videos look at what it is about certain people that make them want the things that they do and what things in their environment will make them do or not do certain things."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "For example, the most common still image photography format in the world is 35mm, which was the dominant film size at the close of the analog film era.",
+   "hyp": "For example, the most common still image photography format in the world is 35mm, which was the dominant film size at the close of the analog film era."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "The term safari in popular use refers to overland travel to view the stunning African wildlife, particularly on savanna.",
+   "hyp": "The term safari in popular luce refers to overland travel to view the stunning African wildlife, particularly on savannah."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "But there are a lot of things about birds that still look like a dinosaur.",
+   "hyp": "But there are a lot of things about Earth that still look like a dinosaur."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "Women: It is recommended that any women travellers say that they are married, regardless of actual marital status.",
+   "hyp": "It is recommended that any women travelers say that they are married regardless of actual marital status."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "In some areas boiling water for a minute is enough, in others several minutes are needed.",
+   "hyp": "In some areas, boiling water for a minute is enough and other several minutes are needed."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "Anyone who's going to drive at high latitudes or over mountain passes should consider the possibility of snow, ice, or freezing temperatures.",
+   "hyp": "Anyone who's going to drive at hot latitudes or over mountain passes should consider the possibility of snow, ice, or freezing temperatures."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "As a result, two fish species have become extinct, and two others have become endangered, including the humpback chub.",
+   "hyp": "as a result two fish species have become extinct and two others have become endangered including the humpback"
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "It was ruled by the \"Vichy\" French. These were French people who had made peace with the Germans in 1940 and worked with the invaders instead of fighting them.",
+   "hyp": "It was ruled by the Vicky French. These were French people who had made peace with the Germans in 1940 and worked with the invaders instead of fighting them."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "On 15 August 1940, the Allies invaded southern France, the invasion was called \"Operation Dragoon\".",
+   "hyp": "On August 15, 1940, the Allies invaded southern France and the invasion was called Operation Dragoon."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "Alloys are basically a mixture of two or more metals. Don't forget that there are many elements on the periodic table.",
+   "hyp": "Alloys are basically a mixture of two or more metals. Don't forget there are many elements on the PRI cable."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "For example, each year students from Bennet School in North Carolina design a website about their trip to the State Capital, each year the website gets remodeled, but old versions are kept online to serve as a scrapbook.",
+   "hyp": "For example, each year students from Bennett School in North Carolina design a website about their trip to the state capitol. Each year the website gets remodeled, but older versions are kept online to serve as a scrapbook."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "His work is of such recognized quality and detail that he is one of the very few \"household names\" among philatelists. Some specialize in collecting his work alone.",
+   "hyp": "His work is of such recognized quality and detail that he is one of the very few household names among philatelists. Some specialize in collecting his work alone."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "Danielle Lantagne, a UN expert on the disease, stated the outbreak was likely caused by the peacekeepers.",
+   "hyp": "Danielle Lantigui, a UN expert on the disease, stated that the outbreak was likely caused by the Peacekeepers."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "The other nominations include Best Picture, Director, Cinematography, Costume Design, Film-editing, Original Score, Production Design, Sound Editing, Sound Mixing and Original Screenplay.",
+   "hyp": "The other nominations include Best Picture, Director, Cinematography, Costume Design, Film Editing, Original Score, Production Design, Sound Editing, Sound Mixing and Original Screenplay."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "Virtual teams are held to the same standards of excellence as conventional teams, but there are subtle differences.",
+   "hyp": "Virtual teams are held to the same standard of excellence as conventional teams, but there are subtle differences."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "In the north the region is bounded by the Sahel, and in the south and west by the Atlantic Ocean.",
+   "hyp": "In the north, the region is bounded by the Sahel, and in the south and west by the Atlantic Ocean."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "A well rounded athlete, the tiger can climb (though not well), swim, leap great distances and pull with five times the force of a strong human.",
+   "hyp": "A well-rounded athlete, the tiger can climb, though not well, swim, leap great distances, and pull with five times the force of a strong human."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "He was subsequently relocated to Addenbrooke's Hospital in Cambridge.",
+   "hyp": "He was subsequently relocated to Addenbrookes Hospital in Cambridge."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "The pyramid sound and light show is one of the most interesting things in the area for kids.",
+   "hyp": "The Pyramid Sound and Light Show is one of the most interesting things in the area for kids."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "Due to the underwater topology the return flow is concentrated at a few deeper sections, and a fast current to deep water may form there.",
+   "hyp": "Due to the underwater topology, the return flow is concentrated at a few deeper sections and a fast current to deep water may form there."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "The crash occurred high up in mountainous terrain, and is believed to have been the result of hostile fire.",
+   "hyp": "The crash occurred high up in mountainous terrain and is believed to have been the result of hostile fire."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "Blogs can also help improve student writing. While students often begin their blog experience with sloppy grammar and spelling, the presence of an audience generally changes that.",
+   "hyp": "Blogs can also help improve student writing. While students often begin their blog experience with sloppy grammar and spelling, the presence of an audience generally changes that."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "This is an important way to distinguish between some verbs and objects.",
+   "hyp": "This is an important way to distinguish between some verbs and objects."
+  },
+  {
+   "lang": "en",
+   "heard": "en",
+   "probs": {},
+   "ref": "As a result, two fish species have become extinct, and two others have become endangered, including the humpback chub.",
+   "hyp": "As a result, two fish species have become extinct and two others have become endangered including the humpback chub."
+  }
+ ]
+}

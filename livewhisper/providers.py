@@ -99,6 +99,30 @@ class Ollama:
         return re.sub(r"(?s)<think>.*?</think>", "", text).strip()
 
 
+class Builtin:
+    """The writing model on the app's own runner (livewhisper.llm)."""
+
+    name = "builtin"
+
+    def available(self) -> bool:
+        from . import llm
+        return llm.server("writer").available()
+
+    def chat(self, system: str, user: str, temperature: float = 0.3) -> str:
+        from . import llm
+        server = llm.server("writer")
+        try:
+            return server.chat([{"role": "system", "content": system},
+                                {"role": "user", "content": user}],
+                               max_tokens=1500, temperature=temperature)
+        except llm.LLMError as e:
+            raise ProviderError(str(e)) from e
+        finally:
+            # Unloaded as soon as it has written, for the reason given at
+            # Ollama.keep_alive: dictation needs that GPU memory.
+            server.stop()
+
+
 class OpenAICompatible:
     """Groq, OpenAI, and anything speaking the same protocol."""
 
@@ -149,10 +173,14 @@ class Anthropic:
 
 def build(cfg: dict):
     """Construct the configured provider, falling back to whatever works."""
-    name = (cfg or {}).get("provider", "ollama")
+    name = (cfg or {}).get("provider", "auto")
     model = (cfg or {}).get("model")
+    if name == "auto":
+        name, model = "builtin", None
 
     def make(n, model=model):
+        if n == "builtin":
+            return Builtin()
         if n == "ollama":
             return Ollama(model)
         if n == "groq":
@@ -171,7 +199,7 @@ def build(cfg: dict):
     if primary.available():
         return primary
 
-    for alt in ("ollama", "groq", "openai", "anthropic"):
+    for alt in ("builtin", "ollama", "groq", "openai", "anthropic"):
         if alt == name:
             continue
         try:
@@ -184,11 +212,10 @@ def build(cfg: dict):
                 return p
         except ProviderError:
             continue
-    if name == "ollama":
-        want = model or Ollama.default_model
+    if name in ("builtin", "ollama"):
         raise ProviderError(
-            f"Writing needs a language model. Start Ollama and run "
-            f"'ollama pull {want}', or add a GROQ_API_KEY.")
+            "Writing needs its model: download it in LiveWhisper under AI, "
+            "or add a Groq key there.")
     raise ProviderError(
         f"{name} is unavailable and no fallback is configured. "
         "Start Ollama, or set an API key.")

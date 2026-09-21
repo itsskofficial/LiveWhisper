@@ -23,12 +23,14 @@ import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from . import paths
+
 from .script.conventions import Conventions
 
 log = logging.getLogger(__name__)
 
 ROOT = Path(__file__).resolve().parent.parent
-STORE = ROOT / "profiles.json"
+STORE = paths.PROFILES
 
 MIN_SAMPLES = 3          # before a habit is trusted enough to apply
 SENT_SPLIT = re.compile(r"(?<=[.!?])\s+")

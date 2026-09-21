@@ -10,15 +10,15 @@ Pillow>=10.0.0
 PyYAML>=6.0
 ruamel.yaml>=0.18
 python-dotenv>=1.0
-customtkinter>=5.2
+pywebview>=5.0
 uiautomation>=2.0
 pywinauto>=0.6
 requests>=2.31
 
-# CUDA runtime libs faster-whisper needs on Windows but does not pull in itself.
-# Without these you get a cryptic "Could not locate cudnn_ops64_9.dll" failure.
+# The cuBLAS runtime CTranslate2 needs to run Whisper on an NVIDIA GPU. The
+# installed app downloads it itself (livewhisper/components.py); a source
+# checkout gets it from pip. cuDNN is not needed.
 nvidia-cublas-cu12
-nvidia-cudnn-cu12
 
 # optional: screenshot fallback for reading apps that hide their text
 # rapidocr_onnxruntime

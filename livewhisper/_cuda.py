@@ -22,13 +22,21 @@ log = logging.getLogger(__name__)
 def register() -> list[Path]:
     if sys.platform != "win32":
         return []
+    registered = []
+    # The installed app downloads cuBLAS itself (livewhisper.components).
+    from . import paths
+    if (paths.CUDA / "cublas64_12.dll").exists():
+        try:
+            os.add_dll_directory(str(paths.CUDA))
+            registered.append(paths.CUDA)
+        except OSError:
+            log.debug("could not register %s", paths.CUDA, exc_info=True)
     try:
         import nvidia
     except ImportError:
-        return []
+        nvidia = None
 
-    registered = []
-    for base in nvidia.__path__:
+    for base in (nvidia.__path__ if nvidia else []):
         for lib in Path(base).iterdir():
             bin_dir = lib / "bin"
             if not bin_dir.is_dir():

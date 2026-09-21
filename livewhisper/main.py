@@ -4,10 +4,9 @@ Ctrl+Alt+Space captures system audio plus your mic. Press it again and the audio
 is transcribed, the active profile's prompt is prepended, and the result lands
 wherever your cursor is.
 
-Threading: Tk owns the main thread (settings window and overlay live there),
-pystray runs its message loop in a daemon thread, and hotkey handlers run in
-their own short-lived threads. Anything touching Tk marshals back with
-root.after().
+Threading: the app window (pywebview) owns the main thread, the recording
+pill has its own thread and message loop, pystray runs its message loop in a
+daemon thread, and hotkey handlers run in their own short-lived threads.
 """
 
 from __future__ import annotations
@@ -18,7 +17,6 @@ import os
 import sys
 import threading
 import time
-import tkinter as tk
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
@@ -26,22 +24,23 @@ from pathlib import Path
 import keyboard
 import pystray
 
+from . import __version__
 from . import config as cfgio
-from . import bias, context, icons, output
+from . import bias, context, icons, output, paths
 from .actions import Actions
+from .history import History
 from .notes import NoteBook
 from .pipeline import Pipeline
 from .profile import ProfileStore
 from .audio import TARGET_RATE, AudioError, Recorder, write_wav
 from .overlay import RecordingOverlay
-from .theme import palette
 from .script.languages import speaker_languages
 from .transcribe import AutoBackend, TranscriptionError, build_backend
 
 log = logging.getLogger("livewhisper")
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_CONFIG = ROOT / "config.yaml"
+DEFAULT_CONFIG = paths.CONFIG
 
 
 class State(Enum):
@@ -62,8 +61,7 @@ class App:
         self.profile_index = 0
         self.recorder: Recorder | None = None
         self.icon: pystray.Icon | None = None
-        self.root: tk.Tk | None = None
-        self._settings = None
+        self.window = None              # the app window, once running
         self._overlay: RecordingOverlay | None = None
         self._started_at = 0.0
         self._backend = None
@@ -75,6 +73,7 @@ class App:
         self.pipeline = Pipeline(self.cfg, self.styles)
         self.actions = Actions(self.cfg.get("actions", {}))
         self.notebook = NoteBook()
+        self.history = History()
         self.note_mode = False
         self._force_script: str | None = None
         self._prime_stop = threading.Event()
@@ -125,6 +124,13 @@ class App:
 
     def notify(self, message: str, title: str = "LiveWhisper") -> None:
         log.info("%s: %s", title, message)
+        # A short note belongs in the pill, where the user is already looking;
+        # a toast in the corner is for anything that needs more words.
+        if (len(message) <= 60 and self.cfg.get("ui", {}).get("overlay", True)
+                and title == "LiveWhisper"):
+            if self._ensure_overlay() is not None:
+                self._overlay.message(message.rstrip("."))
+                return
         if self.icon:
             try:
                 self.icon.notify(message, title)
@@ -132,12 +138,16 @@ class App:
                 log.debug("tray notification failed", exc_info=True)
 
     def _colour(self, key: str) -> str:
-        c = palette(self.cfg.get("ui", {}).get("theme", "dark-amber"))
-        return {"idle": c["muted"], "recording": c["rec"],
-                "transcribing": c["accent"]}[key]
+        return {"idle": icons.IDLE, "recording": icons.RECORDING,
+                "transcribing": icons.WORKING}[key]
 
     def _set_state(self, state: State) -> None:
         self.state = state
+        if self._overlay is not None:
+            if state is State.TRANSCRIBING:
+                self._overlay.working()
+            elif state is State.IDLE:
+                self._overlay.hide()
         if self.icon:
             self.icon.icon = icons.tray_image(self._colour(state.colour_key))
             self.icon.title = (f"LiveWhisper - {state.label} "
@@ -227,8 +237,8 @@ class App:
         threading.Thread(target=self._settle_language,
                          args=(self.recorder, self._generation), daemon=True).start()
         self._set_state(State.RECORDING)
-        if self.cfg.get("ui", {}).get("overlay", True) and self.root:
-            self.root.after(0, self._show_overlay)
+        if self.cfg.get("ui", {}).get("overlay", True):
+            self._show_overlay(command=mode == "command")
 
     # When to look at the audio so far and settle the language. Early enough
     # to be off the critical path even for a short dictation, late enough to
@@ -287,8 +297,8 @@ class App:
     def _stop(self) -> None:
         self._prime_stop.set()
         recorder, self.recorder = self.recorder, None
-        if self.root:
-            self.root.after(0, self._hide_overlay)
+        if self._overlay is not None:
+            self._overlay.working()
         if recorder is None:
             self._set_state(State.IDLE)
             return
@@ -391,13 +401,14 @@ class App:
             output.deliver(result,
                            auto_paste=o.get("auto_paste", True) and not moved,
                            copy_to_clipboard=o.get("copy_to_clipboard", True) or moved)
+            self._record_history(result, recording.seconds,
+                                 "copied" if moved else "pasted", mode="command")
             if moved:
                 self.notify("You switched windows, so nothing was pasted - the "
                             "text is on your clipboard.")
                 return
             log.info("timing: wrote %d words in %.0f ms", len(result.split()),
                      (time.perf_counter() - t0) * 1000)
-            self.notify(f"Written - {len(result.split())} words.")
         except output.ClipboardBusy:
             self.notify("The clipboard is busy in another app - try again.")
         except Exception as e:
@@ -429,8 +440,7 @@ class App:
             if forget:
                 forget()                    # it belonged to a recording we threw away
             recorder, self.recorder = self.recorder, None
-            if self.root:
-                self.root.after(0, self._hide_overlay)
+            self._hide_overlay()
             if recorder:
                 recorder.stop()
             self._set_state(State.IDLE)
@@ -468,6 +478,8 @@ class App:
                 copy_to_clipboard=o.get("copy_to_clipboard", True) or moved,
                 restore_clipboard=o.get("restore_clipboard", False) and not moved,
             )
+            self._record_history(text, recording.seconds,
+                                 "copied" if moved or not pasted else "pasted")
             if moved:
                 self.notify("You switched windows while dictating, so nothing was "
                             "pasted - the text is on your clipboard.")
@@ -479,14 +491,11 @@ class App:
                      (t_asr - t0) * 1000, (t_pipe - t_asr) * 1000,
                      (t_done - t_pipe) * 1000,
                      getattr(self.pipeline._last, "formatted_by", "?"))
-            words = len(transcript.split())
-            if pasted:
-                where = "pasted"
-            elif kept:
-                where = "copied to clipboard"
-            else:
-                where = "saved"
-            self.notify(f"{words} words {where}.")
+            # The words appearing are the confirmation; the pill only speaks up
+            # when they did not.
+            if not pasted:
+                self.notify("Copied - press Ctrl+V to paste" if kept
+                            else "Saved to History")
         except output.ClipboardBusy:
             # The transcript is already saved; only the paste could not happen.
             self.notify("The clipboard is busy in another app - your text is "
@@ -500,6 +509,16 @@ class App:
             self._save_audio_on_failure(recording)
         finally:
             self._set_state(State.IDLE)
+
+    def _record_history(self, text: str, seconds: float, delivered: str,
+                        mode: str = "dictate") -> None:
+        try:
+            screen = self._screen_at_start
+            self.history.add(text, seconds, app=(screen.app if screen else "") or "",
+                             language=getattr(self.backend(), "last_language", "") or "",
+                             mode=mode, delivered=delivered)
+        except Exception:
+            log.debug("could not record history", exc_info=True)
 
     def _wants_native(self) -> bool:
         """Will this dictation be pasted in the language's own script?
@@ -551,7 +570,7 @@ class App:
             return ""
 
     def _transcript_dir(self) -> Path:
-        d = ROOT / self.cfg["output"].get("transcript_dir", "transcripts")
+        d = paths.HOME / self.cfg["output"].get("transcript_dir", "transcripts")
         d.mkdir(parents=True, exist_ok=True)
         return d
 
@@ -592,30 +611,35 @@ class App:
 
     # -------------------------------------------------------------- overlay
 
-    def _show_overlay(self) -> None:
-        u = self.cfg.get("ui", {})
+    def _ensure_overlay(self):
         if self._overlay is None:
-            self._overlay = RecordingOverlay(
-                self.root,
-                on_stop=lambda: threading.Thread(target=self.toggle_record,
-                                                 daemon=True).start(),
-                on_cancel=lambda: threading.Thread(target=self.cancel,
-                                                   daemon=True).start(),
-                theme=u.get("theme", "dark-amber"),
-                position=u.get("overlay_position"),
-                on_move=self._remember_overlay_position,
-                show_meter=u.get("overlay_meter", True),
-            )
-        self._overlay.show_meter = u.get("overlay_meter", True)
-        self._overlay.show()
-        self._pump_overlay()
+            try:
+                self._overlay = RecordingOverlay(
+                    on_stop=self._finish_from_overlay,
+                    on_cancel=self.cancel,
+                    position=self.cfg.get("ui", {}).get("overlay_position"),
+                    on_move=self._remember_overlay_position,
+                )
+            except Exception:
+                log.exception("recording overlay unavailable")
+        return self._overlay
 
-    def _pump_overlay(self) -> None:
-        if self.state is not State.RECORDING or self._overlay is None:
+    def _show_overlay(self, command: bool = False) -> None:
+        if self._ensure_overlay() is None:
             return
-        level = self.recorder.level() if self.recorder else 0.0
-        self._overlay.update(time.monotonic() - self._started_at, level)
-        self.root.after(80, self._pump_overlay)
+
+        def level() -> float:
+            rec = self.recorder
+            return rec.level() if rec is not None else 0.0
+
+        self._overlay.show(level_fn=level, command=command)
+
+    def _finish_from_overlay(self) -> None:
+        """The pill's ✓: the same as pressing the hotkey that started it."""
+        if self._mode == "command":
+            self.toggle_command()
+        else:
+            self.toggle_record()
 
     def _hide_overlay(self) -> None:
         if self._overlay is not None:
@@ -630,47 +654,24 @@ class App:
 
     # ------------------------------------------------------------- settings
 
+    def open_window(self, page: str | None = None) -> None:
+        if self.window is not None:
+            self.window.show(page)
+
     def open_settings(self) -> None:
-        if self.root:
-            self.root.after(0, self._open_settings)
-
-    def _open_settings(self) -> None:
-        from .gui import SettingsWindow
-
-        if self._settings is not None:
-            try:
-                self._settings.deiconify()
-                self._settings.lift()
-                self._settings.focus_force()
-                return
-            except tk.TclError:
-                self._settings = None
-        self._settings = SettingsWindow(self)
-
-    def settings_closed(self) -> None:
-        self._settings = None
+        self.open_window("settings")
 
     def open_wizard(self) -> None:
-        if self.root:
-            self.root.after(0, self._open_wizard)
+        self.open_window("dictionary")
 
-    def _open_wizard(self) -> None:
-        from .wizard import Wizard
+    def component_installed(self, cid: str) -> None:
+        """A download finished: pick up the route it wrote and use it."""
         try:
-            Wizard(self)
-        except Exception as e:
-            log.exception("wizard failed to open")
-            self.notify(f"Setup could not open: {e}")
-
-    def _needs_onboarding(self) -> bool:
-        """First run: no profile file and nothing learned yet."""
-        from .profile import ProfileStore
-        if not self.cfg.get("learning", {}).get("enabled", True):
-            return False
-        if self.styles.path.exists():
-            return False
-        g = self.styles.get(ProfileStore.GLOBAL).conventions
-        return not g.rules and not g.overrides
+            cfg = cfgio.load(self.config_path)
+        except Exception:
+            log.exception("could not reload the config after installing %s", cid)
+            return
+        self.apply_config(cfg)
 
     # --------------------------------------------------------------- wiring
 
@@ -723,12 +724,13 @@ class App:
             pystray.MenuItem(lambda item: f"Status: {self.state.label}", None,
                              enabled=False),
             pystray.Menu.SEPARATOR,
+            pystray.MenuItem("Open LiveWhisper", lambda icon, item: self.open_window(),
+                             default=True),
             pystray.MenuItem(
                 lambda item: ("Stop and transcribe" if self.state is State.RECORDING
                               else "Start recording"),
                 lambda icon, item: threading.Thread(target=self.toggle_record,
-                                                    daemon=True).start(),
-                default=True),
+                                                    daemon=True).start()),
             pystray.MenuItem("Discard recording",
                              lambda icon, item: threading.Thread(target=self.cancel,
                                                                  daemon=True).start()),
@@ -737,11 +739,8 @@ class App:
             pystray.MenuItem(lambda item: f"Engine: {self.backend_name}",
                              lambda icon, item: self.toggle_backend()),
             pystray.Menu.SEPARATOR,
-            pystray.MenuItem("Settings...", lambda icon, item: self.open_settings()),
-            pystray.MenuItem("Teach it how you write...",
-                             lambda icon, item: self.open_wizard()),
-            pystray.MenuItem("Open transcripts",
-                             lambda icon, item: self.open_transcripts()),
+            pystray.MenuItem("Settings", lambda icon, item: self.open_settings()),
+            pystray.MenuItem("History", lambda icon, item: self.open_window("history")),
             pystray.MenuItem("Open log (for bug reports)",
                              lambda icon, item: self.open_log()),
             pystray.MenuItem("Quit", lambda icon, item: self.quit()),
@@ -772,54 +771,77 @@ class App:
             self.recorder.stop()
         if self.icon:
             self.icon.stop()
-        if self.root:
-            self.root.after(0, self.root.quit)
+        if self._overlay is not None:
+            self._overlay.close()
+        try:
+            from . import llm
+            llm.shutdown()
+        except Exception:
+            log.debug("model runner shutdown failed", exc_info=True)
+        if self.window is not None:
+            self.window.destroy()
 
-    def run(self) -> None:
+    def run(self, show: str | None = None) -> None:
+        import webview
+
+        from . import instance
+        from .window import AppWindow
+
         icons.set_app_id()  # must precede any window, or the taskbar shows Python
-        self.root = tk.Tk()
-        self.root.withdraw()  # hidden parent; the tray icon is the real entry point
-        self.root.title("LiveWhisper")
-        icons.apply(self.root)
-
         self.icon = pystray.Icon("livewhisper", icons.tray_image(self._colour("idle")),
                                  "LiveWhisper", self._menu())
         self._set_state(State.IDLE)
         self._bind_hotkeys()
         threading.Thread(target=self.icon.run, daemon=True).start()
         threading.Thread(target=self._warm_up, daemon=True).start()
+        instance.serve(lambda: self.open_window())
 
-        if self._needs_onboarding():
-            threading.Timer(1.2, self.open_wizard).start()
+        self.window = AppWindow(self)
+        first_run = not self.cfg.get("ui", {}).get("onboarded", False)
+        if show or first_run:
+            threading.Timer(0.8, lambda: self.open_window(show)).start()
 
         hk = self.cfg["hotkeys"].get("record", "ctrl+alt+space")
         print(f"LiveWhisper running. Press {hk} to start/stop recording.", flush=True)
-        self.root.mainloop()
+        webview.start(gui="edgechromium", private_mode=False,
+                      storage_path=str(paths.CACHE / "webview"))
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Hotkey meeting transcription.")
-    parser.add_argument("-c", "--config", type=Path, default=DEFAULT_CONFIG)
+    parser = argparse.ArgumentParser(description="Voice dictation for Windows.")
+    parser.add_argument("-c", "--config", type=Path, default=None)
     parser.add_argument("-v", "--verbose", action="store_true")
     parser.add_argument("--settings", action="store_true",
                         help="open the settings window on launch")
+    parser.add_argument("--background", action="store_true",
+                        help="start in the tray without opening the window")
     args = parser.parse_args()
 
+    from . import instance
     from .logs import setup as setup_logging
-    log_file = setup_logging(args.verbose)
-    log.info("LiveWhisper starting; log at %s", log_file)
 
-    if not args.config.exists():
-        print(f"config not found: {args.config}", file=sys.stderr)
+    # A second launch - the Start menu entry clicked again - opens the running
+    # app's window instead of starting another copy that fights it for the
+    # hotkeys.
+    if instance.signal_running():
+        return 0
+
+    log_file = setup_logging(args.verbose)
+    log.info("LiveWhisper %s starting; log at %s", __version__, log_file)
+
+    config = args.config or paths.ensure_config()
+    if not config.exists():
+        print(f"config not found: {config}", file=sys.stderr)
         return 1
 
-    app = App(args.config)
-    if args.settings:
-        threading.Timer(0.6, app.open_settings).start()
+    app = App(config)
+    show = "settings" if args.settings else (None if args.background else "home")
     try:
-        app.run()
+        app.run(show=show)
     except KeyboardInterrupt:
         pass
+    finally:
+        app.quit()
     return 0
 
 

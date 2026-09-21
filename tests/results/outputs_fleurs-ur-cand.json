@@ -1,0 +1,74 @@
+{
+ "rows": [
+  {
+   "lang": "ur",
+   "n": 20,
+   "native_wer": 0.22800718132854578,
+   "native_cer": 0.09208561473369836,
+   "roman_wer": 0.20825852782764812,
+   "usual_spelling": 0.8610359131558468,
+   "leaks": 0,
+   "language_ok": 1.0,
+   "xrt": 0.9398403409413298,
+   "route": "ur-large-v3"
+  }
+ ],
+ "samples": [
+  {
+   "lang": "ur",
+   "reference": "ان کے دور میں خفیف تلوُّث ایزا مسئلہ نہیں تھا جیسا کہ وہ آج ہے۔ ان کی سکونت ایسے شہروں یا حوزات میں ہے جہا ں تک بآسانی پہنچا جا سکتا ہے بہ نسبت ان مقامات کے جو ماڈرن زمانے میں تعمیر کئے گئے۔",
+   "native": "ان کے دور میں خفیف تلویس ایزا مسئلہ نہیں تھا جیسا کہ وہ آج ہے ان کی سکونت ایسے شہروں یا حوضات میں ہے جہاں تک بہ آسانی پہنچا جا سکتا ہے بنسبت ان مقامات کے جو مادرن زمانے میں تعمیر کیے گئے.",
+   "romanized": "Un ke daur mein khafeef talvees aizaa maslah nahin tha jaisa ke wo aaj hai un ki sakoonat aise shahron ya hozat mein hai jahan tak ba aasani pahuncha jaa sakta hai banasbat un maqamat ke jo madran zamane mein taamir kiye gaye.",
+   "heard": "ur"
+  },
+  {
+   "lang": "ur",
+   "reference": "فلپائنی فوٹوگرافروں کے ساتھ چھےاغوا شدگان کو جلد رہا کر دیا گیا تھا، جِن میں بچّے اور بُوڑھے شامل تھے۔",
+   "native": "فیلپینی فوٹوگرافروں کے ساتھ چھ اگواہ شدگان کو جلد رہا کر دیا گیا تھا جن میں بچے اور بڑے شامل تھے.",
+   "romanized": "Felpani fotografaron ke saath chhe agwah shadgaan ko jild raha kar diya gaya tha jin mein bachche aur bade shaamil the.",
+   "heard": "ur"
+  },
+  {
+   "lang": "ur",
+   "reference": "اس کے لانبے جبڑوں میں 70 سے زیادہ استرے سے تیز دانت جڑے تھے اور اسی کے ساتھ اس کے منہ کے تالو میں دانتوں کی ایک مزید لڑی تھی۔ اس کے معنی یہ ہیں کہ اس کے راستہ میں آنے والی کوئی شے اس سے بھاگ نہیں سکتی۔",
+   "native": "اس کے لامبے جھبڑوں میں ستر سے زیادہ اسطرے سے تیز دان چوڑے تھے اور اس کے ساتھ اس کے موں کے تالوے میں دانتوں کی ایک مزید لڑی تھی اس کے معنی یہ ہے کہ اس کے راستے میں آنے والا کوئی شیئر اس سے بھاگ نہیں سکتی.",
+   "romanized": "Is ke lambey jhabdon mein satar se ziyada istarey se tez dan chooday the aur is ke saath is ke mun ke talwe mein danton ki aik mazeed ladi thi is ke maani ye hai ke is ke raaste mein aane wala koi share is se bhaag nahin sakti.",
+   "heard": "ur"
+  },
+  {
+   "lang": "ur",
+   "reference": "اکتوبر میں شروع ہونے والے حکومت مخالف مظاہروں پر مارٹیلی کا ردعمل کمیشن تھا۔",
+   "native": "اکتوبر میں شروع ہونے والے حکومت مخالف مظاہر و پرمائٹلی کا رد عمل کمیشن تھا.",
+   "romanized": "October mein shuroo hone waale hukumat mukhalif mazahir wa permitli ka radd amal commisssion tha.",
+   "heard": "ur"
+  },
+  {
+   "lang": "ur",
+   "reference": "ہسپتال نے انفیکشن پر قابو پانے کے لیے پروٹوکول کی تقلید کی ہے، جس میں مریض کو دیگر سے علیحدہ کرنا شامل ہے تاکہ دیگر افراد کے ممکنہ انفیکشن سے بچا جا سکے۔",
+   "native": "ہسپتال نے انفیکشن پر قابو پانے کے لیے پروٹاکول کی تقلید کی ہے جس میں مریض کو دیگر سے الیدہ کرنا شامل ہے تاکہ دیگر افراد کے ممکنہ انفیکشن سے بچا جا سکے.",
+   "romanized": "Haspataal ne infection par qabu paanay ke liye protakol ki taqlid ki hai jis mein mareez ko deegar se aleedah karna shaamil hai taake deegar afraad ke mamkanah infection se bacha jaa sake.",
+   "heard": "ur"
+  },
+  {
+   "lang": "ur",
+   "reference": "یہ سمجھدار معلوم ہوتا ہے، کیوں کہ زمین ایسا محسوس نہیں کرتی ہے کہ جیسے وہ حرکت کررہی ہے، کیا ایسا کرتی ہے؟",
+   "native": "یہ سمجھتار معلوم ہوتا ہے کیونکہ زمین ایسا محسوس نہیں کرتی ہے کہ جیسے وہ حرکت کر رہی ہے۔کہ ایسا کرتی ہے؟.",
+   "romanized": "Ye samjhatar maloom hota hai kyonki zameen aisa mahsoos nahin karti hai ke jaise wo harkat kar rahi hekah aisa karti hey.",
+   "heard": "ur"
+  },
+  {
+   "lang": "ur",
+   "reference": "اُتاوا کناڈا کی دلکشی، دو زبانی دارالحکومت ہے اور وہاں متعدد آرٹ گیلریاں اور عجائب گھر ہیں جو کناڈا کے ماضی اور حال کی عکاس ہیں۔",
+   "native": "وطاوہ کینیڈا کی دلکشی دو زبانی دار الحکومت تھے اور وہاں متعدد آرٹ کیلویاں اور عجائب گھر ہیں جو کینیڈا کے ماضی اور حال کی عقاس ہیں.",
+   "romanized": "Watawah canada ki dilkashi do zabani daar hukumat the aur wahaan mutadid art kelviyan aur ajaaib ghar hain jo canada ke maadee aur haal ki aqas hain.",
+   "heard": "ur"
+  },
+  {
+   "lang": "ur",
+   "reference": "جو کوئی اونچے ارض البلد میں گاڑی چلانے جا رہا ہو یا پہاڑیوں سے گزر رہا ہو، انہیں ممکنہ برف باری، آئس، یا منجمد کرنے والے درجہ حرارت کا خیال رکھنا چاہئے۔",
+   "native": "جو کوئی اونچے ارزل بدل میں گاڑی چلانے جا رہا ہو یا پہاڑوں سے گزر رہا ہو انہیں ممکنہ برف باری آئس یا منجمند کرنے والے درجہ حرارت کا خیال رکھنا چاہیے.",
+   "romanized": "Jo koi unche arzall badal mein gari chalaane jaa raha ho ya pahadon se guzar raha ho unhen mamkanah baraf baari ice ya munjamand karne waale darja haraarat ka khayal rakhna chahiye.",
+   "heard": "ur"
+  }
+ ]
+}

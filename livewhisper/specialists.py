@@ -23,10 +23,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 import shutil
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
+
+from . import paths
+
+log = logging.getLogger(__name__)
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -47,6 +52,21 @@ class Specialist:
     # "native": used only when the user wants the language's own script, beside
     # a romanizing model that serves romanized requests.
     role: str = "any"
+
+    @property
+    def download_repo(self) -> str:
+        """Where the app fetches it from, ready to load.
+
+        Fine-tunes published as PyTorch weights need converting, and the
+        converter needs PyTorch - which the installed app does not have and a
+        user should not have to install. So each is published converted,
+        with its licence and credit, under MIRROR; only a source checkout
+        converts, and only when the mirror cannot be reached.
+        """
+        return self.repo if self.kind == "ct2" else f"{MIRROR}/livewhisper-{self.name}"
+
+
+MIRROR = "itsskofficial"
 
 
 # Filled from tests/bench_asr.py runs. An entry without measurements is a
@@ -158,6 +178,16 @@ CATALOGUE: list = [
         note="large-v3 cannot write Sindhi at all; this can. Large-v2 sized, "
              "allow ~6 GB of VRAM with the main model."),
     Specialist(
+        # FLEURS has no Sinhala, so this is measured on 15 of Dakshina's
+        # sentences spoken by a neural voice (tests/eval_dakshina_speech.py).
+        # large-v3 does not write Sinhala at all - over 100% word error.
+        "si", "kasunw/whisper-large-v3-sinhala", "si-large-v3", 6.2, "apache-2.0",
+        measured={"spoken Dakshina word error, native": "77.6% (large-v3 114.7%)",
+                  "spoken Dakshina character error, native": "34.8% (large-v3 101.1%)",
+                  "romanized, vs any accepted spelling": "76.9% (large-v3 114.7%)"},
+        note="The only model tried that writes Sinhala; still misses most words. "
+             "Large-v3 sized, 3 GB converted."),
+    Specialist(
         "mr", "DrishtiSharma/whisper-large-v2-marathi", "mr-large-v2", 6.17,
         "apache-2.0",
         measured={"FLEURS word error": "47.2% (large-v3 78.7%)",
@@ -168,9 +198,13 @@ CATALOGUE: list = [
 ]
 
 
+CT2_FILES = ["model.bin", "config.json", "tokenizer.json", "vocabulary.json",
+             "vocabulary.txt", "preprocessor_config.json"]
+
+
 def models_dir(cfg: dict | None = None) -> Path:
     local = ((cfg or {}).get("transcription") or {}).get("local") or {}
-    return Path(local.get("models_dir") or ROOT / "models")
+    return Path(local.get("models_dir") or paths.MODELS)
 
 
 def candidates(lang: str) -> list:
@@ -264,12 +298,20 @@ def install(spec: Specialist, config_path: Path, progress=print) -> Path:
     cfg = cfgio.load(config_path)
     base = models_dir(cfg)
     out = base / spec.name
-    progress(f"Downloading {spec.repo} (~{spec.size_gb:.1f} GB)...")
-    if spec.kind == "ct2":
+    progress(f"Downloading {spec.download_repo}...")
+    try:
         # A plain folder, never the shared cache: the cache is built from
         # symlinks, which Windows refuses without Developer Mode.
-        snapshot_download(spec.repo, local_dir=str(out))
-    else:
+        snapshot_download(spec.download_repo, local_dir=str(out),
+                          allow_patterns=CT2_FILES)
+        mirrored = (out / "model.bin").exists()
+    except Exception:
+        if spec.kind == "ct2":
+            raise
+        log.warning("mirror %s unavailable; converting locally", spec.download_repo,
+                    exc_info=True)
+        mirrored = False
+    if not mirrored:
         src = base / f"{spec.name}.src"
         snapshot_download(spec.repo, local_dir=str(src), allow_patterns=[
             "*.json", "*.safetensors", "pytorch_model.bin", "*.txt", "*.model"])
@@ -277,6 +319,16 @@ def install(spec: Specialist, config_path: Path, progress=print) -> Path:
         convert(src, out, progress=progress)
         shutil.rmtree(src, ignore_errors=True)
 
+    register(spec, config_path, out)
+    progress(f"Installed. {spec.lang} now decodes with {spec.name}; restart the app.")
+    return out
+
+
+def register(spec: Specialist, config_path: Path, out: Path) -> None:
+    """Write the route that sends spec.lang to the model in `out`."""
+    from . import config as cfgio
+
+    cfg = cfgio.load(config_path)
     route: dict | str = str(out)
     if spec.latin_output or spec.language:
         route = {"path": str(out)}
@@ -295,12 +347,15 @@ def install(spec: Specialist, config_path: Path, progress=print) -> Path:
         if isinstance(existing, dict) and existing.get("latin_output"):
             existing["native"] = str(out)
             route = existing
+        else:
+            # No romanizing model yet: native requests use this one, romanized
+            # ones stay on the main model rather than a model that writes
+            # English words in the native script.
+            route = {"native": str(out)}
     elif isinstance(existing, dict) and existing.get("native") and isinstance(route, dict):
         route["native"] = existing["native"]
     local["models"][spec.lang] = route
     cfgio.save(config_path, cfg)
-    progress(f"Installed. {spec.lang} now decodes with {spec.name}; restart the app.")
-    return out
 
 
 def remove(lang: str, config_path: Path, delete_files: bool = True, progress=print) -> None:
@@ -339,7 +394,7 @@ def main(argv: list | None = None) -> int:
     p = sub.add_parser("remove")
     p.add_argument("lang")
     p.add_argument("--keep-files", action="store_true")
-    ap.add_argument("--config", type=Path, default=ROOT / "config.yaml")
+    ap.add_argument("--config", type=Path, default=paths.CONFIG)
     args = ap.parse_args(argv)
 
     if args.cmd == "list":

@@ -186,6 +186,7 @@ class _LoadGate:
 
 
 class Model:
+    prompt = ""
     def __init__(self, name: str, compute_type: str, beam: int, need_mb: int = 3000,
                  english_min: float = 0.0, batch: int = 0, chunk_length: int = 0,
                  timestamps: bool = False):
@@ -234,11 +235,13 @@ class Model:
                 audio, batch_size=self.batch, language=language,
                 beam_size=self.beam,
                 chunk_length=self.chunk_length or None,
-                without_timestamps=not self.timestamps)
+                without_timestamps=not self.timestamps,
+                initial_prompt=self.prompt or None)
         else:
             segs, info = self.m.transcribe(audio, language=language,
                                            beam_size=self.beam, vad_filter=True,
-                                           condition_on_previous_text=False)
+                                           condition_on_previous_text=False,
+                                           initial_prompt=self.prompt or None)
         return " ".join(s.text.strip() for s in segs).strip()
 
 
@@ -246,6 +249,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("data", type=Path)
     ap.add_argument("--model", default="large-v3")
+    ap.add_argument("--prompt", default="", help="initial prompt for every clip")
     ap.add_argument("--label", default=None)
     ap.add_argument("--mode", choices=("auto", "constrained", "forced"),
                     default="constrained")
@@ -286,6 +290,7 @@ def main() -> int:
     model = Model(args.model, args.compute, args.beam, english_min=args.english_min,
                   batch=args.batch, chunk_length=args.chunk_length,
                   timestamps=args.timestamps)
+    model.prompt = args.prompt
     label = args.label or f"{Path(args.model).name}-{args.mode}"
     print(f"{label}: loaded in {model.load_s:.0f}s")
     print(f"{'lang':<5} {'n':>3} {'WER':>6} {'CER':>6} {'lang ok':>8} "

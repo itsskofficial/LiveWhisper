@@ -273,6 +273,41 @@ class OllamaBackend:
             log.info("formatting model could not be warmed; rules until it can")
 
 
+class BuiltinBackend:
+    """The formatting model on the app's own runner (livewhisper.llm)."""
+
+    name = "builtin"
+    WARM_TIMEOUT_S = 90.0
+
+    def __init__(self, timeout: float = 1.5):
+        self.timeout = timeout
+
+    def available(self) -> bool:
+        from . import llm
+        return llm.server("formatter").available()
+
+    def complete(self, messages: list, max_tokens: int,
+                 timeout: float | None = None) -> str:
+        from . import llm
+        server = llm.server("formatter")
+        if not server.running and timeout is None:
+            # Starting the runner takes seconds; a dictation will not wait for
+            # it. The rules format this one while warm() starts it.
+            threading.Thread(target=self.warm, daemon=True).start()
+            raise FormatterUnavailable("formatting model is starting")
+        try:
+            return server.chat(messages, max_tokens=max_tokens, temperature=0,
+                               timeout=timeout or self.timeout, seed=7)
+        except llm.LLMError as e:
+            raise FormatterUnavailable(f"builtin: {e}") from e
+
+    def warm(self) -> None:
+        try:
+            self.complete(messages_for("ok"), 1, timeout=self.WARM_TIMEOUT_S)
+        except FormatterUnavailable:
+            log.info("formatting model could not be warmed; rules until it can")
+
+
 class FreeTierGuard:
     """Keeps OpenRouter use inside the free tier, counted on this machine.
 
@@ -701,6 +736,11 @@ def build(cfg: dict, data_dir: Path) -> LLMFormatter | None:
     cfg = cfg or {}
     engine = (cfg.get("engine") or "auto").lower()
     if engine == "rules":
+        return None
+    from . import llm
+    if engine in ("auto", "builtin") and llm.server("formatter").available():
+        return LLMFormatter(BuiltinBackend(timeout=float(cfg.get("timeout_seconds", 1.5))))
+    if engine == "builtin":
         return None
     if engine in ("auto", "ollama"):
         model = cfg.get("model") or DEFAULT_LOCAL_MODEL

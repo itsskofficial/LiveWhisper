@@ -11,7 +11,7 @@ Every dictation app gives you `क्या कर रहे हो`.
 
 *Hinglish · Tanglish · Banglish · Thanglish · Manglish · Punglish · and six more*
 
-[**What it does →**](https://claude.ai/code/artifact/f350c628-163d-4a75-a4e1-8a7829c6b2e9) · [Install](#install) · [How it works](#how-it-works) · [Contributing](CONTRIBUTING.md)
+[**What it does →**](https://claude.ai/code/artifact/f350c628-163d-4a75-a4e1-8a7829c6b2e9) · [Download](#install) · [How it works](#how-it-works) · [Contributing](CONTRIBUTING.md)
 
 </div>
 
@@ -54,8 +54,8 @@ typed — so the last step before the paste is a formatting pass.
 
 It runs in two layers. **Rules** handle what can be done exactly: spoken
 commands, lists, emails, corrections it can verify, per-app style — 0.6 ms per
-100 words. Then, if you have [Ollama](https://ollama.com), **a very small local
-model** (qwen3 0.6B, 522 MB) handles what rules cannot: punctuating a run-on
+100 words. Then **a very small local model** that the app runs itself
+(qwen3 0.6B, 640 MB, downloaded at setup) handles what rules cannot: punctuating a run-on
 sentence, capitalising names, spotting a list you never announced.
 
 A small model left to itself is dangerous — asked to format "what is the capital
@@ -73,7 +73,7 @@ used.
 | Time per dictation | 0 ms | 155 ms GPU · 371 ms CPU |
 
 [Measured on 42 cases](tests/results/format_llm.md), including a question, a
-dictated instruction and 16 Hinglish sentences. No Ollama, no problem: the rules
+dictated instruction and 16 Hinglish sentences. Skip the model and the rules
 alone are what you get, and nothing slows down.
 
 ```
@@ -143,30 +143,23 @@ there your configured language decides.
 
 ## Install
 
-Windows 10/11 · Python 3.10+ · NVIDIA GPU recommended (works without)
+**[Download LiveWhisper for Windows](https://github.com/itsskofficial/LiveWhisper/releases/latest)**
+(`LiveWhisper-Setup-1.0.0.exe`, 100 MB) and run it. No Python, no command line,
+no administrator rights.
 
-**One line, nothing to clone:**
+Windows 10 or 11, 64-bit. An NVIDIA graphics card makes it several times faster;
+it works without one.
 
-```powershell
-irm https://raw.githubusercontent.com/itsskofficial/LiveWhisper/main/install.ps1 | iex
-```
+On first launch LiveWhisper asks which languages you speak and downloads what
+runs on your PC - the speech model (1.5-3 GB, sized to your machine), GPU
+support if you have an NVIDIA card, and a small formatting model. Then it's in
+your tray, ready for the shortcut, and starts with Windows.
 
-Or from a clone, if you'd rather read it first:
+> Windows may show *"Windows protected your PC"* the first time, because the
+> installer is not yet code-signed. Click **More info → Run anyway**. The source
+> of every release is in this repository.
 
-```powershell
-git clone https://github.com/itsskofficial/LiveWhisper.git
-cd LiveWhisper
-.\install.ps1
-```
-
-The installer asks which language you type in, detects your GPU and picks a
-model that fits it, and offers a Groq key for speed (optional — it runs fully
-local without one).
-
-A one-minute wizard then asks you to type a few sentences your way. That alone
-teaches it most of your spelling habits. Skippable.
-
-| Hotkey | |
+| Shortcut | |
 | --- | --- |
 | `Ctrl+Alt+Space` | Dictate: press, speak, press again. Your microphone only |
 | `Ctrl+Alt+W` | Write for you: press, say *"reply saying I can't make Thursday"*, press again. It reads the message on screen and pastes a reply |
@@ -175,9 +168,31 @@ teaches it most of your spelling habits. Skippable.
 | `Ctrl+Alt+X` | Throw away the recording in progress |
 | `Ctrl+Alt+H` | Keep the next dictation in the original script |
 
-Writing and grammar use a local model through [Ollama](https://ollama.com)
-(`ollama pull qwen2.5:7b`), or Groq if you add a key. On a GPU the installer
-also offers a faster English model (1.6 GB) and the small formatting model.
+All of them can be changed in **Settings**. While you speak, a small pill at the
+bottom of the screen shows a live waveform; click ✓ to finish or ✕ to discard.
+
+Everything runs on your PC. Writing, grammar and formatting use small language
+models that LiveWhisper runs itself (llama.cpp, on any GPU or the processor).
+Add a free [Groq](https://console.groq.com) key under **AI** if you want cloud
+speed or a stronger writing model.
+
+<details>
+<summary><b>Run from source</b> (for development)</summary>
+
+Python 3.12, Windows 10/11.
+
+```powershell
+git clone https://github.com/itsskofficial/LiveWhisper.git
+cd LiveWhisper
+.\install.ps1          # venv, dependencies, model choice for your GPU
+.venv\Scripts\python run.py
+```
+
+Build the installer yourself with `.venv\Scripts\python packaging\build.py`
+(needs [Inno Setup 6](https://jrsoftware.org/isdl.php)). Tests:
+`python run_tests.py`.
+
+</details>
 
 ---
 
@@ -315,13 +330,13 @@ continue sooner.
 | Audio capture | Always |
 | Transcription | Yes — faster-whisper on your GPU, ~3s for a sentence |
 | Romanization + style | Yes — no network at all |
-| Compose & grammar | Yes via Ollama — or Groq/OpenAI/Anthropic if you prefer |
+| Compose & grammar | Yes — a built-in local model, or Groq if you add a key |
 
 No telemetry. No account. No word limits. Your profile is a file on your disk.
 
 **Honest note:** local models are fine for grammar and short rewrites. For
-longer composition a frontier model is noticeably better. Ollama support is a
-real capability, not parity.
+longer composition a frontier model is noticeably better. The built-in model
+is a real capability, not parity.
 
 ---
 

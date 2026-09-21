@@ -1,0 +1,366 @@
+{
+ "rows": [
+  {
+   "lang": "hi",
+   "n": 15,
+   "native_wer": 0.14492753623188406,
+   "native_cer": 0.04827586206896552,
+   "roman_wer_typed": 0.4057971014492754,
+   "roman_wer_acceptable": 0.2391304347826087
+  },
+  {
+   "lang": "bn",
+   "n": 15,
+   "native_wer": 0.17424242424242425,
+   "native_cer": 0.06329113924050633,
+   "roman_wer_typed": 0.417910447761194,
+   "roman_wer_acceptable": 0.29850746268656714
+  },
+  {
+   "lang": "ur",
+   "n": 15,
+   "native_wer": 0.2413793103448276,
+   "native_cer": 0.11961722488038277,
+   "roman_wer_typed": 0.3879310344827586,
+   "roman_wer_acceptable": 0.25862068965517243
+  },
+  {
+   "lang": "mr",
+   "n": 15,
+   "native_wer": 0.33064516129032256,
+   "native_cer": 0.09240506329113925,
+   "roman_wer_typed": 0.5241935483870968,
+   "roman_wer_acceptable": 0.4112903225806452
+  },
+  {
+   "lang": "te",
+   "n": 15,
+   "native_wer": 0.30303030303030304,
+   "native_cer": 0.03259259259259259,
+   "roman_wer_typed": 0.47474747474747475,
+   "roman_wer_acceptable": 0.3838383838383838
+  },
+  {
+   "lang": "ta",
+   "n": 15,
+   "native_wer": 0.19148936170212766,
+   "native_cer": 0.03239556692242114,
+   "roman_wer_typed": 0.524822695035461,
+   "roman_wer_acceptable": 0.3475177304964539
+  },
+  {
+   "lang": "gu",
+   "n": 15,
+   "native_wer": 0.4394904458598726,
+   "native_cer": 0.26422250316055623,
+   "roman_wer_typed": 0.7197452229299363,
+   "roman_wer_acceptable": 0.6050955414012739
+  },
+  {
+   "lang": "kn",
+   "n": 15,
+   "native_wer": 0.34146341463414637,
+   "native_cer": 0.148664343786295,
+   "roman_wer_typed": 0.5121951219512195,
+   "roman_wer_acceptable": 0.3983739837398374
+  },
+  {
+   "lang": "ml",
+   "n": 15,
+   "native_wer": 0.5454545454545454,
+   "native_cer": 0.13753581661891118,
+   "roman_wer_typed": 0.6198347107438017,
+   "roman_wer_acceptable": 0.5702479338842975
+  },
+  {
+   "lang": "si",
+   "n": 15,
+   "native_wer": 1.1468531468531469,
+   "native_cer": 1.010989010989011,
+   "roman_wer_typed": 1.1468531468531469,
+   "roman_wer_acceptable": 1.1468531468531469
+  }
+ ],
+ "samples": [
+  {
+   "lang": "hi",
+   "native_ref": "इसका उलट भी सत्य है।",
+   "native": "इसका उलट भी सत्य है.",
+   "typed": "Iska ulat bhi satya hai.",
+   "romanized": "Iska ulat bhi saty hai."
+  },
+  {
+   "lang": "hi",
+   "native_ref": "तेल के उत्पादन में संसार में रोमानिया का छठा स्थान है।",
+   "native": "तेल के उत्पादन में संसार में रोमानिया का छठा स्थान है.",
+   "typed": "Tel ke utpadan men sansar men Romania ka chhath sthan hai.",
+   "romanized": "Tel ke utpaadan mein sansaar mein Romania ka chhath sthaan hai."
+  },
+  {
+   "lang": "hi",
+   "native_ref": "बनारसी लाल से मिलकर पुलिस ने सारा भेद प्राप्त कर लिया।",
+   "native": "बनारसीलाल से मिलकर पुलिस ने सारा भेद प्राप्त कर लिया.",
+   "typed": "Banarasi Lal se milkar police ne sara bhed praapt kar liya.",
+   "romanized": "Banaarsi laal se milkar police ne sara bhed prapt kar liya."
+  },
+  {
+   "lang": "hi",
+   "native_ref": "बीबीसी हिन्दी संवाददाता द्वारा वेंकटरामन रामकृष्णन का साक्षात्कार।",
+   "native": "बीबीसी हिंदी संवाददाता द्वारा वेंकटारामन रामकृष्णन का साक्षात्कार.",
+   "typed": "beebeesee hindi sanwaddaata dwara Venkatraman Ramkrishnan ka saakshatkar.",
+   "romanized": "BBC hindi sanvaaddaata dvara venkat raman raamakrshnan ka sakshaatkaar."
+  },
+  {
+   "lang": "bn",
+   "native_ref": "তবে বিয়া দিয়া আমার প্রাণ বাঁচাও।।\"",
+   "native": "তবে দিয়া দিয়া আমার প্রাণ বাঁচাও.",
+   "typed": "Tobe biya diya amar pran banchao..\"",
+   "romanized": "Tobe dia dia amar pran banchao."
+  },
+  {
+   "lang": "bn",
+   "native_ref": "ক্রিকেটে তিনি প্রথম ভারতীয় বোলার যিনি ইংরেজদের সাথে খেলায় ওভার হেড বোলিং করতে পারতেন।",
+   "native": "ক্রিকেটে তিনি প্রথম ভারতীয় বোলার যিনি ইংরেজদের সাথে খেলায় ওভারহেড বোলিং করতে পারতেন.",
+   "typed": "Cricket-e tini prothom bharotiyo bowler jini ingrejder shathe khelay over head bowling korte parten.",
+   "romanized": "Crickete tini prothom bharotii bowlar jini engrejder shathe khela ovarhed bowling korte parten."
+  },
+  {
+   "lang": "bn",
+   "native_ref": "মিসাক-ই মিল্লি (“জাতীয় চুক্তি”) ঘোষণার কিছুদিন পর ১৮ মার্চ ব্রিটিশরা এটিকে ভেঙে দেয়।",
+   "native": "মিসাকি মিল্লি জাতীয় চুক্তি ঘোষণার কিছুদিন পর আঠারো মার্চ ব্রিটিশরা এটিকে ভেঙে দেয়.",
+   "typed": "Misak-E Milli (\"Jatiyo Chukti\") ghoshonar kichudin por 18 March British-ra etike bhenge dei.",
+   "romanized": "Misaki milli jatii chukti ghoshonar kichudin por atharo march ra etike bhenge de."
+  },
+  {
+   "lang": "bn",
+   "native_ref": "তা স্থগিত করা হয়।",
+   "native": "তা স্থগিত করা হয়.",
+   "typed": "Ta sthogito kora hoy.",
+   "romanized": "Ta sthogito kora ho."
+  },
+  {
+   "lang": "ur",
+   "native_ref": "ایک ہی \"تین تھے بھائی\" ہندی فلم کے لیے تین تھے بھائی، 2011",
+   "native": "ایک ہی تین تھے بھائی ہندی فلم کے لیے تین تھے بھائی دو ہزار گیارہ.",
+   "typed": "aik hi \"teen the bhai\" hindi film ke liye teen the bhai, 2011",
+   "romanized": "Aik hi teen the bhai hindi film ke liye teen the bhai do hazaar gayarah."
+  },
+  {
+   "lang": "ur",
+   "native_ref": "1922ء میں حکومت کی طرف سے سر کا خطاب ملا۔",
+   "native": "ایک ہزار نو سو بائس میں حکومت کی طرف سے سر کا خطاب ملا.",
+   "typed": "1922AD main hukumat ki taraf se sir ka khitab mila.",
+   "romanized": "Aik hazaar no sau bice mein hukumat ki taraf se sir ka khitaab mila."
+  },
+  {
+   "lang": "ur",
+   "native_ref": "غازی حاجی محمد مانکؒ",
+   "native": "غازی حاجی محمد مانگ.",
+   "typed": "ghazi haji muhammad manik",
+   "romanized": "Ghazi haji mohammad mang."
+  },
+  {
+   "lang": "ur",
+   "native_ref": "تزکیہ کا لفظی معنی ہے پاک صاف کرنا، نشو و نما کرنا۔",
+   "native": "تذکیہ کا لفظی معنی ہے پاک صاف کرنا نشو انما کرنا.",
+   "typed": "tazkiya ka lafzi maani hai paak saaf karna, nasho wa numa karna.",
+   "romanized": "Tazkiya ka lafzi maani hai pak saaf karna nashu anmaa karna."
+  },
+  {
+   "lang": "mr",
+   "native_ref": "मंदिरावर शिखराऐवजी एकावर एक अशी शिवलिंगे आहेत.",
+   "native": "मंदिरामर शिखरा इवजी एकावर एक अशी शिवलिंगे आहे.",
+   "typed": "Mandirawar shikharaaivaji ekavar ek ashi Shivlinge ahet.",
+   "romanized": "Mandiramar shikhrara ivji ekavar ek ashi shivlinge aahe."
+  },
+  {
+   "lang": "mr",
+   "native_ref": "साधारण तीन वर्षांतून एकदा हा निसर्ग चमत्कार पहायला मिळतो.",
+   "native": "साधारण तीन वर्षांतून एकदा हा निसर्ग चमतकार पाहयला मिळतो.",
+   "typed": "sadharan teen varshantun ekda ha nisarga chamatkar pahayla milto.",
+   "romanized": "Sadharan teen varshantun ekda ha nisarg chamatkar pahayla milto."
+  },
+  {
+   "lang": "mr",
+   "native_ref": "साक्षत्व म्हणजे पाहणे अथवा जाणणे.",
+   "native": "साक्षत्व म्हणजे पाहणे अथवा जाणे.",
+   "typed": "sakshtva mhanaje pahane athava janane.",
+   "romanized": "Sakshatv mhanje pahane athva jaane."
+  },
+  {
+   "lang": "mr",
+   "native_ref": "हजारो वर्षांपासून महान व्यक्तींच्या मूर्ती घडवल्या जात आहेत.",
+   "native": "हजारो वर्षांपासून महान व्यक्तींच्या मूर्ती घडवल्या जात आहे.",
+   "typed": "hajaro varshanpasun mahaan vyaktinchya murti ghadavlya jaat ahet.",
+   "romanized": "Hajaro varshanpasun mahan vyaktinchya moorati ghadvalya jaat aahe."
+  },
+  {
+   "lang": "te",
+   "native_ref": "స్క్రీన్ ప్లే, దర్శకత్వం: బి. గోపాల్",
+   "native": "స్క్రీన్ ప్లే దర్శకత్వం గోపాల్.",
+   "typed": "screen play, darsakatvam: B. Gopal",
+   "romanized": "Screen plae darsakatvam gopal."
+  },
+  {
+   "lang": "te",
+   "native_ref": "తెలుగునాట అంతంత మాత్రంగా నడిచిన ఈ సినిమాను హిందీలో డబ్ చేస్తే ఉత్తరాదిన విజయ దుంధుబి మ్రోగించింది.",
+   "native": "తెలుగునాట అంతంత మాత్రంగా నడిచిన ఈ సినిమాను హిందీలో డబ్ చేస్తే ఉత్తరాదిన విజయ దుందుబింగ్ రోగించింది.",
+   "typed": "Telugunaata antanta maatramga nadichina ee cinemaanu hindilo dub cheste uttaraadina vijaya dumdubhi mroginchindi.",
+   "romanized": "Thelugunaata antant matrangaa nadichina ee cinemanu hindilo dubb cheste utharadina vijaya dundubing roginchindi."
+  },
+  {
+   "lang": "te",
+   "native_ref": "వారసులు లేనివారికి ధౌమ్యుని చేత కర్మకాండలు దానధర్మములు నిర్వహింపజేసాడు.",
+   "native": "వారసులు లేని వారికి భౌమ్యాన్ని చేత కర్మకాండలు దాన ధర్మములు నిర్వహింపజేశాడు.",
+   "typed": "vaarasulu lenivaariki dhaumyuni cheta karmakaandalu daanadharmamulu nirvahimpajesaadu.",
+   "romanized": "Vaarasulu leni vaariki bhoumyaanni cheta karmakaandalu daana dharmamulu nirvahimpajesaadu."
+  },
+  {
+   "lang": "te",
+   "native_ref": "సాధారణంగా ఆగ్నేయప్రాంతం మరియు పర్వతప్రాంతాలలో వర్షపాతం ఆధారంగా గాలిలోతేమ అధికంగా ఉంటుంది.",
+   "native": "సాధారణంగా ఆగ్నేయ ప్రాంతం మరియు పర్వత ప్రాంతాలలో వర్షపాతం ఆధారంగా గాలిలో తేమ అధికంగా ఉంటుంది.",
+   "typed": "saadhaaranangaa aagneyapraantam mariyu parvatapraantaalalo varshapaatam aadhaarangaa gaalilotema adhikangaa vuntundi.",
+   "romanized": "Saadhaaranangaa aagneya praantam mariyu parvata praantaalalo varshapaatam aadhaarangaa gaaliloo tema adhikangaa vuntundi."
+  },
+  {
+   "lang": "ta",
+   "native_ref": "இந்தியாவின் சார்க்கண்ட் மாநிலத்தில் இராணுவத்தினருடனான மோதலில் மூன்று மாவோயிசப் போராளிகள் கொல்லப்பட்டனர். (பிடிஐ)",
+   "native": "இந்தியாவின் சார்க்கண்ட் மாநிலத்தில் இராணுவத்தினருடன் மோதலில் மூன்று மாவோயிசப் போராளிகள் கொல்லப்பட்டனர் பிடி.",
+   "typed": "Indhiyaavin saarkkant maanilaththil raanuvaththinarudanaana mothalil moondru maavoyisap poraaligal kollappattanar. (BTI)",
+   "romanized": "Indiavin saarkkand maanilaththil iraanuvaththinarudan mothalil moondru maavoayisap poraaligal kollappattanar pidi."
+  },
+  {
+   "lang": "ta",
+   "native_ref": "காஸ்மிக் கதிர்கள் பற்றி அறியவும் இத்திட்டம் குறிக்கோள்களாகக் கொண்டுள்ளது.",
+   "native": "காஸ்மிக் கதிர்கள் பற்றி அறியவும் இத்திட்டம் குறிக்கோள்களாக கொண்டுள்ளது.",
+   "typed": "cosmic kathirgal pattri ariyavum iththittathin kurikkolgalaagak kondullathu.",
+   "romanized": "Kasmik kathirgal pattri ariyavum iththittam kurikkolgalaaga kondullathu."
+  },
+  {
+   "lang": "ta",
+   "native_ref": "முதல் நூற்றாண்டு முதல் நான்காம் நூற்றாண்டின் தொடக்கம் வரை கிறிஸ்தவர்கள் ரோமப் பேரரசில் அதிகமான துன்புறுத்தல்களுக்கு ஆளாக்கப்பட்டு கொல்லப்பட்டனர்.",
+   "native": "முதல் நூற்றாண்டு முதல் நான்காம் நூற்றாண்டின் தொடக்கம் வரை கிறிஸ்தவர்கள் ரோமப் பேரரசில் அதிகமான துன்புறுத்தல்களுக்கு ஆளாக்கப்பட்டு கொள்ளப்பட்டனர்.",
+   "typed": "mudhal nootraandu mudhal naangaam nootraandin thodakkam varai christhavargal romap perrasil adhigamaana thunpurutthalgallukku aalaakkappattu kollappattanar.",
+   "romanized": "Muthal nootraandu muthal naangaam noottraandin thodakkam varai kiristhavargal romap paerarasil athigamaana thunpuruththalkul aalaakkappattu kollappattanar."
+  },
+  {
+   "lang": "ta",
+   "native_ref": "இவர் தேனி மாவட்டத்திலுள்ள அனுமந்தன்பட்டி எனும் ஊரில் பிறந்து, திண்டுக்கல் மாவட்டம், அய்யம்பாளையம் எனும் ஊரில் வசித்து வருபவர்.",
+   "native": "இவர் தேனி மாவட்டத்தில் உள்ள அனுமந்தன்பட்டி எனும் ஊரில் பிறந்து திண்டுக்கல் மாவட்டம் ஐயம்பாளையம் எனும் ஊரில் வசித்து வருபவர்.",
+   "typed": "ivar Theni maavatathilulla Hanumanthanpatti enum ooril piranthu, Dindigul maavattam, Ayyampalaiyam enum ooril vasithu varubavar.",
+   "romanized": "Ivar theni maavattaththil ulla anumanthanpatti enum ooril piranthu thindukkal maavattam aiyampalaiyam enum ooril vasiththu varubavar."
+  },
+  {
+   "lang": "gu",
+   "native_ref": "પ્રાચીનકાલીન બૌદ્ધ શિક્ષા કા કેંદ્ર - સાઁચી ઇનસાઇટ ટીવી જાલસ્થલ પર",
+   "native": "Prachin Kalin Baudh Shikshaka Kendra Saachi Insight TV Jalasthalpar.",
+   "typed": "praaceenakaaleena bauddha shikshaa kaa kendra - saancee inasaaita teevee jaalasthala para",
+   "romanized": "Prachin Kalin Baudh Shikshaka Kendra Saachi Insight TV Jalasthalpar."
+  },
+  {
+   "lang": "gu",
+   "native_ref": "પરંતુ એક બીજાના કામ માટે કોઇ વ્યક્તિગત (કેટલીક) જવાબદારી હોતી નથી.",
+   "native": "પરંતુ એકબીજાના કામ માટે કોઈ વ્યક્તિગત કેટલીક જવાબદારી હોતી નથી.",
+   "typed": "parantu ek beejaanaa kaam maate koi vyaktigat (ketlik) javaabdaari hoti nathi.",
+   "romanized": "Parantu aekbijana kaam maate koi vyaktigat ketlik javaabadaaree hoti nathi."
+  },
+  {
+   "lang": "gu",
+   "native_ref": "લીંક અને રેફરન્સ પછીથી પણ ઉમેરી શકાય છે.",
+   "native": "લિંક અને રેફરન્સ પછીથી પણ ઉમેરી શકાય છે.",
+   "typed": "leenka ane refaransa pacheethee pana umeree shakaaya che.",
+   "romanized": "Link ane referns pacheethee pan umeree shakaaya chhe."
+  },
+  {
+   "lang": "gu",
+   "native_ref": "પોતાના અધ્યક્ષપદ ના કાર્યકાળ મા સુભાષબાબૂ એ યોજના આયોગ ની સ્થાપના કરી હતી.",
+   "native": "પોતાના અધ્યક્ષ પદના કાર્યકાળમાં સુભાષબાબુ યોજના આયોગની સ્થાપના કરી હતી.",
+   "typed": "potaanaa adhyakshapada naa kaaryakaala maa subhaashabaaboo e yojanaa aayoga nee sthaapanaa karee hatee.",
+   "romanized": "Potaanaa adhyaksha padna kaaryakaalama subhashbaabu yojanaa aayogni sthaapanaa karee hati."
+  },
+  {
+   "lang": "kn",
+   "native_ref": "ದಕ್ಷಿಣದ ಮತ್ತು ನೈರುತ್ಯ ಭೂತಾನಿನಲ್ಲಿ ನೇಪಾಳೀ ವಲಸೆಗಾರರೇ ಹೆಚ್ಚಾಗಿದ್ದಾರೆ.",
+   "native": "ದಕ್ಷಿಣದ ಮತ್ತು ನೈರುತ್ಯ ಭೂತಾನಿನಲ್ಲಿ ನೇಪಾಳಿ ವಲಸಿಗಾರರೇ ಹೆಚ್ಚಾಗಿದ್ದಾರೆ.",
+   "typed": "Dakshinada mattu nairutya bhootaninalli nepalee valasegaarare hechchaagiddaare.",
+   "romanized": "Dakshinada mattu nairutya bhootaaninalli nepali valasigaarare hechchagiddare."
+  },
+  {
+   "lang": "kn",
+   "native_ref": "ಈ ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿ ಡ್ರೈ ಐಸ್ ಅನಿಲ ರೂಪದಿಂದ ಘನ ಸ್ಥಿತಿಗೆ ಬದಲಾಗುತ್ತದೆ.",
+   "native": "ಈ ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿ ಅನಿಲ ರೂಪದಿಂದ ಸ್ಥಿತಿಗೆ ಬದಲಾಗುತ್ತದೆ.",
+   "typed": "Ee prakriyeyalli dry ice anila roopadinda ghana sthitige badalaaguttade.",
+   "romanized": "Ee prakriyeyalli anila roopadinda sthitige badalaguttade."
+  },
+  {
+   "lang": "kn",
+   "native_ref": "ಅತಿ ಕ್ರೂರ ಸ್ವಭಾವದ ಮೀನಾದ ಪಿರಾನಾಗೆ ಅಮೆಜಾನ್ ನದಿ ನೆಲೆ.",
+   "native": "ಅತಿ ಕ್ರೂರ ಸ್ವಭಾವದ ಮೀನಾದ ಪಿರಾನ್ಗೆ ಅಮೆಜಾನ್ ನದಿ ನೆಲೆ.",
+   "typed": "ati krura svabhaavada meenaada piraanaage amejan nadi nele.",
+   "romanized": "Ati krura svabhaavada minadada pirange amazon nadi nele."
+  },
+  {
+   "lang": "kn",
+   "native_ref": "೧೯೫೪ರಲ್ಲಿ ಬಿಡುಗಡೆಯಾದ ಕನ್ನಡ ಚಲನಚಿತ್ರಗಳು",
+   "native": "ಒಂದು ಸಾವಿರ ಒಂಬೈನೂರ ಐವತ್ತು ನಾಲ್ಕು ರಲ್ಲಿ ಬಿಡುಗಡೆಯಾದ ಕನ್ನಡ ಚಲನಚಿತ್ರಗಳು.",
+   "typed": "1954ralli bidugadeyaada kannada chalanachitragalu.",
+   "romanized": "Ondu saavira ombainoora aivattu naalku ralli bidugadeyaada kannada chalanachitragalu."
+  },
+  {
+   "lang": "ml",
+   "native_ref": "പയ്യന്നൂരിലെ കണ്ടോത്ത് ക്ഷേത്രത്തിനു മുന്നിൽ എ.",
+   "native": "പയെന്നൂരിലെ കണ്ടോത്ത ക്ഷേത്രത്തിന് മുന്നിൽ ഏ.",
+   "typed": "payyannoorile kandoth kshethratthinu munnil A.",
+   "romanized": "Payennoorile kandotha kshethrathinu munnil aa."
+  },
+  {
+   "lang": "ml",
+   "native_ref": "എൻ ജനറൽ അസംബ്ലി പലസ്തീൻ ജൂതർക്കും അറബികൾക്കുമായി വിഭജിക്കുവാനുള്ള തീരുമാനം അംഗീകരിച്ചു.",
+   "native": "എൻ ജനറൽ അസംബ്ലി പലസ്തീൻ ജൂദർക്കും അറഭികൾക്കുമായി വിഭജിക്കുവാനുള്ള തീരുമാനം അംഗീകരിച്ചു.",
+   "typed": "N General Assembly Palastine jutharkkum arabikalkkumayi vibhajikuvanulla theerumanam angeekarichu.",
+   "romanized": "Enn general assembly palastine joodarkkum arabhikalkkumaayi vibhajikkuvaanulla theerumanam angeekarichu."
+  },
+  {
+   "lang": "ml",
+   "native_ref": "ഗ്രേറ്റ് മൂവി എന്റർടൈൻ‌മെന്റിന്റെ ബാനറിൽ ശ്യാം ജയൻ, എൽ.",
+   "native": "ഗ്രേറ്റ് മൂവി എന്ററേൻമെന്റിന്റിന്റെ ബാനിൽ ഷ്യാംജേൻ‌എൽ.",
+   "typed": "Great Movie Entetainment banneril Shyam Jayan, L.",
+   "romanized": "Great movie enrarenmenrinrinre baanil shyaamjenchel."
+  },
+  {
+   "lang": "ml",
+   "native_ref": "ഉൽപ്പാദകരുടെ മേൽ ഉൽപാദനം, ക്രയം, വിക്രയം തുടങ്ങിയവയ്ക്ക് ഗവൺമെൻ്റ് ചുമത്തുന്ന നികുതിയാണ് പരോക്ഷനികുതി.",
+   "native": "ഉൾപ്പാധകരുടെ മേൽ ഉൾപാധനം, ക്രെയം, വിക്രേയം തുടങ്ങിയവെക്ക് ഗവൺമെന്റ് ചുമുത്തുന്ന നികുതിയാണ് തരോക്ഷ നികുത.",
+   "typed": "ulppadakarude mel ulpadanam, krayam, vikrayam thudangiyavaykk Government chumathunna nikuthiyanu parokshanikuti.",
+   "romanized": "Ulppaadhakarude mel ulpaadhanam, kreyam, vikreyam thudangiyavekku government chumuthunna nikuthiyaanu tharoksha nikutha."
+  },
+  {
+   "lang": "si",
+   "native_ref": "පලෙයි ප්‍රාදේශීය ලේකම් කොට්ඨාසය",
+   "native": "පස්තින් පස්තින් හොඳින් හොඳින්.",
+   "typed": "Palai pradeshiya lekam kottashaya",
+   "romanized": "Pasthin pasthin hondin hondin."
+  },
+  {
+   "lang": "si",
+   "native_ref": "පාසැල හැරයන්නන් සඳහා වෘත්තීමය පුහුණු පාඨමාලා පැවැත්වීම.",
+   "native": "පුමුමුන් මේදුන් මේදුන් මේදුන් මේදුන් මේදුන් මේදුන් මේදුන් මේදුන් මේදුන්.",
+   "typed": "Pasala herayannan sandaha wurthiyamaya puhunu patamala pawathweema.",
+   "romanized": "Pumumun medun medun medun medun medun medun medun medun medun."
+  },
+  {
+   "lang": "si",
+   "native_ref": "අ)භාෂණයේ නිදහසට සහ ප්‍රකාශනය ඇතුළු අදහස් පළ කිරීමේ නිදහසට",
+   "native": "අපි වෙන්නේ මිනින්නේ වෙන්නේ වෙන්නේ වෙන්නේ වෙන්නේ වෙන්නේ.",
+   "typed": "a)Bhashanaye nidahasata saha prakashanaya athulu adahas pala kireema nidahasata",
+   "romanized": "Api venne mineenne venne venne venne venne venne."
+  },
+  {
+   "lang": "si",
+   "native_ref": "පහළ බෝධියට උතුරු පසින් මෙම බුදු මැදුර පිහිටා ඇත.",
+   "native": "පාලතාන් දැන් ඉතුරුන් මිනින් මිනින් වෙන් වෙන් වෙන් වෙන් වෙන්.",
+   "typed": "pahala bodhiyata uthuru pasin mema budu medura pihita etha.",
+   "romanized": "Palatan dan ithurun mineen mineen wen wen wen wen wen."
+  }
+ ]
+}

@@ -269,8 +269,17 @@ def main() -> int:
 
     print("\n=== configuration ===")
     check("rules means no model", lf.build({"engine": "rules"}, Path(".")) is None)
+    from livewhisper import llm
+    real_available = llm.Server.available
+    llm.Server.available = lambda self: True
+    check("the app's own formatting model is preferred once downloaded",
+          isinstance(lf.build({}, Path(".")).backend, lf.BuiltinBackend))
+    check("...and never used when rules are asked for",
+          lf.build({"engine": "rules"}, Path(".")) is None)
+    llm.Server.available = lambda self: False
     auto = lf.build({}, Path("."))
-    check("the default is the measured small local model",
+    llm.Server.available = real_available
+    check("without it, the measured small model through Ollama",
           isinstance(auto.backend, lf.OllamaBackend) and auto.backend.model == "qwen3:0.6b",
           getattr(auto.backend, "model", None))
     check("OpenRouter is only used when asked for by name",

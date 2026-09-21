@@ -206,3 +206,20 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+def fit(cfg: dict, rec: Recommendation | None = None) -> Recommendation:
+    """Set the local model to what this machine should run.
+
+    Done once, when the app first creates its config: large-v3 on a machine
+    without an NVIDIA GPU would be a 3 GB download that then takes tens of
+    seconds per dictation.
+    """
+    rec = rec or recommend()
+    loc = cfg.setdefault("transcription", {}).setdefault("local", {})
+    loc["model"] = rec.model
+    loc["device"] = rec.device
+    loc["compute_type"] = rec.compute_type
+    loc["batch_size"] = rec.batch_size
+    loc["max_extra_models"] = rec.extra_models
+    return rec

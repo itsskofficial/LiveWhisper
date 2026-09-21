@@ -13,6 +13,7 @@ import logging
 import os
 import threading
 import time
+from pathlib import Path
 
 import numpy as np
 import requests
@@ -41,6 +42,17 @@ class GroqUnavailable(TranscriptionError):
 def _repo_id(model: str) -> str:
     """faster-whisper resolves bare names to the Systran conversions."""
     return model if "/" in model else f"Systran/faster-whisper-{model}"
+
+
+def resolve_model(model: str) -> str:
+    """A model name -> what to load: the app's own download of it if there is
+    one (livewhisper.components fetches into paths.MODELS), else the name for
+    faster-whisper to find in the Hugging Face cache."""
+    from . import paths
+    if Path(model).exists():
+        return model
+    own = paths.MODELS / model
+    return str(own) if (own / "model.bin").exists() else model
 
 
 # faster-whisper packs the speech it finds into windows as long as the model
@@ -116,7 +128,10 @@ class LocalBackend:
             from huggingface_hub import try_to_load_from_cache
         except ImportError:
             return False
-        repo = _repo_id(self.cfg.get("model", "large-v3"))
+        model = self.cfg.get("model", "large-v3")
+        if resolve_model(model) != model or Path(model).exists():
+            return True
+        repo = _repo_id(model)
         try:
             return try_to_load_from_cache(repo, "model.bin") is not None
         except Exception:
@@ -145,7 +160,7 @@ class LocalBackend:
                 return
             from faster_whisper import BatchedInferencePipeline, WhisperModel
 
-            model = self.cfg.get("model", "large-v3")
+            model = resolve_model(self.cfg.get("model", "large-v3"))
             device = self.cfg.get("device", "cuda")
             compute_type = self.cfg.get("compute_type", "int8_float16")
             log.info("loading %s on %s (%s)", model, device, compute_type)
@@ -249,6 +264,23 @@ class LocalBackend:
         if isinstance(route, str):
             return {"path": route}
         return dict(route) if isinstance(route, dict) else {}
+
+    # Said aloud, "comma" is a word, and large-v3 hears "Hi Rahul comma" as a
+    # name, "Hi Rahul Kama," - in every end-to-end run of that sentence. Told
+    # that this is dictation with spoken punctuation, it writes "comma" and the
+    # formatter turns it into ",". On ordinary speech it helps slightly too:
+    # FLEURS English word error 4.8% -> 4.6% on large-v3 and 4.6% -> 4.3% on
+    # turbo, 40 clips, batched as the app decodes (tests/bench_asr.py --prompt).
+    SPOKEN_PUNCTUATION = ("Dictation with spoken punctuation: comma, full stop, "
+                          "question mark, new line, new paragraph.")
+
+    def _prompt(self, language: str | None) -> str | None:
+        parts = []
+        if language == "en":
+            parts.append(self.SPOKEN_PUNCTUATION)
+        if self.vocabulary:
+            parts.append(self.vocabulary)
+        return " ".join(parts) or None
 
     def _model_for(self, language: str | None, path: str | None = None) -> tuple:
         """The model that should decode this language: a specialist, or the main one.
@@ -406,14 +438,17 @@ class LocalBackend:
         common = dict(
             language=self.cfg.get("language") or primed or self._pick_language(audio),
             beam_size=int(self.cfg.get("beam_size", 5)),
-            initial_prompt=self.vocabulary or None,
+            initial_prompt=None,
             hotwords=hotwords or None,
         )
+        common["initial_prompt"] = self._prompt(common["language"])
         route = self._route(common["language"])
-        if native and route.get("latin_output"):
+        if native and (route.get("latin_output") or route.get("native")):
             # A route may name a second model for native script:
             #   hi: {path: .../hinglish-prime, latin_output: true,
             #        native: .../hi-vaani}
+            # or only that one, {native: .../hi-vaani}, when romanized text
+            # comes from the main model.
             native_path = route.get("native")
             if native_path:
                 model, batched = self._model_for(common["language"], path=native_path)

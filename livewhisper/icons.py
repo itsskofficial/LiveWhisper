@@ -12,43 +12,56 @@ import logging
 import sys
 from pathlib import Path
 
+from . import paths
+
 from PIL import Image, ImageDraw
 
 log = logging.getLogger(__name__)
 
-ASSETS = Path(__file__).resolve().parent.parent / "assets"
+ASSETS = paths.ASSETS
 ICON_PATH = ASSETS / "livewhisper.ico"
 
 APP_ID = "LiveWhisper.Tray.1"
 
-BG = "#14140F"
-SURFACE = "#221F17"
-AMBER = "#E0A02B"
-AMBER_HI = "#F5C25C"
+# The brand: a violet plate with a white level meter - the same bars the
+# recording pill animates and the app window's logo shows.
+VIOLET_TOP = (140, 115, 255)
+VIOLET_BOTTOM = (84, 55, 230)
+WHITE = "#FFFFFF"
+IDLE, RECORDING, WORKING = "#8B75FF", "#EF4444", "#F5B942"
 
 BARS = [0.34, 0.62, 1.0, 0.72, 0.44]
 
 
-def render(size: int, accent: str = AMBER, highlight: str | None = None,
+def _plate(s: int) -> Image.Image:
+    """A rounded square with a top-left to bottom-right violet gradient."""
+    grad = Image.new("RGBA", (s, s))
+    px = grad.load()
+    for y in range(s):
+        for x in range(s):
+            t = (x + y) / (2 * (s - 1))
+            px[x, y] = tuple(int(a + (b - a) * t) for a, b in zip(VIOLET_TOP, VIOLET_BOTTOM)) + (255,)
+    mask = Image.new("L", (s, s), 0)
+    ImageDraw.Draw(mask).rounded_rectangle([0, 0, s - 1, s - 1], radius=int(s * 0.24), fill=255)
+    out = Image.new("RGBA", (s, s), (0, 0, 0, 0))
+    out.paste(grad, (0, 0), mask)
+    return out
+
+
+def render(size: int, accent: str = WHITE, highlight: str | None = None,
            chrome: bool = True) -> Image.Image:
     """Level-meter glyph. `chrome=False` drops the plate for tray use."""
-    s = size * 8
-    img = Image.new("RGBA", (s, s), (0, 0, 0, 0))
+    s = size * 4 if size >= 64 else size * 8
+    img = _plate(s) if chrome else Image.new("RGBA", (s, s), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
 
-    if chrome:
-        d.rounded_rectangle([0, 0, s - 1, s - 1], radius=int(s * 0.22), fill=BG)
-        inset = int(s * 0.06)
-        d.rounded_rectangle([inset, inset, s - inset - 1, s - inset - 1],
-                            radius=int(s * 0.17), fill=SURFACE)
-
     n = len(BARS)
-    bw, gap = s * 0.088, s * 0.055
+    bw, gap = s * 0.085, s * 0.058
     if not chrome:
         bw, gap = s * 0.105, s * 0.065  # fill the tray cell more fully
     total = n * bw + (n - 1) * gap
     x, cy = (s - total) / 2, s / 2
-    max_h = s * (0.52 if chrome else 0.68)
+    max_h = s * (0.50 if chrome else 0.68)
 
     for i, rel in enumerate(BARS):
         h = max_h * rel
@@ -69,10 +82,10 @@ def write_ico(path: Path | None = None) -> Path:
     path = path or ICON_PATH
     path.parent.mkdir(parents=True, exist_ok=True)
     sizes = [16, 20, 24, 32, 40, 48, 64, 128, 256]
-    frames = [render(n, highlight=AMBER_HI) for n in sizes]
+    frames = [render(n) for n in sizes]
     frames[-1].save(path, format="ICO", sizes=[(n, n) for n in sizes],
                     append_images=frames[:-1])
-    render(256, highlight=AMBER_HI).save(path.with_suffix(".png"))
+    render(256).save(path.with_suffix(".png"))
     return path
 
 

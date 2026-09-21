@@ -20,3 +20,14 @@ profiles.json
 notes/
 openrouter_usage.json
 models/
+
+# the app's downloaded language models, in a source checkout
+/llm/
+/models/
+
+# runtime files of a source checkout, and fetched build inputs
+/history.jsonl
+/instance.port
+/vendor/
+/webview/
+/cuda/
