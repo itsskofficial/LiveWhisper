@@ -14,3 +14,9 @@ accuracy_runs/
 
 .github/workflows/
 build/
+
+# what the app learns and writes about its user - never commit it
+profiles.json
+notes/
+openrouter_usage.json
+models/

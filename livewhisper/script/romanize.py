@@ -16,6 +16,7 @@ import re
 from .conventions import Conventions
 from .languages import DEFAULT, get, has_indic, latin_ratio, run_pattern
 from .lexicon import get_lexicon
+from .letters import spell as spell_letters
 from .oov import get_model
 
 log = logging.getLogger(__name__)
@@ -133,7 +134,9 @@ class Romanizer:
             base = self._lex.lookup(native)
             if base is None:
                 base = guesses.get(native)
-            return self.conventions.apply(base) if base else native
+            # Neither the dictionary nor the model could spell it: spell it
+            # letter by letter rather than paste native script.
+            return self.conventions.apply(base or spell_letters(native))
 
         return self._pattern.sub(repl, text)
 

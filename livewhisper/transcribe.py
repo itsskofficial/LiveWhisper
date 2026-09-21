@@ -278,7 +278,8 @@ class LocalBackend:
                 return self._model, self._batched
             try:
                 from .script.languages import LANGUAGES
-                name = LANGUAGES[language].name if language in LANGUAGES else language
+                name = (LANGUAGES[language].name if language in LANGUAGES
+                        else {"en": "English"}.get(language, language))
             except Exception:
                 name = language
             self.notify(f"Loading the {name} speech model - only slow the first time.")

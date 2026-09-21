@@ -164,6 +164,12 @@ class Pipeline:
             if not others:
                 break
             text = Romanizer(others[0]).text(text)
+        if has_indic(text):
+            # Whatever script is still left - one no lexicon recognised - is
+            # spelled letter by letter. Native script is never pasted into a
+            # field that asked for Latin.
+            from .script.letters import spell_text
+            text = spell_text(text)
         return text
 
     def process(self, transcript: str, screen: ctx_mod.ScreenContext | None = None,

@@ -57,9 +57,11 @@ class Ollama:
     name = "ollama"
     default_model = "qwen2.5:7b"
 
-    def __init__(self, model: str | None = None, host: str = "http://127.0.0.1:11434"):
+    def __init__(self, model: str | None = None, host: str = "http://127.0.0.1:11434",
+                 keep_alive: str | int = 0):
         self.model = model or self.default_model
         self.host = loopback(host)
+        self.keep_alive = keep_alive
 
     def available(self) -> bool:
         """Ollama is running AND has this model - a running server without it
@@ -77,7 +79,12 @@ class Ollama:
             "messages": [{"role": "system", "content": system},
                          {"role": "user", "content": user}],
             "stream": False,
-            "keep_alive": "30m",
+            # Unload as soon as the text is written. A 7B writing model left
+            # resident for Ollama's default half hour held 6 GB of an 8 GB card,
+            # the speech models spilled into system memory, and every dictation
+            # in that half hour took 12-40 s instead of 1-2. The next Ctrl+Alt+W
+            # pays a few seconds to reload; dictation never pays anything.
+            "keep_alive": self.keep_alive,
             # The screen (up to 6000 characters) plus the instruction fits in
             # 4096 tokens; the default larger context only costs VRAM that the
             # speech models need.

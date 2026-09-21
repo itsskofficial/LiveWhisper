@@ -686,8 +686,18 @@ class App:
                              lambda icon, item: self.open_wizard()),
             pystray.MenuItem("Open transcripts",
                              lambda icon, item: self.open_transcripts()),
+            pystray.MenuItem("Open log (for bug reports)",
+                             lambda icon, item: self.open_log()),
             pystray.MenuItem("Quit", lambda icon, item: self.quit()),
         )
+
+    def open_log(self) -> None:
+        from .logs import log_path
+        path = log_path()
+        if path.exists():
+            os.startfile(str(path))
+        else:
+            self.notify(f"No log yet - it will appear at {path}")
 
     def _warm_up(self) -> None:
         """Prepare what is ready. Must never trigger a 3 GB download by itself."""

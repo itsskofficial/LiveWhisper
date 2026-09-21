@@ -159,7 +159,8 @@ _PREPOSITIONS = {"of", "for", "in", "on", "to", "with", "from", "between",
                  "into", "over", "under", "and", "or", "was", "is", "are"}
 
 _BULLET = {("bullet", "point"), ("next", "bullet"), ("new", "bullet"),
-           ("next", "item"), ("new", "item")}
+           ("next", "item"), ("new", "item"),
+           ("bulletpoint",)}          # large-v3-turbo writes it as one word
 _NUMBERED = {("numbered", "list"), ("number", "list"), ("ordered", "list")}
 _BULLETED = {("bulleted", "list"), ("bullet", "list"), ("bullet", "points")}
 

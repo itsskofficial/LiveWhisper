@@ -168,11 +168,16 @@ teaches it most of your spelling habits. Skippable.
 
 | Hotkey | |
 | --- | --- |
-| `Ctrl+Alt+Space` | Dictate |
-| `Ctrl+Alt+W` | Speak an instruction — it reads your screen and writes the text |
-| `Ctrl+Alt+F` | Fix grammar, *keeping* your lowercase and slang |
-| `Ctrl+Alt+N` | Notes from system audio |
+| `Ctrl+Alt+Space` | Dictate: press, speak, press again. Your microphone only |
+| `Ctrl+Alt+W` | Write for you: press, say *"reply saying I can't make Thursday"*, press again. It reads the message on screen and pastes a reply |
+| `Ctrl+Alt+F` | Fix grammar in the field you are in, *keeping* your lowercase and slang |
+| `Ctrl+Alt+N` | Notes mode: record a meeting — your mic and the other people — into a note |
+| `Ctrl+Alt+X` | Throw away the recording in progress |
 | `Ctrl+Alt+H` | Keep the next dictation in the original script |
+
+Writing and grammar use a local model through [Ollama](https://ollama.com)
+(`ollama pull qwen2.5:7b`), or Groq if you add a key. On a GPU the installer
+also offers a faster English model (1.6 GB) and the small formatting model.
 
 ---
 
@@ -497,10 +502,21 @@ default and clearly labelled.
 Entirely, once the speech model is downloaded.
 
 **What does it learn about me, and where does it go?**
-A JSON file in the install directory containing spelling preferences and
-observed rates like "capitalises 4% of the time in WhatsApp". It never stores
-the text you wrote. Open it, edit it, delete it — **Settings → Writing** shows
-all of it and has a Forget button.
+A JSON file in the install directory, `profiles.json`: spelling rules, the
+individual words you corrected that taught them, and observed rates like
+"capitalises 4% of the time in WhatsApp". Never your messages. Open it, edit
+it, delete it — **Settings → Writing** shows all of it and has a Forget button.
+
+**Something went wrong.**
+Tray icon → **Open log**. The log is at
+`%LOCALAPPDATA%\LiveWhisper\livewhisper.log`, with one line per dictation
+saying how long each stage took and where the text was pasted. Attach it to an
+[issue](https://github.com/itsskofficial/LiveWhisper/issues).
+
+**It is slower on my laptop than the numbers here.**
+Laptop GPUs are held back hard on battery: the same dictation measured about
+three times slower unplugged. Plug in, or set Windows' power mode to *Best
+performance*.
 
 **My language isn't listed.**
 The twelve are the ones Google's Dakshina dataset covers, because a romanization

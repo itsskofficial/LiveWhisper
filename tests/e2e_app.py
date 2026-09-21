@@ -194,7 +194,23 @@ class Notepad:
 
 # -------------------------------------------------------------------- app
 
-def make_app(backend: str):
+def installed_routes(models_dir: Path) -> dict:
+    """Every catalogued GPU specialist already converted under models_dir."""
+    from livewhisper.specialists import CATALOGUE
+    routes = {}
+    for spec in CATALOGUE:
+        path = models_dir / spec.name
+        if spec.device == "gpu" and (path / "model.bin").exists():
+            route = {"path": str(path)}
+            if spec.latin_output:
+                route["latin_output"] = True
+            if spec.language:
+                route["language"] = spec.language
+            routes[spec.lang] = route
+    return routes
+
+
+def make_app(backend: str, routes: dict | None = None):
     """The real App, with its own profile store and speakers-only capture."""
     from livewhisper import config as cfgio
     from livewhisper.main import App
@@ -210,6 +226,9 @@ def make_app(backend: str):
     cfg["transcription"]["languages"] = ["en", "hi"]
     cfg.setdefault("script", {})["language"] = "hi"
     cfg["output"]["restore_clipboard"] = False
+    if routes:
+        cfg["transcription"]["local"]["models"] = routes
+        cfg["transcription"]["local"]["max_extra_models"] = 2
     cfg["ui"]["overlay"] = False
     path = tmp / "config.yaml"
     cfgio.save(path, cfg)
@@ -285,6 +304,9 @@ def main() -> int:
     ap.add_argument("--only", default="",
                     help="run cases whose name starts with this; 'sweep' or 'learn'")
     ap.add_argument("--per-lang", type=int, default=2)
+    ap.add_argument("--routes", default="",
+                    help="a folder of converted specialists (e.g. D:/models/ct2) to "
+                         "route languages to, as `specialists install` would")
     args = ap.parse_args()
 
     import logging
@@ -294,7 +316,10 @@ def main() -> int:
                         datefmt="%H:%M:%S", encoding="utf-8")
     print("synthesising clips...")
     synthesise()
-    app = make_app(args.backend)
+    routes = installed_routes(Path(args.routes)) if args.routes else None
+    if routes:
+        print(f"specialists: {', '.join(f'{k}->{Path(v['path']).name}' for k, v in routes.items())}")
+    app = make_app(args.backend, routes)
     print("loading and warming the models (what the app does at launch)...")
     t0 = time.perf_counter()
     app._warm_up()
