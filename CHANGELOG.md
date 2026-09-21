@@ -36,7 +36,12 @@ produced each number are in `tests/`, and their output in `tests/results/`.
 - **Twelve South Asian languages written the way you type them** — Hinglish,
   Tanglish, Banglish and nine more — plus English.
 - **Your spelling, learned.** Correct `mujhe` to `muze` twice and every word
-  with ज follows.
+  with ज follows. Corrections to the Hinglish model's text are learned too
+  (`karunga` → `karoonga`); only spelling changes are, never edits like
+  `meeting` → `meetings`.
+- **Nothing invented is pasted.** Given silence or a muted microphone, Whisper
+  makes up text ("aapke liye aapke liye…"); that is caught and you are told
+  nothing was heard. No false alarm on 239,516 real sentences.
 - **Finished text, not a transcript.** Spoken punctuation ("comma", "new
   paragraph", "bullet point"), corrections said out loud ("Monday, I mean
   Tuesday", "kal matlab parso"), emails, percentages and money, and a style per

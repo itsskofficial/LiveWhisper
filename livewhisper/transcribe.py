@@ -471,6 +471,14 @@ class LocalBackend:
         else:
             model, batched = self._model_for(common["language"])
         self.last_latin_output = model is not self._model and route.get("latin_output", False)
+        # Names from the screen help where they are written as they are said:
+        # English, and the Hinglish models that write Latin. Given to a model
+        # writing another script they are noise - Notepad's status bar ("Col,
+        # Plain, Windows, CRLF, UTF") turned a Bengali sentence into two
+        # garbled words, end to end.
+        if common["hotwords"] and not (common["language"] == "en"
+                                       or self.last_latin_output):
+            common["hotwords"] = None
         if model is not self._model and route.get("language"):
             # e.g. Oriserve's Hinglish models are driven with the "en" token,
             # while the rest of the app still needs to know the audio was Hindi.

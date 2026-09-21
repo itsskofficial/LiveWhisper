@@ -13,6 +13,7 @@ changed and feed it back into the profile.
 from __future__ import annotations
 
 import logging
+import re
 import time
 from dataclasses import dataclass
 
@@ -41,6 +42,7 @@ class Delivery:
     language: str | None = None   # which lexicon was used
     style: str = "prose"          # formatting the target app asked for
     formatted_by: str = "rules"   # model | rules | shortcut | none
+    respelled: bool = False       # Latin text from a Hinglish model, respelled
 
 
 class Pipeline:
@@ -186,6 +188,7 @@ class Pipeline:
         script = force_script or self.choose_script(app, screen)
         text = transcript
         romanized = False
+        respelled = False
         lang = None
 
         if has_indic(transcript) and script == "latin":
@@ -205,6 +208,8 @@ class Pipeline:
             # one.
             lang = heard_language
             text = respell(transcript, lang)
+            text = _apply_respellings(text, self.profiles.merged_conventions(app).overrides)
+            respelled = True
 
         out_cfg = self.cfg.get("output") or {}
         if out_cfg.get("remove_fillers", True) and not composed:
@@ -240,6 +245,7 @@ class Pipeline:
         d = Delivery(text=text, raw=transcript, app=app, script=script,
                      romanized=romanized, notes=notes, language=lang,
                      style=style.name, formatted_by=formatted_by)
+        d.respelled = respelled
         self._last = d
         return d
 
@@ -301,8 +307,12 @@ class Pipeline:
         # Orthographic habits: learn from whatever the user actually left there.
         self.profiles.observe_text(self._last.app, current)
 
+        if self._last.respelled:
+            # Latin from a Hinglish model: there is no native word to key the
+            # correction on, so the correction is kept word for word.
+            notes = self._learn_respellings(mine, current)
         # Spelling: only meaningful if we romanized something.
-        if self._last.romanized and getattr(self, "_romanizer", None):
+        elif self._last.romanized and getattr(self, "_romanizer", None):
             try:
                 notes = self._romanizer.learn_from_correction(
                     self._last.text, current)
@@ -318,9 +328,69 @@ class Pipeline:
         self.profiles.save()
         return notes
 
+    def _learn_respellings(self, mine: str, current: str) -> list:
+        """Word-for-word respellings the user made to a Hinglish model's text.
+
+        Only a change of spelling is learned, never a change of word: the
+        consonants have to match once the usual romanization choices are set
+        aside (vowels, j/z, v/w, ph/f, sh/s, aspiration). "karunga" ->
+        "karoonga" and "mujhe" -> "muze" are learned; "meeting" -> "meetings"
+        and "late" -> "later" are edits, and are not.
+        """
+        import difflib
+        ours = conv_mod.tokenize(mine)
+        theirs = conv_mod.tokenize(current)
+        glob = self.profiles.get(ProfileStore.GLOBAL).conventions
+        notes: list = []
+        sm = difflib.SequenceMatcher(a=[w.lower() for w in ours],
+                                     b=[w.lower() for w in theirs], autojunk=False)
+        for tag, i1, i2, j1, j2 in sm.get_opcodes():
+            if tag != "replace" or (i2 - i1) != (j2 - j1):
+                continue
+            for a, b in zip(ours[i1:i2], theirs[j1:j2]):
+                a_l, b_l = a.lower(), b.lower()
+                if (len(a_l) >= 3 and a_l.isascii() and a_l.isalpha() and b_l.isalpha()
+                        and _skeleton(a_l) == _skeleton(b_l)
+                        and conv_mod.plausible_correction(a_l, b_l)):
+                    glob.overrides[a_l] = b_l
+                    notes.append(f"{a_l} -> {b_l}")
+        return notes
+
     def seed_from_onboarding(self, pairs: list) -> list:
         """(devanagari_word, default_spelling, user_spelling) triples."""
         conv = self.profiles.get(ProfileStore.GLOBAL).conventions
         notes = conv.seed(pairs)
         self.profiles.save()
         return notes
+
+
+_SWAPS = (("jh", "z"), ("j", "z"), ("ph", "f"), ("w", "v"), ("sh", "s"), ("ck", "k"),
+          ("q", "k"), ("c", "k"))
+
+
+def _skeleton(word: str) -> str:
+    """A word's consonants, with the choices romanizers disagree on made equal."""
+    w = word.lower()
+    for a, b in _SWAPS:
+        w = w.replace(a, b)
+    w = re.sub(r"(?<=[bcdfgkpt])h", "", w)              # kh/k, bh/b, th/t ...
+    w = re.sub(r"[aeiouy]", "", w)
+    return re.sub(r"(.)\1+", r"\1", w)                  # tt/t, nn/n
+
+
+_WORD_RE = re.compile(r"[A-Za-z]+")
+
+
+def _apply_respellings(text: str, overrides: dict) -> str:
+    """Put back the user's spelling of words a Hinglish model wrote."""
+    latin = {k: v for k, v in overrides.items() if k.isascii()}
+    if not latin:
+        return text
+
+    def repl(m: re.Match) -> str:
+        w = m.group(0)
+        new = latin.get(w.lower())
+        if not new:
+            return w
+        return new[:1].upper() + new[1:] if w[:1].isupper() else new
+    return _WORD_RE.sub(repl, text)

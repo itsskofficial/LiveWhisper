@@ -130,6 +130,14 @@ def main() -> int:
         b.transcribe(np.zeros(16000, "float32"))
         check("no names on screen means no hotwords at all",
               seen.get("hotwords") is None, str(seen.get("hotwords")))
+        bn = LocalBackend({"batch_size": 1, "language": "bn"})
+        bn._model = FakeWhisper()
+        bn.load = lambda: None
+        bn.transcribe(np.zeros(16000, "float32"), hotwords="Col, Plain, Windows, CRLF")
+        check("a model writing another script gets no English hotwords",
+              seen.get("hotwords") is None, str(seen.get("hotwords")))
+        check("status-bar chrome is never a name",
+              phrases(screen_text="Ln 1, Col 1  Windows (CRLF)  UTF-8  Plain text") == "")
     finally:
         faster_whisper.WhisperModel, faster_whisper.BatchedInferencePipeline = saved
 

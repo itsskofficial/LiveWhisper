@@ -45,6 +45,12 @@ _COMMON = {
     "okay", "today", "tomorrow", "yesterday", "now", "soon", "again", "still",
     "sent", "subject", "to", "cc", "bcc", "reply", "forward", "inbox",
     "file", "edit", "view", "help", "search", "settings", "home", "back",
+    # Window chrome that reads like names: Notepad's status bar ("Ln 1, Col 1",
+    # "Plain text", "Windows (CRLF)", "UTF-8") and its kin in other editors.
+    "ln", "col", "plain", "windows", "crlf", "lf", "cr", "utf", "ansi",
+    "unicode", "text", "person", "zoom", "untitled", "notepad", "page", "word",
+    "words", "line", "spaces", "tab", "size", "format", "insert", "tools",
+    "window", "share", "comments", "review", "layout", "design", "references",
 }
 
 # A name, a product, or an acronym - the three shapes worth biasing.

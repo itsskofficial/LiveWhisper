@@ -334,7 +334,7 @@ class App:
             if (self.cfg.get("learning") or {}).get("enabled", True):
                 for note in self.pipeline.learn_from_screen(screen):
                     log.info("learned: %s", note)
-                    self.notify(note)
+                    self.notify(note if note.lower().startswith("learned") else f"Learned {note}")
             heard = getattr(self.backend(), "last_language", None)
             delivery = self.pipeline.process(
                 transcript, screen, force_script=self._force_script,
@@ -553,7 +553,16 @@ class App:
         if not self._window_at_start:
             return False
         now = context.foreground_window()
-        return bool(now) and now != self._window_at_start
+        moved = bool(now) and now != self._window_at_start
+        if moved:
+            try:
+                import ctypes
+                buf = ctypes.create_unicode_buffer(200)
+                ctypes.windll.user32.GetWindowTextW(now, buf, 200)
+                log.info("focus moved during dictation, now on %r", buf.value)
+            except Exception:
+                pass
+        return moved
 
     def _names_in_front_of_me(self) -> str:
         """Names on screen worth expecting, for the decoder to lean on.
