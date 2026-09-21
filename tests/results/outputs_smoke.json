@@ -1,0 +1,58 @@
+{
+ "rows": [
+  {
+   "lang": "hi",
+   "n": 2,
+   "native_wer": 0.265625,
+   "native_cer": 0.08333333333333333,
+   "roman_wer": 0.171875,
+   "usual_spelling": 0.8323095823095823,
+   "leaks": 0,
+   "language_ok": 1.0,
+   "xrt": 0.3971965541408636,
+   "route": "hinglish-prime"
+  },
+  {
+   "lang": "ta",
+   "n": 2,
+   "native_wer": 0.3181818181818182,
+   "native_cer": 0.07602339181286549,
+   "roman_wer": 0.3181818181818182,
+   "usual_spelling": 0.7738095238095238,
+   "leaks": 0,
+   "language_ok": 1.0,
+   "xrt": 0.7962724350979934,
+   "route": "ta-medium"
+  }
+ ],
+ "samples": [
+  {
+   "lang": "hi",
+   "reference": "कुछ अणुओं में अस्थिर केंद्रक होता है, जिसका मतलब यह है कि उनमें थोड़े या बिना किसी झटके से टूटने की प्रवृत्ति होती है,",
+   "native": "कुछ अनुवों में आरस्तिर केंद्रक होता है जिसका मतलब यहां कि उन में थोड़े या बिना किसी जटके से तूटने की प्रवत्ती होती है.",
+   "romanized": "Kuchh anuon mein ast kendrak hota hai jiska matlab yahan ki unmen thode ya bina kisi jhatke se tootne ki pravatti hoti hai.",
+   "heard": "hi"
+  },
+  {
+   "lang": "hi",
+   "reference": "ग्रीनलैंड को बहुत कम जगह बसाया गया था. नॉर्स सगास में वे कहते हैं कि एरिक रेड हत्या के लिए आइसलैंड से निर्वासित किया गया था, और आगे पश्चिम की यात्रा करते समय, ग्रीनलैंड मिला जिसे ग्रीनलैंड नाम दिया गया.",
+   "native": "ग्रीनलेंड को बहुत कम जगब बसाया गया था नौर्स सगास में वे कहते हैं कि एरिक रेड हत्या के लिए आईसलेंड से निर्वासित किया गया था और आगे पश्चम की यात्र करते समय ग्रीनलेंड मिला जिसे ग्रीनलेंड नाम दिया गया.",
+   "romanized": "Greenland ko bahut kam jagah basaya gaya tha. North Saga samay ve kahte hain ki Eric red hatya ke lie Iceland se nirvaasit kiya gaya tha aur aage pashchim ki yatra karte samay Greenland mila jise Greenland naam diya gaya.",
+   "heard": "hi"
+  },
+  {
+   "lang": "ta",
+   "reference": "இது வேதியியல் pH என அழைக்கப்படுகிறது. நீங்கள் சிவப்பு முட்டைக்கோஸ் சாற்றைப் பயன்படுத்தி ஒரு குறிகாட்டியை உருவாக்கலாம்.",
+   "native": "இது வேதியில் பிக் என அழைக்கப்படுகிறது நீங்கள் சிறப்பு முட்டைக்கோஸ் சாற்றைப் பயன்படுத்தி ஒரு குறிகாட்டியை உருவாக்கலாம்.",
+   "romanized": "Idhu vaethiyil big ena azhaikkappadugirathu neengal sirappu muttaikkos saatraip payanpaduththi oruu kurikaattiyai uruvaakkalaam.",
+   "heard": "ta"
+  },
+  {
+   "lang": "ta",
+   "reference": "லக்கா சிங் பஜனையை வழங்கினார். பாடகர், ராஜு கண்டெல்வலும் அவருடன் வந்திருந்தார்.",
+   "native": "லகா சிங் பஜனை வழங்கினார் பாடகர் ராஜூ கண்டல்வேலும் அவருடன் வந்திருந்தார்.",
+   "romanized": "Lakaa singh pajanai valangkinaar paadagar rajuu kandalvelum avarudan vandhirunthaar.",
+   "heard": "ta"
+  }
+ ]
+}
