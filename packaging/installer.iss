@@ -43,9 +43,9 @@ SolidCompression=yes
 LZMAUseSeparateProcess=yes
 WizardStyle=modern
 WizardSizePercent=110
-AppMutex=LiveWhisper.Running
-CloseApplications=force
-RestartApplications=no
+; A running copy is closed by the [Code] below rather than AppMutex, which
+; only asks the user to close it - and makes a silent upgrade give up.
+CloseApplications=no
 VersionInfoVersion={#AppVersion}
 VersionInfoDescription={#AppName} setup
 
@@ -71,6 +71,8 @@ Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: 
 
 [Run]
 Filename: "{app}\{#AppExe}"; Description: "Open LiveWhisper"; Flags: nowait postinstall skipifsilent
+; A silent upgrade puts back the copy it closed, in the tray.
+Filename: "{app}\{#AppExe}"; Parameters: "--background"; Flags: nowait runasoriginaluser; Check: WasRunning
 
 [UninstallRun]
 Filename: "{sys}\taskkill.exe"; Parameters: "/F /IM llama-server.exe"; Flags: runhidden; RunOnceId: "KillRunner"
@@ -79,6 +81,50 @@ Filename: "{sys}\taskkill.exe"; Parameters: "/F /IM llama-server.exe"; Flags: ru
 Type: filesandordirs; Name: "{app}"
 
 [Code]
+var
+  AppWasRunning: Boolean;
+
+function WasRunning: Boolean;
+begin
+  Result := AppWasRunning and WizardSilent;
+end;
+
+{ Close LiveWhisper and its model runner so their files can be replaced. The
+  app keeps no unsaved state: settings and history are written as they change. }
+procedure CloseApp;
+var
+  Code: Integer;
+begin
+  Exec(ExpandConstant('{sys}\taskkill.exe'), '/F /IM LiveWhisper.exe', '', SW_HIDE, ewWaitUntilTerminated, Code);
+  Exec(ExpandConstant('{sys}\taskkill.exe'), '/F /IM llama-server.exe', '', SW_HIDE, ewWaitUntilTerminated, Code);
+end;
+
+function InitializeSetup: Boolean;
+begin
+  AppWasRunning := CheckForMutexes('LiveWhisper.Running');
+  Result := True;
+end;
+
+function PrepareToInstall(var NeedsRestart: Boolean): String;
+begin
+  if CheckForMutexes('LiveWhisper.Running') then
+  begin
+    CloseApp;
+    Sleep(800);
+  end;
+  Result := '';
+end;
+
+function InitializeUninstall: Boolean;
+begin
+  if CheckForMutexes('LiveWhisper.Running') then
+  begin
+    CloseApp;
+    Sleep(800);
+  end;
+  Result := True;
+end;
+
 const
   WebView2Key = 'SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}';
   WebView2UserKey = 'Software\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}';

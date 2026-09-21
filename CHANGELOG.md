@@ -52,8 +52,10 @@ produced each number are in `tests/`, and their output in `tests/results/`.
 ### Speed
 
 - About 0.9 s to text for a four-second English sentence, 1.1 s for Hindi with
-  the Hinglish model, on mains power. A laptop on battery is about three times
-  slower; the README says why.
+  the Hinglish model, on mains power. On battery Windows caps a laptop GPU and
+  it is several times slower (6 s measured); the README says what to change.
+- With a Groq key: about 2 s from the end of speech to pasted text, 1 s of it
+  the transcription itself (English, measured end to end).
 - The language is worked out while you are still speaking.
 - English is decoded by a smaller model when installed, 30–55% faster with no
   loss in accuracy.
@@ -63,8 +65,14 @@ produced each number are in `tests/`, and their output in `tests/results/`.
 
 - Long dictations no longer lose words: paragraphs used to come back missing a
   quarter of what was said.
-- Language-specialist models for eight languages, chosen by measurement, and a
-  144 MB Hinglish model for machines with no GPU.
+- Accuracy models for all twelve languages, chosen by measurement and
+  downloaded in one click (native-script Hindi at 10% word error), and a
+  144 MB Hinglish model for machines with no GPU. Every language can be written
+  in its own script or romanized; the README has both numbers per language.
+- Spoken punctuation survives Whisper's own: "Hi Rahul comma" is no longer
+  heard as a name, and never doubles a comma.
+- Words to know also fix one-letter near misses ("full request" → "pull
+  request").
 
 ### Writing for you
 
@@ -72,18 +80,19 @@ produced each number are in `tests/`, and their output in `tests/results/`.
   screen and pastes a reply in your voice.
 - `Ctrl+Alt+F`: fixes the grammar in the field you are in, keeping your
   lowercase and slang.
-- Runs on a local model through Ollama, or Groq with a key. A missing model is
-  reported before you speak, with the command that fixes it.
+- Runs on the built-in local model, or Groq with a key. A missing model is
+  reported before you speak, with where to get it.
 
 ### Everything else
 
-- A log at `%LOCALAPPDATA%\LiveWhisper\livewhisper.log` (tray → Open log), with
-  one line per dictation saying how long each stage took.
-- The installer works on a fresh Python, and offers the optional models it can
-  use on your hardware.
+- A log at `%LOCALAPPDATA%\LiveWhisper\livewhisper.log` (Settings → Open log),
+  with one line per dictation saying how long each stage took.
+- Uninstalling offers to remove your settings and the downloaded models too.
 
 ### Known limits
 
 - Gujarati, Punjabi, Malayalam and Marathi still get about half the words
-  wrong; Sindhi has no specialist model.
-- Windows only.
+  wrong, and Sinhala most of them: no better openly licensed model exists yet.
+- The installer is not code-signed yet, so Windows asks for confirmation the
+  first time.
+- Windows 10/11 only.

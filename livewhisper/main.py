@@ -1,8 +1,9 @@
-"""LiveWhisper - hotkey-driven meeting transcription for Windows.
+"""LiveWhisper - voice dictation for Windows.
 
-Ctrl+Alt+Space captures system audio plus your mic. Press it again and the audio
-is transcribed, the active profile's prompt is prepended, and the result lands
-wherever your cursor is.
+Ctrl+Alt+Space records your microphone. Press it again and the words are
+transcribed, formatted, written the way you type them, and pasted wherever your
+cursor was when you started. Notes mode (Ctrl+Alt+N) records a meeting - your
+mic and the other people - into a note instead.
 
 Threading: the app window (pywebview) owns the main thread, the recording
 pill has its own thread and message loop, pystray runs its message loop in a
@@ -26,7 +27,7 @@ import pystray
 
 from . import __version__
 from . import config as cfgio
-from . import bias, context, icons, output, paths
+from . import bias, context, guard, icons, output, paths
 from .actions import Actions
 from .history import History
 from .notes import NoteBook
@@ -386,7 +387,7 @@ class App:
         try:
             t0 = time.perf_counter()
             instruction = self.backend().transcribe(recording.audio)
-            if not instruction.strip():
+            if not instruction.strip() or guard.invented(instruction, recording.audio):
                 self.notify("Did not catch what to write.")
                 return
             log.info("command: %s", instruction)
@@ -457,6 +458,10 @@ class App:
             t_asr = time.perf_counter()
             if not transcript:
                 self.notify("No speech detected in the recording.")
+                return
+            if guard.invented(transcript, recording.audio):
+                log.info("dropped a transcript that looks made up: %r", transcript[:80])
+                self.notify("Nothing was heard - is the right microphone on?")
                 return
 
             # Notes mode diverts the transcript into the open note instead.
@@ -666,6 +671,11 @@ class App:
 
     def component_installed(self, cid: str) -> None:
         """A download finished: pick up the route it wrote and use it."""
+        if cid in ("formatter", "writer"):
+            # Text models: the speech model is untouched, so do not reload it.
+            self.pipeline = Pipeline(self.cfg, self.styles)
+            threading.Thread(target=self.pipeline.warm_formatter, daemon=True).start()
+            return
         try:
             cfg = cfgio.load(self.config_path)
         except Exception:
@@ -759,7 +769,18 @@ class App:
         try:
             backend = self.backend()
             warm = getattr(backend, "warm", None)
-            (warm or backend.load)()
+            # "Loading the ... model" is for someone waiting on a dictation,
+            # not for a warm-up nobody asked for.
+            parts = [b for b in (backend, getattr(backend, "local", None)) if b is not None]
+            saved = [getattr(b, "notify", None) for b in parts]
+            for b in parts:
+                b.notify = lambda msg: log.info("%s", msg)
+            try:
+                (warm or backend.load)()
+            finally:
+                for b, n in zip(parts, saved):
+                    if n is not None:
+                        b.notify = n
             log.info("%s backend ready", self.backend_name)
             self.pipeline.warm_formatter()
         except Exception as e:
