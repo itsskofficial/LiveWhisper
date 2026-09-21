@@ -87,6 +87,18 @@ def main() -> int:
               lb._route("bn").get("path", "").endswith("bn-medium")
               and lb._route("hi").get("latin_output") is True)
 
+        hi_native = sp.Specialist("hi", "org/hi-native", "hi-native", 6.2, "apache-2.0",
+                                  role="native", measured={"native": 0.1})
+        sp.install(hi_native, cfg_path, progress=quiet)
+        route = dict(cfgio.load(cfg_path)["transcription"]["local"]["models"]["hi"])
+        check("a native-script model is added beside the romanizing one",
+              route.get("latin_output") is True
+              and route.get("native", "").endswith("hi-native"), str(route))
+        sp.install(hi, cfg_path, progress=quiet)
+        route = dict(cfgio.load(cfg_path)["transcription"]["local"]["models"]["hi"])
+        check("reinstalling the romanizing model keeps the native one",
+              route.get("native", "").endswith("hi-native"), str(route))
+
         sp.remove("bn", cfg_path, progress=quiet)
         models = cfgio.load(cfg_path)["transcription"]["local"]["models"]
         check("remove drops the route", "bn" not in models)

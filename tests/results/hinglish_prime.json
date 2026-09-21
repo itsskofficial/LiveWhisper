@@ -1,0 +1,95 @@
+{
+ "english_kept": 0.9736842105263158,
+ "hindi_accepted": 0.9266666666666666,
+ "native_exact": 0.94,
+ "clips": 80,
+ "english_lost": {
+  "pull": 1,
+  "deadline": 1,
+  "unbox": 1,
+  "hike": 1,
+  "cab": 1
+ },
+ "samples": [
+  {
+   "said": "मैंने pull request review कर लिया है, अब merge कर दो",
+   "romanized": "Mainne pull request review kar liya hai. Ab merge kar do.",
+   "native": "मैंने pull request review कर लिया है, अब merge कर दो."
+  },
+  {
+   "said": "मैंने pull request review कर लिया है, अब merge कर दो",
+   "romanized": "Mainne full request review kar liya hai, ab merge kar do.",
+   "native": "मैंने pull request review कर लिया है, अब merge कर दो."
+  },
+  {
+   "said": "कल की meeting cancel हो गई है, client ने reschedule करने को बोला",
+   "romanized": "Kal ki meeting cancel ho gai hai. Client ne reschedule karne ko bola.",
+   "native": "कल की मीटिंग कैंसल हो गई है, क्लाइंट ने रीस्केड्यूल करने को बोला."
+  },
+  {
+   "said": "कल की meeting cancel हो गई है, client ने reschedule करने को बोला",
+   "romanized": "Kal ki meeting cancel ho gai hai. Client ne reschedule karne ko bola.",
+   "native": "कल की मीटिंग कैंसल हो गई है. क्लाइंट ने रीस्किडूल करने को बोला."
+  },
+  {
+   "said": "भाई laptop hang हो गया है, restart करके देखता हूँ",
+   "romanized": "Bhai laptop hang ho gaya hai. Restart karke dekhata hoon.",
+   "native": "भाई लाप्टॉप हैं हो गया है, रीस्टार्ट करके देखता हूँ."
+  },
+  {
+   "said": "भाई laptop hang हो गया है, restart करके देखता हूँ",
+   "romanized": "Bhai laptop hang ho gaya hai. Restart karke dekhata hoon.",
+   "native": "भाई लाप्टॉप हैंग हो गया है, री स्टार्ट करके देखता हूँ."
+  },
+  {
+   "said": "deadline से पहले presentation ready कर देना please",
+   "romanized": "Dedline se pahle presentation ready kar dena please.",
+   "native": "Deadline से पहले presentation ready कर देना please."
+  },
+  {
+   "said": "deadline से पहले presentation ready कर देना please",
+   "romanized": "Deadline se pahle presentation ready kar dena please.",
+   "native": "Deadline से पहले presentation ready कर देना please."
+  },
+  {
+   "said": "मुझे लगता है कि ये bug production में भी है",
+   "romanized": "Mujhe lagta hai ki yah bug production mein bhi hai.",
+   "native": "मुझे लगता है कि ये बग प्रड़क्षन में भी है."
+  },
+  {
+   "said": "मुझे लगता है कि ये bug production में भी है",
+   "romanized": "Mujhe lagta hai ki yah bug production mein bhi hai.",
+   "native": "मुझे लगता है कि ये बग प्रडाक्शन में भी है."
+  },
+  {
+   "said": "आज office नहीं आ पाऊंगा, work from home करूंगा",
+   "romanized": "Aaj office nahin aa paoonga. Work from home karunga.",
+   "native": "आज ओफिस नहीं आ पाऊंगा, वर्क फ्रॉम होम करूँगा."
+  },
+  {
+   "said": "आज office नहीं आ पाऊंगा, work from home करूंगा",
+   "romanized": "Aaj office nahin aa paoonga. Work from home karunga.",
+   "native": "आज ओफिस नहीं आ पाऊंगा, वर्क फ्रॉम होम करूँगा."
+  },
+  {
+   "said": "tickets book कर दिए हैं, Friday की flight है",
+   "romanized": "Tickets book kar die hain. Friday ki flight hai.",
+   "native": "टिकेट्स बुक कर दिये हैं. फ्राइडे की फ्लाइट है."
+  },
+  {
+   "said": "tickets book कर दिए हैं, Friday की flight है",
+   "romanized": "Tickets book kar die hain Friday ki flight hai.",
+   "native": "टिकेट्स बुक कर दिये हैं फ्राइडे की फ्लाइट है."
+  },
+  {
+   "said": "मम्मी को बोल देना कि मैं dinner पर late आऊंगा",
+   "romanized": "Mommy ko bol dena ki main dinner par late aaunga.",
+   "native": "मम्मी को बोल देना कि मैं डिनर पर लेट आओंगा."
+  },
+  {
+   "said": "मम्मी को बोल देना कि मैं dinner पर late आऊंगा",
+   "romanized": "Mommy ko bol dena ki main dinner par late aaunga.",
+   "native": "मम्मी को बोल देना कि मैं डिना पर लेट आउंगा."
+  }
+ ]
+}

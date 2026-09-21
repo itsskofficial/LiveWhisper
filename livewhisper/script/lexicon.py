@@ -61,6 +61,12 @@ COMMON_WORDS = {
     "एक": "ek", "दो": "do", "कुछ": "kuch", "सब": "sab", "कोई": "koi",
     "कौन": "kaun", "कहाँ": "kahan",
   },
+  "sd": {
+    # "and", written with its own letter (U+06FD). It appeared 8 times in 20
+    # FLEURS Sindhi sentences and is absent from the Dakshina sample, so it was
+    # romanized letter by letter as "I".
+    "۽": "ain",
+  },
   # Other languages rely on the lexicon alone until a native speaker
   # contributes a list. See CONTRIBUTING.md - this is a good first issue.
 }

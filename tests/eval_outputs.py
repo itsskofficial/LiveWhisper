@@ -72,6 +72,9 @@ def main() -> int:
     ap.add_argument("--routes", default="D:/models/ct2",
                     help="folder of converted specialists; '' for large-v3 alone")
     ap.add_argument("--label", default="")
+    ap.add_argument("--try", dest="try_", default="",
+                    help="candidate routes to measure, e.g. sd=D:/models/ct2/sd-large"
+                         " (a lang=none entry removes that language's route)")
     args = ap.parse_args()
 
     from e2e_app import installed_routes
@@ -81,6 +84,12 @@ def main() -> int:
     base = cfgio.load(ROOT / "config.yaml")
     local = dict(base["transcription"]["local"])
     local["models"] = installed_routes(Path(args.routes)) if args.routes else {}
+    for item in [x for x in args.try_.split(",") if x]:
+        lang, path = item.split("=", 1)
+        if path == "none":
+            local["models"].pop(lang, None)
+        else:
+            local["models"][lang] = {"path": path}
     local["max_extra_models"] = 1
     backend = LocalBackend(local, languages=["en"])
     backend.load()

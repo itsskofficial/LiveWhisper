@@ -1,0 +1,74 @@
+{
+ "rows": [
+  {
+   "lang": "hi",
+   "n": 20,
+   "native_wer": 0.28256513026052105,
+   "native_cer": 0.09875311720698254,
+   "roman_wer": 0.23446893787575152,
+   "usual_spelling": 0.8155833981351994,
+   "leaks": 0,
+   "language_ok": 1.0,
+   "xrt": 0.8477494406640085,
+   "route": "large-v3"
+  }
+ ],
+ "samples": [
+  {
+   "lang": "hi",
+   "reference": "मेजरकेन खाना, भूमध्य सागर में समान क्षेत्रों की तरह, रोटी, सब्जियों और मांस (विशेष रूप से सूअर का मांस) पर आधारित है, और जैतून के तेल का उपयोग करता है।",
+   "native": "मेजर किन खाना भूम अध्यसागर में सामान शेतरों की तरह रोटी सबजियों और मास विशेश रूप से सुवर का मास पर आधारित है और जैतून के तेल का उप्योग करता है.",
+   "romanized": "Major kin khana bhumam adhyasagar mein saman shetron ki tarah roti sabjiyon aur maas visheshsh rup se suvarar ka maas par aadharit hai aur jaitun ke tel ka upyog karta hai.",
+   "heard": "hi"
+  },
+  {
+   "lang": "hi",
+   "reference": "वैज्ञानिकों का मानना है कि ओसेलोट्स गंध के द्वारा जानवरों का पीछा करते और खाते (शिकार) हैं, यह सूँघते हुए कि वे ज़मीन पर कहाँ रहे होंगे।",
+   "native": "ग्यानिकों का मानना है कि ओसे लोड्स गंद के द्वारा जानवरों का पीछा करते और खाते हैं ये सूमते हुए कि वे जमीन पर कहां रहे हुँगे.",
+   "romanized": "Gyanikon ka manana hai ki ose lods gand ke dwara janvaron ka pichha karte aur khaate hain ye sumate huye ki ve jameen par kahan rahe hunge.",
+   "heard": "hi"
+  },
+  {
+   "lang": "hi",
+   "reference": "आर्मंड वर्सास ने कहा, मैंने अपनी बहन और उसकी दोस्त को खो दिया, और रास्ते में व्हीलचेयर में दो दिव्यांग लोग थे, और लोग उनपर उछल रहे थे और उन्हें धक्का दे रहे थे”।",
+   "native": "आर्म्ड वर्षास ने कहा मैंने अपनी बहन और उनकी दोस्त को खो दिया और रास्ते में हुईल चेयर में दो दिब्यांग लोग थे और लोग उन पर उचल रहे थे और उन्हें धक्का दे रहे थे.",
+   "romanized": "Armd varshas ne kaha maine apni bahan aur unki dost ko kho diya aur raste mein huill chair mein do dibyang log the aur log un par uchal rahe the aur unhe dhakka de rahe the.",
+   "heard": "hi"
+  },
+  {
+   "lang": "hi",
+   "reference": "कुतूहल गाँव में आधे घंटे टहलना समय की हानि नहीं है।",
+   "native": "कुतुहल गाउ में आदे गंति टहलना समय की हानी नहीं है।.",
+   "romanized": "Kutuhal gauu mein aade gantin tahalana samay ki hani nahi hai.",
+   "heard": "hi"
+  },
+  {
+   "lang": "hi",
+   "reference": "जब घायलों को लड़ाई बंद होने के बाद अस्पताल ले जाया गया, तो लगभग 40 अन्य बचे हुए कैदी यार्ड में रुके और अपनी कोठरियों में लौटने से इनकार कर दिया.",
+   "native": "जब गायलों को लड़ाई बंध होने के बाद अस्पताल ले जाया गया तो लगबख 40 अन्य बचे हुए कैदी यार्ड में रुके और अपनी कोट्रियों में लोटने से इंकार कर दिया.",
+   "romanized": "Jab gayalon ko ladai bandh hone ke baad aspataal le jaya gaya to lagabakh 40 anya bache huye kaidi yard mein ruke aur apni kotriyon mein lotne se inkaar kar diya.",
+   "heard": "hi"
+  },
+  {
+   "lang": "hi",
+   "reference": "पूर्व हाउस स्पीकर न्यूट गिंग्रिच, टेक्सास के गर्वनर रिक पैरी, और कांग्रेसवुमन मिशेल बैचमैन ने क्रमश: चौथा, पाँचवाँ और छठा स्थान हासिल किया.",
+   "native": "पूर्व हाउस स्पीकर न्यूट ग्रिंकिच टैकसास के गवर्नर रिक पैरी और कॉंग्रेस वुमेन मिशल बैच मैन ने क्रमशा चोथा, पाँचवा और छटा इस्थान हाशल किया.",
+   "romanized": "Purv house speaker newtut grinkich taxass ke gavarnar reak pairi aur congresss vumen mishall batch man ne kramsha chotha, panchva aur chhata isthan hashall kiya.",
+   "heard": "hi"
+  },
+  {
+   "lang": "hi",
+   "reference": "रॉबिन उथप्पा ने केवल 41 गेंदों में 11 चौकों और 2 छक्कों की मदद से 70 रन बना कर पारी का सर्वोच्च स्कोर बनाया.",
+   "native": "रॉबिन उथपपा ने केवल 41 गेंदों में 11 चौंकों और 2 छकों की मदद से 70 रन बना कर पारी का सर्वची स्कूर बनाया.",
+   "romanized": "Robin uthppapa ne keval 41 gendon mein 11 chaunkon aur 2 chhakon ki madad se 70 run bana kar pari ka sarvachi schoore banaya.",
+   "heard": "hi"
+  },
+  {
+   "lang": "hi",
+   "reference": "यदि आप सर्दियों में आर्कटिक या अंटार्कटिक क्षेत्रों में जाते हैं, तो आप ध्रुवीय रात का अनुभव करेंगे, जिसका अर्थ है कि सूरज क्षितिज से ऊपर नहीं उगता है।",
+   "native": "यदि आप सर्दियों में आर्टिक या अंटार्टिक शेत्रों में जाते हैं तो आप दुरुव्य रात का अनुभव करेंगे जिसका अर्थ है कि सूरत शिति से उपर नहीं उपता है.",
+   "romanized": "Yadi aap sardiyon mein artick ya antartic shetron mein jate hain to aap duruvya raat ka anubhav karenge jiska arth hai ki surat shiti se upar nahi upta hai.",
+   "heard": "hi"
+  }
+ ]
+}

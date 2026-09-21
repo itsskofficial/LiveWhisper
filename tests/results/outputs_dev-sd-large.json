@@ -1,0 +1,74 @@
+{
+ "rows": [
+  {
+   "lang": "sd",
+   "n": 20,
+   "native_wer": 0.011337868480725623,
+   "native_cer": 0.004227053140096618,
+   "roman_wer": 0.564625850340136,
+   "usual_spelling": 0.21330870300936117,
+   "leaks": 0,
+   "language_ok": 1.0,
+   "xrt": 1.06674069811708,
+   "route": "sd-large"
+  }
+ ],
+ "samples": [
+  {
+   "lang": "sd",
+   "reference": "ان کانپوءِ، ڪجهہ پاکڙا، خاص طور تي انگريزي پاکڙو، جنهن ۾ حفاظتي بار آهن جيڪي پاکڙي کان ڪرائڻ ۾ رڪاب جي مدد ڪن ٿا جيڪڏهن ڪرندڙ سوار انهن کي پوئتي ڇڪي ٿو.",
+   "native": "ان کانپوءِ ڪجهہ پاکڙا خاص طور تي انگريزي پاکڙو جنهن ۾ حفاظتي بار آهن جيڪي پاکڙي کان ڪرائڻ ۾ رڪاب جي مدد ڪن ٿا جيڪڏهن ڪرندڙ سوار انهن کي پوئتي ڇڪي ٿو.",
+   "romanized": "Un kanpoe kajhah pakra khaas taur tee angrezi pakro janhanan ma hafazati baar aahan jeki pakri kaan karayan ma rakab ji madad kan thaa jekadhan karandardar sawar anhann kee poyti chhiki thow.",
+   "heard": "sd"
+  },
+  {
+   "lang": "sd",
+   "reference": "کنڊ کان ڊگھي مفاصلي جي ڪري مُماليه سفر ڪرڻ کان قاصر هئا جنهن جي ڪري وڏي ڪمي گالاپيگوس ۾ بنيادي گاهه چرڻ وارو جانور ٿيو.",
+   "native": "کنڊ کان ڊگھي مفاصلي جي ڪري مُماليه سفر ڪرڻ کان قاصر هئا جنهن جي ڪري وڏي ڪمي گاضاپيگوس ۾ بنيادي گاهه چرڻ وارو جانور ٿيو.",
+   "romanized": "Kand kaan dighi mufasili ji kari mumaliyah safar karann kaan qasir haya janhanan ji kari wadi kami gazapegos ma banyadi gahahh charan waro jaanwar theo.",
+   "heard": "sd"
+  },
+  {
+   "lang": "sd",
+   "reference": "ڪيترائي عام فارميٽ (مثال طور فاميٽس جي APS فيملي) هن ڏيک جي نسبت جي برابر يا اٽڪل ويجهو آهن.",
+   "native": "ڪيترائي عام فارميٽ مثال طور فاميٽس جي aps فيملي هن ڏيک جي نسبت جي برابر يا اٽڪل ويجهو آهن.",
+   "romanized": "Ketrai aam formet misaal taur fommets ji aps femli hann dek ji nisbat ji baraabar ya atkal vejhoo aahan.",
+   "heard": "sd"
+  },
+  {
+   "lang": "sd",
+   "reference": "گڏيل قومن جو ادارو گلوبل وارمنگ مان متاثر ٿيل ملڪن کي ان جي اثرن کي منهن ڏيڻ لاءِ فنڊ کي حتمي شڪل ڏيڻ جي اميد ڪري ٿو.",
+   "native": "گڏيل قومن جو ادارو گلوبل وارمنگ مان متاثر ٿيل ملڪن کي ان جي اثرن کي منهن ڏيڻ لاءِ فنڊ کي حتمي شڪل ڏيڻ جي اميد ڪري ٿو.",
+   "romanized": "Gadil qoman jo adaro global warming maan mutasir thell malkan kee un ji asran kee munhanan deen laaee fund kee hatmi shikal deen ji ameed kari thow.",
+   "heard": "sd"
+  },
+  {
+   "lang": "sd",
+   "reference": "هڪ ڏينهن ۾ صرف اٺ تمغن جي دستياب هجڻ سان، ڪيترائي ملڪ ميڊل پوڊيم ٺاهڻ ۾ ناڪام ٿي ويا آهن.",
+   "native": "هڪ ڏينهن ۾ صرف اٺ تمغن جي دستياب هجڻ سان ڪيترائي ملڪ ميڊل پوڊيم ٺاهڻ ۾ ناڪام ٿي ويا آهن.",
+   "romanized": "Hikk deenhan ma sirf ath tamghan ji dastiyab hajann san ketrai malakk medal podim thahann ma nakam thiy via aahan.",
+   "heard": "sd"
+  },
+  {
+   "lang": "sd",
+   "reference": "اهو عام رواج ٿي ويو، ته ويگن جي لڪڙي جي ڦيٿي تي وڌيڪ لوه هجڻ جي ڪري وڌيڪ لڪڙي لڳڻ لڳي.",
+   "native": "اهو عام رواج ٿي ويو ته ويگن جي لڪڙي جي ڦيٿي تي وڌيڪ لوه هجڻ جي ڪري وڌيڪ لڪڙي لڳڻ لڳي.",
+   "romanized": "Ahoo aam riwaaj thiy oio tah vegan ji lakri ji phethi tee wadheek loh hajann ji kari wadheek lakri lagann lagi.",
+   "heard": "sd"
+  },
+  {
+   "lang": "sd",
+   "reference": "کنڊ کان ڊگھي مفاصلي جي ڪري مُماليه سفر ڪرڻ کان قاصر هئا جنهن جي ڪري وڏي ڪمي گالاپيگوس ۾ بنيادي گاهه چرڻ وارو جانور ٿيو.",
+   "native": "کنڊ کان ڊگھي مفاصلي جي ڪري مُماليه سفر ڪرڻ کان قاصر هئا جنهن جي ڪري وڏي ڪمي گالاپيگوس ۾ بنيادي گاهه چرڻ وارو جانور ٿيو.",
+   "romanized": "Kand kaan dighi mufasili ji kari mumaliyah safar karann kaan qasir haya janhanan ji kari wadi kami galapegos ma banyadi gahahh charan waro jaanwar theo.",
+   "heard": "sd"
+  },
+  {
+   "lang": "sd",
+   "reference": "عبراني ڪٽنب جي گهڻي زندگي کليل هوا ۾ گذري.",
+   "native": "عبراني ڪٽنب جي گهڻي زندگي کليل هوا ۾ گذري.",
+   "romanized": "Abrani katnab ji ghani zindagee kalil hawa ma guzri.",
+   "heard": "sd"
+  }
+ ]
+}

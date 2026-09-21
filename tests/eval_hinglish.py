@@ -67,6 +67,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--routes", default="D:/models/ct2")
     ap.add_argument("--label", default="")
+    ap.add_argument("--try", dest="try_", default="",
+                    help="route overrides, e.g. hi=D:/models/ct2/hi-vaani; hi=none")
     args = ap.parse_args()
 
     from e2e_app import installed_routes
@@ -78,6 +80,12 @@ def main() -> int:
     base = cfgio.load(ROOT / "config.yaml")
     local = dict(base["transcription"]["local"])
     local["models"] = installed_routes(Path(args.routes)) if args.routes else {}
+    for item in [x for x in args.try_.split(",") if x]:
+        lang, path = item.split("=", 1)
+        if path == "none":
+            local["models"].pop(lang, None)
+        else:
+            local["models"][lang] = {"path": path}
     local["max_extra_models"] = 2
     backend = LocalBackend(local, languages=["hi", "en"])
     backend.load()

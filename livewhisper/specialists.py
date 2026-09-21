@@ -44,6 +44,9 @@ class Specialist:
     measured: dict = field(default_factory=dict)   # metric -> value, bench_asr
     note: str = ""
     device: str = "gpu"            # gpu | cpu: which kind of machine it is for
+    # "native": used only when the user wants the language's own script, beside
+    # a romanizing model that serves romanized requests.
+    role: str = "any"
 
 
 # Filled from tests/bench_asr.py runs. An entry without measurements is a
@@ -92,6 +95,20 @@ CATALOGUE: list = [
         note="Writes Hinglish straight from audio, so English words stay English. "
              "Large-v3 sized: with the main model loaded too, allow ~6 GB of VRAM."),
     Specialist(
+        # Native-script Hindi. Hinglish-Prime writes Latin text and cannot give
+        # Devanagari; large-v3 did it at 26.5% WER. Measured on both FLEURS
+        # splits (Vaani is not FLEURS, and the two agree): test 10.3% WER /
+        # 3.0% CER, dev 10.4% / 4.1%. On the code-switched set it spells 96.0%
+        # of Hindi words exactly. It is not the romanized route: it writes
+        # English words in Devanagari, and romanizing those kept only 60% of
+        # English words against Prime's 97.4% (tests/eval_hinglish.py).
+        "hi", "ARTPARK-IISc/whisper-large-v3-vaani-hindi", "hi-vaani", 6.2,
+        "apache-2.0", role="native",
+        measured={"FLEURS test WER, native script": "10.3% (large-v3 26.5%)",
+                  "FLEURS test CER, native script": "3.0% (large-v3 8.7%)",
+                  "code-switched Hindi spelled exactly": "96.0% (large-v3 94.0%)"},
+        note="For Devanagari output. Large-v3 sized, 3 GB converted."),
+    Specialist(
         # For machines without a usable GPU. Measured on the batched path the
         # app decodes with, scored after respelling as the app delivers it
         # (tests/rescore_delivered.py). The CPU default before it, `small`,
@@ -131,6 +148,16 @@ CATALOGUE: list = [
         note="Clearly better than large-v3, but still misses about half the words. "
              "Whisper-medium fine-tuned by SPRING Lab, IIT Madras; 1.5 GB converted."),
     Specialist(
+        # Fine-tuned on FLEURS Sindhi, so it is measured on the FLEURS test
+        # split only: on the dev split it scored an implausible 1.1% WER, which
+        # says it saw those recordings. 29.2% on test matches the 27.7% its own
+        # card reports.
+        "sd", "steja/whisper-large-sindhi", "sd-large", 3.09, "apache-2.0",
+        measured={"FLEURS test word error, native": "29.2% (large-v3 104%)",
+                  "FLEURS test character error, native": "13.1% (large-v3 108%)"},
+        note="large-v3 cannot write Sindhi at all; this can. Large-v2 sized, "
+             "allow ~6 GB of VRAM with the main model."),
+    Specialist(
         "mr", "DrishtiSharma/whisper-large-v2-marathi", "mr-large-v2", 6.17,
         "apache-2.0",
         measured={"FLEURS word error": "47.2% (large-v3 78.7%)",
@@ -159,7 +186,15 @@ def recommended(lang: str, cpu: bool = False) -> Specialist | None:
     per dictation, and a CPU model on a GPU gives away accuracy for nothing.
     """
     want = "cpu" if cpu else "gpu"
-    return next((s for s in candidates(lang) if s.measured and s.device == want), None)
+    return next((s for s in candidates(lang) if s.measured and s.device == want
+                 and s.role != "native"), None)
+
+
+def native_for(lang: str, cpu: bool = False) -> Specialist | None:
+    """A separate native-script model, where the main route writes Latin."""
+    if cpu:
+        return None
+    return next((s for s in candidates(lang) if s.measured and s.role == "native"), None)
 
 
 # ------------------------------------------------------------------ convert
@@ -252,6 +287,16 @@ def install(spec: Specialist, config_path: Path, progress=print) -> Path:
     local = cfg.setdefault("transcription", {}).setdefault("local", {})
     if not local.get("models"):
         local["models"] = {}
+    existing = local["models"].get(spec.lang)
+    if spec.role == "native":
+        # Beside the romanizing route, not instead of it.
+        if isinstance(existing, str):
+            existing = {"path": existing}
+        if isinstance(existing, dict) and existing.get("latin_output"):
+            existing["native"] = str(out)
+            route = existing
+    elif isinstance(existing, dict) and existing.get("native") and isinstance(route, dict):
+        route["native"] = existing["native"]
     local["models"][spec.lang] = route
     cfgio.save(config_path, cfg)
     progress(f"Installed. {spec.lang} now decodes with {spec.name}; restart the app.")
@@ -287,6 +332,8 @@ def main(argv: list | None = None) -> int:
     p.add_argument("lang")
     p.add_argument("--force", action="store_true",
                    help="install an unmeasured candidate anyway")
+    p.add_argument("--native", action="store_true",
+                   help="install the native-script model for the language")
     p.add_argument("--cpu", action="store_true", default=None,
                    help="pick the CPU model (default: detected from the machine)")
     p = sub.add_parser("remove")
@@ -310,7 +357,7 @@ def main(argv: list | None = None) -> int:
         if cpu is None:
             from .hardware import detect
             cpu = not detect().has_cuda
-        spec = recommended(args.lang, cpu=cpu)
+        spec = native_for(args.lang, cpu=cpu) if args.native else recommended(args.lang, cpu=cpu)
         if spec is None and args.force and candidates(args.lang):
             spec = candidates(args.lang)[0]
         if spec is None:

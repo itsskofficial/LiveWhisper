@@ -341,6 +341,21 @@ print(f'{s.name}|{s.size_gb}|{s.note}' if s else '')
                 & $vpy -m livewhisper.specialists install $Language
                 if ($LASTEXITCODE -ne 0) { Warn "Specialist install failed; large-v3 will be used for everything." }
             }
+            # A second model for the language's own script, where the first
+            # writes romanized text (Hindi: Hinglish-Prime + Vaani).
+            $native = & $vpy -c @"
+import sys
+from livewhisper.specialists import native_for
+s = native_for(sys.argv[1].strip().lower())
+print(f'{s.name}|{s.size_gb}' if s else '')
+"@ $Language | Select-Object -Last 1
+            if ($native) {
+                $np = $native -split '\|', 2
+                if (AskYesNo "Also install $($np[0]) (~$($np[1]) GB) for output in the language's own script?" $true) {
+                    & $vpy -m livewhisper.specialists install $Language --native
+                    if ($LASTEXITCODE -ne 0) { Warn "Native-script model did not install; large-v3 writes native script." }
+                }
+            }
         }
     }
 } finally {

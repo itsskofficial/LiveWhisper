@@ -97,6 +97,14 @@ def main() -> int:
     b2.cfg["language"] = "ta"
     check("a native-script specialist serves native requests",
           b2.transcribe(audio, native=True) == "[ta-spec:ta]")
+    b2.cfg["language"] = "hi"
+    b2.cfg["models"]["hi"]["native"] = "hi-native"
+    b2.cfg["max_extra_models"] = 2
+    out = b2.transcribe(audio, native=True)
+    check("a route's own native model serves native requests", out == "[hi-native:hi]", out)
+    check("and romanized requests still go to the romanizing model",
+          b2.transcribe(audio) == "[hinglish:en]")
+    del b2.cfg["models"]["hi"]["native"]
 
     print("\n=== a borderline English loses to the user's other language ===")
 

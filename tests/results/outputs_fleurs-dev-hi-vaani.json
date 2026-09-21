@@ -1,0 +1,74 @@
+{
+ "rows": [
+  {
+   "lang": "hi",
+   "n": 20,
+   "native_wer": 0.10420841683366733,
+   "native_cer": 0.040897755610972565,
+   "roman_wer": 0.09819639278557114,
+   "usual_spelling": 0.9482052510742761,
+   "leaks": 0,
+   "language_ok": 1.0,
+   "xrt": 0.8112548705022321,
+   "route": "hi-vaani"
+  }
+ ],
+ "samples": [
+  {
+   "lang": "hi",
+   "reference": "मेजरकेन खाना, भूमध्य सागर में समान क्षेत्रों की तरह, रोटी, सब्जियों और मांस (विशेष रूप से सूअर का मांस) पर आधारित है, और जैतून के तेल का उपयोग करता है।",
+   "native": "मेजरकिन खाना भूमध्यसागर में समान क्षेत्रों की तरह रोटी सब्जियों और मांस विशेष रूप से सुअर का मांस पर आधारित है और जैतून के तेल का उपयोग करता है.",
+   "romanized": "Mejarkin khana bhoomadhysagar mein saman kshetron ki tarah roti sabjiyon aur mans vishesh rup se suar ka mans par aadharit hai aur jaitun ke tel ka upyog karta hai.",
+   "heard": "hi"
+  },
+  {
+   "lang": "hi",
+   "reference": "वैज्ञानिकों का मानना है कि ओसेलोट्स गंध के द्वारा जानवरों का पीछा करते और खाते (शिकार) हैं, यह सूँघते हुए कि वे ज़मीन पर कहाँ रहे होंगे।",
+   "native": "वैज्ञानिकों का मानना है कि ओसेलोड्सगंध के द्वारा जानवरों का पीछा करते और खाते हैं यह सूंघते हुए कि वे ज़मीन पर कहां रहे होंगे.",
+   "romanized": "Vaigyanikon ka manana hai ki oselodsgandh ke dwara janvaron ka pichha karte aur khaate hain yeh sunghate huye ki ve zamin par kahan rahe honge.",
+   "heard": "hi"
+  },
+  {
+   "lang": "hi",
+   "reference": "आर्मंड वर्सास ने कहा, मैंने अपनी बहन और उसकी दोस्त को खो दिया, और रास्ते में व्हीलचेयर में दो दिव्यांग लोग थे, और लोग उनपर उछल रहे थे और उन्हें धक्का दे रहे थे”।",
+   "native": "आर्म्ड वर्षास ने कहा मैंने अपनी बहन और उनकी दोस्त को खो दिया और रास्ते में ह्विलचेयर में दो दिव्यांग लोग थे और लोग उन पर उछल रहे थे और उन्हें धक्का दे रहे थे.",
+   "romanized": "Armd varshas ne kaha maine apni bahan aur unki dost ko kho diya aur raste mein hvilcheyar mein do divyang log the aur log un par uchhalal rahe the aur unhe dhakka de rahe the.",
+   "heard": "hi"
+  },
+  {
+   "lang": "hi",
+   "reference": "कुतूहल गाँव में आधे घंटे टहलना समय की हानि नहीं है।",
+   "native": "कुतुहल गांव में आधे घंटे टहलना समय की हानि नहीं है.",
+   "romanized": "Kutuhal gaon mein aadhe ghante tahalana samay ki hani nahi hai.",
+   "heard": "hi"
+  },
+  {
+   "lang": "hi",
+   "reference": "जब घायलों को लड़ाई बंद होने के बाद अस्पताल ले जाया गया, तो लगभग 40 अन्य बचे हुए कैदी यार्ड में रुके और अपनी कोठरियों में लौटने से इनकार कर दिया.",
+   "native": "जब घायलों को लड़ाई बंद होने के बाद अस्पताल ले जाया गया तो लगभग चालीस अन्य बचे हुए कैदी यार्ड में रुके और अपनी कोठरियों में लौटने से इनकार कर दिया.",
+   "romanized": "Jab ghaylon ko ladai band hone ke baad aspataal le jaya gaya to lagbhag chalis anya bache huye kaidi yard mein ruke aur apni kothariyon mein lautane se inkar kar diya.",
+   "heard": "hi"
+  },
+  {
+   "lang": "hi",
+   "reference": "पूर्व हाउस स्पीकर न्यूट गिंग्रिच, टेक्सास के गर्वनर रिक पैरी, और कांग्रेसवुमन मिशेल बैचमैन ने क्रमश: चौथा, पाँचवाँ और छठा स्थान हासिल किया.",
+   "native": "पूर्व हाउस स्पीकर न्यूट ग्रिंकिच टैक्सास के गवर्नर रिक पैरी और कांग्रेस वुमन मिशेल बैचमैन ने क्रमशः चौथा पांचवां और छठा स्थान हासिल किया.",
+   "romanized": "Purv house speaker newtut grinkich taxass ke gavarnar reak pairi aur congress vuman mishel bachman ne kramshah chautha paanchvaan aur chhatha sthan hasil kiya.",
+   "heard": "hi"
+  },
+  {
+   "lang": "hi",
+   "reference": "रॉबिन उथप्पा ने केवल 41 गेंदों में 11 चौकों और 2 छक्कों की मदद से 70 रन बना कर पारी का सर्वोच्च स्कोर बनाया.",
+   "native": "रॉबिन उथप्पा ने केवल इकतालीस गेंदों में ग्यारह चौकों और दो छक्कों की मदद से सत्तर रन बनाकर पारी का सर्वोच्च स्कोर बनाया.",
+   "romanized": "Robin uthppapa ne keval iktalis gendon mein gyarah chaukon aur do chhakkon ki madad se sattar run banakar pari ka sarvocch score banaya.",
+   "heard": "hi"
+  },
+  {
+   "lang": "hi",
+   "reference": "यदि आप सर्दियों में आर्कटिक या अंटार्कटिक क्षेत्रों में जाते हैं, तो आप ध्रुवीय रात का अनुभव करेंगे, जिसका अर्थ है कि सूरज क्षितिज से ऊपर नहीं उगता है।",
+   "native": "यदि आप सर्दियों में आर्किक या अंटार्किक क्षेत्रों में जाते हैं तो आप ध्रुवीरात का अनुभव करेंगे जिसका अर्थ है कि सूरज स्थिति से ऊपर नहीं उगता है.",
+   "romanized": "Yadi aap sardiyon mein arkikik ya antarkik kshetron mein jate hain to aap dhruvirat ka anubhav karenge jiska arth hai ki suraj sthiti se upar nahi ugta hai.",
+   "heard": "hi"
+  }
+ ]
+}

@@ -250,7 +250,7 @@ class LocalBackend:
             return {"path": route}
         return dict(route) if isinstance(route, dict) else {}
 
-    def _model_for(self, language: str | None) -> tuple:
+    def _model_for(self, language: str | None, path: str | None = None) -> tuple:
         """The model that should decode this language: a specialist, or the main one.
 
         `transcription.local.models` maps a language to a model directory, e.g.
@@ -262,7 +262,7 @@ class LocalBackend:
         A specialist that fails to load is logged and skipped, never fatal: a
         dictation that falls back to large-v3 beats one that does not happen.
         """
-        path = self._route(language).get("path")
+        path = path or self._route(language).get("path")
         if not path:
             return self._model, self._batched
         with self._lock:
@@ -411,7 +411,15 @@ class LocalBackend:
         )
         route = self._route(common["language"])
         if native and route.get("latin_output"):
-            model, batched, route = self._model, self._batched, {}
+            # A route may name a second model for native script:
+            #   hi: {path: .../hinglish-prime, latin_output: true,
+            #        native: .../hi-vaani}
+            native_path = route.get("native")
+            if native_path:
+                model, batched = self._model_for(common["language"], path=native_path)
+            else:
+                model, batched = self._model, self._batched
+            route = {}
         else:
             model, batched = self._model_for(common["language"])
         self.last_latin_output = model is not self._model and route.get("latin_output", False)

@@ -207,6 +207,10 @@ def installed_routes(models_dir: Path) -> dict:
     for spec in CATALOGUE:
         path = models_dir / spec.name
         if spec.device == "gpu" and (path / "model.bin").exists():
+            if spec.role == "native":
+                if spec.lang in routes and routes[spec.lang].get("latin_output"):
+                    routes[spec.lang]["native"] = str(path)
+                continue
             route = {"path": str(path)}
             if spec.latin_output:
                 route["latin_output"] = True

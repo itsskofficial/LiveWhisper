@@ -1,0 +1,74 @@
+{
+ "rows": [
+  {
+   "lang": "sd",
+   "n": 20,
+   "native_wer": 0.29175946547884185,
+   "native_cer": 0.1310592459605027,
+   "roman_wer": 0.7015590200445434,
+   "usual_spelling": 0.19750607682096746,
+   "leaks": 0,
+   "language_ok": 1.0,
+   "xrt": 1.1114047906349174,
+   "route": "sd-large"
+  }
+ ],
+ "samples": [
+  {
+   "lang": "sd",
+   "reference": "'هوسٽائل ماحول واري ڪورس' لاءِ انٽرنيٽ جي هڪ ڳولا ممڪن طور تي ڪنهن مقامي ڪمپني جو پتو مهيا ڪندي.",
+   "native": "هوسٽائل ماحول واري ڪورس لاءِ انٽرنيٽ جي هڪ ڳولا ممڪن طور تي ڪنهن مقامي ڪمپني جو پتو مهيا ڪندي.",
+   "romanized": "Hostaile maahaul wari koras laaee internet ji hikk gola mumkan taur tee kanhanan muqami kampani jo pato mahya kandi.",
+   "heard": "sd"
+  },
+  {
+   "lang": "sd",
+   "reference": "هن ڪٽس لاءِ ڪو انگ اکر اهو چئي سيٽ نه ڪيو ته، اهي چين جي اِقتصادي پيداوار جي بُنياد تي سيٽ ڪيا ويندا.",
+   "native": "هن ڪٽنس لاءِ ۾ انگ اخر اهو جي سيٽ نہ ڪيو ته اهي چين جي اقتصادي پيداوار جي بنياد تي سيٽ ڪيا ويندا.",
+   "romanized": "Hann katans laaee ma ang akhar ahoo ji set na kyo tah ahee chain ji iqtasadi pedawar ji bunyad tee set kiya veenda.",
+   "heard": "sd"
+  },
+  {
+   "lang": "sd",
+   "reference": "اوٽاوا ڪينيڊا جو من موهيندڙ، ٻن ٻولين وارو گادي جو هنڌ آهي ۽ هن ۾ آرٽ گيلريون ۽ عجائب گهرن جي هڪ قطار آهي جيڪو ڪينيڊا جي ماضي ۽ حال کي ظاهر ڪري ٿي.",
+   "native": "اوٽا واڪ ڪينيڊا جو من مهيندڙ ٻن بولين وارو گادي جو هنڌ آهي ۽ هن ۾ آرٽ گيلريون ۽ عجاب گهرن جي هڪ ڪتار آهي جيڪو ڪينيڊا جي ماضي ۽ حال کي ظاهر ڪري ٿو.",
+   "romanized": "Ota waak kenida jo man maheendar ban bolin waro gadi jo hndh aahi I hann ma art gelriyoon I ajab gharann ji hikk katar aahi jeko kenida ji mazi I haal kee zahir kari thow.",
+   "heard": "sd"
+  },
+  {
+   "lang": "sd",
+   "reference": "روم ۾ ڪيترين ئي جاين تي ماڻهن کي رسم ڏسڻ لاءِ ڪيترين ئي وڏين اسڪرينن وارين ٽيلي ويزنن کي نصب ڪيون ويو هو.",
+   "native": "روم ۾ ڪيترن ئي جاين تي ماڻهن کي رسم ڏسڻ لاءِ ڪيترن ٿي وڌين اسڪرن وارين ٽيلي ويزن کي نسب ڪيو ويو آهي.",
+   "romanized": "Rome ma ketran ii jayan tee manhann kee rasm disann laaee ketran thiy wadheen scron warin teli vezan kee nasab kyo oio aahi.",
+   "heard": "sd"
+  },
+  {
+   "lang": "sd",
+   "reference": "ٻني خشڪ پائوڊرن کي هڪ ٻئي سان ملايو ۽ پوءِ، صاف پسيل هٿن سان، اهي بال ۾ نپوڙيو.",
+   "native": "ٻني خشڪ پاوڊرن کي هڪ ٻئي سان ملايو ۽ پوءِ ساف پسيل هٿن سان اهي بال ۾ نپوڙيو.",
+   "romanized": "Bani khashk pawdaran kee hikk baee san malayo I poee saf paseel hathan san ahee boll ma naporiyo.",
+   "heard": "sd"
+  },
+  {
+   "lang": "sd",
+   "reference": "جيانڪارلو فسيشلا پنهنجي ڪار جو ڪنٽرول وڃائي ڇڏيو ۽ شروع ڪرڻ کان تمام جلد ريس ختم ڪري ڇڏي.",
+   "native": "جيان ڪارلو فسيشلا پنهنجي ڪار جو ڪنٽرول وڃائي ڇڏيو ۽ شروع ڪرڻ کان تمام جلد ريس ختم ڪري ڇڏي.",
+   "romanized": "Jayan karlo faseeshla panhanji kar jo controll wajaee chhadiyo I shuroo karann kaan tamam jild ress khatm kari chhadi.",
+   "heard": "sd"
+  },
+  {
+   "lang": "sd",
+   "reference": "تنهنڪري، امڪان اهو آهي تہ هن اشاري کي صرف ليبل جي طور تي شامل ڪيو ويو هو.",
+   "native": "تنهنڪري امڪان اهو آهي تہ هن اشاري کي صرف ليبل جي طور تي شامل ڪيو ويو هو.",
+   "romanized": "Tanhankari amkan ahoo aahi ta hann ashari kee sirf lebal ji taur tee shaamil kyo oio ho.",
+   "heard": "sd"
+  },
+  {
+   "lang": "sd",
+   "reference": "هڪ مال گاڏي ۾، اهي بادشاهه ۽ راڻي جي خلاف خطرا ۽ ڌمڪيون ۽ نعرا هڻندڙ ماڻهن جي هجوم ۾ شامل ٿي پيرس ڏانهن واپس سفر ڪيو.",
+   "native": "هڪ مالگاڏي اهي پادشاه ۽ راڻي جي خلاف خطرا ۽ دمڪيون ۽ نارا هڻن درمادن جي هجم ۾ شامل ٿي پئرس ڏانهن واپس سفر ڪيو.",
+   "romanized": "Hikk malgadi ahee padshah I rani ji khilaaf khatraa I damkiyoon I naara hananan darmadan ji hajamm ma shaamil thiy pairs danhann wapas safar kyo.",
+   "heard": "sd"
+  }
+ ]
+}
