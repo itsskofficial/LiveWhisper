@@ -45,6 +45,12 @@ def main() -> int:
          finish("the meeting is at five new paragraph bring the deck"),
          "The meeting is at five\n\nBring the deck.")
     same("new line", finish("line one new line line two"), "Line one\nLine two.")
+    same("Whisper's own commas around a spoken one do not double it",
+         finish("Hi Rahul, comma, thanks for the update, full stop, new paragraph, "
+                "let's talk on Monday."),
+         "Hi Rahul, thanks for the update.\n\nLet's talk on Monday.")
+    same("an abbreviation keeps its dot before a spoken comma",
+         finish("use e.g. comma like this"), "Use e.g., like this.")
     same("brackets close up against their contents",
          finish("open bracket this is aside close bracket done"),
          "(this is aside) done.")

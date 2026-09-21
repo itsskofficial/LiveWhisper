@@ -45,6 +45,18 @@ _DEVA_SIGNS = {
 }
 _DEVA_MARKS = {"ं": "n", "ँ": "n", "ः": "h", "्": "", "़": "", "ऽ": ""}
 
+# Long ई/ऊ as the plain "i"/"u" most people type in the northern scripts and
+# Kannada, and doubled in Tamil, Telugu and Malayalam, where the doubled forms
+# are the usual ones. Measured against every word of Dakshina's human
+# romanizations - the share spelled the way people most often spell it:
+#   i/u better   hi 36.9 -> 47.4%, mr 50.7 -> 61.0, pa 24.9 -> 30.4,
+#                gu 27.9 -> 32.7, bn 24.7 -> 27.6, kn 61.9 -> 62.6
+#   ee/oo better te 33.8 vs 31.8, ta 14.0 vs 12.6, ml 16.4 vs 14.3
+_PLAIN_LONG = {"ई": "i", "ऊ": "u", "ी": "i", "ू": "u"}
+_KEEPS_DOUBLED = ((0x0B80, 0x0C7F), (0x0D00, 0x0D7F))       # Tamil, Telugu, Malayalam
+_PLAIN_VOWELS = {k: _PLAIN_LONG.get(k, v) for k, v in _DEVA_VOWELS.items()}
+_PLAIN_SIGNS = {k: _PLAIN_LONG.get(k, v) for k, v in _DEVA_SIGNS.items()}
+
 _SINHALA_CONS = {
     "ක": "k", "ඛ": "kh", "ග": "g", "ඝ": "gh", "ඞ": "ng", "ඟ": "ng", "ච": "ch",
     "ඡ": "chh", "ජ": "j", "ඣ": "jh", "ඤ": "ny", "ඥ": "gn", "ඦ": "nj", "ට": "t",
@@ -176,8 +188,9 @@ def spell(word: str) -> str:
         return "".join(_ARABIC.get(c, c if c.isascii() else "") for c in word)
     deva = unicodedata.normalize("NFC", "".join(_to_devanagari(c) for c in word))
     final_a = any(lo <= ord(c) <= hi for c in word for lo, hi in _KEEPS_FINAL_A)
-    return _brahmic(deva, _DEVA_CONS, _DEVA_VOWELS, _DEVA_SIGNS, _DEVA_MARKS,
-                    final_a=final_a)
+    doubled = any(lo <= ord(c) <= hi for c in word for lo, hi in _KEEPS_DOUBLED)
+    vowels, signs = (_DEVA_VOWELS, _DEVA_SIGNS) if doubled else (_PLAIN_VOWELS, _PLAIN_SIGNS)
+    return _brahmic(deva, _DEVA_CONS, vowels, signs, _DEVA_MARKS, final_a=final_a)
 
 
 _NATIVE = re.compile(r"[؀-ۿݐ-ݿऀ-෿‌‍]+")

@@ -1,0 +1,12 @@
+[
+ {
+  "case": "en_commands",
+  "said": "Hi Rahul comma thanks for the update full stop new paragraph let's talk on Monday",
+  "got": "Hi Rahul, thanks for the update.\n\nLet's talk on Monday.",
+  "problems": [],
+  "formatted_by": "model",
+  "style": "prose",
+  "wait_ms": 12248.520399967674,
+  "spoken_s": 5.76
+ }
+]

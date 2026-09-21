@@ -115,7 +115,15 @@ begin
 end;
 
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+var
+  RunValue: String;
 begin
+  { The app's own "Start with Windows" switch writes the same entry the
+    installer task does; remove it too, but only if it points at this copy. }
+  if (CurUninstallStep = usUninstall) and
+     RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', 'LiveWhisper', RunValue) and
+     (Pos(Lowercase(ExpandConstant('{app}')), Lowercase(RunValue)) > 0) then
+    RegDeleteValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', 'LiveWhisper');
   if (CurUninstallStep = usPostUninstall) and not UninstallSilent then
   begin
     if MsgBox('Also delete your LiveWhisper settings, history and downloaded models?' + #13#10 + #13#10 +

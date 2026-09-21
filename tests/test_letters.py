@@ -30,8 +30,8 @@ def check(name: str, ok: bool, detail: str = "") -> None:
 
 def main() -> int:
     print("=== readable spellings ===")
-    for native, want in (("करूंगा", "karoonga"), ("কাল", "kal"), ("ಕಚೇರಿಗೆ", "kacherige"),
-                         ("ഓഫീസിൽ", "opheesil"), ("ज़रूर", "zaroor"), ("फ़ाइल", "faail"),
+    for native, want in (("करूंगा", "karunga"), ("কাল", "kal"), ("ಕಚೇರಿಗೆ", "kacherige"),
+                         ("ഓഫീസിൽ", "opheesil"), ("ज़रूर", "zarur"), ("फ़ाइल", "faail"),
                          ("මම", "mama"), ("කරන්ට", "karanta"),
                          ("కమల", "kamala"), ("ಕಮಲ", "kamala"), ("कमल", "kamal")):
         check(f"{native} -> {want}", spell(native) == want, spell(native))

@@ -18,7 +18,7 @@ from dataclasses import dataclass
 
 from . import context as ctx_mod
 from . import format as fmt_mod
-from . import llm_format
+from . import llm_format, vocab
 from .cleanup import remove_fillers
 from .profile import ProfileStore
 from .script import conventions as conv_mod
@@ -209,6 +209,10 @@ class Pipeline:
         out_cfg = self.cfg.get("output") or {}
         if out_cfg.get("remove_fillers", True) and not composed:
             text = remove_fillers(text)
+
+        vocabulary = (self.cfg.get("transcription") or {}).get("vocabulary") or ""
+        if vocabulary and not composed:
+            text = vocab.apply(text, vocabulary)
 
         # Formatting runs before habits, not after: habits are what this user
         # does that the rules do not know about, so they get the last word.

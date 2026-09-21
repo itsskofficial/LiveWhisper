@@ -11,6 +11,7 @@ from __future__ import annotations
 import io
 import logging
 import os
+import re
 import threading
 import time
 from pathlib import Path
@@ -498,6 +499,15 @@ class LocalBackend:
         return text
 
 
+# What Whisper writes for a spoken "comma" it took for a name or a word.
+_MISHEARD_COMMA = re.compile(r"\b(?:kama|karma|coma)\b", re.IGNORECASE)
+
+
+def language_unknown(forced: str | None, languages: list) -> bool:
+    """Was the language left for Groq to detect (so no English prompt went)?"""
+    return not forced and languages != ["en"]
+
+
 class GroqBackend:
     name = "groq"
 
@@ -547,6 +557,15 @@ class GroqBackend:
         """
         forced = self.cfg.get("language") or None
         text, lang, _score = self._post(audio, key, forced)
+        if lang == "en" and language_unknown(forced, self.languages) \
+                and _MISHEARD_COMMA.search(text):
+            # English, and a word that is usually "comma" misheard. Only now
+            # is it known to be English, so ask again with the prompt that
+            # makes Whisper write the command down (see _post).
+            try:
+                text = self._post(audio, key, "en")[0]
+            except TranscriptionError:
+                pass
         if forced or not self.languages or lang in self.languages:
             return text
         log.info("groq heard %s, outside %s; retrying within them",
@@ -577,6 +596,13 @@ class GroqBackend:
         if language:
             data["language"] = language
         prompt = getattr(self, "_bias", "") or self.vocabulary
+        # The spoken-punctuation prompt (LocalBackend.SPOKEN_PUNCTUATION) only
+        # when the audio is known to be English: Groq detects the language
+        # after the prompt is sent, and an English prompt on Hindi speech
+        # would pull it toward English. "Kama" cannot be fixed in the text
+        # instead - it is a Hinglish word ("paise kama raha hoon").
+        if language == "en" or self.languages == ["en"]:
+            prompt = " ".join(p for p in (LocalBackend.SPOKEN_PUNCTUATION, prompt) if p)
         if prompt:
             data["prompt"] = prompt
 

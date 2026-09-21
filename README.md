@@ -134,6 +134,40 @@ grammar and not a stutter.
 Coverage is how much of the language the dictionary knows. It is not accuracy —
 for that, see [below](#measured-not-claimed).
 
+### Both outputs, measured
+
+Every language can be written in its own script or romanized, switched
+automatically by the box you're typing in, or with `Ctrl+Alt+H`. Word error on
+20 held-out FLEURS recordings per language, through the app's own code with the
+language's accuracy model installed. Romanized output counts a word right if it
+is any spelling people actually use for it (Dakshina); "usual spelling" is the
+share written the way people most often write it.
+
+| Language | Model | Native WER | Native CER | Romanized WER | Usual spelling |
+| --- | --- | --- | --- | --- | --- |
+| Hindi | Vaani (native), Hinglish-Prime (romanized) | **10.3%** | 3.0% | 18.1% | 75.4% |
+| Bengali | Bengali.AI medium | 14.5% | 2.6% | 24.1% | 91.5% |
+| Urdu | large-v3 | 23.0% | 9.2% | 20.3% | 87.3% |
+| Kannada | IIT Madras medium | 24.3% | 10.8% | 22.8% | 87.3% |
+| Tamil | IIT Madras medium | 24.6% | 12.4% | 24.3% | 89.2% |
+| Sindhi | Sindhi large | 29.2% | 13.1% | 68.4% | 19.7% |
+| Telugu | IIT Madras medium | 31.7% | 19.3% | 31.1% | 82.9% |
+| Marathi | Marathi large-v2 | 40.2% | 11.4% | 42.1% | 49.3% |
+| Gujarati | IIT Madras medium | 45.2% | 34.1% | 43.6% | 69.1% |
+| Malayalam | Malayalam large-v3 | 57.2% | 27.9% | 53.8% | 60.3% |
+| Punjabi | Punjabi large-v2 | 57.3% | 28.1% | 52.9% | 53.0% |
+| Sinhala* | Sinhala large-v3 | 77.6% | 34.8% | 76.9% | — |
+| English | large-v3-turbo | 4.3% | 2.2% | — | — |
+
+\* FLEURS has no Sinhala; measured on 15 Dakshina sentences read by a neural
+voice (`tests/eval_dakshina_speech.py`). English: 40 FLEURS clips.
+
+The top half is good enough to dictate with. The bottom half is honest: for
+Malayalam, Punjabi and Sinhala no openly licensed model yet hears more than
+about half the words right, and those numbers will move as better ones appear.
+No native script ever leaks into romanized text (0 of 220 dictations).
+Reproduce with `python tests/eval_outputs.py build/fleurs --n 20`.
+
 It picks the language from the script it is handed, so speaking Tamil at work and
 Hindi at home needs no setting change. Ten of these twelve scripts belong to one
 language and are unambiguous; Devanagari and Arabic are each shared by two, and

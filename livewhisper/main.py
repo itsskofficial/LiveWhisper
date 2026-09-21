@@ -720,8 +720,10 @@ class App:
                              radio=True)
             for i, p in enumerate(self.profiles)
         ]
+        status = {State.IDLE: "Ready", State.RECORDING: "Listening...",
+                  State.TRANSCRIBING: "Writing..."}
         return pystray.Menu(
-            pystray.MenuItem(lambda item: f"Status: {self.state.label}", None,
+            pystray.MenuItem(lambda item: f"LiveWhisper - {status[self.state]}", None,
                              enabled=False),
             pystray.Menu.SEPARATOR,
             pystray.MenuItem("Open LiveWhisper", lambda icon, item: self.open_window(),
@@ -735,10 +737,8 @@ class App:
                              lambda icon, item: threading.Thread(target=self.cancel,
                                                                  daemon=True).start()),
             pystray.Menu.SEPARATOR,
-            pystray.MenuItem("Prompt profile", pystray.Menu(*profiles)),
-            pystray.MenuItem(lambda item: f"Engine: {self.backend_name}",
-                             lambda icon, item: self.toggle_backend()),
-            pystray.Menu.SEPARATOR,
+            pystray.MenuItem("Prompt profile", pystray.Menu(*profiles),
+                             visible=len(profiles) > 1),
             pystray.MenuItem("Settings", lambda icon, item: self.open_settings()),
             pystray.MenuItem("History", lambda icon, item: self.open_window("history")),
             pystray.MenuItem("Open log (for bug reports)",

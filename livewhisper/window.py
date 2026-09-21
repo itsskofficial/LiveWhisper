@@ -375,6 +375,16 @@ class AppWindow:
         if self._quitting:
             return True
         self.hide()
+        ui = self.app.cfg.setdefault("ui", {})
+        if not ui.get("tray_hint_shown"):
+            # Closing looks like quitting; say once that it is still there.
+            key = self.app.cfg.get("hotkeys", {}).get("record", "ctrl+alt+space")
+            self.app.notify(f"Still running in the tray - {key.title()} to dictate")
+            ui["tray_hint_shown"] = True
+            try:
+                cfgio.save(self.app.config_path, self.app.cfg)
+            except Exception:
+                log.debug("could not save the tray hint flag", exc_info=True)
         return False                      # keep running in the tray
 
     def show(self, page: str | None = None) -> None:

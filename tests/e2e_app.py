@@ -66,7 +66,7 @@ CASES = [
      "Hi Rahul comma thanks for the update full stop new paragraph "
      "let's talk on Monday",
      {"has": ["Rahul,", "update.", "\n\n", "Monday"],
-      "not": ["comma", "full stop", "paragraph"]}),
+      "not": ["comma", "kama", "full stop", "paragraph"]}),
     ("en_list", "en-US-GuyNeural",
      "Tasks for tomorrow. Bullet point fix the login bug. "
      "Bullet point update the docs. Bullet point ship the release.",

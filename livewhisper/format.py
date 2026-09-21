@@ -212,6 +212,17 @@ class _Writer:
         elif mark in _HUGS_RIGHT:
             self.items.append(("right", mark))
         elif mark in _HUGS_LEFT:
+            # Whisper punctuates around a spoken command as if it were a word:
+            # "Rahul, comma, thanks" and "the update, full stop, new...". What
+            # was said wins over what Whisper guessed, or the text reads
+            # "Rahul,, thanks" and "update,." - both seen end to end.
+            if self.items and self.items[-1][0] == "word":
+                w = self.items[-1][1]
+                trimmed = w.rstrip(",;:")
+                if trimmed.endswith(".") and "." not in trimmed[:-1]:
+                    trimmed = trimmed[:-1]              # not "e.g." or "U.S."
+                if trimmed and trimmed != w:
+                    self.items[-1] = ("word", trimmed)
             self.items.append(("left", mark))
         else:
             self.items.append(("word", mark))
