@@ -546,7 +546,7 @@ async function teach(lang) {
 function modelRow(c, title) {
   const m = c.measured || {};
   const k = Object.keys(m)[0];
-  const gain = k ? `<div class="gain">${esc(k)}: ${esc(m[k])}</div>` : "";
+  const gain = "";
   let right;
   if (c.installed) right = `<span class="chip ok">${icon("check")} Installed</span>`;
   else if (c.state === "downloading" || c.state === "queued") {

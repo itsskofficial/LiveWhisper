@@ -289,7 +289,8 @@ class Components:
                             for t in targets)
             size = int(spec.size_gb * 1000 / (2 if spec.kind == "convert" else 1))
             out.append(Component(
-                cid, "English, faster" if cid == "lang:en" else spec.name, spec.note,
+                cid, "English, faster" if cid == "lang:en" else spec.name,
+                spec.blurb or spec.note,
                 size, "language", installed=installed, recommended=cid == "lang:en",
                 extra={"lang": spec.lang, "role": spec.role,
                        "measured": spec.measured, "latin_output": spec.latin_output}))

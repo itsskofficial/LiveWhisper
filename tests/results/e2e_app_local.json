@@ -1,24 +1,62 @@
 [
  {
-  "case": "hi_mixed",
-  "said": "कल मैं ऑफिस जाऊंगा और मीटिंग अटेंड करूंगा",
-  "got": "Kal main office jama aur meeting attend karunga.",
+  "case": "en_prose",
+  "said": "Hey Priya, just wanted to check if the report is ready. I need it before the call tomorrow.",
+  "got": "Hey Priya, just wanted to check if the report is ready. I need it before the call tomorrow.",
   "problems": [],
   "formatted_by": "model",
   "style": "prose",
-  "wait_ms": 7067.68680003006,
-  "spoken_s": 4.248
+  "wait_ms": 6538.618699996732,
+  "spoken_s": 6.576
  },
  {
-  "case": "hi_codeswitch",
-  "said": "मैंने pull request review कर लिया है, अब merge कर दो",
-  "got": "Mainne full request review kar liya hai, ab merge kar do.",
-  "problems": [
-   "missing 'pull request'"
-  ],
+  "case": "en_question",
+  "said": "Can you send me the latest numbers when you get a chance?",
+  "got": "Can you send me the latest numbers when you get a chance?",
+  "problems": [],
   "formatted_by": "model",
   "style": "prose",
-  "wait_ms": 6082.799800031353,
-  "spoken_s": 4.512
+  "wait_ms": 5484.438700019382,
+  "spoken_s": 3.768
+ },
+ {
+  "case": "en_commands",
+  "said": "Hi Rahul comma thanks for the update full stop new paragraph let's talk on Monday",
+  "got": "Hi Rahul, thanks for the update.\n\nLet's talk on Monday.",
+  "problems": [],
+  "formatted_by": "model",
+  "style": "prose",
+  "wait_ms": 6268.571799970232,
+  "spoken_s": 5.76
+ },
+ {
+  "case": "en_list",
+  "said": "Tasks for tomorrow. Bullet point fix the login bug. Bullet point update the docs. Bullet point ship the release.",
+  "got": "Tasks for tomorrow:\n- Fix the login bug\n- Update the docs\n- Ship the release",
+  "problems": [],
+  "formatted_by": "model",
+  "style": "prose",
+  "wait_ms": 7636.4509999984875,
+  "spoken_s": 9.912
+ },
+ {
+  "case": "en_correction",
+  "said": "Let's meet on Monday, I mean Tuesday, at four.",
+  "got": "Let's meet on Tuesday, at 4.",
+  "problems": [],
+  "formatted_by": "model",
+  "style": "prose",
+  "wait_ms": 5479.259799991269,
+  "spoken_s": 4.032
+ },
+ {
+  "case": "en_paragraph",
+  "said": "Thanks everyone for joining today. We covered the roadmap for the next quarter. The main goals are faster onboarding, better offline support, and a cleaner settings page. If you have questions, please post them in the channel.",
+  "got": "Thanks everyone for joining today. We covered the roadmap for the next quarter. The main goals are faster onboarding, better offline support, and a cleaner settings page. If you have questions, please post them in the channel.",
+  "problems": [],
+  "formatted_by": "model",
+  "style": "prose",
+  "wait_ms": 6663.415800023358,
+  "spoken_s": 15.024
  }
 ]

@@ -55,3 +55,24 @@ def register() -> list[Path]:
         )
         log.debug("registered %d CUDA lib dirs", len(registered))
     return registered
+
+
+def cublas_available() -> bool:
+    """Can CTranslate2 actually run on the GPU here?
+
+    It needs cuBLAS, and only finds out on the first real decode: a model loads
+    "on cuda" without it, and a warm-up on silence never reaches the GPU, so
+    the failure used to arrive as a failed dictation. The installed app
+    downloads cuBLAS on first launch (livewhisper.components); until it has,
+    or on a machine where it could not, the processor is used instead.
+    """
+    if sys.platform != "win32":
+        return True
+    register()
+    import ctypes
+    try:
+        ctypes.WinDLL("cublas64_12.dll")
+        ctypes.WinDLL("cublasLt64_12.dll")
+        return True
+    except OSError:
+        return False

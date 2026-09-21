@@ -52,6 +52,7 @@ class Specialist:
     # "native": used only when the user wants the language's own script, beside
     # a romanizing model that serves romanized requests.
     role: str = "any"
+    blurb: str = ""                # what the app window says about it, plainly
 
     @property
     def download_repo(self) -> str:
@@ -84,26 +85,30 @@ CATALOGUE: list = [
         measured={"FLEURS word error": "4.6% (large-v3 4.8%)",
                   "wait after an English dictation": "30-55% shorter"},
         note="Makes English dictation faster with no loss in accuracy. "
-             "Already converted, so install is a 1.6 GB download."),
+             "Already converted, so install is a 1.6 GB download.",
+        blurb='English dictation arrives a third to half sooner, just as accurate.'),
     Specialist(
         "bn", "bengaliAI/tugstugi_bengaliai-asr_whisper-medium", "bn-medium",
         3.06, "apache-2.0",
         measured={"FLEURS word error": "20.9% (large-v3 73.3%)",
                   "delivered Banglish": "31.7% (large-v3 66.5%)"},
         note="Winner of the Bengali.AI speech recognition competition. Half "
-             "the size of large-v3 and faster, 1.5 GB once converted."),
+             "the size of large-v3 and faster, 1.5 GB once converted.",
+        blurb='Trained for Bengali: about 1 word in 5 wrong, against 3 in 4 without it.'),
     Specialist(
         "ta", "vasista22/whisper-tamil-medium", "ta-medium", 3.06, "apache-2.0",
         measured={"FLEURS word error": "23.2% (large-v3 56.9%)",
                   "delivered Tanglish": "22.4% (large-v3 51.8%)"},
         note="Whisper-medium fine-tuned on Tamil by SPRING Lab, IIT Madras. "
-             "1.5 GB once converted."),
+             "1.5 GB once converted.",
+        blurb='Trained for Tamil: about 1 word in 4 wrong, against more than half without it.'),
     Specialist(
         "te", "vasista22/whisper-telugu-medium", "te-medium", 3.06, "apache-2.0",
         measured={"FLEURS word error": "37.1% (large-v3 74.4%)",
                   "delivered Telugu romanized": "36.2% (large-v3 71.6%)"},
         note="Whisper-medium fine-tuned on Telugu by SPRING Lab, IIT Madras. "
-             "1.5 GB once converted."),
+             "1.5 GB once converted.",
+        blurb='Trained for Telugu: about 1 word in 3 wrong, against 3 in 4 without it.'),
     Specialist(
         # Measured decoding with the "hi" token, so no language override: the
         # route decodes with whatever detection chose. Oriserve's card suggests
@@ -113,7 +118,8 @@ CATALOGUE: list = [
         measured={"delivered Hinglish, held-out": "19.1% (large-v3 22.0%)",
                   "delivered Hinglish, test": "19.5% (large-v3 24.4%)"},
         note="Writes Hinglish straight from audio, so English words stay English. "
-             "Large-v3 sized: with the main model loaded too, allow ~6 GB of VRAM."),
+             "Large-v3 sized: with the main model loaded too, allow ~6 GB of VRAM.",
+        blurb='Writes Hinglish straight from your voice, so English words stay English.'),
     Specialist(
         # Native-script Hindi. Hinglish-Prime writes Latin text and cannot give
         # Devanagari; large-v3 did it at 26.5% WER. Measured on both FLEURS
@@ -127,7 +133,8 @@ CATALOGUE: list = [
         measured={"FLEURS test WER, native script": "10.3% (large-v3 26.5%)",
                   "FLEURS test CER, native script": "3.0% (large-v3 8.7%)",
                   "code-switched Hindi spelled exactly": "96.0% (large-v3 94.0%)"},
-        note="For Devanagari output. Large-v3 sized, 3 GB converted."),
+        note="For Devanagari output. Large-v3 sized, 3 GB converted.",
+        blurb='For Hindi in Devanagari: about 1 word in 10 wrong, against 1 in 4 without it.'),
     Specialist(
         # For machines without a usable GPU. Measured on the batched path the
         # app decodes with, scored after respelling as the app delivers it
@@ -138,7 +145,8 @@ CATALOGUE: list = [
         measured={"delivered Hinglish, CPU": "25.6% (small 52.9%, large-v3 23.9%)",
                   "4-second dictation on CPU": "0.84 s (small 2.4 s)"},
         note="Whisper-base sized, 144 MB converted: close to large-v3 on Hindi "
-             "and fast on an ordinary CPU."),
+             "and fast on an ordinary CPU.",
+        blurb='Hinglish that stays quick on a PC without a graphics card.'),
     Specialist(
         "pa", "DrishtiSharma/whisper-large-v2-punjabi", "pa-large-v2", 6.17,
         "apache-2.0",
@@ -146,7 +154,8 @@ CATALOGUE: list = [
                   "delivered Punglish": "56.3% (large-v3 68.6%)"},
         note="Better than large-v3, but still gets more than half of words wrong - "
              "trained on Common Voice's small Punjabi set. Large-v2 sized, "
-             "allow ~6 GB of VRAM with the main model."),
+             "allow ~6 GB of VRAM with the main model.",
+        blurb='Better for Punjabi than without it, though it still misses about half the words.'),
     Specialist(
         "ml", "rontroy/whisper-large-v3-malayalam-ct2", "ml-large-v3", 3.09,
         "apache-2.0", kind="ct2",
@@ -154,19 +163,22 @@ CATALOGUE: list = [
                   "delivered Manglish": "58.8% (large-v3 109.0%)"},
         note="large-v3 writes Malayalam in Gurmukhi, Devanagari or Telugu script; "
              "this model writes Malayalam every time. Still gets most words "
-             "wrong. Already converted, so install is a download only."),
+             "wrong. Already converted, so install is a download only.",
+        blurb='Without it Malayalam often comes out in the wrong script. Still misses many words.'),
     Specialist(
         "kn", "vasista22/whisper-kannada-medium", "kn-medium", 3.06, "apache-2.0",
         measured={"FLEURS word error": "32.3% (large-v3 67.4%)",
                   "delivered Kanglish": "30.2% (large-v3 59.8%)"},
         note="Whisper-medium fine-tuned on Kannada by SPRING Lab, IIT Madras. "
-             "1.5 GB once converted; converting peaks near 7 GB of memory."),
+             "1.5 GB once converted; converting peaks near 7 GB of memory.",
+        blurb='Trained for Kannada: about 1 word in 3 wrong, against 2 in 3 without it.'),
     Specialist(
         "gu", "vasista22/whisper-gujarati-medium", "gu-medium", 3.06, "apache-2.0",
         measured={"FLEURS word error": "49.8% (large-v3 67.7%)",
                   "delivered Gujlish": "48.5% (large-v3 63.3%)"},
         note="Clearly better than large-v3, but still misses about half the words. "
-             "Whisper-medium fine-tuned by SPRING Lab, IIT Madras; 1.5 GB converted."),
+             "Whisper-medium fine-tuned by SPRING Lab, IIT Madras; 1.5 GB converted.",
+        blurb='Better for Gujarati than without it, though it still misses about half the words.'),
     Specialist(
         # Fine-tuned on FLEURS Sindhi, so it is measured on the FLEURS test
         # split only: on the dev split it scored an implausible 1.1% WER, which
@@ -176,7 +188,8 @@ CATALOGUE: list = [
         measured={"FLEURS test word error, native": "29.2% (large-v3 104%)",
                   "FLEURS test character error, native": "13.1% (large-v3 108%)"},
         note="large-v3 cannot write Sindhi at all; this can. Large-v2 sized, "
-             "allow ~6 GB of VRAM with the main model."),
+             "allow ~6 GB of VRAM with the main model.",
+        blurb='Without it Sindhi cannot be written at all. With it, about 7 words in 10 are right.'),
     Specialist(
         # FLEURS has no Sinhala, so this is measured on 15 of Dakshina's
         # sentences spoken by a neural voice (tests/eval_dakshina_speech.py).
@@ -186,7 +199,8 @@ CATALOGUE: list = [
                   "spoken Dakshina character error, native": "34.8% (large-v3 101.1%)",
                   "romanized, vs any accepted spelling": "76.9% (large-v3 114.7%)"},
         note="The only model tried that writes Sinhala; still misses most words. "
-             "Large-v3 sized, 3 GB converted."),
+             "Large-v3 sized, 3 GB converted.",
+        blurb='The only model that writes Sinhala. Still misses most words.'),
     Specialist(
         "mr", "DrishtiSharma/whisper-large-v2-marathi", "mr-large-v2", 6.17,
         "apache-2.0",
@@ -194,7 +208,8 @@ CATALOGUE: list = [
                   "delivered Minglish": "51.6% (large-v3 73.2%)"},
         note="Large-v2 sized: as fast as large-v3 on the same clips (2.5x "
              "realtime), allow ~6 GB of VRAM with the main model. Converting "
-             "peaks near 11.5 GB of memory."),
+             "peaks near 11.5 GB of memory.",
+        blurb='Trained for Marathi: about half the words wrong, against 4 in 5 without it.'),
 ]
 
 

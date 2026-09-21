@@ -155,6 +155,20 @@ class LocalBackend:
 
     # -- inference ----------------------------------------------------------
 
+    def _device(self) -> tuple:
+        """(device, compute type): the configured GPU if it can run, else the CPU."""
+        device = self.cfg.get("device", "cuda")
+        compute_type = self.cfg.get("compute_type", "int8_float16")
+        if device == "cuda":
+            from . import _cuda
+            if not _cuda.cublas_available():
+                if not getattr(self, "_told_no_gpu", False):
+                    self._told_no_gpu = True
+                    log.warning("cuBLAS not available; using the processor")
+                    self.notify("Using the processor until GPU support is downloaded")
+                return "cpu", "int8"
+        return device, compute_type
+
     def load(self) -> None:
         with self._lock:
             if self._model is not None:
@@ -162,8 +176,7 @@ class LocalBackend:
             from faster_whisper import BatchedInferencePipeline, WhisperModel
 
             model = resolve_model(self.cfg.get("model", "large-v3"))
-            device = self.cfg.get("device", "cuda")
-            compute_type = self.cfg.get("compute_type", "int8_float16")
+            device, compute_type = self._device()
             log.info("loading %s on %s (%s)", model, device, compute_type)
             try:
                 self._model = WhisperModel(model, device=device, compute_type=compute_type)
@@ -319,9 +332,8 @@ class LocalBackend:
             self.notify(f"Loading the {name} speech model - only slow the first time.")
             try:
                 from faster_whisper import BatchedInferencePipeline, WhisperModel
-                device = self.cfg.get("device", "cuda")
-                m = WhisperModel(path, device=device,
-                                 compute_type=self.cfg.get("compute_type", "int8_float16"))
+                device, compute_type = self._device()
+                m = WhisperModel(path, device=device, compute_type=compute_type)
                 b = BatchedInferencePipeline(model=m) if self._batch_size() > 1 else None
             except Exception:
                 log.warning("could not load specialist %s for %s; using main model",
