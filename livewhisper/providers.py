@@ -62,21 +62,34 @@ class Ollama:
         self.host = loopback(host)
 
     def available(self) -> bool:
+        """Ollama is running AND has this model - a running server without it
+        answered every request with "model not found"."""
         try:
             with urllib.request.urlopen(f"{self.host}/api/tags", timeout=3) as r:
-                return r.status == 200
+                names = {m.get("name", "") for m in json.loads(r.read()).get("models", [])}
         except Exception:
             return False
+        return self.model in names or f"{self.model}:latest" in names
 
     def chat(self, system: str, user: str, temperature: float = 0.3) -> str:
-        out = _post(f"{self.host}/api/chat", {
+        payload = {
             "model": self.model,
             "messages": [{"role": "system", "content": system},
                          {"role": "user", "content": user}],
             "stream": False,
-            "options": {"temperature": temperature},
-        })
-        return (out.get("message") or {}).get("content", "").strip()
+            "keep_alive": "30m",
+            # The screen (up to 6000 characters) plus the instruction fits in
+            # 4096 tokens; the default larger context only costs VRAM that the
+            # speech models need.
+            "options": {"temperature": temperature, "num_ctx": 4096},
+        }
+        if self.model.startswith(("qwen3", "deepseek-r1")):
+            # Reasoning models think out loud first: seconds of waiting, and
+            # the thinking can leak into the text that gets pasted.
+            payload["think"] = False
+        out = _post(f"{self.host}/api/chat", payload)
+        text = (out.get("message") or {}).get("content", "")
+        return re.sub(r"(?s)<think>.*?</think>", "", text).strip()
 
 
 class OpenAICompatible:
@@ -132,7 +145,7 @@ def build(cfg: dict):
     name = (cfg or {}).get("provider", "ollama")
     model = (cfg or {}).get("model")
 
-    def make(n):
+    def make(n, model=model):
         if n == "ollama":
             return Ollama(model)
         if n == "groq":
@@ -155,12 +168,20 @@ def build(cfg: dict):
         if alt == name:
             continue
         try:
-            p = make(alt)
+            # Each fallback with its own default model: the configured one
+            # belongs to the configured provider - "qwen2.5:7b" sent to Groq
+            # is a 404.
+            p = make(alt, model=None)
             if p.available():
                 log.warning("%s unavailable, using %s", name, alt)
                 return p
         except ProviderError:
             continue
+    if name == "ollama":
+        want = model or Ollama.default_model
+        raise ProviderError(
+            f"Writing needs a language model. Start Ollama and run "
+            f"'ollama pull {want}', or add a GROQ_API_KEY.")
     raise ProviderError(
         f"{name} is unavailable and no fallback is configured. "
         "Start Ollama, or set an API key.")

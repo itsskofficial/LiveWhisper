@@ -38,6 +38,11 @@ class Recommendation:
     batch_size: int
     reason: str
     speed: str  # rough expectation, so the number is not a surprise later
+    # Specialist models kept loaded beside the main one. Measured on an 8 GB
+    # card: large-v3 + English turbo + Hinglish-Prime + the qwen3 formatter
+    # together took 6.3 GB, so two fit; one forces a reload on every change of
+    # language for someone who speaks two.
+    extra_models: int = 1
 
 
 def detect() -> Machine:
@@ -101,6 +106,13 @@ def _ram_mb() -> int:
 
 
 def recommend(m: Machine | None = None) -> Recommendation:
+    rec = _recommend(m)
+    vram = (m or detect()).vram_mb if rec.device == "cuda" else 0
+    rec.extra_models = 2 if vram >= 7_500 else (1 if vram >= 5_500 else 0)         if rec.device == "cuda" else 1
+    return rec
+
+
+def _recommend(m: Machine | None = None) -> Recommendation:
     """Pick model / precision / batch size that fit, favouring accuracy.
 
     VRAM headroom matters more than raw model size: large-v3 at int8_float16 is

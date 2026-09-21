@@ -53,14 +53,22 @@ def _style_brief(profile: AppProfile) -> str:
     return "The person you are writing as: " + "; ".join(bits) + "."
 
 
-COMPOSE_SYSTEM = """You write on behalf of the user, in their voice.
+COMPOSE_SYSTEM = """You write text for the user to send, as the user.
+
+The screen shows what the user is looking at - usually a message someone else
+sent them. The user tells you what to write back. You are the user replying:
+never write as the other person, never address the user by name.
 
 Rules:
-- Output ONLY the finished text. No preamble, no "Here's a draft:", no quotes
-  around it, no explanation.
-- Match the register of the surrounding context and of the user's own style.
-- Keep it about as long as the situation needs. Do not pad.
-- If the user's instruction is in Hindi/Hinglish, answer in the same mix they use.
+- Output ONLY the finished text, ready to paste. No preamble ("Here's a
+  draft"), no quotes around it, no explanation, no subject line.
+- Match the register of the conversation on screen: a chat gets a chat reply,
+  an email gets an email reply.
+- Keep it as short as the situation allows.
+- Never use placeholders like [Your Name] or [Date]. If you do not know the
+  user's name, leave the sign-off out.
+- If the instruction is in Hindi or Hinglish, write the reply in Hinglish,
+  in Latin letters.
 {style}"""
 
 
@@ -96,6 +104,19 @@ class Actions:
 
     def reset(self) -> None:
         self._provider = None
+
+    def unavailable(self) -> str | None:
+        """Why Ctrl+Alt+W / Ctrl+Alt+F cannot run right now, or None if they can.
+
+        Asked before listening, so the user learns about a missing model
+        before speaking an instruction rather than after.
+        """
+        try:
+            self.provider()
+            return None
+        except providers.ProviderError as e:
+            self._provider = None
+            return str(e)
 
     # ------------------------------------------------------------ compose
 
@@ -140,6 +161,16 @@ def _unwrap(out: str, original: str) -> str:
         if out.lower().startswith(prefix.lower()):
             nl = out.find("\n")
             out = out[nl + 1:].strip() if nl != -1 else out
+    # A placeholder sign-off is worse than none: drop any line that is only one.
+    out = "\n".join(line for line in out.splitlines()
+                    if not re.fullmatch(r"\s*[-,]?\s*\[[^\]]{2,30}\]\s*", line))
+    out = re.sub(r"\[[^\]\n]{0,40}\b(?:name|sign[- ]?off|signature|date|time|"
+                 r"company|email|phone|placeholder)\b[^\]\n]{0,40}\]", " ", out,
+                 flags=re.IGNORECASE)
+    out = re.sub(r"[ \t]{2,}", " ", out)
+    out = re.sub(r"[ \t]+([,.!?])", r"\1", out).strip()
+    # "Thanks, [Your Name]" leaves "Thanks," - end on the word instead.
+    out = re.sub(r",\s*$", "", out)
     if len(out) > 1 and out[0] == out[-1] and out[0] in "\"'":
         inner = out[1:-1]
         if '"' not in inner and "'" not in inner:

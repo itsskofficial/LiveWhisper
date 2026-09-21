@@ -169,7 +169,10 @@ class Pipeline:
     def process(self, transcript: str, screen: ctx_mod.ScreenContext | None = None,
                 force_script: str | None = None,
                 heard_language: str | None = None,
-                latin_output: bool = False) -> Delivery:
+                latin_output: bool = False, composed: bool = False) -> Delivery:
+        """`composed`: the text was written by a model, not spoken, so the
+        spoken-word passes - fillers, spoken punctuation, corrections - must
+        not run on it."""
         app = (screen.app if screen else "") or ""
         profile = self.profiles.get(app)
         notes: list = []
@@ -198,7 +201,7 @@ class Pipeline:
             text = respell(transcript, lang)
 
         out_cfg = self.cfg.get("output") or {}
-        if out_cfg.get("remove_fillers", True):
+        if out_cfg.get("remove_fillers", True) and not composed:
             text = remove_fillers(text)
 
         # Formatting runs before habits, not after: habits are what this user
@@ -207,7 +210,7 @@ class Pipeline:
         style = fmt_mod.style_for(app, override=profile.style or fmt_cfg.get("style"),
                                   cfg=fmt_cfg)
         formatted_by = "none"
-        if fmt_cfg.get("enabled", True):
+        if fmt_cfg.get("enabled", True) and not composed:
             expansion = fmt_mod.shortcut(text, fmt_cfg.get("shortcuts"))
             # Native script stays with the rules: the model is prompted for
             # Latin text, and a Devanagari reply has no capitals to add.

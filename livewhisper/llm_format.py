@@ -234,7 +234,8 @@ class OllamaBackend:
         except Exception:
             return False
 
-    def complete(self, messages: list, max_tokens: int) -> str:
+    def complete(self, messages: list, max_tokens: int,
+                 timeout: float | None = None) -> str:
         payload = {
             "model": self.model, "messages": messages, "stream": False,
             "keep_alive": self.keep_alive,
@@ -252,19 +253,24 @@ class OllamaBackend:
                                      data=json.dumps(payload).encode(), method="POST",
                                      headers={"Content-Type": "application/json"})
         try:
-            with urllib.request.urlopen(req, timeout=self.timeout) as r:
+            with urllib.request.urlopen(req, timeout=timeout or self.timeout) as r:
                 out = json.loads(r.read().decode("utf-8"))
         except Exception as e:
             raise FormatterUnavailable(f"ollama: {e}") from e
         return (out.get("message") or {}).get("content", "")
 
+    # Loading the model from disk took 3.6 s here. The warm-up used to share the
+    # 1.5 s budget of a dictation, gave up, and Ollama abandoned the load - so
+    # the model never loaded and every dictation then timed out waiting for it.
+    WARM_TIMEOUT_S = 90.0
+
     def warm(self) -> None:
         """Load the model now, so the first dictation does not pay for it."""
         try:
             # The real prompt, so the model and the prompt cache are both warm.
-            self.complete(messages_for("ok"), 1)
+            self.complete(messages_for("ok"), 1, timeout=self.WARM_TIMEOUT_S)
         except FormatterUnavailable:
-            pass
+            log.info("formatting model could not be warmed; rules until it can")
 
 
 class FreeTierGuard:
@@ -488,7 +494,12 @@ def _transfer(spoken: str, model: str) -> str:
         # mean" - came back as MATLAB.
         if m_word[1:] == m_word[1:].lower() or (len(m_word) <= 4 and m_word.isupper()):
             word = m_word
-    return (s_lead or m_lead) + word + (m_trail or s_trail)
+    # A sentence end that was already there - the speaker said "full stop", or
+    # the speech model heard the sentence finish - is kept. The model may add
+    # commas where there were none, but it once turned a spoken "full stop"
+    # into a comma, and what the user said out loud is not its call.
+    trail = s_trail if re.search(r"[.?!:;]", s_trail) else (m_trail or s_trail)
+    return (s_lead or m_lead) + word + trail
 
 
 _LIST_LEAD = {"first", "firstly", "second", "secondly", "third", "thirdly",

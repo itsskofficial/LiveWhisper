@@ -12,8 +12,12 @@ hotkeys:
   devanagari: ctrl+alt+h      # keep the NEXT dictation in Devanagari script
 
 audio:
-  capture_system: true        # WASAPI loopback - what the other participants say
+  capture_system: true        # WASAPI loopback - what the other participants say.
+                              # Used in notes mode (Ctrl+Alt+N), for meetings.
   capture_mic: true           # your microphone - what you say
+  dictation_includes_system: false  # dictation records your microphone only, so
+                              # music or a video playing does not end up in the
+                              # text. true = record system audio while dictating too
   system_gain: 1.0
   mic_gain: 1.0
 

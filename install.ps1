@@ -41,6 +41,16 @@ function Step([string]$m) { Write-Host ""; Write-Host "==> $m" -ForegroundColor 
 function Warn([string]$m) { Write-Host "  ! $m" -ForegroundColor Yellow }
 function Die([string]$m) { Write-Host ""; Write-Host "ERROR: $m" -ForegroundColor Red; exit 1 }
 
+# Runs a native command with its stderr discarded. Under Windows PowerShell 5.1,
+# "2>$null" turns every stderr line into an error record, and with
+# $ErrorActionPreference = "Stop" the first one ends the whole install - a pip
+# warning or a Python traceback was enough. Exit codes are still checked.
+function Quiet([scriptblock]$block) {
+    $saved = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    try { & $block 2>$null } finally { $ErrorActionPreference = $saved }
+}
+
 function Ask([string]$question, [string]$default = "") {
     if ($Unattended) { return $default }
     $suffix = if ($default) { " [$default]" } else { "" }
@@ -114,12 +124,17 @@ Say "  Python $pyver ($((Get-Command $python).Source))" "Green"
 # ------------------------------------------------------------------- hardware
 Step "Detecting hardware"
 
-$hwJson = & $python -c @"
-import sys, json
-sys.path.insert(0, r'$Source')
-from livewhisper import hardware
+# hardware.py is stdlib-only on purpose, and is loaded as a lone file: importing
+# the livewhisper package would need python-dotenv, which a fresh Python has not
+# got until the virtualenv exists.
+$hwJson = Quiet { & $python -c @"
+import importlib.util, json, sys
+spec = importlib.util.spec_from_file_location('hardware', r'$Source\livewhisper\hardware.py')
+hardware = importlib.util.module_from_spec(spec)
+sys.modules['hardware'] = hardware
+spec.loader.exec_module(hardware)
 print(json.dumps(hardware.summary()))
-"@ 2>$null
+"@ }
 
 if ($LASTEXITCODE -ne 0 -or -not $hwJson) {
     Warn "Hardware detection failed; will use the defaults in config.yaml."
@@ -194,7 +209,7 @@ if ($LASTEXITCODE -ne 0) { Die "Dependency installation failed. Re-run with -Ver
 # CPU-only is plenty - the model is 4.5M parameters - and it keeps the download
 # to ~200 MB rather than 2.5 GB.
 Say "  Installing the spelling model runtime (CPU torch, ~200 MB)..." "DarkGray"
-& $vpy -m pip install torch --index-url https://download.pytorch.org/whl/cpu --quiet 2>$null
+Quiet { & $vpy -m pip install torch --index-url https://download.pytorch.org/whl/cpu --quiet }
 if ($LASTEXITCODE -ne 0) {
     Warn "torch did not install. The dictionary still covers ~87% of words; unknown ones stay in the original script."
 }
@@ -275,13 +290,23 @@ c.save('config.yaml', cfg); print('  engine set to local')
         Say "  Skipped - downloads on first use." "DarkGray"
     }
 
+    # --- faster English ---
+    # Everyone dictates some English, and on a GPU a smaller decoder does it
+    # faster with no loss in accuracy (livewhisper/specialists.py, "en").
+    if ($hw -and $hw.recommended.device -eq "cuda") {
+        if (AskYesNo "Download the English speed-up (large-v3-turbo, ~1.6 GB)? Recommended." $true) {
+            & $vpy -m livewhisper.specialists install en
+            if ($LASTEXITCODE -ne 0) { Warn "English speed-up did not install; large-v3 handles English." }
+        }
+    }
+
     # --- small local model for formatting ---
     # Optional. Without it the rules format the text; with it punctuation and
     # lists are noticeably better (tests/results/format_llm.md). It can only
     # add punctuation and capitals, never change a word.
     $ollama = Get-Command ollama -ErrorAction SilentlyContinue
     if ($ollama) {
-        $have = (& ollama list 2>$null | Select-String -SimpleMatch "qwen3:0.6b")
+        $have = (Quiet { & ollama list } | Select-String -SimpleMatch "qwen3:0.6b")
         if ($have) {
             Say "  Formatting model qwen3:0.6b is already installed." "DarkGray"
         } elseif (AskYesNo "Download the small formatting model (qwen3:0.6b, ~520 MB) for Ollama?" $true) {

@@ -104,6 +104,7 @@ class LocalBackend:
         self._model = None
         self._batched = None
         self._primed: str | None = None     # language settled while recording
+        self._generation = 0                # the recording that priming is for
         self._lock = threading.Lock()
 
     # -- model availability -------------------------------------------------
@@ -165,11 +166,14 @@ class LocalBackend:
                     log.warning("batched pipeline unavailable; sequential decode",
                                 exc_info=True)
 
-        # Load the specialist for the main language now rather than on the first
-        # dictation in it, which would otherwise stall for several seconds while
-        # 1.5-6 GB reach the GPU. Outside the lock: _model_for takes it too.
-        if self.languages and self._route(self.languages[0]).get("path"):
-            self._model_for(self.languages[0])
+        # Load the specialists for the user's languages now rather than on the
+        # first dictation in each, which would otherwise stall for seconds while
+        # 1.5-6 GB reach the GPU - and, with only one allowed, swap them on every
+        # change of language. Outside the lock: _model_for takes it too.
+        budget = max(0, int(self.cfg.get("max_extra_models", 1)))
+        routed = [lang for lang in self.languages if self._route(lang).get("path")]
+        for lang in routed[:budget]:
+            self._model_for(lang)
 
     def _batch_size(self) -> int:
         return int(self.cfg.get("batch_size", 8))
@@ -292,7 +296,13 @@ class LocalBackend:
             self._routed[path] = (m, b)
             return m, b
 
-    def prime(self, audio: np.ndarray) -> str | None:
+    def new_recording(self) -> int:
+        """A recording has started: forget any language settled for another."""
+        self._generation += 1
+        self._primed = None
+        return self._generation
+
+    def prime(self, audio: np.ndarray, generation: int | None = None) -> str | None:
         """Settle the language now, on the audio captured so far.
 
         Detection is a whole extra encoder pass - measured at ~300 ms of the
@@ -312,10 +322,18 @@ class LocalBackend:
         except Exception:
             log.debug("could not settle the language early", exc_info=True)
             return None
-        if language:
+        # Detection takes a while. If the recording it was for has already been
+        # transcribed or cancelled, the answer belongs to nobody - storing it
+        # would force the NEXT dictation into this one's language.
+        if language and (generation is None or generation == self._generation):
             self._primed = language
             log.info("language settled during recording: %s", language)
         return language
+
+    def _on_disk(self) -> bool:
+        from pathlib import Path
+        model = str(self.cfg.get("model", "large-v3"))
+        return Path(model).exists() or self.is_downloaded()
 
     def warm(self) -> None:
         """Run one throwaway decode, so the first real dictation is not the slow one.
@@ -329,7 +347,13 @@ class LocalBackend:
         Silence would be dropped by VAD before reaching the decoder, so the
         warm-up turns VAD off and decodes one second of it directly, with the
         beam size real dictations use.
+
+        Never downloads: a 3 GB download at launch, unannounced, would leave the
+        first dictation waiting minutes. Download is an explicit step.
         """
+        if not self._on_disk():
+            log.info("speech model not downloaded yet; not warming")
+            return
         self.load()
         try:
             segments, _ = self._model.transcribe(
@@ -344,11 +368,13 @@ class LocalBackend:
     def forget_priming(self) -> None:
         """Drop a primed language - the recording it belonged to is gone."""
         self._primed = None
+        self._generation += 1
 
     def transcribe(self, audio: np.ndarray, hotwords: str = "") -> str:
         """`hotwords` are names worth expecting - see livewhisper/bias.py."""
         self.load()
         primed, self._primed = self._primed, None
+        self._generation += 1               # late priming for this one is ignored
         common = dict(
             language=self.cfg.get("language") or primed or self._pick_language(audio),
             beam_size=int(self.cfg.get("beam_size", 5)),
@@ -428,7 +454,9 @@ class GroqBackend:
             )
         # Whisper takes one prompt, so the names on screen join the user's own
         # vocabulary rather than replacing it.
-        self._bias = ", ".join(x for x in (self.vocabulary, hotwords) if x)
+        # Names read off the screen are deliberately not sent: the promise in
+        # Settings is that screen text never leaves this machine.
+        self._bias = self.vocabulary
         chunk = int(self.cfg.get("chunk_seconds", 600)) * TARGET_RATE
         parts = [self._chunk(c, key) for c in _split_on_silence(audio, chunk)]
         return " ".join(p for p in parts if p).strip()
@@ -545,6 +573,19 @@ class AutoBackend:
             return
         if self.local.is_downloaded():
             self.local.warm()
+
+    # Early language detection runs on the local model, and only matters when
+    # the local model will be the one transcribing.
+    def new_recording(self) -> int:
+        return self.local.new_recording()
+
+    def prime(self, audio, generation: int | None = None):
+        if self.groq_available:
+            return None
+        return self.local.prime(audio, generation=generation)
+
+    def forget_priming(self) -> None:
+        self.local.forget_priming()
 
     def _block_groq(self) -> None:
         self._blocked_until = time.monotonic() + self.cooldown

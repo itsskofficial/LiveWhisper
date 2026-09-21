@@ -499,7 +499,16 @@ def tidy(text: str, capitals: bool = True) -> str:
     if capitals:
         text = _SENTENCE_START.sub(lambda m: m.group(1) + m.group(2).upper(), text)
         text = _LONE_I.sub("I", text)
+    # A list item is a fragment, typed without a full stop. The speech model
+    # hears each spoken item end and adds one: "- Fix the login bug."
+    text = _LIST_ITEM_STOP.sub(r"\1", text)
+    # The line that introduces a list ends in a colon, not a full stop.
+    text = _LIST_LEAD_STOP.sub(r"\1:\n", text)
     return text.strip()
+
+
+_LIST_ITEM_STOP = re.compile(r"(?m)^((?:[-*]|\d+\.)\s[^\n.!?]*[^\s.!?])\.[ \t]*$")
+_LIST_LEAD_STOP = re.compile(r"(?m)^([^\n]*[^\s.:!?])\.[ \t]*\n(?=(?:[-*]|\d+\.)\s)")
 
 
 _ALREADY_ENDED = re.compile(r"[.!?…:,)\"'\]]$")

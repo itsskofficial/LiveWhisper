@@ -44,6 +44,7 @@ def cmd_apply_recommended(_) -> int:
     loc["device"] = rec.device
     loc["compute_type"] = rec.compute_type
     loc["batch_size"] = rec.batch_size
+    loc["max_extra_models"] = rec.extra_models
     cfgio.save(CONFIG, cfg)
     print(f"local model set to {rec.model} / {rec.compute_type} / batch {rec.batch_size}")
     return 0

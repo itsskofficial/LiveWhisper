@@ -79,6 +79,8 @@ class App:
         self._force_script: str | None = None
         self._prime_stop = threading.Event()
         self._screen_at_start = None
+        self._mode = "dictate"          # what the current recording is for
+        self._generation = 0            # which recording a primed language is for
 
     # ---------------------------------------------------------------- config
 
@@ -145,15 +147,63 @@ class App:
     def toggle_record(self) -> None:
         with self._lock:
             if self.state is State.TRANSCRIBING:
-                self.notify("Still transcribing the last recording.")
+                self.notify("Still working on the last one.")
                 return
-            self._start() if self.state is State.IDLE else self._stop()
+            if self.state is State.RECORDING:
+                self._stop()
+            else:
+                self._start("dictate")
 
-    def _start(self) -> None:
+    def toggle_command(self) -> None:
+        """Ctrl+Alt+W: press, say what to write, press again.
+
+        It used to listen for a fixed 8 seconds, so every instruction - even
+        "say yes" - waited the full 8, and a long one was cut off. Now it works
+        like dictation. The writing model is checked before listening, so a
+        missing model is reported before the user has spoken, not after.
+        """
+        with self._lock:
+            if self.state is State.TRANSCRIBING:
+                self.notify("Still working on the last one.")
+                return
+            if self.state is State.RECORDING:
+                if self._mode == "command":
+                    self._stop()
+                else:
+                    self.notify("Finish the dictation first.")
+                return
+            problem = self.actions.unavailable()
+            if problem:
+                self.notify(problem)
+                return
+            self._start("command")
+            if self.state is State.RECORDING:
+                key = self.cfg["hotkeys"].get("write", "ctrl+alt+w").title()
+                self.notify(f"Say what to write, then press {key} again.")
+
+    def _sources(self, mode: str) -> tuple:
+        """(system audio, microphone) for this kind of recording.
+
+        Dictation is your voice, so it is the microphone alone: recording the
+        speakers as well put whatever was playing - a video, music, a call -
+        into the text, and flagged "system audio was silent" on every quiet
+        dictation. System audio is for notes (meetings), where the other
+        people are the point. audio.dictation_includes_system opts back in.
+        """
         a = self.cfg["audio"]
+        mic = bool(a.get("capture_mic", True))
+        if mode == "command":
+            return False, True
+        if self.note_mode or a.get("dictation_includes_system", False):
+            return bool(a.get("capture_system", True)), mic
+        return False, True
+
+    def _start(self, mode: str = "dictate") -> None:
+        a = self.cfg["audio"]
+        system, mic = self._sources(mode)
         self.recorder = Recorder(
-            capture_system=a.get("capture_system", True),
-            capture_mic=a.get("capture_mic", True),
+            capture_system=system,
+            capture_mic=mic,
             system_gain=float(a.get("system_gain", 1.0)),
             mic_gain=float(a.get("mic_gain", 1.0)),
         )
@@ -163,14 +213,17 @@ class App:
             self.recorder = None
             self.notify(f"Could not start recording: {e}")
             return
+        self._mode = mode
         try:
             self._screen_at_start = context.capture()
         except Exception:
             self._screen_at_start = None
         self._started_at = time.monotonic()
         self._prime_stop = threading.Event()
-        threading.Thread(target=self._settle_language, args=(self.recorder,),
-                         daemon=True).start()
+        begin = getattr(self.backend(), "new_recording", None)
+        self._generation = begin() if begin else self._generation + 1
+        threading.Thread(target=self._settle_language,
+                         args=(self.recorder, self._generation), daemon=True).start()
         self._set_state(State.RECORDING)
         if self.cfg.get("ui", {}).get("overlay", True) and self.root:
             self.root.after(0, self._show_overlay)
@@ -181,7 +234,7 @@ class App:
     # waits for and gives a long dictation more audio to work with.
     SETTLE_AT_S = (2.5, 12.0)
 
-    def _settle_language(self, recorder) -> None:
+    def _settle_language(self, recorder, generation: int = 0) -> None:
         """Detect the language while the speaker is still talking.
 
         Detection is an entire encoder pass, and it only ever looks at the
@@ -211,7 +264,10 @@ class App:
                 log.debug("could not read the recording so far", exc_info=True)
                 return
             if len(audio) >= 1.5 * TARGET_RATE:
-                settle(audio)
+                try:
+                    settle(audio, generation=generation)
+                except TypeError:                   # a backend without generations
+                    settle(audio)
 
     def _stop(self) -> None:
         self._prime_stop.set()
@@ -230,13 +286,16 @@ class App:
         # Loopback keeps delivering buffers with nothing playing, so a silent
         # track means nothing was audible rather than nothing was recorded.
         silent = 1e-4
-        if self.cfg["audio"].get("capture_system", True) and recording.system_peak < silent:
-            self.notify("Warning: system audio was silent - captured your mic only.")
-        elif self.cfg["audio"].get("capture_mic", True) and recording.mic_peak < silent:
-            self.notify("Warning: microphone was silent - captured system audio only.")
+        system, mic = self._sources(self._mode)
+        if mic and recording.mic_peak < silent:
+            self.notify("The microphone recorded silence - is it muted, or is "
+                        "another app holding it?")
+        elif system and self.note_mode and recording.system_peak < silent:
+            self.notify("System audio was silent - only your microphone was captured.")
 
         self._set_state(State.TRANSCRIBING)
-        threading.Thread(target=self._transcribe, args=(recording,), daemon=True).start()
+        work = self._transcribe if self._mode == "dictate" else self._write_from
+        threading.Thread(target=work, args=(recording,), daemon=True).start()
 
     # ------------------------------------------------- personalised pipeline
 
@@ -246,9 +305,10 @@ class App:
             screen = self._screen_at_start or context.capture()
             # Learn before writing: whatever is in the field now reflects any
             # corrections made to what we pasted last time.
-            for note in self.pipeline.learn_from_screen(screen):
-                log.info("learned: %s", note)
-                self.notify(note)
+            if (self.cfg.get("learning") or {}).get("enabled", True):
+                for note in self.pipeline.learn_from_screen(screen):
+                    log.info("learned: %s", note)
+                    self.notify(note)
             heard = getattr(self.backend(), "last_language", None)
             delivery = self.pipeline.process(
                 transcript, screen, force_script=self._force_script,
@@ -265,69 +325,66 @@ class App:
 
     # ------------------------------------------------------------- actions
 
-    def _run_action(self, kind: str) -> None:
-        """Voice command, grammar fix, or rewrite - all read the screen first."""
-        try:
+    def fix_field(self) -> None:
+        """Ctrl+Alt+F: correct the grammar of the text in the focused field."""
+        with self._lock:
+            if self.state is not State.IDLE:
+                self.notify("Finish the dictation first.")
+                return
+            problem = self.actions.unavailable()
+            if problem:
+                self.notify(problem)
+                return
             self._set_state(State.TRANSCRIBING)
+        try:
             screen = context.capture(
                 use_ocr=self.cfg.get("context", {}).get("ocr_fallback", False))
-            profile = self.styles.get(screen.app)
-
-            if kind == "fix":
-                target = (screen.focused_text or "").strip()
-                if not target:
-                    self.notify("Nothing to fix - no text found in this field.")
-                    return
-                fixed = self.actions.fix(target)
-                if fixed.strip() == target.strip():
-                    self.notify("Already looks correct.")
-                    return
-                output.deliver(fixed, auto_paste=False, copy_to_clipboard=True)
-                self.notify(f"Corrected - {len(fixed.split())} words on clipboard.")
+            target = (screen.focused_text or "").strip()
+            if not target:
+                self.notify("Nothing to fix - no text found in this field.")
                 return
-
-            # Command mode: record, then treat the transcript as an instruction.
-            self.notify("Listening for a command...")
-            audio = self._record_once(self.cfg.get("actions", {})
-                                      .get("command_seconds", 8))
-            if audio is None:
+            fixed = self.actions.fix(target)
+            if fixed.strip() == target.strip():
+                self.notify("Already looks correct.")
                 return
-            instruction = self.backend().transcribe(audio)
+            output.deliver(fixed, auto_paste=False, copy_to_clipboard=True)
+            self.notify(f"Corrected - {len(fixed.split())} words on the clipboard. "
+                        f"Select the text and paste to replace it.")
+        except Exception as e:
+            log.exception("fix failed")
+            self.notify(f"Could not fix the text: {e}")
+        finally:
+            self._set_state(State.IDLE)
+
+    def _write_from(self, recording) -> None:
+        """The second half of Ctrl+Alt+W: instruction -> finished text -> paste."""
+        try:
+            t0 = time.perf_counter()
+            instruction = self.backend().transcribe(recording.audio)
             if not instruction.strip():
-                self.notify("Did not catch a command.")
+                self.notify("Did not catch what to write.")
                 return
             log.info("command: %s", instruction)
-
+            screen = self._screen_at_start or context.capture()
+            profile = self.styles.get(screen.app if screen else "")
             result = self.actions.compose(instruction, profile, screen)
-            result = self.pipeline.process(result, screen).text
+            # The model wrote finished text: spoken-punctuation rules would
+            # turn "a new line before the signature" into a line break.
+            result = self.pipeline.process(result, screen, composed=True).text
             o = self.cfg["output"]
             output.deliver(result,
                            auto_paste=o.get("auto_paste", True),
                            copy_to_clipboard=o.get("copy_to_clipboard", True))
+            log.info("timing: wrote %d words in %.0f ms", len(result.split()),
+                     (time.perf_counter() - t0) * 1000)
             self.notify(f"Written - {len(result.split())} words.")
+        except output.ClipboardBusy:
+            self.notify("The clipboard is busy in another app - try again.")
         except Exception as e:
-            log.exception("action failed")
-            self.notify(f"Action failed: {e}")
+            log.exception("write failed")
+            self.notify(f"Could not write that: {e}")
         finally:
             self._set_state(State.IDLE)
-
-    def _record_once(self, seconds: float):
-        """Blocking capture used by command mode."""
-        a = self.cfg["audio"]
-        rec = Recorder(capture_system=False,
-                       capture_mic=a.get("capture_mic", True))
-        try:
-            rec.start()
-        except AudioError as e:
-            self.notify(f"Microphone unavailable: {e}")
-            return None
-        self._started_at = time.monotonic()
-        if self.root:
-            self.root.after(0, self._show_overlay)
-        time.sleep(seconds)
-        if self.root:
-            self.root.after(0, self._hide_overlay)
-        return rec.stop().audio
 
     def toggle_notes(self) -> None:
         self.note_mode = not self.note_mode
@@ -363,8 +420,10 @@ class App:
         try:
             mins, secs = divmod(int(recording.seconds), 60)
             log.info("transcribing %dm%02ds via %s", mins, secs, self.backend_name)
+            t0 = time.perf_counter()
             transcript = self.backend().transcribe(
                 recording.audio, hotwords=self._names_in_front_of_me())
+            t_asr = time.perf_counter()
             if not transcript:
                 self.notify("No speech detected in the recording.")
                 return
@@ -377,6 +436,7 @@ class App:
 
             text = self._apply_pipeline(transcript)
             text = output.compose(self.profile.get("prompt", ""), text)
+            t_pipe = time.perf_counter()
             self._save(text)
 
             o = self.cfg["output"]
@@ -386,6 +446,13 @@ class App:
                 copy_to_clipboard=o.get("copy_to_clipboard", True),
                 restore_clipboard=o.get("restore_clipboard", False),
             )
+            t_done = time.perf_counter()
+            # One line per dictation with where the wait went, so a slow one in
+            # a user's log says which stage to look at.
+            log.info("timing: speech %.0f ms, text %.0f ms, paste %.0f ms (%s)",
+                     (t_asr - t0) * 1000, (t_pipe - t_asr) * 1000,
+                     (t_done - t_pipe) * 1000,
+                     getattr(self.pipeline._last, "formatted_by", "?"))
             words = len(transcript.split())
             if pasted:
                 where = "pasted"
@@ -394,6 +461,10 @@ class App:
             else:
                 where = "saved"
             self.notify(f"{words} words {where}.")
+        except output.ClipboardBusy:
+            # The transcript is already saved; only the paste could not happen.
+            self.notify("The clipboard is busy in another app - your text is "
+                        "saved in Transcripts.")
         except TranscriptionError as e:
             self.notify(f"Transcription failed: {e}")
             self._save_audio_on_failure(recording)
@@ -565,8 +636,8 @@ class App:
             hk.get("cycle_profile", "ctrl+alt+p"): self.cycle_profile,
             hk.get("toggle_backend", "ctrl+alt+g"): self.toggle_backend,
             hk.get("cancel", "ctrl+alt+x"): self.cancel,
-            hk.get("write", "ctrl+alt+w"): lambda: self._run_action("write"),
-            hk.get("fix", "ctrl+alt+f"): lambda: self._run_action("fix"),
+            hk.get("write", "ctrl+alt+w"): self.toggle_command,
+            hk.get("fix", "ctrl+alt+f"): self.fix_field,
             hk.get("notes", "ctrl+alt+n"): self.toggle_notes,
             hk.get("devanagari", "ctrl+alt+h"): self.force_devanagari,
         }
@@ -668,14 +739,9 @@ def main() -> int:
                         help="open the settings window on launch")
     args = parser.parse_args()
 
-    logging.basicConfig(
-        level=logging.DEBUG if args.verbose else logging.INFO,
-        format="%(asctime)s %(levelname)-7s %(name)s | %(message)s",
-        datefmt="%H:%M:%S",
-    )
-    # -v is for debugging LiveWhisper, not PIL's plugin scan or httpcore's frames.
-    for noisy in ("PIL", "httpx", "httpcore", "urllib3", "filelock", "huggingface_hub"):
-        logging.getLogger(noisy).setLevel(logging.WARNING)
+    from .logs import setup as setup_logging
+    log_file = setup_logging(args.verbose)
+    log.info("LiveWhisper starting; log at %s", log_file)
 
     if not args.config.exists():
         print(f"config not found: {args.config}", file=sys.stderr)

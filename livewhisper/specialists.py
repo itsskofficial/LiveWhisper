@@ -50,6 +50,19 @@ class Specialist:
 # candidate under evaluation and is not offered by `install` without --force.
 CATALOGUE: list = [
     Specialist(
+        # Not a fine-tune: OpenAI's turbo model, whose decoder is an eighth the
+        # size of large-v3's. On English it is at least as accurate (FLEURS WER
+        # 4.6% against 4.8%) and decoding is paid per layer per token, so routing
+        # English to it cut the wait after a dictation by 30-55% in
+        # tests/e2e_app.py. Weaker on Indic languages (Hindi 26.6% vs 23.9%),
+        # which stay on large-v3 or their own specialist.
+        "en", "mobiuslabsgmbh/faster-whisper-large-v3-turbo", "en-turbo", 1.6,
+        "mit", kind="ct2",
+        measured={"FLEURS word error": "4.6% (large-v3 4.8%)",
+                  "wait after an English dictation": "30-55% shorter"},
+        note="Makes English dictation faster with no loss in accuracy. "
+             "Already converted, so install is a 1.6 GB download."),
+    Specialist(
         "bn", "bengaliAI/tugstugi_bengaliai-asr_whisper-medium", "bn-medium",
         3.06, "apache-2.0",
         measured={"FLEURS word error": "20.9% (large-v3 73.3%)",
