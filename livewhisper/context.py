@@ -39,6 +39,14 @@ class ScreenContext:
     method: str               # uia | ocr | none
 
 
+def foreground_window() -> int:
+    """The window that has focus, as a handle - 0 if there is none."""
+    try:
+        return int(user32.GetForegroundWindow() or 0)
+    except Exception:
+        return 0
+
+
 def foreground_app() -> tuple[str, str]:
     """(process name, window title) of whatever the user is looking at."""
     hwnd = user32.GetForegroundWindow()

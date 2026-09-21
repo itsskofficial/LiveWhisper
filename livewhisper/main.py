@@ -80,6 +80,7 @@ class App:
         self._prime_stop = threading.Event()
         self._screen_at_start = None
         self._mode = "dictate"          # what the current recording is for
+        self._window_at_start = 0       # where the text is meant to go
         self._generation = 0            # which recording a primed language is for
 
     # ---------------------------------------------------------------- config
@@ -214,6 +215,7 @@ class App:
             self.notify(f"Could not start recording: {e}")
             return
         self._mode = mode
+        self._window_at_start = context.foreground_window()
         try:
             self._screen_at_start = context.capture()
         except Exception:
@@ -232,15 +234,22 @@ class App:
     # to be off the critical path even for a short dictation, late enough to
     # have real speech to judge from; the second look costs nothing anybody
     # waits for and gives a long dictation more audio to work with.
-    SETTLE_AT_S = (2.5, 12.0)
+    # Look again every couple of seconds while the speaker talks, so the last
+    # guess before they stop was made on nearly all of it. One look at 2.5 s -
+    # the first version - heard Punjabi, Marathi, Kannada and Sindhi as English
+    # in the end-to-end run: two seconds of speech is not enough to tell.
+    # Detection only reads the first 30 s, so there is no point after that.
+    SETTLE_EVERY_S = 2.0
+    SETTLE_UNTIL_S = 30.0
 
     def _settle_language(self, recorder, generation: int = 0) -> None:
         """Detect the language while the speaker is still talking.
 
-        Detection is an entire encoder pass, and it only ever looks at the
-        start of the recording, so running it after the hotkey is released
-        adds a third of the wait for nothing. Best effort throughout: if this
-        thread does not finish, transcription detects the language itself.
+        Detection is an entire encoder pass, and it only ever reads the start
+        of the recording, so doing it after the hotkey is released adds to the
+        wait for nothing. Transcription uses the latest guess only if it was
+        made on most of the recording (LocalBackend.PRIME_TRUST); otherwise it
+        detects again. Best effort throughout.
         """
         try:
             # The formatting model may have been unloaded while idle; bring it
@@ -251,11 +260,12 @@ class App:
         settle = getattr(self.backend(), "prime", None)
         if settle is None:
             return
-        waited = 0.0
-        for mark in self.SETTLE_AT_S:
-            if self._prime_stop.wait(mark - waited):
+        interval = self.SETTLE_EVERY_S
+        elapsed = 0.0
+        while elapsed < self.SETTLE_UNTIL_S:
+            if self._prime_stop.wait(interval):
                 return                          # recording already ended
-            waited = mark
+            elapsed += interval
             if self.recorder is not recorder:
                 return
             try:
@@ -263,11 +273,16 @@ class App:
             except Exception:
                 log.debug("could not read the recording so far", exc_info=True)
                 return
-            if len(audio) >= 1.5 * TARGET_RATE:
-                try:
-                    settle(audio, generation=generation)
-                except TypeError:                   # a backend without generations
-                    settle(audio)
+            if len(audio) < 1.5 * TARGET_RATE:
+                continue
+            t0 = time.perf_counter()
+            try:
+                settle(audio, generation=generation)
+            except TypeError:                   # a backend without generations
+                settle(audio)
+            # On a CPU one detection can take a second or two; never spend more
+            # than about a third of the machine on it.
+            interval = max(self.SETTLE_EVERY_S, 3 * (time.perf_counter() - t0))
 
     def _stop(self) -> None:
         self._prime_stop.set()
@@ -372,9 +387,14 @@ class App:
             # turn "a new line before the signature" into a line break.
             result = self.pipeline.process(result, screen, composed=True).text
             o = self.cfg["output"]
+            moved = self._window_moved()
             output.deliver(result,
-                           auto_paste=o.get("auto_paste", True),
-                           copy_to_clipboard=o.get("copy_to_clipboard", True))
+                           auto_paste=o.get("auto_paste", True) and not moved,
+                           copy_to_clipboard=o.get("copy_to_clipboard", True) or moved)
+            if moved:
+                self.notify("You switched windows, so nothing was pasted - the "
+                            "text is on your clipboard.")
+                return
             log.info("timing: wrote %d words in %.0f ms", len(result.split()),
                      (time.perf_counter() - t0) * 1000)
             self.notify(f"Written - {len(result.split())} words.")
@@ -422,7 +442,8 @@ class App:
             log.info("transcribing %dm%02ds via %s", mins, secs, self.backend_name)
             t0 = time.perf_counter()
             transcript = self.backend().transcribe(
-                recording.audio, hotwords=self._names_in_front_of_me())
+                recording.audio, hotwords=self._names_in_front_of_me(),
+                native=self._wants_native())
             t_asr = time.perf_counter()
             if not transcript:
                 self.notify("No speech detected in the recording.")
@@ -440,12 +461,17 @@ class App:
             self._save(text)
 
             o = self.cfg["output"]
+            moved = self._window_moved()
             pasted, kept = output.deliver(
                 text,
-                auto_paste=o.get("auto_paste", True),
-                copy_to_clipboard=o.get("copy_to_clipboard", True),
-                restore_clipboard=o.get("restore_clipboard", False),
+                auto_paste=o.get("auto_paste", True) and not moved,
+                copy_to_clipboard=o.get("copy_to_clipboard", True) or moved,
+                restore_clipboard=o.get("restore_clipboard", False) and not moved,
             )
+            if moved:
+                self.notify("You switched windows while dictating, so nothing was "
+                            "pasted - the text is on your clipboard.")
+                return
             t_done = time.perf_counter()
             # One line per dictation with where the wait went, so a slow one in
             # a user's log says which stage to look at.
@@ -474,6 +500,36 @@ class App:
             self._save_audio_on_failure(recording)
         finally:
             self._set_state(State.IDLE)
+
+    def _wants_native(self) -> bool:
+        """Will this dictation be pasted in the language's own script?
+
+        Decided before transcribing, because it decides which model may decode:
+        the same rule the pipeline applies afterwards (a forced script, the
+        app's setting, or the script already in the field).
+        """
+        if self._force_script:
+            return self._force_script == "native"
+        screen = self._screen_at_start
+        try:
+            return self.pipeline.choose_script(screen.app if screen else "",
+                                               screen) == "native"
+        except Exception:
+            return False
+
+    def _window_moved(self) -> bool:
+        """Is focus somewhere other than the window the dictation started in?
+
+        Text goes wherever the cursor is when it is pasted. In testing, a
+        dictation started in Notepad and finished while the user was in a Google
+        Doc and was pasted into the doc. Dictation into one place must not land
+        in another - a chat, a document, a password box - so if focus has moved
+        the text is left on the clipboard instead.
+        """
+        if not self._window_at_start:
+            return False
+        now = context.foreground_window()
+        return bool(now) and now != self._window_at_start
 
     def _names_in_front_of_me(self) -> str:
         """Names on screen worth expecting, for the decoder to lean on.

@@ -104,6 +104,7 @@ class LocalBackend:
         self._model = None
         self._batched = None
         self._primed: str | None = None     # language settled while recording
+        self._primed_seconds = 0.0          # how much audio that guess heard
         self._generation = 0                # the recording that priming is for
         self._lock = threading.Lock()
 
@@ -301,7 +302,24 @@ class LocalBackend:
         """A recording has started: forget any language settled for another."""
         self._generation += 1
         self._primed = None
+        self._primed_seconds = 0.0
         return self._generation
+
+    # A settled language is used only if it was decided on most of what was
+    # said: at least 70% of the recording, or 8 s of it, whichever is less.
+    PRIME_TRUST = (0.7, 8.0)
+
+    def _trusted_prime(self, audio: np.ndarray) -> str | None:
+        primed, seconds = self._primed, self._primed_seconds
+        self._primed, self._primed_seconds = None, 0.0
+        if not primed:
+            return None
+        total = len(audio) / TARGET_RATE
+        share, enough = self.PRIME_TRUST
+        if seconds >= min(enough, share * total):
+            return primed
+        log.info("language guessed on %.1f of %.1f s; detecting again", seconds, total)
+        return None
 
     def prime(self, audio: np.ndarray, generation: int | None = None) -> str | None:
         """Settle the language now, on the audio captured so far.
@@ -328,6 +346,7 @@ class LocalBackend:
         # would force the NEXT dictation into this one's language.
         if language and (generation is None or generation == self._generation):
             self._primed = language
+            self._primed_seconds = len(audio) / TARGET_RATE
             log.info("language settled during recording: %s", language)
         return language
 
@@ -371,10 +390,18 @@ class LocalBackend:
         self._primed = None
         self._generation += 1
 
-    def transcribe(self, audio: np.ndarray, hotwords: str = "") -> str:
-        """`hotwords` are names worth expecting - see livewhisper/bias.py."""
+    def transcribe(self, audio: np.ndarray, hotwords: str = "",
+                   native: bool = False) -> str:
+        """`hotwords` are names worth expecting - see livewhisper/bias.py.
+
+        `native`: the user wants the language's own script. A specialist that
+        writes romanized text itself (Hinglish-Prime) cannot give them that, so
+        it is skipped and the main model - or a native-script specialist -
+        decodes instead. Without this, asking for Devanagari with the Hinglish
+        model installed produced Latin text.
+        """
         self.load()
-        primed, self._primed = self._primed, None
+        primed = self._trusted_prime(audio)
         self._generation += 1               # late priming for this one is ignored
         common = dict(
             language=self.cfg.get("language") or primed or self._pick_language(audio),
@@ -382,8 +409,11 @@ class LocalBackend:
             initial_prompt=self.vocabulary or None,
             hotwords=hotwords or None,
         )
-        model, batched = self._model_for(common["language"])
         route = self._route(common["language"])
+        if native and route.get("latin_output"):
+            model, batched, route = self._model, self._batched, {}
+        else:
+            model, batched = self._model_for(common["language"])
         self.last_latin_output = model is not self._model and route.get("latin_output", False)
         if model is not self._model and route.get("language"):
             # e.g. Oriserve's Hinglish models are driven with the "en" token,
@@ -447,7 +477,8 @@ class GroqBackend:
                 f"{self.cfg.get('api_key_env', 'GROQ_API_KEY')} is not set"
             )
 
-    def transcribe(self, audio: np.ndarray, hotwords: str = "") -> str:
+    def transcribe(self, audio: np.ndarray, hotwords: str = "",
+                   native: bool = False) -> str:
         key = self.api_key()
         if not key:
             raise GroqUnavailable(
@@ -598,7 +629,8 @@ class AutoBackend:
         return (not self._groq_served
                 and bool(getattr(self.local, "last_latin_output", False)))
 
-    def transcribe(self, audio: np.ndarray, hotwords: str = "") -> str:
+    def transcribe(self, audio: np.ndarray, hotwords: str = "",
+                   native: bool = False) -> str:
         self._groq_served = False
         if self.groq_available:
             try:
@@ -620,7 +652,7 @@ class AutoBackend:
             self.notify("Downloading local model (~3 GB). This happens once.")
             self.local.download()
             self.notify("Local model ready.")
-        out = self.local.transcribe(audio, hotwords=hotwords)
+        out = self.local.transcribe(audio, hotwords=hotwords, native=native)
         self._last_language = self.local.last_language
         return out
 

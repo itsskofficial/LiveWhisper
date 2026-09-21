@@ -85,6 +85,19 @@ def main() -> int:
     check("no restriction configured leaves detection to Whisper",
           free._pick_language(audio) is None)
 
+    print("\n=== native script is never decoded by a romanizing model ===")
+    b2 = backend()
+    b2.load = lambda: None
+    b2.cfg["language"] = "hi"
+    out = b2.transcribe(audio, native=True)
+    check("asking for native Hindi skips the Hinglish model",
+          out == "[main:hi]" and b2.last_latin_output is False, out)
+    out = b2.transcribe(audio)
+    check("asking for romanized Hindi still uses it", out == "[hinglish:en]", out)
+    b2.cfg["language"] = "ta"
+    check("a native-script specialist serves native requests",
+          b2.transcribe(audio, native=True) == "[ta-spec:ta]")
+
     print("\n=== a borderline English loses to the user's other language ===")
 
     class Detector(FakeWhisper):

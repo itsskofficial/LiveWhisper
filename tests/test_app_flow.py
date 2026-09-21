@@ -66,7 +66,8 @@ class FakeBackend:
     def prime(self, audio, generation=None):
         return None
 
-    def transcribe(self, audio, hotwords=""):
+    def transcribe(self, audio, hotwords="", native=False):
+        self.native = native
         return "hello there"
 
 
@@ -154,6 +155,35 @@ def main() -> int:
     finally:
         output.deliver = orig_deliver
 
+    print("\n=== text goes where the dictation started ===")
+    app = make_app()
+    windows = iter([101, 202])
+    main_mod.context.foreground_window = lambda: next(windows)
+    delivered: list = []
+    orig_deliver = output.deliver
+    output.deliver = lambda text, **kw: (delivered.append(kw), (False, True))[1]
+    try:
+        app.toggle_record()
+        app.toggle_record()
+        deadline = time.time() + 5
+        while app.state is not main_mod.State.IDLE and time.time() < deadline:
+            time.sleep(0.02)
+        check("switching windows mid-dictation leaves the text on the clipboard",
+              delivered and delivered[-1]["auto_paste"] is False
+              and delivered[-1]["copy_to_clipboard"] is True
+              and "switched windows" in app.notices[-1], str(app.notices[-1:]))
+        windows = iter([303, 303])
+        main_mod.context.foreground_window = lambda: next(windows)
+        app.toggle_record()
+        app.toggle_record()
+        deadline = time.time() + 5
+        while app.state is not main_mod.State.IDLE and time.time() < deadline:
+            time.sleep(0.02)
+        check("staying put pastes as normal", delivered[-1]["auto_paste"] is True)
+    finally:
+        output.deliver = orig_deliver
+        main_mod.context.foreground_window = lambda: 0
+
     print("\n=== a language settled for one recording stays with it ===")
     import faster_whisper
     b = LocalBackend({"batch_size": 1, "models": {}}, languages=["hi", "en"])
@@ -175,6 +205,19 @@ def main() -> int:
     b.prime(np.zeros(16000, np.float32), generation=g2)
     check("a cancelled recording's detection is dropped even if it finishes later",
           b._primed is None, str(b._primed))
+
+    g4 = b.new_recording()
+    b.prime(np.zeros(16000 * 2, np.float32), generation=g4)
+    check("a guess made on 2 s of a 10 s recording is not trusted",
+          b._trusted_prime(np.zeros(16000 * 10, np.float32)) is None)
+    g5 = b.new_recording()
+    b.prime(np.zeros(16000 * 8, np.float32), generation=g5)
+    check("a guess made on 8 s of a 20 s recording is",
+          b._trusted_prime(np.zeros(16000 * 20, np.float32)) == "hi")
+    g6 = b.new_recording()
+    b.prime(np.zeros(16000 * 4, np.float32), generation=g6)
+    check("so is one made on 4 s of a 5 s dictation",
+          b._trusted_prime(np.zeros(16000 * 5, np.float32)) == "hi")
 
     groq = GroqBackend({})
     groq.is_configured = lambda: False

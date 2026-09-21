@@ -514,9 +514,14 @@ saying how long each stage took and where the text was pasted. Attach it to an
 [issue](https://github.com/itsskofficial/LiveWhisper/issues).
 
 **It is slower on my laptop than the numbers here.**
-Laptop GPUs are held back hard on battery: the same dictation measured about
-three times slower unplugged. Plug in, or set Windows' power mode to *Best
-performance*.
+Laptop GPUs are held back hard by power settings. On battery the same
+dictation measured about three times slower; plugged in but in the laptop
+maker's quiet or eco profile, the GPU sat at its minimum clock (210 of 3105 MHz)
+and everything took two to three seconds instead of under one. Plug in, pick
+the *Performance* profile in your laptop's control app (Armoury Crate, Lenovo
+Vantage, Omen Gaming Hub, ...), and set Windows' power mode to *Best
+performance*. `nvidia-smi -q -d PERFORMANCE` shows whether a power cap is
+holding the GPU back.
 
 **My language isn't listed.**
 The twelve are the ones Google's Dakshina dataset covers, because a romanization

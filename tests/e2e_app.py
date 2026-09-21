@@ -179,10 +179,16 @@ class Notepad:
         time.sleep(0.2)
 
     def type_over(self, text: str) -> None:
-        """Replace everything with `text`, as a user editing the field would."""
+        """Replace everything with `text`, as a user editing the field would.
+
+        Pasted, not typed: keyboard.write raced Notepad and produced
+        "iiin iiiice ,,,,,," - a harness failure, not the app's.
+        """
         import keyboard
+        import pyperclip
         self.clear()
-        keyboard.write(text, delay=0.005)
+        pyperclip.copy(text)
+        keyboard.send("ctrl+v")
         time.sleep(0.3)
 
     def close(self) -> None:
