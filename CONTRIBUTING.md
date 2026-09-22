@@ -115,7 +115,8 @@ A change that claims to improve accuracy should come with the before and after
 from one of these. [docs/development.md](docs/development.md) has the full
 workflow - running the app from source, the end-to-end harness, building the
 installer - and [docs/evaluation.md](docs/evaluation.md) the datasets and
-current numbers. A decision that changes how the app behaves gets a record in
+current numbers. A decision that changes how the app behaves gets a line in
+[docs/decisions.md](docs/decisions.md), and a significant one a record in
 [docs/adr/](docs/adr/).
 
 ### House style
