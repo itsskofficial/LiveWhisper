@@ -95,7 +95,7 @@ pip install -r requirements.txt
 Tests:
 
 ```powershell
-python run_tests.py             # 13 suites in ~20 seconds, no GPU or network
+python run_tests.py             # 25 suites in about a minute, no GPU or network
 python run_tests.py --audio     # + real speech through the model, loopback capture
 python run_tests.py --all       # + Groq fallback (needs a key), install readiness
 ```
@@ -112,7 +112,11 @@ python tests/bench_romanization.py <dakshina-root>              # spelling vs hu
 ```
 
 A change that claims to improve accuracy should come with the before and after
-from one of these.
+from one of these. [docs/development.md](docs/development.md) has the full
+workflow - running the app from source, the end-to-end harness, building the
+installer - and [docs/evaluation.md](docs/evaluation.md) the datasets and
+current numbers. A decision that changes how the app behaves gets a record in
+[docs/adr/](docs/adr/).
 
 ### House style
 
@@ -125,10 +129,10 @@ from one of these.
 - **Be honest in the docs.** If a number isn't measured, don't state it. The
   README has a "measured, not claimed" section for a reason.
 
-### Enabling CI on a fork
+### CI
 
-The workflow lives at [`ci/tests.yml`](ci/tests.yml) rather than
-`.github/workflows/` — see [docs/CI-SETUP.md](docs/CI-SETUP.md).
+[`.github/workflows/tests.yml`](.github/workflows/tests.yml) runs the default
+suites on Windows and `ruff` on every push and pull request.
 
 ---
 
@@ -138,8 +142,8 @@ Useful bug reports for this project include:
 
 - Your language and which app you were typing into
 - What you said, what it produced, what you expected
-- `python verify.py` output if it's a setup problem
+- The log if it's a setup problem: Settings → Open log in the app
 
-If the app learned something wrong, `profiles.json` in the install directory is
+If the app learned something wrong, `%APPDATA%\LiveWhisper\profiles.json` is
 the whole state — attach it (it contains only spellings and rates, no text you
 wrote).

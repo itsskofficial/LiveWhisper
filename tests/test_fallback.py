@@ -8,6 +8,13 @@ paths.
 
 from __future__ import annotations
 
+import sys as _sys  # noqa: E402
+from pathlib import Path as _Path  # noqa: E402
+
+# Run from anywhere: the project root, one level up, holds the package.
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))
+
+
 import os
 import subprocess
 import sys

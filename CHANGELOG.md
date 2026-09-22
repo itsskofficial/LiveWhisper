@@ -1,5 +1,19 @@
 # Changelog
 
+## Unreleased
+
+### Project
+
+- Documentation reorganised: [docs/](docs/) has an index, the architecture,
+  the development and release workflow, the evaluation method and results, and
+  architecture decision records for every major choice
+  ([docs/adr/](docs/adr/)).
+- Tests, developer scripts and experiments moved out of the repository root
+  into `tests/`, `scripts/` and `experiments/`, each with a README.
+- CI runs on every push (`.github/workflows/tests.yml`).
+- The command-line installer (`install.ps1`) is retired; the Setup.exe
+  replaces it.
+
 ## 1.0.0
 
 The first release meant for people other than its author. Everything below was

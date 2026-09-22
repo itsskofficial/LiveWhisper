@@ -10,9 +10,9 @@ app would have collected from you writing in each app - just without spending
 ten minutes of recording time doing it live. The resulting behaviour is real,
 not mocked.
 
-    python demo_seed.py            # seed
-    python demo_seed.py --show     # print what is currently learned
-    python demo_seed.py --clear    # wipe, so the wizard runs fresh
+    python scripts/demo_seed.py            # seed
+    python scripts/demo_seed.py --show     # print what is currently learned
+    python scripts/demo_seed.py --clear    # wipe, so the wizard runs fresh
 
 Run --clear before demoing the setup wizard.
 """
@@ -22,7 +22,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from livewhisper.profile import ProfileStore  # noqa: E402
 

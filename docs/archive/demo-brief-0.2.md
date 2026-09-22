@@ -1,3 +1,9 @@
+> **Archived.** This brief describes LiveWhisper 0.2: tray only, a separate
+> setup wizard, Ollama for writing, installed with `install.ps1`. 1.0 replaced
+> all of that (see [ADR 0005](../adr/0005-desktop-installer-and-in-app-downloads.md)
+> to [0008](../adr/0008-built-in-llama-cpp-runner.md)). The sentences and
+> expected results are still a useful starting point for a new demo.
+
 # Demo brief — LiveWhisper
 
 *Paste this whole file to the demo agent. It is self-contained: what to show,

@@ -1,7 +1,7 @@
 # Benchmark results
 
 Raw output of the measurement scripts, kept so every number in the README and
-`docs/HOW-IT-WORKS.md` can be traced to a run.
+`docs/how-it-works.md` can be traced to a run.
 
 | File | Produced by | What it measures |
 | --- | --- | --- |

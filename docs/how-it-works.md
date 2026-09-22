@@ -30,6 +30,13 @@ Four things it does:
 | 3 | Fix grammar in whatever field you're in | `Ctrl+Alt+F` |
 | 4 | Notes from system audio | `Ctrl+Alt+N` |
 
+It is a Windows desktop app: one installer, a window for History, Dictionary,
+Languages, AI and Settings, a small recording pill while you speak, and a tray
+icon the rest of the time. Everything runs on your PC unless you turn on
+**Online**. For how the pieces fit together as software, see
+[architecture.md](architecture.md); for why they are the way they are, the
+[decision records](adr/).
+
 ---
 
 ## Part 2 — The concepts, from zero
@@ -251,8 +258,10 @@ out loud already applied — "let's meet Monday, I mean Tuesday" arrives as
 Most of this is done with rules, which take about half a millisecond for a
 hundred words. Rules cannot do everything, though: they cannot tell where a
 run-on sentence should end, or that "marcus" and "london" are names. For that
-the app can use a very small language model — qwen3 0.6B, about half a
-gigabyte, running locally through Ollama in roughly a sixth of a second.
+the app uses a very small language model — qwen3 0.6B, about 640 MB, which
+the app runs itself on your GPU (llama.cpp) in a few hundred milliseconds. With
+**Online** on, a larger model on Groq does the same job (gpt-oss-20b, 71% of test
+cases exactly right against 67% locally).
 
 A language model is a program that continues text, and a small one has poor
 judgement about what it was asked. Told to format "what is the capital of
@@ -501,9 +510,10 @@ conventions — but they came from Wikipedia and read like *"in apartment 3,
 intruders captured six weightlifters"*. Nobody types that, and a formal sentence
 would make you type formally, hiding the very habits we want to see.
 
-You can skip it, and redo it any time from **Settings → Writing**.
+You can skip it, and redo it any time from **Dictionary → Teach it how you
+write** in the app window.
 
-`livewhisper/onboarding.py`, `livewhisper/wizard.py`
+`livewhisper/onboarding.py`, `livewhisper/window.py` (`teach_start`, `teach_finish`)
 
 ### 5.3 How it notices you corrected something
 
@@ -644,9 +654,10 @@ The app checks first whether you're giving an *instruction* or just *dictating*,
 using simple word patterns — "write", "reply", "make this shorter". Plain
 dictation never goes near a language model.
 
-**What model?** By default **Ollama** running `qwen2.5:7b` on your own machine —
-nothing leaves your computer. You can switch to Groq, OpenAI or Anthropic in
-settings.
+**What model?** By default Qwen 2.5 3B, which the app runs itself on your own
+machine — nothing leaves your computer — and unloads as soon as it has written,
+so dictation keeps the GPU. With **Online** on, gpt-oss-120b on Groq, falling
+back to the local model when Groq cannot answer.
 
 **An honest limitation:** local models are genuinely fine for grammar and short
 rewrites. For longer composition, a frontier model is noticeably better. Local
@@ -676,40 +687,42 @@ timestamps instead of pasting. Plain text on disk, readable without this app.
 
 ## Part 7 — Every file, and what it does
 
+[architecture.md](architecture.md) has the full map; in short:
+
 ```
 livewhisper/
+  main.py          the app: hotkeys, tray, state machine, one dictation end to end
+  window.py        the app window's backend (ui/index.html is the page)
+  overlay.py       the recording pill
   audio.py         record microphone + system audio (WASAPI loopback)
-  transcribe.py    speech -> text (Whisper, local or Groq)
-  pipeline.py      the chain: script choice -> romanize -> style -> deliver
-  output.py        clipboard + paste at cursor
-  context.py       read the screen (UI Automation, OCR fallback)
+  transcribe.py    speech -> text: local Whisper, Groq, and routing between them
+  pipeline.py      the chain: script choice -> romanize -> format -> style -> deliver
+  format.py        rules: spoken punctuation, lists, corrections said aloud
+  llm_format.py    the formatting model: local, Groq, never changes words
+  guard.py         never paste text nobody said
+  vocab.py         words to know, and their near misses
+  output.py        clipboard + paste at cursor, only into the window you started in
+  context.py       read the screen (UI Automation)
   profile.py       per-app habits, stored as observed rates
-  actions.py       compose, grammar fix, rewrite
-  providers.py     Ollama / Groq / OpenAI / Anthropic
-  notes.py         Markdown notes from system audio
-  main.py          hotkeys, tray icon, state machine
-  gui.py           settings window
+  actions.py       Ctrl+Alt+W compose, Ctrl+Alt+F grammar
+  providers.py     writing models: built-in, Groq, Ollama, OpenAI, Anthropic
+  llm.py           the built-in model runner (llama.cpp)
+  components.py    everything downloaded after install
+  specialists.py   the per-language model catalogue
+  notes.py         Markdown notes from a meeting
   onboarding.py    turns typed sentences into a spelling profile
-  wizard.py        the one-minute setup window
   script/
     languages.py   the twelve languages, their scripts and unicode ranges
     lexicon.py     the 30k-word dictionaries + curated common words
-    oov.py         the character model for unknown words
+    oov.py         the character model for unknown words (numpy)
+    letters.py     letter-by-letter spelling, the last resort
     conventions.py your personal spelling rules, learned letter by letter
-    romanize.py    puts the three together
+    romanize.py    puts them together
 
-tools/
-    build_lexicons.py       rebuild the shipped dictionaries from Dakshina
-    train_transliterator.py train the character model
-    check_data.py           lexicon integrity, runs in CI
-    check_core.py           romanization + learning, runs in CI
-
-data/
-  <code>.lexicon.tsv   30,000 words each, twelve languages, 17 MB total
-                       (CC BY-SA 4.0, see LICENSE-DATA.md)
-  translit.pt          the trained character model
-
-experiments/       every measurement quoted in this document, reproducible
+tools/        rebuild the dictionaries, train and export the character model
+data/         <code>.lexicon.tsv (CC BY-SA 4.0), translit.npz, translit.pt
+packaging/    PyInstaller spec, Inno Setup script, build.py
+experiments/  every measurement quoted in this document, reproducible
 ```
 
 ---
@@ -719,9 +732,12 @@ experiments/       every measurement quoted in this document, reproducible
 | Model | Job | Size | Where it runs |
 | --- | --- | --- | --- |
 | **Whisper large-v3** | speech → text, and which language it was | 1.5B params, 3 GB | your GPU |
-| *Specialists (optional)* | speech → text for one language | 0.15–3 GB each | your GPU, loaded on demand |
-| **Our transliterator** | unknown Hindi words → Latin | 2.56M params, 10 MB | your CPU |
-| **Qwen 2.5 7B** (Ollama) | compose & grammar | 7B params, 4.7 GB | your GPU |
+| **Whisper large-v3-turbo** | English, faster | 0.8B params, 1.6 GB | your GPU |
+| *Per-language models* | speech → text for one language | 0.15–3 GB each | your GPU, loaded on demand |
+| **Our transliterator** | unknown words → Latin, twelve languages | 4.5M params, 17 MB | your CPU (numpy) |
+| **Qwen3 0.6B** | formatting | 640 MB | your GPU (llama.cpp) |
+| **Qwen 2.5 3B** | compose & grammar | 2.1 GB | your GPU, unloaded after use |
+| *Groq (Online only)* | Whisper large-v3, gpt-oss-20b, gpt-oss-120b | — | Groq's servers |
 | *Dakshina lexicon* | 92% of Hindi words | 30k entries, 1.1 MB | a lookup, not a model |
 
 Note the last row. **The biggest single contribution to the hardest feature is
@@ -809,8 +825,8 @@ Ctrl+Alt+H       keep the next dictation in Devanagari
 Ctrl+Alt+X       discard
 ```
 
-The setup wizard runs automatically on first launch. To see the personalisation
-work afterwards:
+First launch walks you through picking your languages and downloading the
+models. To see the personalisation work afterwards:
 
 1. Dictate a Hindi sentence into any text field
 2. Change one spelling — `mujhe` to `muze`

@@ -5,7 +5,7 @@ Goes further than the unit tests - it drives the real components against the
 real data and models, so the output is a truthful statement of what a demo
 could show today.
 
-    python verify.py
+    python scripts/verify.py
 """
 
 from __future__ import annotations
@@ -19,7 +19,7 @@ from livewhisper.console import setup as _console
 
 _console()
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 OK, BAD, WARN = "  ok  ", " FAIL ", " warn "
@@ -122,10 +122,10 @@ def main() -> int:
     section("4. writing assistant")
     try:
         from livewhisper import providers
-        p = providers.build({"provider": "ollama", "model": "qwen2.5:7b"})
+        p = providers.build({"provider": "auto"})
         report("provider available", OK, f"{p.name} / {getattr(p,'model','')}")
         from livewhisper.actions import Actions, looks_like_command
-        a = Actions({"models": {"provider": "ollama", "model": "qwen2.5:7b"}})
+        a = Actions({"models": {"provider": "auto"}})
         report("command intent detection",
                OK if looks_like_command("write a reply") and
                not looks_like_command("kal main office jaunga") else BAD)
@@ -180,24 +180,19 @@ def main() -> int:
     except Exception as e:
         report("app wiring", BAD, str(e))
 
-    section("8. installed copy")
-    inst = Path("E:/Apps/LiveWhisper")
-    if inst.exists():
-        report("install present", OK, str(inst))
-        prof = inst / "profiles.json"
-        if prof.exists():
-            try:
-                d = json.loads(prof.read_text(encoding="utf-8"))
-                g = (d.get("_global") or {}).get("conventions", {})
-                report("install profile", WARN,
-                       f"exists - rules={g.get('rules')} "
-                       f"(first-run setup will NOT show; delete to demo it)")
-            except Exception:
-                report("install profile", WARN, "exists but unreadable")
-        else:
-            report("install profile", OK, "absent - first-run setup shows on launch")
-    else:
-        report("install present", BAD, "E:/Apps/LiveWhisper missing")
+    section("8. installed app")
+    import os
+    inst = Path(os.environ.get("LOCALAPPDATA", "")) / "Programs" / "LiveWhisper" / "LiveWhisper.exe"
+    report("Setup.exe install", OK if inst.exists() else WARN,
+           str(inst) if inst.exists() else "not installed from LiveWhisper-Setup.exe")
+    try:
+        from livewhisper.components import Components
+        for c in Components().list():
+            if c["group"] in ("essentials", "ai"):
+                report(c["name"], OK if c["installed"] else WARN,
+                       "downloaded" if c["installed"] else "not downloaded yet")
+    except Exception as e:
+        report("downloads", WARN, str(e)[:90])
 
     print()
     bad = [n for n, s in results if s == BAD]

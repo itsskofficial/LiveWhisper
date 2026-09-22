@@ -23,8 +23,8 @@ ROOT = Path(__file__).resolve().parent
 FAST = [
     ("data integrity", ["-m", "tools.check_data"]),
     ("core logic", ["-m", "tools.check_core"]),
-    ("pipeline", ["test_pipeline.py"]),
-    ("onboarding alignment", ["test_alignment.py"]),
+    ("pipeline", ["tests/test_pipeline.py"]),
+    ("onboarding alignment", ["tests/test_alignment.py"]),
     ("app window api", ["tests/test_window_api.py"]),
     ("single instance", ["tests/test_instance.py"]),
     ("in-app downloads", ["tests/test_components.py"]),
@@ -52,8 +52,8 @@ AUDIO = [
     ("loopback capture", ["tests/test_loopback.py", "--audio", "build/audio"]),
 ]
 ALL = [
-    ("groq fallback", ["test_fallback.py"]),
-    ("install readiness", ["verify.py"]),
+    ("groq fallback", ["tests/test_fallback.py"]),
+    ("install readiness", ["scripts/verify.py"]),
 ]
 
 

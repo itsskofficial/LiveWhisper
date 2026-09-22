@@ -154,10 +154,9 @@ output:
     # pascal, kebab and constant case).
 
 ui:
-  theme: dark-amber           # dark-amber | dark-indigo | system
-  overlay: true               # floating recording pill: timer + live level meter
-  overlay_meter: true         # level bars inside the pill
+  overlay: true               # the recording pill: live waveform, finish and discard
   overlay_position:           # remembered pill position, set by dragging it
+  # The app window follows Windows' light or dark mode.
 
 # Prompt profiles. The active profile's prompt is prepended to the transcript
 # before it is pasted. Ctrl+Alt+P cycles through them.

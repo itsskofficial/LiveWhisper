@@ -11,7 +11,7 @@ Every dictation app gives you `क्या कर रहे हो`.
 
 *Hinglish · Tanglish · Banglish · Thanglish · Manglish · Punglish · and six more*
 
-[**What it does →**](https://claude.ai/code/artifact/f350c628-163d-4a75-a4e1-8a7829c6b2e9) · [Download](#install) · [How it works](#how-it-works) · [Contributing](CONTRIBUTING.md)
+[**Download**](https://github.com/itsskofficial/LiveWhisper/releases/latest) · [What it does](https://claude.ai/code/artifact/f350c628-163d-4a75-a4e1-8a7829c6b2e9) · [How it works](#how-it-works) · [Docs](docs/) · [Contributing](CONTRIBUTING.md)
 
 </div>
 
@@ -224,13 +224,13 @@ Python 3.12, Windows 10/11.
 ```powershell
 git clone https://github.com/itsskofficial/LiveWhisper.git
 cd LiveWhisper
-.\install.ps1          # venv, dependencies, model choice for your GPU
+py -3.12 -m venv .venv
+.venv\Scripts\pip install -r requirements.txt
 .venv\Scripts\python run.py
 ```
 
-Build the installer yourself with `.venv\Scripts\python packaging\build.py`
-(needs [Inno Setup 6](https://jrsoftware.org/isdl.php)). Tests:
-`python run_tests.py`.
+Tests, the end-to-end harness, building the installer and releasing are in
+[docs/development.md](docs/development.md).
 
 </details>
 

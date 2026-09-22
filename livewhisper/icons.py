@@ -102,17 +102,3 @@ def set_app_id() -> None:
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(APP_ID)
     except Exception:
         log.debug("could not set AppUserModelID", exc_info=True)
-
-
-def apply(window) -> None:
-    """Attach the .ico to a Tk window (taskbar + title bar)."""
-    if not ICON_PATH.exists():
-        try:
-            write_ico()
-        except Exception:
-            log.debug("could not generate icon", exc_info=True)
-            return
-    try:
-        window.iconbitmap(str(ICON_PATH))
-    except Exception:
-        log.debug("iconbitmap failed", exc_info=True)

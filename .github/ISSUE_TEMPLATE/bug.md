@@ -16,16 +16,18 @@ labels: ["bug"]
 
 ## Environment
 
-```
-<!-- paste the output of: python verify.py -->
-```
+- LiveWhisper version (bottom-left of the app window):
+- Windows 10 or 11:
+- Graphics card (Settings -> This PC):
+- Online on or off (AI page):
+- Languages you picked:
 
 ## Log
 
-<!-- Tray icon -> Open log, or %LOCALAPPDATA%\LiveWhisper\livewhisper.log.
+<!-- Settings -> Open log, or %LOCALAPPDATA%\LiveWhisper\livewhisper.log.
      Paste the lines around the time it went wrong. It records timings and the
      name of the app text was pasted into - not what you dictated. -->
 
-<!-- If the app learned something wrong, profiles.json in the install directory
-     is the entire state: spelling rules and the individual words you corrected,
-     never whole messages. Check it before attaching. -->
+<!-- If the app learned something wrong, %APPDATA%\LiveWhisper\profiles.json
+     is the entire learned state: spelling rules and the individual words you
+     corrected, never whole messages. Check it before attaching. -->

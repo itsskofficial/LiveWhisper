@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """Capture whatever is currently playing and measure transcription accuracy.
 
-    python test_accuracy.py --seconds 60 --label panel
-    python test_accuracy.py --seconds 60 --label panel --reference ref.txt
+    python experiments/capture_accuracy.py --seconds 60 --label panel
+    python experiments/capture_accuracy.py --seconds 60 --label panel --reference ref.txt
 
 With a reference file it reports WER. The reference is usually YouTube's own
 captions, which are themselves imperfect - so treat the number as an upper bound
@@ -10,6 +10,13 @@ on error, not ground truth.
 """
 
 from __future__ import annotations
+
+import sys as _sys  # noqa: E402
+from pathlib import Path as _Path  # noqa: E402
+
+# Run from anywhere: the project root, one level up, holds the package.
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))
+
 
 import argparse
 import re

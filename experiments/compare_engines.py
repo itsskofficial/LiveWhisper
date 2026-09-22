@@ -5,10 +5,17 @@ Without human ground truth, cross-engine agreement is the honest metric: two
 independently-trained systems converging on the same words is strong evidence
 both are right, and the places they diverge are exactly where the audio is hard.
 
-    python compare_engines.py accuracy_runs/gitlab_meeting.wav
+    python experiments/compare_engines.py accuracy_runs/gitlab_meeting.wav
 """
 
 from __future__ import annotations
+
+import sys as _sys  # noqa: E402
+from pathlib import Path as _Path  # noqa: E402
+
+# Run from anywhere: the project root, one level up, holds the package.
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))
+
 
 import sys
 import time
@@ -19,7 +26,7 @@ import soundfile as sf
 import yaml
 
 from livewhisper.transcribe import build_backend
-from test_accuracy import normalise, wer
+from capture_accuracy import normalise, wer
 
 from livewhisper.console import setup as _console
 

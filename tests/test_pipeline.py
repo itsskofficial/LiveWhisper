@@ -5,10 +5,17 @@ Covers the path from raw transcript to delivered text, and the learning loop
 that runs in reverse. No audio and no network - it exercises the parts that are
 deterministic so a regression shows up immediately.
 
-    python test_pipeline.py
+    python tests/test_pipeline.py
 """
 
 from __future__ import annotations
+
+import sys as _sys  # noqa: E402
+from pathlib import Path as _Path  # noqa: E402
+
+# Run from anywhere: the project root, one level up, holds the package.
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))
+
 
 import sys
 import tempfile

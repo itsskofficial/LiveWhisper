@@ -12,7 +12,6 @@ accuracy_runs/
 *.pt
 !data/translit.pt
 
-.github/workflows/
 build/
 
 # what the app learns and writes about its user - never commit it
@@ -31,3 +30,6 @@ models/
 /vendor/
 /webview/
 /cuda/
+
+# stray lock files from GPU benchmark runs
+tests/.gpu-load.lock

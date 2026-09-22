@@ -13,7 +13,7 @@ checking, and every pair after the merge was wrong:
 Those nonsense pairs became permanent per-word overrides. This test pins the
 behaviour so it cannot come back.
 
-    python test_alignment.py
+    python tests/test_alignment.py
 """
 
 from __future__ import annotations
@@ -21,7 +21,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from livewhisper.onboarding import Onboarding  # noqa: E402
 
