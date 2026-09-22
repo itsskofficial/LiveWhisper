@@ -492,8 +492,11 @@ class OpenRouterBackend:
         self.key_env = key_env
         self.timeout = timeout
         self._open = opener or urllib.request.urlopen
-        self._checked = 0.0
-        self._verified_at = 0.0
+        # None, not 0.0: time.monotonic() counts from boot on Windows, so "0"
+        # looked recent for the first ten minutes (or day) after starting the
+        # PC, and the checks below were skipped exactly when first needed.
+        self._checked: float | None = None
+        self._verified_at: float | None = None
 
     def _key(self) -> str | None:
         return os.environ.get(self.key_env) or None
@@ -509,7 +512,8 @@ class OpenRouterBackend:
         completion price to be zero; anything else - the model gone, repriced,
         or the list unreadable - and the model is not used.
         """
-        if self.model and time.monotonic() - self._verified_at < 86400:
+        if (self.model and self._verified_at is not None
+                and time.monotonic() - self._verified_at < 86400):
             return
         try:
             with self._open(urllib.request.Request(self.MODELS_URL),
@@ -538,7 +542,8 @@ class OpenRouterBackend:
 
     def refresh_allowance(self) -> None:
         """Ask OpenRouter what is left today; at most every ten minutes."""
-        if time.monotonic() - self._checked < 600 or not self._key():
+        recent = self._checked is not None and time.monotonic() - self._checked < 600
+        if recent or not self._key():
             return
         self._checked = time.monotonic()
         req = urllib.request.Request(self.KEY_URL,
