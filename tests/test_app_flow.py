@@ -221,6 +221,7 @@ def main() -> int:
 
     groq = GroqBackend({})
     groq.is_configured = lambda: False
+    b.is_downloaded = lambda: True          # priming needs the local model
     auto = AutoBackend(groq, b)
     g3 = auto.new_recording()
     auto.prime(np.zeros(16000, np.float32), generation=g3)

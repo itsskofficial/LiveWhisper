@@ -81,8 +81,11 @@ def main() -> int:
         results.append((label, ok, took))
         print(f"[{'  ok  ' if ok else ' FAIL '}] {label:<26} {took:6.1f}s", flush=True)
         if args.verbose or not ok:
-            tail = (p.stdout + p.stderr).strip().splitlines()[-25:]
-            print("\n".join("        " + line for line in tail))
+            lines = (p.stdout + p.stderr).strip().splitlines()
+            # Every failing check, even ones that scrolled out of the tail -
+            # in CI this output is all there is.
+            failing = [ln for ln in lines[:-25] if "FAIL ]" in ln]
+            print("\n".join("        " + line for line in failing + lines[-25:]))
 
     failed = [r for r in results if not r[1]]
     print(f"\n{len(results) - len(failed)}/{len(results)} suites passed"
