@@ -308,6 +308,105 @@ class BuiltinBackend:
             log.info("formatting model could not be warmed; rules until it can")
 
 
+def groq_reasoning_off(model: str, max_tokens: int) -> dict:
+    """Request fields that stop Groq's reasoning models thinking out loud.
+
+    Formatting and composing want the answer, not the working: reasoning costs
+    seconds, and with a small token budget it can use up the whole reply.
+    """
+    if "gpt-oss" in model:
+        return {"reasoning_effort": "low", "include_reasoning": False,
+                "max_tokens": max_tokens + 400}
+    if "qwen3" in model:
+        return {"reasoning_effort": "none"}
+    return {}
+
+
+class GroqBackend:
+    """The formatting step on Groq, for online mode.
+
+    Same prompt and the same guarantee as the local model: the reply is only
+    accepted if it adds punctuation, capitals and line breaks to the words
+    that were said (LLMFormatter projects it back onto them). A fast 8B model:
+    formatting is on the path the user waits on.
+
+    Chosen on the 42 formatting cases (tests/bench_format_llm.py --pace 2.2,
+    the free tier's rate): gpt-oss-20b 71% exact in ~0.7 s and never an
+    invented word, against 67% for the local 0.6B model and 40% for rules.
+    qwen3.8-27b tied and was faster, but the free tier rate-limited it on
+    a quarter of requests; gpt-oss-120b was no better and invented a word once.
+    """
+
+    name = "groq"
+    URL = "https://api.groq.com/openai/v1/chat/completions"
+    MODEL = "openai/gpt-oss-20b"
+
+    def __init__(self, model: str | None = None, key_env: str = "GROQ_API_KEY",
+                 timeout: float = 2.5):
+        self.model = model or self.MODEL
+        self.key_env = key_env
+        self.timeout = timeout
+
+    def available(self) -> bool:
+        return bool(os.environ.get(self.key_env))
+
+    def complete(self, messages: list, max_tokens: int,
+                 timeout: float | None = None) -> str:
+        key = os.environ.get(self.key_env)
+        if not key:
+            raise FormatterUnavailable("groq: no key")
+        payload = {"model": self.model, "messages": messages, "max_tokens": max_tokens,
+                   "temperature": 0, "seed": 7}
+        payload.update(groq_reasoning_off(self.model, max_tokens))
+        req = urllib.request.Request(self.URL, data=json.dumps(payload).encode(),
+                                     method="POST",
+                                     headers={"Content-Type": "application/json",
+                                              "Authorization": f"Bearer {key}",
+                                              "User-Agent": "LiveWhisper"})
+        try:
+            with urllib.request.urlopen(req, timeout=timeout or self.timeout) as r:
+                out = json.loads(r.read().decode("utf-8"))
+        except Exception as e:
+            raise FormatterUnavailable(f"groq: {e}") from e
+        return (out["choices"][0]["message"].get("content") or "")
+
+    def warm(self) -> None:
+        pass                                # nothing to load
+
+
+class FallbackBackend:
+    """The first backend that answers: online mode's Groq, then this PC."""
+
+    def __init__(self, *backends):
+        self.backends = [b for b in backends if b is not None]
+        self.name = "+".join(b.name for b in self.backends)
+        self.last = None
+
+    def available(self) -> bool:
+        return any(b.available() for b in self.backends)
+
+    def complete(self, messages: list, max_tokens: int,
+                 timeout: float | None = None) -> str:
+        error = None
+        for b in self.backends:
+            if not b.available():
+                continue
+            try:
+                out = b.complete(messages, max_tokens, timeout=timeout)
+                self.last = b.name
+                return out
+            except FormatterUnavailable as e:
+                error = e
+                log.info("%s formatter unavailable (%s); trying the next", b.name, e)
+        raise error or FormatterUnavailable("no formatter available")
+
+    def warm(self) -> None:
+        for b in self.backends:
+            warm = getattr(b, "warm", None)
+            if warm and b.available():
+                warm()
+
+
 class FreeTierGuard:
     """Keeps OpenRouter use inside the free tier, counted on this machine.
 
@@ -738,6 +837,12 @@ def build(cfg: dict, data_dir: Path) -> LLMFormatter | None:
     if engine == "rules":
         return None
     from . import llm
+    if engine == "groq":
+        # Online mode: Groq first, this PC's own model when Groq cannot answer.
+        local = BuiltinBackend(timeout=float(cfg.get("timeout_seconds", 1.5)))
+        return LLMFormatter(FallbackBackend(
+            GroqBackend(cfg.get("groq_model"), timeout=float(cfg.get("online_timeout_seconds", 2.5))),
+            local if llm.server("formatter").available() else None))
     if engine in ("auto", "builtin") and llm.server("formatter").available():
         return LLMFormatter(BuiltinBackend(timeout=float(cfg.get("timeout_seconds", 1.5))))
     if engine == "builtin":

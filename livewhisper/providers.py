@@ -23,6 +23,11 @@ log = logging.getLogger(__name__)
 TIMEOUT = 120
 
 
+# Groq retired its Llama models; composing on the old default returned 404.
+# The larger gpt-oss writes better, and composing is not on the dictation path.
+GROQ_WRITER = "openai/gpt-oss-120b"
+
+
 class ProviderError(RuntimeError):
     pass
 
@@ -42,6 +47,8 @@ def _post(url: str, payload: dict, headers: dict | None = None) -> dict:
     data = json.dumps(payload).encode("utf-8")
     req = urllib.request.Request(url, data=data, method="POST")
     req.add_header("Content-Type", "application/json")
+    # Groq's Cloudflare refuses Python's default user agent (error 1010).
+    req.add_header("User-Agent", "LiveWhisper")
     for k, v in (headers or {}).items():
         req.add_header(k, v)
     try:
@@ -123,6 +130,28 @@ class Builtin:
             server.stop()
 
 
+class Chain:
+    """The first provider that answers."""
+
+    def __init__(self, *providers):
+        self.providers = providers
+        self.name = providers[0].name
+        self.model = getattr(providers[0], "model", None)
+
+    def available(self) -> bool:
+        return any(p.available() for p in self.providers)
+
+    def chat(self, system: str, user: str, temperature: float = 0.3) -> str:
+        error = None
+        for p in self.providers:
+            try:
+                return p.chat(system, user, temperature)
+            except ProviderError as e:
+                error = e
+                log.warning("%s could not write (%s); trying the next", p.name, e)
+        raise error
+
+
 class OpenAICompatible:
     """Groq, OpenAI, and anything speaking the same protocol."""
 
@@ -139,13 +168,18 @@ class OpenAICompatible:
         key = os.environ.get(self.key_env)
         if not key:
             raise ProviderError(f"{self.key_env} is not set")
-        out = _post(self.url, {
+        payload = {
             "model": self.model,
             "messages": [{"role": "system", "content": system},
                          {"role": "user", "content": user}],
             "temperature": temperature,
-        }, {"Authorization": f"Bearer {key}"})
-        return out["choices"][0]["message"]["content"].strip()
+        }
+        if self.name == "groq":
+            from .llm_format import groq_reasoning_off
+            payload.update(groq_reasoning_off(self.model, 1500))
+        out = _post(self.url, payload, {"Authorization": f"Bearer {key}"})
+        text = out["choices"][0]["message"].get("content") or ""
+        return re.sub(r"(?s)<think>.*?</think>", "", text).strip()
 
 
 class Anthropic:
@@ -186,7 +220,7 @@ def build(cfg: dict):
         if n == "groq":
             return OpenAICompatible(
                 "groq", "https://api.groq.com/openai/v1/chat/completions",
-                "GROQ_API_KEY", model or "llama-3.3-70b-versatile")
+                "GROQ_API_KEY", model or GROQ_WRITER)
         if n == "openai":
             return OpenAICompatible(
                 "openai", "https://api.openai.com/v1/chat/completions",
@@ -197,6 +231,10 @@ def build(cfg: dict):
 
     primary = make(name)
     if primary.available():
+        if name != "builtin" and Builtin().available():
+            # Online first, this PC's writing model when the cloud is not
+            # reachable - the same promise dictation makes.
+            return Chain(primary, Builtin())
         return primary
 
     for alt in ("builtin", "ollama", "groq", "openai", "anthropic"):

@@ -103,6 +103,9 @@ def main() -> int:
     ap.add_argument("--models", default="")
     ap.add_argument("--cpu", action="store_true", help="run Ollama models on the CPU")
     ap.add_argument("--label", default="")
+    ap.add_argument("--pace", type=float, default=0.0,
+                    help="seconds between requests, for rate-limited cloud models")
+    ap.add_argument("--modes", default="project,guard")
     ap.add_argument("--show", action="store_true", help="print every wrong output")
     ap.add_argument("--raw", action="store_true",
                     help="also score each model with no rules and no check")
@@ -120,16 +123,23 @@ def main() -> int:
     from livewhisper.llm_format import LLMFormatter, OllamaBackend
 
     for model in [m for m in args.models.split(",") if m]:
-        backend = OllamaBackend(model, cpu=args.cpu)
+        if model.startswith("groq:"):
+            from livewhisper.llm_format import GroqBackend
+            backend = GroqBackend(model.split(":", 1)[1], timeout=10)
+        else:
+            backend = OllamaBackend(model, cpu=args.cpu)
         if args.raw:
             raw = LLMFormatter(backend, guard=False, rules_first=False)
             results[f"{model} raw"] = run(f"{model} raw",
                                           lambda c: raw.format(c["input"], c["style"]), cases)
-        for mode in ("project", "guard"):
+        for mode in args.modes.split(","):
             formatter = LLMFormatter(backend, mode=mode)
             fell_back: list = []
 
             def one(c, formatter=formatter, fell_back=fell_back):
+                if args.pace:
+                    import time as _t
+                    _t.sleep(args.pace)
                 out = formatter.format(c["input"], c["style"])
                 if formatter.last_reason not in ("ok", "rules only for this style"):
                     fell_back.append((c["id"], formatter.last_reason))

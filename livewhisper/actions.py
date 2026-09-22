@@ -154,9 +154,15 @@ class Actions:
         return _unwrap(out, text)
 
 
+_PLAIN = str.maketrans({"‘": "'", "’": "'", "“": '"', "”": '"',
+                        "‐": "-", "‑": "-", " ": " ", " ": " "})
+
+
 def _unwrap(out: str, original: str) -> str:
     """Models like to add quotes or a preamble even when told not to."""
-    out = out.strip()
+    # Typeset punctuation reads as pasted-from-elsewhere in a chat box, and a
+    # non-breaking hyphen ("stand‑up", from gpt-oss) does not search.
+    out = out.translate(_PLAIN).strip()
     for prefix in ("Here's", "Here is", "Corrected:", "Output:", "Sure,"):
         if out.lower().startswith(prefix.lower()):
             nl = out.find("\n")

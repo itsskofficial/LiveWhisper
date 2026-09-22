@@ -46,6 +46,7 @@ def _get(cfg: dict, dotted: str, default=None):
 # Settings the page may change, with the type each must have. Anything else is
 # refused: the page is trusted, but a typo there must not corrupt the config.
 SETTINGS = {
+    "processing": str,
     "ui.overlay": bool,
     "output.auto_paste": bool,
     "output.copy_to_clipboard": bool,
@@ -70,6 +71,37 @@ SETTINGS = {
     "hotkeys.devanagari": str,
     "hotkeys.notes": str,
 }
+
+
+def processing_mode(cfg: dict) -> str:
+    """online | local - read back from what the switch sets."""
+    mode = _get(cfg, "processing")
+    if mode in ("online", "local"):
+        return mode
+    key_set = os.environ.get(_get(cfg, "transcription.groq.api_key_env", "GROQ_API_KEY"))
+    cloud = _get(cfg, "transcription.backend") in ("auto", "groq")
+    return "online" if cloud and key_set else "local"
+
+
+def processing_patch(cfg: dict, mode: str) -> dict:
+    """Everything the one Online switch changes.
+
+        online   speech on Groq, falling back to this PC, and staying on this
+                 PC for a language whose own model is downloaded (see
+                 transcribe.AutoBackend._local_is_better); formatting and
+                 writing on Groq, falling back to this PC's models
+        local    all three on this PC
+    """
+    formatting_on = (_get(cfg, "output.format.engine") or "auto") != "rules"
+    if mode == "online":
+        return {"transcription.backend": "auto",
+                "output.format.engine": "groq" if formatting_on else "rules",
+                "actions.models.provider": "groq",
+                "actions.models.model": None}
+    return {"transcription.backend": "local",
+            "output.format.engine": "auto" if formatting_on else "rules",
+            "actions.models.provider": "auto",
+            "actions.models.model": None}
 
 
 class Api:
@@ -107,6 +139,7 @@ class Api:
             "gpu": self._comps.machine.gpu or "",
             "gpu_ready": gpu_ready(),
             "backend": cfg["transcription"].get("backend", "auto"),
+            "processing": processing_mode(cfg),
             "stats": app.history.stats(),
             "recent": app.history.entries()[:6],
         }
@@ -267,6 +300,7 @@ class Api:
     def settings(self) -> dict:
         cfg = self._app.cfg
         out = {k: _get(cfg, k) for k in SETTINGS}
+        out["processing"] = processing_mode(cfg)
         from . import startup
         out["startup"] = startup.is_enabled()
         env = _get(cfg, "transcription.groq.api_key_env", "GROQ_API_KEY")
@@ -304,6 +338,8 @@ class Api:
 
     def _save(self, patch: dict) -> dict:
         cfg = self._app.cfg
+        if "processing" in patch:
+            patch = {**patch, **processing_patch(cfg, patch["processing"])}
         for key, value in patch.items():
             want = SETTINGS.get(key)
             if want is not None and value is not None and not isinstance(value, want):

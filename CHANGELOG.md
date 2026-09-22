@@ -28,6 +28,11 @@ produced each number are in `tests/`, and their output in `tests/results/`.
   identical output on 2,400 test words and faster than before. The language
   models download already converted.
 - **One copy at a time.** Launching it again opens the running app.
+- **Online, as one switch.** Speech, formatting and writing all move to Groq
+  together, and all fall back to this PC when Groq cannot answer. Languages
+  with their own downloaded model stay here, where they are more accurate.
+  Formatting online is the most accurate option measured: 71% of cases exactly
+  right (gpt-oss-20b), against 67% for the local model and 40% for rules.
 
 ### Dictation
 
@@ -85,7 +90,9 @@ produced each number are in `tests/`, and their output in `tests/results/`.
   screen and pastes a reply in your voice.
 - `Ctrl+Alt+F`: fixes the grammar in the field you are in, keeping your
   lowercase and slang.
-- Runs on the built-in local model, or Groq with a key. A missing model is
+- Runs on the built-in local model, or on Groq when Online is on
+  (gpt-oss-120b; Groq's retired Llama models, and Python's default user agent,
+  which Groq's firewall refuses, had both broken it). A missing model is
   reported before you speak, with where to get it.
 
 ### Everything else

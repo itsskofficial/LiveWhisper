@@ -242,6 +242,10 @@ def make_app(backend: str, routes: dict | None = None):
         cfg["transcription"]["local"]["max_extra_models"] = 2
     # The pill is on, as it is for users: the run shows it recording and working.
     cfg["ui"]["overlay"] = not os.environ.get("LW_E2E_NO_PILL")
+    if os.environ.get("LW_E2E_ONLINE"):
+        from livewhisper.window import _set, processing_patch
+        for key, value in {"processing": "online", **processing_patch(cfg, "online")}.items():
+            _set(cfg, key, value)
     path = tmp / "config.yaml"
     cfgio.save(path, cfg)
     app = App(path)
@@ -317,6 +321,8 @@ def judge(text: str, checks: dict) -> list:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--backend", default="local", choices=("local", "groq", "auto"))
+    ap.add_argument("--online", action="store_true",
+                    help="the app's Online switch: speech, formatting, writing on Groq")
     ap.add_argument("--only", default="",
                     help="run cases whose name starts with this; 'sweep' or 'learn'")
     ap.add_argument("--per-lang", type=int, default=2)
@@ -324,6 +330,9 @@ def main() -> int:
                     help="a folder of converted specialists (e.g. D:/models/ct2) to "
                          "route languages to, as `specialists install` would")
     args = ap.parse_args()
+    if args.online:
+        os.environ["LW_E2E_ONLINE"] = "1"
+        args.backend = "auto"
 
     import logging
     CLIPS.mkdir(parents=True, exist_ok=True)

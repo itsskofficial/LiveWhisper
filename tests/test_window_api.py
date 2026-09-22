@@ -69,6 +69,29 @@ def main() -> int:
         api.finish_onboarding()
         check("onboarding is remembered", api.state()["onboarded"] is True)
 
+        print("\n=== the Online switch ===")
+        import os as _os
+        _os.environ["GROQ_API_KEY"] = _os.environ.get("GROQ_API_KEY") or "test-key"
+        api.save_setting("processing", "online")
+        c = cfgio.load(paths.CONFIG)
+        check("online: speech goes to Groq, falling back to this PC",
+              c["transcription"]["backend"] == "auto")
+        check("online: formatting goes to Groq", c["output"]["format"]["engine"] == "groq")
+        check("online: writing goes to Groq", c["actions"]["models"]["provider"] == "groq")
+        check("the window reads it back", api.settings()["processing"] == "online")
+        api.save_setting("processing", "local")
+        c = cfgio.load(paths.CONFIG)
+        check("off again: all three back on this PC",
+              c["transcription"]["backend"] == "local"
+              and c["output"]["format"]["engine"] == "auto"
+              and c["actions"]["models"]["provider"] == "auto")
+        api.save_setting("output.format.engine", "rules")
+        api.save_setting("processing", "online")
+        check("formatting switched off stays off when going online",
+              cfgio.load(paths.CONFIG)["output"]["format"]["engine"] == "rules")
+        api.save_setting("processing", "local")
+        api.save_setting("output.format.engine", "auto")
+
         print("\n=== languages ===")
         api.set_languages(["hi", "ta", "en", "xx"])
         t = cfgio.load(paths.CONFIG)["transcription"]

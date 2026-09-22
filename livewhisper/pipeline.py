@@ -234,8 +234,11 @@ class Pipeline:
             if expansion is not None:
                 text, formatted_by = expansion, "shortcut"
             elif model is not None:
+                before = text
                 text = model.format(text, style.name, rules_style=style)
                 formatted_by = "model" if model.last_reason == "ok" else "rules"
+                if formatted_by == "model" and (romanized or respelled):
+                    text = _no_title_case(before, text)
                 if formatted_by == "rules":
                     log.info("formatted by rules: %s", model.last_reason)
             else:
@@ -394,3 +397,36 @@ def _apply_respellings(text: str, overrides: dict) -> str:
             return w
         return new[:1].upper() + new[1:] if w[:1].isupper() else new
     return _WORD_RE.sub(repl, text)
+
+
+_TOKEN = re.compile(r"\S+")
+_EDGE = ".,!?;:\"'()"
+
+
+def _no_title_case(before: str, after: str) -> str:
+    """Undo capitals a model gave romanized words mid-sentence.
+
+    English-trained models read romanized Hindi or Marathi as a string of
+    names - "Polics Adhikshak Chandra Shekhar Yane Sahitale" - seen online end
+    to end. The formatter never changes words, so the two texts have the same
+    words in the same order; a word keeps a capital the model added only at the
+    start of a sentence or where it was already capitalised.
+    """
+    before_tokens = _TOKEN.findall(before)
+    ours = [t.lower().strip(_EDGE) for t in before_tokens]
+    was_upper = {i for i, t in enumerate(before_tokens) if t[:1].isupper()}
+    pieces, k, last, ended = [], 0, 0, True
+    for m in _TOKEN.finditer(after):
+        tok = m.group(0)
+        gap = after[last:m.start()]
+        starts_sentence = ended or "\n" in gap
+        if k < len(ours) and tok.lower().strip(_EDGE) == ours[k]:
+            if (tok[:1].isupper() and not starts_sentence and k not in was_upper
+                    and not tok.isupper()):
+                tok = tok[:1].lower() + tok[1:]
+            k += 1
+        pieces.append(gap + tok)
+        last = m.end()
+        ended = tok[-1:] in ".!?"
+    pieces.append(after[last:])
+    return "".join(pieces)

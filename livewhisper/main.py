@@ -612,13 +612,21 @@ class App:
         self.notify(f"Profile: {self.profile['name']}")
 
     def toggle_backend(self) -> None:
-        order = ["auto", "groq", "local"]
-        current = self.backend_name
-        nxt = order[(order.index(current) + 1) % len(order)] if current in order else "auto"
-        self.cfg["transcription"]["backend"] = nxt
-        self._backend = None
-        self._set_state(self.state)
-        self.notify(f"Engine: {nxt}")
+        """Ctrl+Alt+G: the Online switch, from the keyboard."""
+        from .window import _set, processing_mode, processing_patch
+        mode = "local" if processing_mode(self.cfg) == "online" else "online"
+        env = self.cfg["transcription"].get("groq", {}).get("api_key_env", "GROQ_API_KEY")
+        if mode == "online" and not os.environ.get(env):
+            self.notify("Add a Groq key in LiveWhisper to go online")
+            return
+        for key, value in {"processing": mode, **processing_patch(self.cfg, mode)}.items():
+            _set(self.cfg, key, value)
+        try:
+            cfgio.save(self.config_path, self.cfg)
+        except Exception:
+            log.debug("could not save the processing mode", exc_info=True)
+        self.apply_config(self.cfg)
+        self.notify("Online" if mode == "online" else "Everything on this PC")
 
     def open_transcripts(self) -> None:
         os.startfile(self._transcript_dir())  # noqa: S606 - Windows-only by design

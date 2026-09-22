@@ -684,13 +684,13 @@ class AutoBackend:
 
     def load(self) -> None:
         # Warm-up must not drag in a 3 GB download; only prepare what is ready.
-        if self.groq.is_configured():
+        if self.groq.is_configured() and not self._has_local_specialists():
             return
         if self.local.is_downloaded():
             self.local.load()
 
     def warm(self) -> None:
-        if self.groq.is_configured():
+        if self.groq.is_configured() and not self._has_local_specialists():
             return
         if self.local.is_downloaded():
             self.local.warm()
@@ -701,9 +701,53 @@ class AutoBackend:
         return self.local.new_recording()
 
     def prime(self, audio, generation: int | None = None):
-        if self.groq_available:
+        # Even with Groq in use, the language is settled locally while the
+        # speaker talks when a language could go to a local accuracy model:
+        # that is what decides where the dictation is sent.
+        if self.groq_available and not self._has_local_specialists():
+            return None
+        if not self.local.is_downloaded():
             return None
         return self.local.prime(audio, generation=generation)
+
+    # -- which languages stay on this PC ------------------------------------
+
+    def _has_local_specialists(self) -> bool:
+        return any(self._local_is_better(lang, native)
+                   for lang in (self.local.cfg.get("models") or {})
+                   for native in (False, True))
+
+    def _local_is_better(self, lang: str | None, native: bool) -> bool:
+        """Does a downloaded model for this language beat Groq's general one?
+
+        Groq runs the general Whisper model. A language's own model is far
+        more accurate - Bengali 21% of words wrong against 73%, Tamil 23%
+        against 57%, Hindi in Devanagari 10% against 26% - so with one
+        installed, that language is decoded here even in online mode. English
+        and Hinglish, where the general model does well, go to Groq.
+        """
+        if not lang or lang == "en":
+            return False
+        route = self.local._route(lang)
+        if not route:
+            return False
+        path = route.get("native") if native and route.get("native") else route.get("path")
+        if not path or (route.get("latin_output") and not native):
+            return False
+        return (Path(path) / "model.bin").exists()
+
+    def _known_language(self, audio: np.ndarray) -> str | None:
+        """The language guessed during recording, without consuming it.
+
+        Any guess will do here, not only a trusted one: this decides where to
+        send the audio, and sending it to a local model is always safe - it
+        detects the language again properly. Waiting for a trusted guess sent
+        10 of 16 Marathi, Tamil, Kannada... dictations to Groq end to end
+        (80% of words wrong in Marathi) because detection lagged the speaker.
+        """
+        if len(self.local.languages) == 1:
+            return self.local.languages[0]
+        return self.local._primed
 
     def forget_priming(self) -> None:
         self.local.forget_priming()
@@ -721,26 +765,41 @@ class AutoBackend:
     def transcribe(self, audio: np.ndarray, hotwords: str = "",
                    native: bool = False) -> str:
         self._groq_served = False
-        if self.groq_available:
+        lang = self._known_language(audio) if self.groq_available else None
+        if lang and self._local_is_better(lang, native):
+            log.info("%s has its own model here; decoding locally", lang)
+        elif self.groq_available:
             try:
                 out = self.groq.transcribe(audio, hotwords=hotwords)
-                self._last_language = self.groq.last_language
+                heard = self.groq.last_language
+                if (heard and self._local_is_better(heard, native)
+                        and self.local.is_downloaded()):
+                    # No early guess, but it turned out to be a language
+                    # decoded far better here: do it again, here.
+                    log.info("groq heard %s, which has its own model here; redoing it locally",
+                             heard)
+                    self.local._primed, self.local._primed_seconds = heard, len(audio) / TARGET_RATE
+                    out = self.local.transcribe(audio, hotwords=hotwords, native=native)
+                    self._last_language = self.local.last_language
+                    return out
+                self._last_language = heard
                 self._groq_served = True
                 return out
             except GroqUnavailable as e:
                 if e.cooldown:
                     self._block_groq()
                 log.warning("groq unavailable (%s); falling back to local", e)
-                self.notify(f"Groq unavailable ({e}). Using local model.")
+                self.notify("Offline - used this PC")
         elif not self.groq.is_configured():
             log.debug("no groq key; using local")
         else:
             log.debug("groq on cooldown; using local")
 
         if not self.local.is_downloaded():
-            self.notify("Downloading local model (~3 GB). This happens once.")
-            self.local.download()
-            self.notify("Local model ready.")
+            # Not a 3 GB download in the middle of a dictation: say what to do.
+            raise TranscriptionError(
+                "Groq is unreachable and there is no speech model on this PC - "
+                "download it in LiveWhisper to dictate offline")
         out = self.local.transcribe(audio, hotwords=hotwords, native=native)
         self._last_language = self.local.last_language
         return out

@@ -205,10 +205,16 @@ your tray, ready for the shortcut, and starts with Windows.
 All of them can be changed in **Settings**. While you speak, a small pill at the
 bottom of the screen shows a live waveform; click ✓ to finish or ✕ to discard.
 
-Everything runs on your PC. Writing, grammar and formatting use small language
-models that LiveWhisper runs itself (llama.cpp, on any GPU or the processor).
-Add a free [Groq](https://console.groq.com) key under **AI** if you want cloud
-speed or a stronger writing model.
+Everything runs on your PC by default. Writing, grammar and formatting use
+small language models that LiveWhisper runs itself (llama.cpp, on any GPU or the
+processor).
+
+**Online** is one switch under **AI**: speech, formatting and writing then run
+on [Groq](https://console.groq.com) (free key) - about 2 s from the end of your
+sentence to the text, on any PC. If you are offline or Groq is busy, your PC
+takes over. A language whose accuracy model you have downloaded is still
+transcribed on your PC, because that model is far more accurate than Groq's
+general one (Bengali 21% of words wrong against 73%).
 
 <details>
 <summary><b>Run from source</b> (for development)</summary>

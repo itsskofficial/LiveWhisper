@@ -267,7 +267,7 @@ def main() -> int:
     providers.Builtin.available = lambda self: False
     p = providers.build({"provider": "ollama", "model": "qwen2.5:7b"})
     check("falling back to Groq uses Groq's own model, not the Ollama one",
-          p.name == "groq" and p.model == "llama-3.3-70b-versatile", p.model)
+          p.name == "groq" and p.model == providers.GROQ_WRITER, p.model)
     del os.environ["GROQ_API_KEY"]
     try:
         providers.build({"provider": "ollama", "model": "qwen2.5:7b"})

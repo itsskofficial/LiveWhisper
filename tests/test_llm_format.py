@@ -289,6 +289,32 @@ def main() -> int:
           loopback("http://localhost:11434") == "http://127.0.0.1:11434"
           and auto.backend.host == "http://127.0.0.1:11434")
 
+    print("\n=== online, with this PC as the backup ===")
+
+    class Down:
+        name = "groq"
+
+        def available(self):
+            return True
+
+        def complete(self, *a, **k):
+            raise lf.FormatterUnavailable("offline")
+
+    class Up:
+        name = "builtin"
+
+        def available(self):
+            return True
+
+        def complete(self, *a, **k):
+            return "Hello there."
+
+    chain = lf.FallbackBackend(Down(), Up())
+    check("Groq unreachable: this PC formats instead",
+          chain.complete([], 10) == "Hello there." and chain.last == "builtin")
+    check("online formatting is built when asked for",
+          isinstance(lf.build({"engine": "groq"}, Path(".")).backend, lf.FallbackBackend))
+
     print("\n=== in the pipeline ===")
     with tempfile.TemporaryDirectory() as td:
         pipe = Pipeline({"output": {"format": {"shortcuts": {"sign off": "Thanks,\nS"}}}},

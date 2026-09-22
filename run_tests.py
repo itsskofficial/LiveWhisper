@@ -30,6 +30,7 @@ FAST = [
     ("in-app downloads", ["tests/test_components.py"]),
     ("words to know", ["tests/test_vocab.py"]),
     ("no invented text", ["tests/test_guard.py"]),
+    ("no title case online", ["tests/test_title_case.py"]),
     ("robustness (118 checks)", ["tests/test_robustness.py"]),
     ("filler removal", ["tests/test_cleanup.py"]),
     ("text formatting", ["tests/test_format.py"]),

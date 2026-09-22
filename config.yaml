@@ -21,11 +21,19 @@ audio:
   system_gain: 1.0
   mic_gain: 1.0
 
+# The one switch in the app window (AI -> Online): where the work happens.
+#   local   speech, formatting and writing all on this PC; nothing leaves it
+#   online  all three on Groq (needs a free key), falling back to this PC when
+#           Groq cannot answer. A language whose own accuracy model is
+#           downloaded is still transcribed here: it is far more accurate.
+# The app sets the three settings below from it.
+processing: local
+
 transcription:
   # auto  - Groq first, fall back to local when Groq is out of credit or offline
   # groq  - Groq only
   # local - local only, nothing leaves this machine
-  backend: auto
+  backend: local
 
   fallback_cooldown_minutes: 60   # after Groq refuses, stop retrying it for this
                                   # long instead of stalling every recording

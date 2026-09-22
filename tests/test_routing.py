@@ -68,7 +68,31 @@ def backend(**cfg_extra) -> LocalBackend:
     return b
 
 
+def online_routing() -> None:
+    """Online mode keeps a language with its own model on this PC."""
+    import tempfile
+    from livewhisper.transcribe import AutoBackend, GroqBackend, LocalBackend
+    tmp = Path(tempfile.mkdtemp())
+    for name in ("bn-medium", "hinglish-prime", "hi-vaani"):
+        (tmp / name).mkdir()
+        (tmp / name / "model.bin").write_bytes(b"x")
+    local = LocalBackend({"models": {
+        "bn": str(tmp / "bn-medium"),
+        "hi": {"path": str(tmp / "hinglish-prime"), "latin_output": True,
+               "native": str(tmp / "hi-vaani")},
+        "ta": str(tmp / "missing")}}, languages=["bn", "hi", "ta", "en"])
+    auto = AutoBackend(GroqBackend({}), local)
+    print("\n=== online mode ===")
+    check("Bengali with its model stays here", auto._local_is_better("bn", False))
+    check("Hinglish goes to Groq", not auto._local_is_better("hi", False))
+    check("Devanagari Hindi with its model stays here", auto._local_is_better("hi", True))
+    check("a model not downloaded does not count", not auto._local_is_better("ta", False))
+    check("English goes to Groq", not auto._local_is_better("en", False))
+    check("a language with no model goes to Groq", not auto._local_is_better("mr", False))
+
+
 def main() -> int:
+    online_routing()
     audio = np.zeros(16000, "float32")
 
     print("=== detection limited to the user's languages ===")

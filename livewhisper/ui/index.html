@@ -294,22 +294,22 @@ input:focus, textarea:focus, select:focus { border-color: var(--accent); box-sha
     <!-- AI -->
     <section class="page" id="p-ai">
       <h1>AI</h1>
-      <p class="sub">Two small language models that run on this PC. Nothing you say leaves it unless you add a cloud key.</p>
-      <div class="card" id="ai-models"></div>
+      <p class="sub">Where the work happens: on this PC, private and offline, or online on Groq, which is faster on a slow computer.</p>
+      <div class="card" id="ai-mode-card">
+        <div class="row"><div class="grow"><div class="label" style="font-size:15px">Online</div>
+          <div class="hint">Speech, formatting and writing run on Groq. If you're offline or Groq is busy, this PC takes over. Languages with an accuracy model downloaded still run here, because they're far more accurate that way.</div></div>
+          <label class="switch"><input type="checkbox" id="ai-online"><i></i></label></div>
+        <div class="row"><div class="grow"><div class="label">Groq API key</div><div class="hint">Free at console.groq.com. Needed for Online. Stored on this PC.</div></div>
+          <input type="password" id="ai-groq" placeholder="gsk_…" style="width:220px"><button class="btn" id="ai-groq-save">Save</button></div>
+      </div>
       <h2>Formatting</h2>
       <div class="card">
         <div class="row"><div class="grow"><div class="label">Format as I speak</div><div class="hint">Punctuation, lists, paragraphs, and fixes like “Monday, I mean Tuesday”. It never changes your words.</div></div><label class="switch"><input type="checkbox" data-set="output.format.enabled"><i></i></label></div>
-        <div class="row"><div class="grow"><div class="label">Use the formatting model</div><div class="hint">Off uses fast rules only. The model gets twice as many sentences exactly right.</div></div><label class="switch"><input type="checkbox" id="ai-fmt"><i></i></label></div>
+        <div class="row"><div class="grow"><div class="label">Use an AI model for formatting</div><div class="hint">Off uses fast rules only. A model gets far more sentences exactly right: 71% online, 67% on this PC, 40% with rules.</div></div><label class="switch"><input type="checkbox" id="ai-fmt"><i></i></label></div>
       </div>
-      <h2>Cloud (optional)</h2>
-      <div class="card">
-        <div class="row"><div class="grow"><div class="label">Groq API key</div><div class="hint">Free at console.groq.com. Enables cloud speech recognition and a stronger writing model. Stored on this PC.</div></div>
-          <input type="password" id="ai-groq" placeholder="gsk_…" style="width:220px"><button class="btn" id="ai-groq-save">Save</button></div>
-        <div class="row"><div class="grow"><div class="label">Speech recognition</div><div class="hint">On this PC is private and works offline. Cloud is faster on a slow computer.</div></div>
-          <div class="seg" id="ai-backend"><button data-v="local">This PC</button><button data-v="auto">Cloud first</button><button data-v="groq">Cloud only</button></div></div>
-        <div class="row"><div class="grow"><div class="label">Writing (Ctrl+Alt+W) uses</div><div class="hint">The cloud model writes better long text; the local one keeps everything private.</div></div>
-          <div class="seg" id="ai-provider"><button data-v="auto">This PC</button><button data-v="groq">Groq</button></div></div>
-      </div>
+      <h2>Models on this PC</h2>
+      <p class="sub" style="margin-bottom:12px">Used when Online is off, and as the backup when it's on.</p>
+      <div class="card" id="ai-models"></div>
     </section>
 
     <!-- SETTINGS -->
@@ -396,7 +396,8 @@ async function refresh(full = false) {
   const st = { idle: ["", "Ready"], recording: ["rec", "Listening…"], transcribing: ["work", "Writing…"] }[S.status] || ["", "Ready"];
   const setup = !S.ready;
   $("#sdot").className = "dot " + (setup && S.status === "idle" ? "setup" : st[0]);
-  $("#stext").textContent = setup && S.status === "idle" ? (S.downloading.length ? "Downloading…" : "Setup needed") : st[1];
+  $("#stext").textContent = (setup && S.status === "idle" ? (S.downloading.length ? "Downloading…" : "Setup needed") : st[1])
+    + (S.processing === "online" ? " · Online" : "");
   if (!S.onboarded && !$("#ob").classList.contains("on")) onboarding(0);
   if (page === "home") renderHome();
   if (full) {
@@ -585,20 +586,31 @@ async function renderLanguages() {
 async function renderAI() {
   await loadSettings();
   const comps = await api.list_components();
-  const ai = comps.filter(c => c.group === "ai");
-  $("#ai-models").innerHTML = ai.map(c => modelRow(c, c.name)).join("");
+  $("#ai-models").innerHTML = comps.filter(c => c.group === "ai").map(c => modelRow(c, c.name)).join("");
   bindDownloads($("#ai-models"));
+  const online = settings.processing === "online";
+  $("#ai-online").checked = online;
+  $("#ai-online").onchange = async e => {
+    if (e.target.checked && !settings.groq_key_set) {
+      e.target.checked = false;
+      $("#ai-groq").focus();
+      toast("Add your Groq key first");
+      return;
+    }
+    await api.save_setting("processing", e.target.checked ? "online" : "local");
+    toast(e.target.checked ? "Online" : "Everything on this PC");
+    renderAI();
+  };
   $("#ai-fmt").checked = (settings["output.format.engine"] || "auto") !== "rules";
-  $("#ai-fmt").onchange = e => api.save_setting("output.format.engine", e.target.checked ? "auto" : "rules");
+  $("#ai-fmt").onchange = e => api.save_setting("output.format.engine",
+    e.target.checked ? (settings.processing === "online" ? "groq" : "auto") : "rules");
   $("#ai-groq").placeholder = settings.groq_key_set ? "Saved. Paste to replace" : "gsk_…";
-  segBind("#ai-backend", "transcription.backend", settings["transcription.backend"] || "local");
-  segBind("#ai-provider", "actions.models.provider", settings["actions.models.provider"] === "groq" ? "groq" : "auto");
 }
-function segBind(sel, key, val) {
-  $$(sel + " button").forEach(b => { b.classList.toggle("on", b.dataset.v === val);
-    b.onclick = async () => { const r = await api.save_setting(key, b.dataset.v); if (r && r.ok === false) toast(r.error); segBind(sel, key, b.dataset.v); }; });
-}
-$("#ai-groq-save").onclick = async () => { await api.set_groq_key($("#ai-groq").value); $("#ai-groq").value = ""; toast("Key saved"); renderAI(); };
+$("#ai-groq-save").onclick = async () => {
+  const key = $("#ai-groq").value.trim();
+  if (!key) return;
+  await api.set_groq_key(key); $("#ai-groq").value = ""; toast("Key saved"); renderAI();
+};
 
 /* ---------------------------------------------------------------- settings */
 async function loadSettings() {
