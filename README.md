@@ -11,6 +11,8 @@ Every dictation app gives you `क्या कर रहे हो`.
 
 *Hinglish · Tanglish · Banglish · Thanglish · Manglish · Punglish · and six more*
 
+[![tests](https://github.com/itsskofficial/LiveWhisper/actions/workflows/tests.yml/badge.svg)](https://github.com/itsskofficial/LiveWhisper/actions/workflows/tests.yml) [![release](https://img.shields.io/github/v/release/itsskofficial/LiveWhisper)](https://github.com/itsskofficial/LiveWhisper/releases/latest)
+
 [**Download**](https://github.com/itsskofficial/LiveWhisper/releases/latest) · [What it does](https://claude.ai/code/artifact/f350c628-163d-4a75-a4e1-8a7829c6b2e9) · [How it works](#how-it-works) · [Docs](docs/) · [Contributing](CONTRIBUTING.md)
 
 </div>
