@@ -54,6 +54,7 @@ SETTINGS = {
     "output.save_transcripts": bool,
     "output.format.enabled": bool,
     "output.format.engine": str,
+    "output.polish": bool,
     "context.bias": bool,
     "learning.enabled": bool,
     "script.default": str,

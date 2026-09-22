@@ -343,7 +343,8 @@ def main() -> int:
     synthesise()
     routes = installed_routes(Path(args.routes)) if args.routes else None
     if routes:
-        print(f"specialists: {', '.join(f'{k}->{Path(v['path']).name}' for k, v in routes.items())}")
+        names = ", ".join(f"{k}->{Path(v['path']).name}" for k, v in routes.items())
+        print(f"specialists: {names}")
     app = make_app(args.backend, routes)
     print("loading and warming the models (what the app does at launch)...")
     t0 = time.perf_counter()

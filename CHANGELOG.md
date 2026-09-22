@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+### Added
+
+- **Polish my English (Beta)**, off by default, on the AI page. With Online
+  on, English dictation is rewritten the way you would have typed it: false
+  starts, repeated words and filler removed, grammar fixed. A rewrite that
+  changes a name, number, link, "not" or "maybe", answers a question or adds
+  anything you did not say is thrown away and the formatted text pasted
+  instead. On 28 held-out dictations it brought the text from 35 to 11-17
+  word edits away from a careful typist's version (two runs), with nothing unsafe pasted
+  (`tests/bench_polish.py`). Not used for Hinglish, other languages, code
+  editors or Ctrl+Alt+W.
+
 ### Project
 
 - Documentation reorganised: [docs/](docs/) has an index, the architecture,

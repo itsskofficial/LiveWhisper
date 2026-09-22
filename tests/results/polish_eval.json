@@ -1,0 +1,887 @@
+{
+ "groq:openai/gpt-oss-120b": {
+  "summary": {
+   "cases": 40,
+   "applicable": 36,
+   "accepted": 32,
+   "distance_before": 53,
+   "distance_after": 29,
+   "violations": 0,
+   "hinglish_skipped": 2,
+   "p50_s": 0.89
+  },
+  "violations": [],
+  "rows": [
+   {
+    "id": "false-start-1",
+    "said": "So I was thinking we could, actually let's just meet on Thursday at three.",
+    "out": "I was thinking we could actually just meet on Thursday at three.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "false-start-2",
+    "said": "Can you send me the, the report from last week when you get a chance.",
+    "out": "Can you send me the report from last week when you get a chance?",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "repetition",
+    "said": "I think I think we need to we need to push the launch by a week.",
+    "out": "I think we need to push the launch by a week.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "restart-mid-sentence",
+    "said": "The problem is that the the database is, the queries are too slow on the dashboard.",
+    "out": "The problem is that the database queries are too slow on the dashboard.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "grammar-agreement",
+    "said": "The results from the survey was really interesting and shows a clear trend.",
+    "out": "The results from the survey were really interesting and show a clear trend.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "grammar-tense",
+    "said": "Yesterday I have finished the draft and send it to Maria.",
+    "out": "Yesterday I finished the draft and sent it to Maria.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "run-on",
+    "said": "The build passed the tests passed we can ship it tomorrow morning if nobody objects.",
+    "out": "The build passed, the tests passed; we can ship it tomorrow morning if nobody objects.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "like-you-know",
+    "said": "It's like you know kind of a big deal for the team so we should celebrate.",
+    "out": "It's a big deal for the team, so we should celebrate.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "trailing-so",
+    "said": "I'll be there around six so.",
+    "out": "I'll be there around six.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "already-clean",
+    "said": "Thanks for the update. I'll review the pull request this afternoon.",
+    "out": "Thanks for the update. I'll review the pull request this afternoon.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "short-ok",
+    "said": "Sounds good",
+    "out": "Sounds good",
+    "reason": "skipped: too short to need it",
+    "bad": []
+   },
+   {
+    "id": "name-priya",
+    "said": "Hey Priya can you can you loop in Arjun on the thread with Kubernetes folks.",
+    "out": "Hey Priya, can you loop in Arjun on the thread with the Kubernetes folks?",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "name-unusual",
+    "said": "Tell Siobhan and Nguyen that the meeting with Okonkwo is is moved.",
+    "out": "Tell Siobhan and Nguyen that the meeting with Okonkwo is moved.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "numbers-money",
+    "said": "The invoice was for $4,250 not 4,520 please double check.",
+    "out": "The invoice was for $4,250, not $4,520; please double‑check.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "numbers-time",
+    "said": "Let's do the call at 10:30 on the 14th, the 14th of March.",
+    "out": "Let's do the call at 10:30 on the 14th, the 14th of March.",
+    "reason": "number lost: 14th",
+    "bad": []
+   },
+   {
+    "id": "numbers-version",
+    "said": "We're on version 2.3.1 and the bug was fixed in 2.4.",
+    "out": "We're on version 2.3.1, and the bug was fixed in 2.4.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "email",
+    "said": "Send it to rahul.k@acme.io and cc me.",
+    "out": "Send it to rahul.k@acme.io and cc me.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "url",
+    "said": "The docs are at docs.livewhisper.app slash setup I think.",
+    "out": "The docs are at docs.livewhisper.app/setup, I think.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "code-terms",
+    "said": "The getUserName function in user_service returns null when the JWT expires.",
+    "out": "The getUserName function in user_service returns null when the JWT expires.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "acronyms",
+    "said": "The Q3 OKRs for the API team are in the PRD.",
+    "out": "The Q3 OKRs for the API team are in the PRD.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "negation-1",
+    "said": "We should not merge this before the the security review is done.",
+    "out": "We should not merge this before the security review is done.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "negation-2",
+    "said": "I never said we'd drop the feature I said we'd delay it.",
+    "out": "I never said we'd drop the feature; I said we'd delay it.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "negation-3",
+    "said": "Don't don't restart the server until I say so.",
+    "out": "Don't restart the server until I say so.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "question-factual",
+    "said": "What is the capital of France.",
+    "out": "What is the capital of France?",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "question-math",
+    "said": "How much is 17 times 23 again.",
+    "out": "How much is 17 times 23 again?",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "instruction",
+    "said": "Write a short email to the team saying the offsite is cancelled.",
+    "out": "Write a short email to the team saying the offsite is cancelled.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "instruction-translate",
+    "said": "Translate this into Spanish please.",
+    "out": "Translate this into Spanish please.",
+    "reason": "name lost: Spanish",
+    "bad": []
+   },
+   {
+    "id": "opinion-kept",
+    "said": "Honestly I think the design is kind of ugly but it works.",
+    "out": "Honestly, I think the design is kind of ugly, but it works.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "casual-register",
+    "said": "Yeah no worries man we'll figure it out tomorrow lol.",
+    "out": "Yeah, no worries, man—we'll figure it out tomorrow, lol.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "profanity-kept",
+    "said": "This damn printer is broken again.",
+    "out": "This damn printer is broken again.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "list-spoken",
+    "said": "We need three things milk eggs and bread.",
+    "out": "We need three things: milk, eggs, and bread.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "correction-kept",
+    "said": "The meeting is on Tuesday at noon.",
+    "out": "The meeting is on Tuesday at noon.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "long-ramble",
+    "said": "So basically what happened was the client called and they said that they they want the whole thing redone by Friday which is you know not really possible with the current team so we need to talk about it.",
+    "out": "So basically what happened was the client called and they said that they they want the whole thing redone by Friday which is you know not really possible with the current team so we need to talk about it.",
+    "reason": "negation changed",
+    "bad": []
+   },
+   {
+    "id": "hinglish-skip",
+    "said": "Kal main office jaunga aur meeting attend karunga.",
+    "out": "Kal main office jaunga aur meeting attend karunga.",
+    "reason": "skipped: Hinglish",
+    "bad": []
+   },
+   {
+    "id": "hinglish-mixed-skip",
+    "said": "Yaar the deadline toh kal hai na so let's finish it aaj.",
+    "out": "Yaar the deadline toh kal hai na so let's finish it aaj.",
+    "reason": "skipped: Hinglish",
+    "bad": []
+   },
+   {
+    "id": "one-word",
+    "said": "Yes",
+    "out": "Yes",
+    "reason": "skipped: too short to need it",
+    "bad": []
+   },
+   {
+    "id": "vocab-word",
+    "said": "The LiveWhisper build on the the Dakshina data is done.",
+    "out": "The LiveWhisper build on the Dakshina data is done.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "quantities",
+    "said": "About 30% of the users like 3 out of 10 dropped off at step two.",
+    "out": "About 30% of the users, like 3 out of 10, dropped off at step two.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "dates-deadline",
+    "said": "The deadline is the 3rd, no wait the 5th of October.",
+    "out": "The deadline is the 3rd, no wait the 5th of October.",
+    "reason": "number lost: 3rd",
+    "bad": []
+   },
+   {
+    "id": "thanks-sign-off",
+    "said": "Thanks so much talk soon.",
+    "out": "Thanks so much; talk soon.",
+    "reason": "ok",
+    "bad": []
+   }
+  ]
+ },
+ "groq:openai/gpt-oss-20b": {
+  "summary": {
+   "cases": 40,
+   "applicable": 36,
+   "accepted": 30,
+   "distance_before": 53,
+   "distance_after": 25,
+   "violations": 0,
+   "hinglish_skipped": 2,
+   "p50_s": 0.96
+  },
+  "violations": [],
+  "rows": [
+   {
+    "id": "false-start-1",
+    "said": "So I was thinking we could, actually let's just meet on Thursday at three.",
+    "out": "Let's just meet on Thursday at three.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "false-start-2",
+    "said": "Can you send me the, the report from last week when you get a chance.",
+    "out": "Can you send me the report from last week when you get a chance.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "repetition",
+    "said": "I think I think we need to we need to push the launch by a week.",
+    "out": "I think we need to push the launch by a week.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "restart-mid-sentence",
+    "said": "The problem is that the the database is, the queries are too slow on the dashboard.",
+    "out": "The problem is that the database is slow; the queries on the dashboard are too slow.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "grammar-agreement",
+    "said": "The results from the survey was really interesting and shows a clear trend.",
+    "out": "The results from the survey were really interesting and show a clear trend.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "grammar-tense",
+    "said": "Yesterday I have finished the draft and send it to Maria.",
+    "out": "Yesterday I finished the draft and sent it to Maria.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "run-on",
+    "said": "The build passed the tests passed we can ship it tomorrow morning if nobody objects.",
+    "out": "The build passed the tests. We can ship it tomorrow morning if nobody objects.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "like-you-know",
+    "said": "It's like you know kind of a big deal for the team so we should celebrate.",
+    "out": "It's a big deal for the team, so we should celebrate.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "trailing-so",
+    "said": "I'll be there around six so.",
+    "out": "I'll be there around six.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "already-clean",
+    "said": "Thanks for the update. I'll review the pull request this afternoon.",
+    "out": "Thanks for the update. I'll review the pull request this afternoon.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "short-ok",
+    "said": "Sounds good",
+    "out": "Sounds good",
+    "reason": "skipped: too short to need it",
+    "bad": []
+   },
+   {
+    "id": "name-priya",
+    "said": "Hey Priya can you can you loop in Arjun on the thread with Kubernetes folks.",
+    "out": "Hey Priya, can you loop in Arjun on the thread with the Kubernetes folks?",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "name-unusual",
+    "said": "Tell Siobhan and Nguyen that the meeting with Okonkwo is is moved.",
+    "out": "Tell Siobhan and Nguyen that the meeting with Okonkwo is moved.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "numbers-money",
+    "said": "The invoice was for $4,250 not 4,520 please double check.",
+    "out": "The invoice was for $4,250, not $4,520. Please double‑check.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "numbers-time",
+    "said": "Let's do the call at 10:30 on the 14th, the 14th of March.",
+    "out": "Let's do the call at 10:30 on the 14th of March.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "numbers-version",
+    "said": "We're on version 2.3.1 and the bug was fixed in 2.4.",
+    "out": "We're on version 2.3.1, and the bug was fixed in 2.4.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "email",
+    "said": "Send it to rahul.k@acme.io and cc me.",
+    "out": "Send it to rahul.k@acme.io and cc me.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "url",
+    "said": "The docs are at docs.livewhisper.app slash setup I think.",
+    "out": "The docs are at docs.livewhisper.app/setup, I think.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "code-terms",
+    "said": "The getUserName function in user_service returns null when the JWT expires.",
+    "out": "The getUserName function in user_service returns null when the JWT expires.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "acronyms",
+    "said": "The Q3 OKRs for the API team are in the PRD.",
+    "out": "The Q3 OKRs for the API team are in the PRD.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "negation-1",
+    "said": "We should not merge this before the the security review is done.",
+    "out": "We should not merge this before the security review is done.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "negation-2",
+    "said": "I never said we'd drop the feature I said we'd delay it.",
+    "out": "I never said we'd drop the feature; I said we'd delay it.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "negation-3",
+    "said": "Don't don't restart the server until I say so.",
+    "out": "Don't restart the server until I say so.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "question-factual",
+    "said": "What is the capital of France.",
+    "out": "What is the capital of France.",
+    "reason": "name lost: France",
+    "bad": []
+   },
+   {
+    "id": "question-math",
+    "said": "How much is 17 times 23 again.",
+    "out": "How much is 17 times 23 again.",
+    "reason": "number added: 391",
+    "bad": []
+   },
+   {
+    "id": "instruction",
+    "said": "Write a short email to the team saying the offsite is cancelled.",
+    "out": "Write a short email to the team saying the offsite is cancelled.",
+    "reason": "name added: Thanks",
+    "bad": []
+   },
+   {
+    "id": "instruction-translate",
+    "said": "Translate this into Spanish please.",
+    "out": "Translate this into Spanish please.",
+    "reason": "name lost: Spanish",
+    "bad": []
+   },
+   {
+    "id": "opinion-kept",
+    "said": "Honestly I think the design is kind of ugly but it works.",
+    "out": "Honestly, I think the design is kind of ugly, but it works.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "casual-register",
+    "said": "Yeah no worries man we'll figure it out tomorrow lol.",
+    "out": "Yeah no worries man we'll figure it out tomorrow lol.",
+    "reason": "unavailable: groq: The read operation timed out",
+    "bad": []
+   },
+   {
+    "id": "profanity-kept",
+    "said": "This damn printer is broken again.",
+    "out": "This damn printer is broken again.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "list-spoken",
+    "said": "We need three things milk eggs and bread.",
+    "out": "We need three things: milk, eggs, and bread.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "correction-kept",
+    "said": "The meeting is on Tuesday at noon.",
+    "out": "The meeting is on Tuesday at noon.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "long-ramble",
+    "said": "So basically what happened was the client called and they said that they they want the whole thing redone by Friday which is you know not really possible with the current team so we need to talk about it.",
+    "out": "So basically what happened was the client called and said they want the whole thing redone by Friday, which is not really possible with the current team. We need to talk about it.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "hinglish-skip",
+    "said": "Kal main office jaunga aur meeting attend karunga.",
+    "out": "Kal main office jaunga aur meeting attend karunga.",
+    "reason": "skipped: Hinglish",
+    "bad": []
+   },
+   {
+    "id": "hinglish-mixed-skip",
+    "said": "Yaar the deadline toh kal hai na so let's finish it aaj.",
+    "out": "Yaar the deadline toh kal hai na so let's finish it aaj.",
+    "reason": "skipped: Hinglish",
+    "bad": []
+   },
+   {
+    "id": "one-word",
+    "said": "Yes",
+    "out": "Yes",
+    "reason": "skipped: too short to need it",
+    "bad": []
+   },
+   {
+    "id": "vocab-word",
+    "said": "The LiveWhisper build on the the Dakshina data is done.",
+    "out": "The LiveWhisper build on the Dakshina data is done.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "quantities",
+    "said": "About 30% of the users like 3 out of 10 dropped off at step two.",
+    "out": "About 30% of users—3 out of 10—dropped off at step two.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "dates-deadline",
+    "said": "The deadline is the 3rd, no wait the 5th of October.",
+    "out": "The deadline is the 3rd, no wait the 5th of October.",
+    "reason": "number lost: 3rd",
+    "bad": []
+   },
+   {
+    "id": "thanks-sign-off",
+    "said": "Thanks so much talk soon.",
+    "out": "Thanks so much. Talk soon.",
+    "reason": "ok",
+    "bad": []
+   }
+  ]
+ },
+ "builtin": {
+  "summary": {
+   "cases": 40,
+   "applicable": 36,
+   "accepted": 32,
+   "distance_before": 53,
+   "distance_after": 25,
+   "violations": 0,
+   "hinglish_skipped": 2,
+   "p50_s": 1.2
+  },
+  "violations": [],
+  "rows": [
+   {
+    "id": "false-start-1",
+    "said": "So I was thinking we could, actually let's just meet on Thursday at three.",
+    "out": "Let's just meet on Thursday at three.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "false-start-2",
+    "said": "Can you send me the, the report from last week when you get a chance.",
+    "out": "Can you send me the report from last week when you get a chance?",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "repetition",
+    "said": "I think I think we need to we need to push the launch by a week.",
+    "out": "I think we need to push the launch by a week.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "restart-mid-sentence",
+    "said": "The problem is that the the database is, the queries are too slow on the dashboard.",
+    "out": "The problem is that the queries are too slow on the dashboard.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "grammar-agreement",
+    "said": "The results from the survey was really interesting and shows a clear trend.",
+    "out": "The results from the survey were really interesting and show a clear trend.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "grammar-tense",
+    "said": "Yesterday I have finished the draft and send it to Maria.",
+    "out": "Yesterday I finished the draft and sent it to Maria.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "run-on",
+    "said": "The build passed the tests passed we can ship it tomorrow morning if nobody objects.",
+    "out": "The build passed the tests, we can ship it tomorrow morning if nobody objects.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "like-you-know",
+    "said": "It's like you know kind of a big deal for the team so we should celebrate.",
+    "out": "It's kind of a big deal for the team, so we should celebrate.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "trailing-so",
+    "said": "I'll be there around six so.",
+    "out": "I'll be there around six.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "already-clean",
+    "said": "Thanks for the update. I'll review the pull request this afternoon.",
+    "out": "Thanks for the update. I'll review the pull request this afternoon.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "short-ok",
+    "said": "Sounds good",
+    "out": "Sounds good",
+    "reason": "skipped: too short to need it",
+    "bad": []
+   },
+   {
+    "id": "name-priya",
+    "said": "Hey Priya can you can you loop in Arjun on the thread with Kubernetes folks.",
+    "out": "Hey Priya, can you loop in Arjun on the thread with Kubernetes folks?",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "name-unusual",
+    "said": "Tell Siobhan and Nguyen that the meeting with Okonkwo is is moved.",
+    "out": "Tell Siobhan and Nguyen that the meeting with Okonkwo is moved.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "numbers-money",
+    "said": "The invoice was for $4,250 not 4,520 please double check.",
+    "out": "The invoice was for $4,250, not $4,520. Please double-check.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "numbers-time",
+    "said": "Let's do the call at 10:30 on the 14th, the 14th of March.",
+    "out": "Let's do the call at 10:30 on the 14th of March.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "numbers-version",
+    "said": "We're on version 2.3.1 and the bug was fixed in 2.4.",
+    "out": "We're on version 2.3.1 and the bug was fixed in 2.4.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "email",
+    "said": "Send it to rahul.k@acme.io and cc me.",
+    "out": "Send it to rahul.k@acme.io and cc me.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "url",
+    "said": "The docs are at docs.livewhisper.app slash setup I think.",
+    "out": "The docs are at docs.livewhisper.app/setup, I think.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "code-terms",
+    "said": "The getUserName function in user_service returns null when the JWT expires.",
+    "out": "The getUserName function in user_service returns null when the JWT expires.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "acronyms",
+    "said": "The Q3 OKRs for the API team are in the PRD.",
+    "out": "The Q3 OKRs for the API team are in the PRD.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "negation-1",
+    "said": "We should not merge this before the the security review is done.",
+    "out": "We should not merge this before the security review is done.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "negation-2",
+    "said": "I never said we'd drop the feature I said we'd delay it.",
+    "out": "I never said we'd drop the feature. I said we'd delay it.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "negation-3",
+    "said": "Don't don't restart the server until I say so.",
+    "out": "Don't restart the server until I say so.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "question-factual",
+    "said": "What is the capital of France.",
+    "out": "What is the capital of France?",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "question-math",
+    "said": "How much is 17 times 23 again.",
+    "out": "How much is 17 times 23 again.",
+    "reason": "number added: 391",
+    "bad": []
+   },
+   {
+    "id": "instruction",
+    "said": "Write a short email to the team saying the offsite is cancelled.",
+    "out": "Write a short email to the team saying the offsite is cancelled.",
+    "reason": "name added: Best",
+    "bad": []
+   },
+   {
+    "id": "instruction-translate",
+    "said": "Translate this into Spanish please.",
+    "out": "Translate this into Spanish please.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "opinion-kept",
+    "said": "Honestly I think the design is kind of ugly but it works.",
+    "out": "Honestly, I think the design is kind of ugly but it works.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "casual-register",
+    "said": "Yeah no worries man we'll figure it out tomorrow lol.",
+    "out": "Yeah, no worries. We'll figure it out tomorrow, lol.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "profanity-kept",
+    "said": "This damn printer is broken again.",
+    "out": "This damn printer is broken again.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "list-spoken",
+    "said": "We need three things milk eggs and bread.",
+    "out": "We need three things milk eggs and bread.",
+    "reason": "number changed: three",
+    "bad": []
+   },
+   {
+    "id": "correction-kept",
+    "said": "The meeting is on Tuesday at noon.",
+    "out": "The meeting is on Tuesday at noon.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "long-ramble",
+    "said": "So basically what happened was the client called and they said that they they want the whole thing redone by Friday which is you know not really possible with the current team so we need to talk about it.",
+    "out": "So basically, what happened was the client called and said they want the whole thing redone by Friday, which is not really possible with the current team. We need to talk about it.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "hinglish-skip",
+    "said": "Kal main office jaunga aur meeting attend karunga.",
+    "out": "Kal main office jaunga aur meeting attend karunga.",
+    "reason": "skipped: Hinglish",
+    "bad": []
+   },
+   {
+    "id": "hinglish-mixed-skip",
+    "said": "Yaar the deadline toh kal hai na so let's finish it aaj.",
+    "out": "Yaar the deadline toh kal hai na so let's finish it aaj.",
+    "reason": "skipped: Hinglish",
+    "bad": []
+   },
+   {
+    "id": "one-word",
+    "said": "Yes",
+    "out": "Yes",
+    "reason": "skipped: too short to need it",
+    "bad": []
+   },
+   {
+    "id": "vocab-word",
+    "said": "The LiveWhisper build on the the Dakshina data is done.",
+    "out": "The LiveWhisper build on the Dakshina data is done.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "quantities",
+    "said": "About 30% of the users like 3 out of 10 dropped off at step two.",
+    "out": "About 30% of the users dropped off at step two, with 3 out of 10.",
+    "reason": "ok",
+    "bad": []
+   },
+   {
+    "id": "dates-deadline",
+    "said": "The deadline is the 3rd, no wait the 5th of October.",
+    "out": "The deadline is the 3rd, no wait the 5th of October.",
+    "reason": "number lost: 3rd",
+    "bad": []
+   },
+   {
+    "id": "thanks-sign-off",
+    "said": "Thanks so much talk soon.",
+    "out": "Thanks so much, talk soon.",
+    "reason": "ok",
+    "bad": []
+   }
+  ]
+ }
+}

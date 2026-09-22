@@ -306,6 +306,7 @@ input:focus, textarea:focus, select:focus { border-color: var(--accent); box-sha
       <div class="card">
         <div class="row"><div class="grow"><div class="label">Format as I speak</div><div class="hint">Punctuation, lists, paragraphs, and fixes like “Monday, I mean Tuesday”. It never changes your words.</div></div><label class="switch"><input type="checkbox" data-set="output.format.enabled"><i></i></label></div>
         <div class="row"><div class="grow"><div class="label">Use an AI model for formatting</div><div class="hint">Off uses fast rules only. A model gets far more sentences exactly right: 71% online, 67% on this PC, 40% with rules.</div></div><label class="switch"><input type="checkbox" id="ai-fmt"><i></i></label></div>
+        <div class="row"><div class="grow"><div class="label">Polish my English <span class="chip" style="margin-left:6px">Beta</span></div><div class="hint" id="ai-polish-hint">Rewrites English the way you'd have typed it: drops false starts and repeated words, fixes grammar. If a rewrite changes a name, number, link or “not”, or adds anything you didn't say, your words are pasted as they were.</div></div><label class="switch"><input type="checkbox" data-set="output.polish"><i></i></label></div>
       </div>
       <h2>Models on this PC</h2>
       <p class="sub" style="margin-bottom:12px">Used when Online is off, and as the backup when it's on.</p>
@@ -604,6 +605,10 @@ async function renderAI() {
   $("#ai-fmt").checked = (settings["output.format.engine"] || "auto") !== "rules";
   $("#ai-fmt").onchange = e => api.save_setting("output.format.engine",
     e.target.checked ? (settings.processing === "online" ? "groq" : "auto") : "rules");
+  $("#ai-polish-hint").dataset.base ||= $("#ai-polish-hint").textContent;
+  $("#ai-polish-hint").textContent = $("#ai-polish-hint").dataset.base
+    + (online && settings["output.format.engine"] !== "rules" ? ""
+       : " Needs Online and the AI model for formatting.");
   $("#ai-groq").placeholder = settings.groq_key_set ? "Saved. Paste to replace" : "gsk_…";
 }
 $("#ai-groq-save").onclick = async () => {

@@ -19,3 +19,4 @@ New ones start from [0000-template.md](0000-template.md).
 | 0011 | [Learn from corrections by reading the field at the next dictation](0011-learn-at-the-next-dictation.md) | Accepted |
 | 0012 | [Online is one switch, and languages with their own model stay local](0012-online-as-one-switch.md) | Accepted |
 | 0013 | [Never paste what was not said, or where it was not meant](0013-never-paste-what-was-not-said.md) | Accepted |
+| 0014 | [Polish is opt-in, English-only, online-only, and checked before pasting](0014-opt-in-english-polish.md) | Accepted |

@@ -34,6 +34,7 @@ FAST = [
     ("robustness (118 checks)", ["tests/test_robustness.py"]),
     ("filler removal", ["tests/test_cleanup.py"]),
     ("text formatting", ["tests/test_format.py"]),
+    ("english polish guardrails", ["tests/test_polish.py"]),
     ("model formatting, free tier", ["tests/test_llm_format.py"]),
     ("hotkey flow", ["tests/test_app_flow.py"]),
     ("no native script left", ["tests/test_letters.py"]),

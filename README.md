@@ -514,6 +514,7 @@ actually stands — including the parts that are still worse:
 | --- | --- |
 | Smart formatting, lists, paragraphs | Yes — rules plus a 522 MB local model that can punctuate but never change a word, [above](#it-hands-you-a-message-not-a-sentence) |
 | Auto-edits: "Monday, I mean Tuesday" | Yes, for corrections it can verify are corrections |
+| Polish: false starts and grammar rewritten | Opt-in beta, English, Online only. A rewrite that changes a name, number or "not", or answers what you said, is thrown away ([ADR 0014](docs/adr/0014-opt-in-english-polish.md)) |
 | Context awareness: names from your screen | Yes — read locally, used for that one dictation, never stored or sent |
 | Learns your vocabulary and spelling | Yes, and it keeps the capitalisation habits they discard |
 | Per-app tone and style | Yes, per app, and you can override it |

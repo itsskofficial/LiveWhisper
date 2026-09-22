@@ -15,6 +15,7 @@ results. Raw outputs are committed in `tests/results/`
 | Dakshina spoken | 15 Dakshina sentences per language read by neural voices | both outputs where FLEURS has no data (Sinhala) |
 | `tests/data/hinglish_eval.json` | synthetic code-switched Hindi/English | keeping English words English in Hinglish |
 | `tests/data/format_eval.json` | 42 dictations with the formatted text a careful typist would write | formatting quality |
+| `tests/data/polish_eval.json`, `polish_holdout.json` | 40 + 30 English dictations with a polished reference, must-keep words and must-not words (answers, executed instructions) | polish; the guardrails were tuned on the first, the second is the fair score |
 | end-to-end clips | TTS sentences with checks (commands, lists, corrections) | the real app, speakers → loopback → Notepad |
 
 FLEURS audio is fetched with `scripts/fetch_fleurs.py`; Dakshina from Google's
@@ -33,6 +34,7 @@ Contamination is checked: `steja/whisper-large-sindhi` scored an implausible
 | `tests/eval_dakshina_speech.py` | spoken Dakshina sentences, both outputs (`--try lang=path` for a candidate model) |
 | `tests/eval_hinglish.py` | English retention and Hindi spelling on code-switched speech |
 | `tests/bench_format_llm.py` | formatting models against the 42 cases (`--models groq:<id>`, `--pace`) |
+| `tests/bench_polish.py` | polish: accepted rewrites, word distance to the reference, violations (must be 0) (`--cases`, `--models groq:<id>,builtin`, `--llm-dir`) |
 | `tests/e2e_app.py` | the app end to end: English, Hinglish, every language, learning; `--online` |
 | `tests/bench_latency.py`, `tests/bench_windows.py`, `tests/bench_compose.py` | latency, decode window length, compose quality |
 | `tests/rescore_delivered.py` | re-scores saved outputs as delivered (after respelling) |
@@ -74,6 +76,19 @@ formatted exactly as expected, and words the model invented (must be 0).
 | rules only | 40% | 0 | < 1 ms |
 | qwen3 0.6B (local) | 67% | 0 | 0.2-0.6 s |
 | gpt-oss-20b (Groq, Online) | 71% | 0 | ~0.7 s |
+
+### Polish
+
+`python tests/bench_polish.py --cases tests/data/polish_holdout.json --models ...
+--pace 2.2` - 28 held-out cases polish applies to ([ADR 0014](adr/0014-opt-in-english-polish.md)).
+
+| Model | Accepted | Word distance | Violations | Latency (p50) |
+| --- | --- | --- | --- | --- |
+| gpt-oss-120b (Groq, used) | 23 | 35 -> 11 / 17 | 0 | ~1 s |
+| gpt-oss-20b (Groq) | 18 | 35 -> 21 | 0 | ~0.85 s |
+| qwen2.5-3b (this PC) | 20-21 | 35 -> 34-35 | 1, then 0 with the hedge guard | ~1.2 s |
+
+Two runs; Groq's replies vary between runs.
 
 ### End to end
 

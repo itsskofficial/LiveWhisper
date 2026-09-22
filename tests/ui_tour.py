@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import ctypes
 import json
+import os
 import sys
 import time
 from ctypes import wintypes
@@ -32,7 +33,22 @@ PAGES = ["home", "history", "dictionary", "languages", "ai", "settings"]
 
 def grab(path: Path) -> None:
     u = ctypes.windll.user32
-    hwnd = u.FindWindowW(None, TITLE)
+    # This process's own window: FindWindowW by title found the installed
+    # app's hidden 129x84 window instead whenever it was running.
+    found = []
+
+    @ctypes.WINFUNCTYPE(wintypes.BOOL, wintypes.HWND, wintypes.LPARAM)
+    def each(h, _):
+        pid = wintypes.DWORD()
+        u.GetWindowThreadProcessId(h, ctypes.byref(pid))
+        buf = ctypes.create_unicode_buffer(256)
+        u.GetWindowTextW(h, buf, 256)
+        if pid.value == os.getpid() and buf.value == TITLE and u.IsWindowVisible(h):
+            found.append(h)
+        return True
+
+    u.EnumWindows(each, 0)
+    hwnd = found[0] if found else u.FindWindowW(None, TITLE)
     u.SetForegroundWindow(hwnd)
     time.sleep(0.5)
     r = wintypes.RECT()

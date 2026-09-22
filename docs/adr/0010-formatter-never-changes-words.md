@@ -1,6 +1,7 @@
 # 0010. The formatting model may add punctuation, never change words
 
-- **Status:** Accepted
+- **Status:** Accepted; polish, an opt-in step after formatting, is
+  [ADR 0014](0014-opt-in-english-polish.md)
 - **Date:** 0.2; recorded 2026-09-22
 
 ## Context

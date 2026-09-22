@@ -103,6 +103,14 @@ output:
   transcript_dir: transcripts
   remove_fillers: true        # drop "um", "uh", "erm". Repeated words are never
                               # touched: "dheere dheere" is Hindi grammar
+  # Polish (beta): rewrite English dictation the way you would have typed it -
+  # false starts, repeated words and filler removed, grammar fixed. Off by
+  # default, because it changes words. Needs Online (Groq's gpt-oss-120b); a
+  # rewrite that drops or adds a name, number, link, negation or anything you
+  # did not say is thrown away and the formatted text pasted instead
+  # (docs/adr/0014). Never for Hinglish or other languages, code editors or
+  # Ctrl+Alt+W text.
+  polish: false
 
   # Finishing the text before it is pasted: spoken punctuation ("comma", "new
   # paragraph", "bullet point"), corrections you make out loud ("Monday, I mean

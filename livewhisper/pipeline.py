@@ -20,6 +20,7 @@ from dataclasses import dataclass
 from . import context as ctx_mod
 from . import format as fmt_mod
 from . import llm_format, vocab
+from . import polish as polish_mod
 from .cleanup import remove_fillers
 from .profile import ProfileStore
 from .script import conventions as conv_mod
@@ -41,7 +42,7 @@ class Delivery:
     notes: list
     language: str | None = None   # which lexicon was used
     style: str = "prose"          # formatting the target app asked for
-    formatted_by: str = "rules"   # model | rules | shortcut | none
+    formatted_by: str = "rules"   # model | rules | shortcut | polish | none
     respelled: bool = False       # Latin text from a Hinglish model, respelled
 
 
@@ -53,6 +54,8 @@ class Pipeline:
         self._formatter = None
         self._formatter_key = None
         self._formatter_seen = (0.0, False)
+        self._polisher = None
+        self._polisher_key = None
 
     # ----------------------------------------------------------- formatter
 
@@ -78,6 +81,21 @@ class Pipeline:
                 ok = False
             self._formatter_seen = (time.monotonic(), ok)
         return self._formatter if ok else None
+
+    def polisher(self):
+        """The opt-in English polisher (livewhisper.polish), or None when it is
+        off or cannot run (it needs Online)."""
+        out_cfg = self.cfg.get("output") or {}
+        if not out_cfg.get("polish", False):
+            return None
+        fmt_cfg = out_cfg.get("format") or {}
+        vocabulary = (self.cfg.get("transcription") or {}).get("vocabulary") or ""
+        key = (fmt_cfg.get("engine"), fmt_cfg.get("polish_groq_model"),
+               fmt_cfg.get("polish_timeout_seconds"), vocabulary)
+        if key != self._polisher_key:
+            self._polisher_key = key
+            self._polisher = polish_mod.build(fmt_cfg, vocabulary)
+        return self._polisher
 
     def warm_formatter(self) -> None:
         """Load the formatting model now, off the path anyone waits on."""
@@ -243,6 +261,21 @@ class Pipeline:
                     log.info("formatted by rules: %s", model.last_reason)
             else:
                 text, formatted_by = fmt_mod.finish(text, style), "rules"
+        # Polish rewrites. It runs on formatted text, so its check compares
+        # like with like, and before habits, which keep the last word.
+        polisher = self.polisher() if formatted_by in ("model", "rules") else None
+        if polisher is not None:
+            why_not = polish_mod.applies(text, language=heard_language, romanized=romanized,
+                                         respelled=respelled, style=style.name,
+                                         composed=composed)
+            if why_not is None:
+                text = polisher.polish(text)
+                if polisher.last_reason == "ok":
+                    formatted_by = "polish"
+                else:
+                    log.info("not polished: %s", polisher.last_reason)
+            else:
+                log.debug("not polished: %s", why_not)
         text = profile.habits.apply(text)
 
         d = Delivery(text=text, raw=transcript, app=app, script=script,

@@ -14,6 +14,8 @@ deleting it.
 
 | Decision | Who | Why |
 | --- | --- | --- |
+| Build polish as an opt-in setting with guardrails, English only | owner | Typeless-style cleanup without risking a pasted answer or a lost "not" ([ADR 0014](adr/0014-opt-in-english-polish.md)) |
+| Polish runs online only, on gpt-oss-120b | measured | Held-out: 35 -> 11-17 word distance, 0 violations; the local 3B left text no better and dropped a "maybe" |
 | Publish 1.0.0 as a GitHub release with the installer attached; nothing goes to PyPI | owner | Users get a Setup.exe; the Python package is only for source checkouts |
 | Keep documentation in `docs/` with ADRs; retire `install.ps1`, `uninstall.ps1`, `start.bat` | owner | The Setup.exe replaced the command-line install ([ADR 0005](adr/0005-desktop-installer-and-in-app-downloads.md)) |
 | Online is one switch covering speech, formatting and writing | owner | "Whatever we can do offline, do online with one setting" ([ADR 0012](adr/0012-online-as-one-switch.md)) |
@@ -21,7 +23,7 @@ deleting it.
 | Online falls back to this PC when Groq fails, and says so in the pill | owner | A dictation must still happen offline |
 | New installs start with Online off | owner | Private by default, and works without a key ([ADR 0004](adr/0004-local-first.md)) |
 | Formatting online on gpt-oss-20b, writing on gpt-oss-120b | measured | 71% exact vs 67% local; Groq's Llama models were retired |
-| Do not add a Typeless-style "polish" rewrite in 1.0 | owner | The formatter stays word-preserving ([ADR 0010](adr/0010-formatter-never-changes-words.md)); revisit as an opt-in |
+| ~~Do not add a Typeless-style "polish" rewrite in 1.0~~ (superseded above: opt-in polish) | owner | The formatter stays word-preserving ([ADR 0010](adr/0010-formatter-never-changes-words.md)); revisit as an opt-in |
 | Names from the screen go only to English and Hinglish decoding | incident | Notepad's status bar wrecked a Bengali transcript ([ADR 0013](adr/0013-never-paste-what-was-not-said.md)) |
 | Corrections to the Hinglish model's Latin text are learned when only the spelling changed | incident | They were silently ignored ([ADR 0011](adr/0011-learn-at-the-next-dictation.md)) |
 | Drop looping or stock text from silence instead of pasting it | incident | A muted mic pasted "aapke liye aapke liye..." |
@@ -69,6 +71,7 @@ Decided to defer, with what would change it:
 
 - **Code signing.** Windows warns on first run until the installer is signed; worth it once people outside early users install it.
 - **Faster first run.** Download turbo first so dictation works within minutes while large-v3 follows; the current first run is about 25 minutes at 4 MB/s.
-- **Opt-in polish mode.** A Typeless-style rewrite, if users ask for it.
+- **Polish offline and beyond English.** Needs a local model that improves the
+  held-out set with 0 violations, and an evaluation set per language.
 - **Untested hardware.** No-GPU PCs, AMD/Intel graphics and Windows 10 have not been run end to end.
 - **Weak languages.** Malayalam, Punjabi, Gujarati, Marathi and Sinhala wait on better openly licensed models; re-measure when one appears.
