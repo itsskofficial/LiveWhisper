@@ -17,4 +17,4 @@ _cuda.register()
 # Real environment variables win over .env, so an exported key still overrides.
 load_dotenv(paths.ENV)
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"

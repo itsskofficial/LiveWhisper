@@ -1,7 +1,7 @@
 ; LiveWhisper installer (Inno Setup 6).
 ;
 ;   packaging\build.py builds the app folder with PyInstaller, then runs:
-;   ISCC.exe /DAppVersion=1.0.0 packaging\installer.iss
+;   ISCC.exe /DAppVersion=1.1.0 packaging\installer.iss
 ;
 ; Per-user install: no administrator prompt, installs to
 ; %LOCALAPPDATA%\Programs\LiveWhisper. Models and settings are not in here -
@@ -9,7 +9,7 @@
 ; keeps settings in %APPDATA%\LiveWhisper. Uninstall offers to remove both.
 
 #ifndef AppVersion
-  #define AppVersion "1.0.0"
+  #define AppVersion "1.1.0"
 #endif
 #define AppName "LiveWhisper"
 #define AppExe "LiveWhisper.exe"

@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.1.0 - 2026-09-23
 
 ### Fixed
 
@@ -24,17 +24,17 @@
   Punjabi 60.9% -> 40.3%, Malayalam 61.3% -> 50.6%, and each 1.5 GB instead of
   3-6 GB. On the README's 20-clip measure, Marathi words are now spelled the
   way people write them 64.7% of the time against 49.3%, Punjabi 72.5% against
-  53.0%, Malayalam 69.8% against 60.3%. Kannada, Gujarati, Telugu and Urdu were no better and keep their
-  models ([ADR 0016](docs/adr/0016-indicwhisper-specialists.md)).
-
+  53.0%, Malayalam 69.8% against 60.3%. Kannada, Gujarati, Telugu and Urdu
+  were no better and keep their models
+  ([ADR 0016](docs/adr/0016-indicwhisper-specialists.md)).
 - **Polish my English (Beta)**, off by default, on the AI page. With Online
   on, English dictation is rewritten the way you would have typed it: false
   starts, repeated words and filler removed, grammar fixed. A rewrite that
   changes a name, number, link, "not" or "maybe", answers a question or adds
   anything you did not say is thrown away and the formatted text pasted
-  instead. On 28 held-out dictations it brought the text from 35 to 11-17
-  word edits away from a careful typist's version (two runs), with nothing unsafe pasted
-  (`tests/bench_polish.py`). Not used for Hinglish, other languages, code
+  instead. On 28 held-out dictations it brought the text from 35 to 11-17 word
+  edits away from a careful typist's version (two runs), with nothing unsafe
+  pasted (`tests/bench_polish.py`). Not used for Hinglish, other languages, code
   editors or Ctrl+Alt+W.
 
 ### Project
