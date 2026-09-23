@@ -10,6 +10,7 @@ with the system Python before the virtualenv exists.
 from __future__ import annotations
 
 import ctypes
+import functools
 import json
 import os
 import shutil
@@ -54,14 +55,23 @@ def detect() -> Machine:
     )
 
 
+# nvidia-smi is a console program. Started from the windowed app without this
+# flag, each call opened a console window, which Windows Terminal left on the
+# desktop as an empty see-through frame: dozens of them, stacked over the app
+# window and catching its clicks, and the AI page took 5 s to open.
+_NO_WINDOW = 0x08000000 if sys.platform == "win32" else 0
+
+
+@functools.cache
 def _nvidia_smi(query: str) -> str | None:
+    """The GPU does not change while the app runs; ask once per query."""
     exe = shutil.which("nvidia-smi")
     if not exe:
         return None
     try:
         out = subprocess.run(
             [exe, f"--query-gpu={query}", "--format=csv,noheader,nounits"],
-            capture_output=True, text=True, timeout=10,
+            capture_output=True, text=True, timeout=10, creationflags=_NO_WINDOW,
         )
     except (OSError, subprocess.SubprocessError):
         return None

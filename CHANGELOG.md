@@ -4,6 +4,11 @@
 
 ### Fixed
 
+- **No more empty terminal windows piling up.** Each time the app checked the
+  graphics card it opened a console window, and Windows Terminal left every
+  one on the desktop as an empty see-through frame - 421 of them after a day,
+  stacked over the LiveWhisper window and catching its clicks. The AI page
+  also took about 5 s to open because of them; it now opens in under 1 s.
 - **Spelling corrections are learned inside a longer message.** A correction
   was aligned word by word from the start of the box, so with an earlier
   dictation still in it, a fix to the second line was never seen - correcting
