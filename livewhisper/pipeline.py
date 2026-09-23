@@ -323,6 +323,34 @@ class Pipeline:
                    for w in mine_words)
         return kept / len(mine_words) >= Pipeline.EDIT_OVERLAP
 
+    @staticmethod
+    def _our_stretch(mine: str, current: str) -> str:
+        """The part of `current` that is `mine` as the user left it.
+
+        A second dictation into the same message went unlearned: with the first
+        line still in the box, "Mujhe pata hai" was aligned against "tuze kal
+        milta", the correction "muze" four words later was never seen, and the
+        "jh" -> "z" habit it would have completed never formed. Every window
+        of about our length is scored the way _is_edit_of_mine scores a field -
+        a word survives verbatim or as a plausible respelling - and the best
+        one wins, the latest on a tie since the paste was the latest thing.
+        """
+        from .script.languages import WORD
+        spans = list(WORD.finditer(current))
+        ours = [w.lower() for w in conv_mod.tokenize(mine)]
+        if not ours or len(spans) <= len(ours):
+            return current
+        best, best_score = None, -1.0
+        for size in {max(1, len(ours) - 1), len(ours), len(ours) + 1}:
+            for i in range(0, len(spans) - size + 1):
+                window = [m.group().lower() for m in spans[i:i + size]]
+                score = sum(w in window
+                            or any(conv_mod.plausible_correction(w, t) for t in window)
+                            for w in ours) - 0.01 * abs(size - len(ours))
+                if score >= best_score:
+                    best, best_score = (spans[i].start(), spans[i + size - 1].end()), score
+        return current[best[0]:best[1]] if best else current
+
     def learn_from_screen(self, screen: ctx_mod.ScreenContext | None) -> list:
         """Compare what we pasted with what is in the field now.
 
@@ -338,6 +366,11 @@ class Pipeline:
             return []
         if not self._is_edit_of_mine(mine, current):
             return []
+
+        # The field can hold more than our last paste: earlier dictations, or
+        # text typed around it. Corrections are aligned word by word from the
+        # start, so learn from the stretch that is our paste, not the whole box.
+        current = self._our_stretch(mine, current)
 
         notes: list = []
         # Orthographic habits: learn from whatever the user actually left there.

@@ -4,6 +4,12 @@
 
 ### Fixed
 
+- **Spelling corrections are learned inside a longer message.** A correction
+  was aligned word by word from the start of the box, so with an earlier
+  dictation still in it, a fix to the second line was never seen - correcting
+  "tujhe" to "tuze" and then "mujhe" to "muze" in one message did not form the
+  "jh" -> "z" habit. It now learns from the stretch of the box that was the
+  last dictation.
 - **A dropped connection no longer fails a model download.** Installing the
   1.5 GB Marathi model broke 7 MB in and gave up, though each file is written
   to a part file that can be resumed. It now carries on from where it stopped,

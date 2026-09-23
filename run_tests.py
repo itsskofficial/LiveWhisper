@@ -49,6 +49,7 @@ FAST = [
     ("language from the words", ["tests/test_langcheck.py"]),
     ("learning convergence", ["tests/test_learning.py"]),
     ("learning from Hinglish", ["tests/test_learning_hinglish.py"]),
+    ("learning inside a longer message", ["tests/test_learning_in_context.py"]),
 ]
 AUDIO = [
     ("speech end to end", ["tests/test_audio_e2e.py", "build/audio"]),
