@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Fixed
+
+- **A dropped connection no longer fails a model download.** Installing the
+  1.5 GB Marathi model broke 7 MB in and gave up, though each file is written
+  to a part file that can be resumed. It now carries on from where it stopped,
+  and an attempt that moved the file forward does not count against the
+  retries - the same download then completed over a connection that broke
+  five times.
+
 ### Added
 
 - **Marathi is heard as Marathi.** Whisper labelled Marathi speech Hindi and

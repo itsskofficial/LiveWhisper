@@ -74,10 +74,46 @@ class Component:
 
 # ---------------------------------------------------------------- fetching
 
+# A 1.5 GB model over a home connection drops often - this one broke every
+# 100-600 MB. One broken read used to fail the whole install 7 MB in. What
+# counts is progress, so the allowance is tries since the last byte arrived,
+# not tries in total.
+FETCH_ATTEMPTS = 6
+
+
 def _fetch(url: str, dest: Path, report, cancelled, expected: int = 0) -> None:
-    """Stream url to dest, resuming a partial .part file."""
+    """Stream url to dest, resuming a partial .part file.
+
+    A dropped connection is retried, carrying on from what was written.
+    """
     part = dest.with_name(dest.name + ".part")
     dest.parent.mkdir(parents=True, exist_ok=True)
+
+    def have() -> int:
+        return part.stat().st_size if part.exists() else 0
+
+    stuck = 0
+    while True:
+        before = have()
+        try:
+            _fetch_once(url, part, report, cancelled)
+            break
+        except (Cancelled, requests.HTTPError):
+            raise
+        except (requests.RequestException, OSError) as e:
+            stuck = 0 if have() > before else stuck + 1
+            if stuck >= FETCH_ATTEMPTS:
+                raise
+            log.info("download of %s interrupted (%s); resuming at %d bytes",
+                     dest.name, e, have())
+            time.sleep(min(2 ** stuck, 20))
+    if expected and part.stat().st_size != expected:
+        raise IOError(f"{dest.name}: got {part.stat().st_size} bytes, expected {expected}")
+    part.replace(dest)
+
+
+def _fetch_once(url: str, part: Path, report, cancelled) -> None:
+    """One attempt, starting where `part` left off. Raises if the read breaks."""
     have = part.stat().st_size if part.exists() else 0
     headers = dict(UA)
     if have:
@@ -85,21 +121,16 @@ def _fetch(url: str, dest: Path, report, cancelled, expected: int = 0) -> None:
     with requests.get(url, headers=headers, stream=True, timeout=30,
                       allow_redirects=True) as r:
         if r.status_code == 416:            # already complete
-            part.replace(dest)
             return
         r.raise_for_status()
         if have and r.status_code != 206:   # server ignored the range
             have = 0
-        mode = "ab" if have else "wb"
-        with open(part, mode) as f:
+        with open(part, "ab" if have else "wb") as f:
             for chunk in r.iter_content(CHUNK):
                 if cancelled():
                     raise Cancelled
                 f.write(chunk)
                 report(len(chunk))
-    if expected and part.stat().st_size != expected:
-        raise IOError(f"{dest.name}: got {part.stat().st_size} bytes, expected {expected}")
-    part.replace(dest)
 
 
 def _hf_files(repo: str, patterns=None) -> list:

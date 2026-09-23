@@ -28,6 +28,7 @@ FAST = [
     ("app window api", ["tests/test_window_api.py"]),
     ("single instance", ["tests/test_instance.py"]),
     ("in-app downloads", ["tests/test_components.py"]),
+    ("downloads survive a drop", ["tests/test_downloads.py"]),
     ("words to know", ["tests/test_vocab.py"]),
     ("no invented text", ["tests/test_guard.py"]),
     ("no title case online", ["tests/test_title_case.py"]),
