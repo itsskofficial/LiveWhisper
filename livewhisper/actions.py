@@ -64,9 +64,12 @@ Rules:
   draft"), no quotes around it, no explanation, no subject line.
 - Match the register of the conversation on screen: a chat gets a chat reply,
   an email gets an email reply.
-- Keep it as short as the situation allows.
-- Never use placeholders like [Your Name] or [Date]. If you do not know the
-  user's name, leave the sign-off out.
+- An email reply is a whole email: a greeting with the sender's first name on
+  its own line ("Hi Ananya,"), the message, then a sign-off on its own lines
+  ("Thanks," and below it the user's name). A chat reply has neither.
+- Keep the message itself as short as the situation allows.
+- Never use placeholders like [Your Name] or [Date].
+{name}
 - If the instruction is in Hindi or Hinglish, write the reply in Hinglish,
   in Latin letters.
 {style}"""
@@ -92,10 +95,101 @@ Rules:
 {style}"""
 
 
+def windows_first_name() -> str:
+    """The first word of the Windows account's display name, or ''."""
+    try:
+        import ctypes
+        size = ctypes.c_ulong(256)
+        buf = ctypes.create_unicode_buffer(size.value)
+        # 3 = NameDisplay ("Sarthak Karandikar"); fails on some local accounts.
+        if ctypes.windll.secur32.GetUserNameExW(3, buf, ctypes.byref(size)) and buf.value.strip():
+            return buf.value.split()[0]
+    except (AttributeError, OSError):
+        pass
+    import os
+    return first_name_from_login(os.environ.get("USERNAME") or "")
+
+
+def first_name_from_login(login: str) -> str:
+    """A Microsoft-account login has no display name, but its user name is
+    usually the person's name ("Sarthak Karandikar"); "admin" or "user1" is not."""
+    words = login.split()
+    if words and words[0].isalpha() and words[0].lower() not in (
+            "admin", "administrator", "user", "owner", "pc", "runneradmin"):
+        return words[0].capitalize()
+    return ""
+
+
+_ADDRESS = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")
+_GREETING = re.compile(r"^(hi|hello|hey|dear|good (morning|afternoon|evening))\b", re.IGNORECASE)
+_MAIL_APPS = ("outlook", "thunderbird", "mail", "gmail", "inbox")
+
+
+def looks_like_email(screen_text: str, app: str = "", title: str = "") -> bool:
+    """Is the thing being replied to an email, rather than a chat?"""
+    where = f"{app} {title}".lower()
+    return (any(m in where for m in _MAIL_APPS) or bool(_ADDRESS.search(screen_text or ""))
+            or bool(re.search(r"^(from|subject):", screen_text or "", re.IGNORECASE | re.MULTILINE)))
+
+
+def sender_first_name(screen_text: str) -> str:
+    """Who wrote the email on screen: the From line, a 'Name <address>' line,
+    or the name under their sign-off."""
+    text = screen_text or ""
+    m = re.search(r"^from:\s*([A-Z][\w'-]+)", text, re.IGNORECASE | re.MULTILINE)
+    if m:
+        return m.group(1).capitalize()
+    m = re.search(r"^([A-Z][\w'-]+)(?:\s+[A-Z][\w'-]+)*\s*<[^>@]+@", text, re.MULTILINE)
+    if m:
+        return m.group(1)
+    m = re.search(r"(?:thanks|regards|cheers|best)\s*,?\s*\n?\s*([A-Z][\w'-]+)\s*$", text.strip(),
+                  re.IGNORECASE)
+    return m.group(1).capitalize() if m else ""
+
+
+def shape_email(reply: str, sender: str, signer: str) -> str:
+    """An email reply gets a greeting and the user's sign-off, whatever the model did.
+
+    The built-in writing model ignored the prompt's email rules on every email
+    case of tests/bench_compose.py - "Sure, will be there." with no greeting,
+    and once "Thanks, Priya", signing as the person being replied to."""
+    lines = [ln.rstrip() for ln in reply.strip().splitlines()]
+    while lines and not lines[-1].strip():
+        lines.pop()
+    if not lines:
+        return reply
+    if not _GREETING.match(lines[0].strip()):
+        lines = [f"Hi {sender}," if sender else "Hi,", ""] + lines
+    last = lines[-1].strip()
+    signed_by_user = bool(signer) and signer.lower() in last.lower()
+    if not signed_by_user:
+        # A sign-off the model already wrote - "Thanks!", or one signed with the
+        # sender's name - is replaced rather than stacked under a second one,
+        # whether it has a line of its own or ends the last sentence.
+        lines[-1] = re.sub(r"(?<=[.!?])\s+(thanks|thank you|cheers|regards)[!.,]?(\s*,?\s*[A-Z][\w'-]*)?[.!]?$",
+                           "", lines[-1], flags=re.IGNORECASE)
+        last = lines[-1].strip()
+        if re.fullmatch(r"(thanks|thank you|regards|best|cheers)[!.,]?(\s*,?\s*\w+)?[.!]?", last,
+                        re.IGNORECASE):
+            lines.pop()
+            while lines and not lines[-1].strip():
+                lines.pop()
+        lines += ["", "Thanks,"] + ([signer] if signer else [])
+    return "\n".join(lines)
+
+
 class Actions:
     def __init__(self, cfg: dict):
         self.cfg = cfg or {}
         self._provider = None
+
+    def signer(self) -> str:
+        """Who emails from Ctrl+Alt+W are signed as.
+
+        Replies stopped at one line - no "Hi Ananya," and no sign-off - because
+        the prompt said to leave the sign-off out without the user's name, and
+        nothing gave it the name."""
+        return (self.cfg.get("sign_as") or "").strip() or windows_first_name()
 
     def provider(self):
         if self._provider is None:
@@ -134,8 +228,14 @@ class Actions:
             parts.append("\nWrite the text the instruction asks for, using the "
                          "screen content above as the thing being responded to.")
 
-        return self.provider().chat(
-            COMPOSE_SYSTEM.format(style=style), "\n".join(parts), temperature=0.4)
+        name = self.signer()
+        signer = (f"- The user's name is {name}; sign emails with it." if name else
+                  '- You do not know the user\'s name: end an email with "Thanks," alone.')
+        out = self.provider().chat(
+            COMPOSE_SYSTEM.format(style=style, name=signer), "\n".join(parts), temperature=0.4)
+        if screen and looks_like_email(screen_text, screen.app, screen.title):
+            out = shape_email(_unwrap(out, instruction), sender_first_name(screen_text), name)
+        return out
 
     # ---------------------------------------------------------------- fix
 

@@ -19,6 +19,13 @@
 
 ### Added
 
+- **Replies to an email are written as an email.** Ctrl+Alt+W used to answer
+  an email with one line ("Sure, I'll be there.") - no greeting, no sign-off.
+  A reply to an email now opens with the sender's first name and ends with
+  yours, taken from the new `actions.sign_as` setting or your Windows account.
+  The app's own writing model ignored the instruction, so it is done after the
+  model: on tests/bench_compose.py the built-in model went from 5 to 8 of 8
+  usable replies, Groq from 7 to 8. Chat replies are unchanged.
 - **Marathi is heard as Marathi.** Whisper labelled Marathi speech Hindi and
   wrote it as Hindi; on a new 40-sentence code-switched set it got the
   language right on 22% of held-out clips. It now reconsiders both from the

@@ -14,6 +14,8 @@ deleting it.
 
 | Decision | Who | Why |
 | --- | --- | --- |
+| A reply to an email gets a greeting and the user's sign-off, enforced after the model | owner + measured | The built-in model ignored the prompt on every email case; 5/8 -> 8/8 usable (tests/bench_compose.py, rules written on those cases) |
+| No polish for romanized text yet; the next step would be delete-only polish | owner | A rewrite would replace the user's own spellings; removing words is checkable in any language |
 | Correct Whisper when it hears Marathi as Hindi, by detection score and by the words written | incident + measured | A user's "tu AI system design kuthun shikla?" was heard as Hindi on every voice; held-out Marathi recognised 22% -> 59% ([ADR 0015](adr/0015-hear-marathi-as-marathi.md)) |
 | Take IndicWhisper for Marathi, Punjabi and Malayalam; keep the current model for Kannada, Gujarati, Telugu and Urdu | measured | Marathi 47.2% -> 26.5% word error, Punjabi 60.9% -> 40.3%, Malayalam 61.3% -> 50.6%; the others no better or worse ([ADR 0016](adr/0016-indicwhisper-specialists.md)) |
 | Do not put a code-switched example in the decoding prompt | measured | English words kept 43.3% -> 44.0%, and 52% -> 50% on IndicWhisper: noise, as in the earlier Hindi experiment |

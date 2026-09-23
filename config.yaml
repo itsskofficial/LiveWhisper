@@ -229,6 +229,8 @@ context:
 # Text generation. Local by default so nothing leaves the machine.
 actions:
   command_seconds: 8          # how long Ctrl+Alt+W listens for an instruction
+  sign_as:                    # the name emails from Ctrl+Alt+W are signed with;
+                              # blank = the first name of your Windows account
   models:
     provider: auto            # auto = the app's own writing model, then Ollama,
                               # then a cloud key | builtin | ollama | groq |

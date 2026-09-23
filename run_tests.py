@@ -36,6 +36,7 @@ FAST = [
     ("filler removal", ["tests/test_cleanup.py"]),
     ("text formatting", ["tests/test_format.py"]),
     ("english polish guardrails", ["tests/test_polish.py"]),
+    ("emails signed by name", ["tests/test_compose_prompt.py"]),
     ("model formatting, free tier", ["tests/test_llm_format.py"]),
     ("hotkey flow", ["tests/test_app_flow.py"]),
     ("no native script left", ["tests/test_letters.py"]),
