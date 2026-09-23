@@ -9,6 +9,13 @@
   one on the desktop as an empty see-through frame - 421 of them after a day,
   stacked over the LiveWhisper window and catching its clicks. The AI page
   also took about 5 s to open because of them; it now opens in under 1 s.
+- **Fix grammar fixes lowercase messages.** Ctrl+Alt+F on "i has went
+  through the screens and they looks good" said the text already looked
+  correct: told to keep lowercase and informality, the built-in model kept the
+  mistakes too. On tests/bench_fix.py's held-out messages it now gets 5 of 8
+  right (was 3), and Groq 8 of 8 (was 5) - the old prompt also had Groq turn a
+  learned "muze" back into "mujhe" and add full stops to chat messages. The
+  built-in model still rewrites some Hinglish; Online does not.
 - **Spelling corrections are learned inside a longer message.** A correction
   was aligned word by word from the start of the box, so with an earlier
   dictation still in it, a fix to the second line was never seen - correcting

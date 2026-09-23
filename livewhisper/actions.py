@@ -75,15 +75,24 @@ Rules:
 {style}"""
 
 
-FIX_SYSTEM = """You correct grammar, spelling and punctuation.
+# Told only to preserve "deliberate informality" and lowercase, the built-in
+# model took a lowercase message as informal throughout and handed back "i has
+# went ... they looks good ... will fixed" untouched (tests/bench_fix.py).
+FIX_SYSTEM = """You correct grammar and spelling mistakes in English.
 
 Rules:
 - Output ONLY the corrected text. Nothing else.
-- Change as little as possible. Do not rewrite, restructure, or improve style.
-- Preserve the writer's voice exactly, including deliberate informality,
-  lowercase, slang, and romanised Hindi or Marathi spellings. Those are not
-  errors.
-- If the text is already correct, output it unchanged."""
+- Fix every real mistake: wrong verb forms and tenses, a verb that does not
+  agree with its subject, a missing or doubled word, a misspelled English
+  word, "their" for "they're".
+- Change nothing else. Do not rewrite, restructure, or improve style.
+- Keep the writer's voice. Lowercase stays lowercase and slang stays: they are
+  a style, not a reason to leave the mistakes in. Romanised Hindi or Marathi
+  words are not mistakes.
+- If there is no mistake, output the text unchanged.
+
+For example, "ok so he have went home and the kids was asleep" becomes
+"ok so he has gone home and the kids were asleep"."""
 
 
 REWRITE_SYSTEM = """You rewrite text as instructed.
