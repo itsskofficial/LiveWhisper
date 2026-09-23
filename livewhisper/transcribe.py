@@ -233,7 +233,29 @@ class LocalBackend:
         if not pool:
             return None
         best = max(pool, key=lambda x: x[1])[0]
+        best = self._second_guess_hindi(best, pool)
         return self._second_guess_english(best, pool)
+
+    # Whisper rarely lets Marathi win over Hindi, but gives it far more weight
+    # on Marathi speech than on Hindi. log10(P(mr)/P(hi)) measured with
+    # large-v3 (scratch probe; tests/eval_codeswitch.py end to end): Hindi
+    # clips at most -2.05 (FLEURS dev, Hinglish set), Marathi median -1.1
+    # code-switched and +0.6 read. At -1.5, held-out: Marathi recovered 19 of
+    # 32 (was about 1 in 16), Hindi flipped 0 of 40. Only when the speaker
+    # uses both.
+    MARATHI_MIN_LOG10 = -1.5
+
+    def _second_guess_hindi(self, best: str, pool: list) -> str:
+        if best != "hi":
+            return best
+        probs = dict(pool)
+        if "mr" not in probs:
+            return best
+        ratio = (probs["mr"] + 1e-12) / (probs["hi"] + 1e-12)
+        if np.log10(ratio) > self.MARATHI_MIN_LOG10:
+            log.info("hindi, but marathi at %.3f of it; decoding as marathi", ratio)
+            return "mr"
+        return best
 
     # Measured on FLEURS: Marathi recordings that detection called English had
     # English at 0.54-0.89 once renormalised over {mr, en}; real English speech
@@ -448,8 +470,26 @@ class LocalBackend:
         self.load()
         primed = self._trusted_prime(audio)
         self._generation += 1               # late priming for this one is ignored
+        self.reconsidered = None
+        forced = self.cfg.get("language")
+        text = self._decode(audio, hotwords, native,
+                            forced or primed or self._pick_language(audio))
+        if not forced:
+            # Whisper chose from the sound; the words it wrote may say it
+            # chose a same-script sibling wrongly (Marathi heard as Hindi).
+            from .script import langcheck
+            rival = langcheck.reconsider(text, self.last_language, self.languages)
+            if rival:
+                log.info("the words are %s, not %s; decoding again", rival, self.last_language)
+                self.reconsidered = (self.last_language, rival)
+                text = self._decode(audio, hotwords, native, rival)
+        return text
+
+    reconsidered: tuple | None = None
+
+    def _decode(self, audio: np.ndarray, hotwords: str, native: bool, language: str | None) -> str:
         common = dict(
-            language=self.cfg.get("language") or primed or self._pick_language(audio),
+            language=language,
             beam_size=int(self.cfg.get("beam_size", 5)),
             initial_prompt=None,
             hotwords=hotwords or None,
@@ -586,6 +626,18 @@ class GroqBackend:
                 text = self._post(audio, key, "en")[0]
             except TranscriptionError:
                 pass
+        if not forced:
+            # As LocalBackend.transcribe: Marathi heard as Hindi is written as
+            # Hindi, but its words give it away. Asked again with the right
+            # language; AutoBackend then moves it here if a model here is better.
+            from .script import langcheck
+            rival = langcheck.reconsider(text, lang, self.languages)
+            if rival:
+                log.info("groq heard %s but the words are %s; asking again", lang, rival)
+                try:
+                    text, lang = self._post(audio, key, rival)[0], rival
+                except TranscriptionError:
+                    pass
         if forced or not self.languages or lang in self.languages:
             return text
         log.info("groq heard %s, outside %s; retrying within them",

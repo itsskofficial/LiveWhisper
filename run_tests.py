@@ -45,6 +45,7 @@ FAST = [
     ("install memory guards", ["tests/test_resources.py"]),
     ("compound splitting", ["tests/test_compounds.py"]),
     ("language routing", ["tests/test_routing.py"]),
+    ("language from the words", ["tests/test_langcheck.py"]),
     ("learning convergence", ["tests/test_learning.py"]),
     ("learning from Hinglish", ["tests/test_learning_hinglish.py"]),
 ]
