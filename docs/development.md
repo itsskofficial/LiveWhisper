@@ -101,8 +101,10 @@ comes from `livewhisper/__init__.py`.
 
 The converted per-language models are hosted as `itsskofficial/livewhisper-*` on
 Hugging Face (see [ADR 0007](adr/0007-no-pytorch-at-runtime.md)); publishing a
-new one means converting it with `scripts/convert_ct2.py` and uploading the
-folder with a model card crediting the original.
+new one means converting it with `scripts/convert_ct2.py` and uploading it with
+`scripts/publish_specialist.py`, which needs a model card crediting the
+original beside the folder (`<name>.card.md`) and reads `HF_TOKEN` from the
+environment - pass it inline for that one command and keep it out of files.
 
 ## CI
 

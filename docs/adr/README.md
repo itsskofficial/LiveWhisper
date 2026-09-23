@@ -20,3 +20,5 @@ New ones start from [0000-template.md](0000-template.md).
 | 0012 | [Online is one switch, and languages with their own model stay local](0012-online-as-one-switch.md) | Accepted |
 | 0013 | [Never paste what was not said, or where it was not meant](0013-never-paste-what-was-not-said.md) | Accepted |
 | 0014 | [Polish is opt-in, English-only, online-only, and checked before pasting](0014-opt-in-english-polish.md) | Accepted |
+| 0015 | [Correct Whisper when it hears Marathi as Hindi](0015-hear-marathi-as-marathi.md) | Accepted |
+| 0016 | [IndicWhisper for Marathi, Punjabi and Malayalam - and not the rest](0016-indicwhisper-specialists.md) | Accepted |

@@ -4,6 +4,18 @@
 
 ### Added
 
+- **Marathi is heard as Marathi.** Whisper labelled Marathi speech Hindi and
+  wrote it as Hindi; on a new 40-sentence code-switched set it got the
+  language right on 22% of held-out clips. It now reconsiders both from the
+  detection score and from the words written, and gets 59% right, with no
+  Hindi clip turned into Marathi. Only for people who dictate in both
+  ([ADR 0015](docs/adr/0015-hear-marathi-as-marathi.md)).
+- **Better Marathi, Punjabi and Malayalam models.** AI4Bharat's IndicWhisper,
+  measured on FLEURS through the app: Marathi 47.2% -> 26.5% of words wrong,
+  Punjabi 60.9% -> 40.3%, Malayalam 61.3% -> 50.6%, and each 1.5 GB instead of
+  3-6 GB. Kannada, Gujarati, Telugu and Urdu were no better and keep their
+  models ([ADR 0016](docs/adr/0016-indicwhisper-specialists.md)).
+
 - **Polish my English (Beta)**, off by default, on the AI page. With Online
   on, English dictation is rewritten the way you would have typed it: false
   starts, repeated words and filler removed, grammar fixed. A rewrite that

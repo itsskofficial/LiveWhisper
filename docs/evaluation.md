@@ -33,6 +33,7 @@ Contamination is checked: `steja/whisper-large-sindhi` scored an implausible
 | `tests/bench_romanization.py` | romanization of Dakshina sentences against the human romanization (`--offset` for a disjoint sample) |
 | `tests/eval_dakshina_speech.py` | spoken Dakshina sentences, both outputs (`--try lang=path` for a candidate model) |
 | `tests/eval_hinglish.py` | English retention and Hindi spelling on code-switched speech |
+| `tests/eval_codeswitch.py` | the same for any language, through the app's routing with the speaker's language list: which language was heard, English kept, own words in a spelling people use, native script exact (`--lang`, `--split`, `--try`, `--online`, `--no-fixes`) |
 | `tests/bench_format_llm.py` | formatting models against the 42 cases (`--models groq:<id>`, `--pace`) |
 | `tests/bench_polish.py` | polish: accepted rewrites, word distance to the reference, violations (must be 0) (`--cases`, `--models groq:<id>,builtin`, `--llm-dir`) |
 | `tests/e2e_app.py` | the app end to end: English, Hinglish, every language, learning; `--online` |
@@ -76,6 +77,22 @@ formatted exactly as expected, and words the model invented (must be 0).
 | rules only | 40% | 0 | < 1 ms |
 | qwen3 0.6B (local) | 67% | 0 | 0.2-0.6 s |
 | gpt-oss-20b (Groq, Online) | 71% | 0 | ~0.7 s |
+
+### Hearing the right language
+
+`python tests/eval_codeswitch.py --lang mr --split test` - 32 held-out
+code-switched Marathi clips, speaker set to Hindi, Marathi and English
+([ADR 0015](adr/0015-hear-marathi-as-marathi.md), [ADR 0016](adr/0016-indicwhisper-specialists.md)).
+
+| | 1.0 | + detection and word check | + IndicWhisper Marathi |
+| --- | --- | --- | --- |
+| heard as Marathi | 22% | 53% | **59%** |
+| Marathi words in a spelling people use | 30% | 46% | **55%** |
+| native script exact | 39% | 54% | **72%** |
+| English words kept in English | 72% | 62% | 62% |
+
+On reference text, the word check recovered 357 of 370 sentences from the
+wrong sibling language and flipped 0 correct ones.
 
 ### Polish
 

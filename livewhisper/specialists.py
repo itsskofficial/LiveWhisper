@@ -148,23 +148,31 @@ CATALOGUE: list = [
              "and fast on an ordinary CPU.",
         blurb='Hinglish that stays quick on a PC without a graphics card.'),
     Specialist(
-        "pa", "DrishtiSharma/whisper-large-v2-punjabi", "pa-large-v2", 6.17,
-        "apache-2.0",
-        measured={"FLEURS word error": "60.9% (large-v3 79.8%)",
-                  "delivered Punglish": "56.3% (large-v3 68.6%)"},
-        note="Better than large-v3, but still gets more than half of words wrong - "
-             "trained on Common Voice's small Punjabi set. Large-v2 sized, "
-             "allow ~6 GB of VRAM with the main model.",
-        blurb='Better for Punjabi than without it, though it still misses about half the words.'),
+        # Replaced DrishtiSharma/whisper-large-v2-punjabi (60.9% / 56.3%
+        # delivered) in 1.1: better, a quarter of the size, and a download
+        # rather than a conversion.
+        "pa", "itsskofficial/livewhisper-pa-indicwhisper", "pa-indicwhisper", 1.53,
+        "mit", kind="ct2",
+        measured={"FLEURS word error": "40.3% (large-v2 fine-tune 60.9%, large-v3 79.8%)",
+                  "FLEURS dev word error": "38.9%",
+                  "delivered Punglish": "36.8% (large-v2 fine-tune 56.3%)"},
+        note="AI4Bharat's IndicWhisper, Whisper-medium trained on the Vistaar "
+             "sets. Half the size of large-v3 and faster; 1.5 GB, already "
+             "converted. Writes English words in Gurmukhi.",
+        blurb='Trained for Punjabi: about 2 words in 5 wrong, against 4 in 5 without it.'),
     Specialist(
-        "ml", "rontroy/whisper-large-v3-malayalam-ct2", "ml-large-v3", 3.09,
-        "apache-2.0", kind="ct2",
-        measured={"FLEURS word error": "61.3% (large-v3 114.9%)",
-                  "delivered Manglish": "58.8% (large-v3 109.0%)"},
-        note="large-v3 writes Malayalam in Gurmukhi, Devanagari or Telugu script; "
-             "this model writes Malayalam every time. Still gets most words "
-             "wrong. Already converted, so install is a download only.",
-        blurb='Without it Malayalam often comes out in the wrong script. Still misses many words.'),
+        # Replaced rontroy/whisper-large-v3-malayalam-ct2 (61.3% / 58.8%
+        # delivered) in 1.1. Malayalam remains the weakest of the twelve.
+        "ml", "itsskofficial/livewhisper-ml-indicwhisper", "ml-indicwhisper", 1.53,
+        "mit", kind="ct2",
+        measured={"FLEURS word error": "50.6% (previous fine-tune 61.3%, large-v3 114.9%)",
+                  "FLEURS dev word error": "52.1%",
+                  "delivered Manglish": "49.3% (previous fine-tune 58.8%)"},
+        note="AI4Bharat's IndicWhisper, Whisper-medium trained on the Vistaar "
+             "sets. large-v3 writes Malayalam in the wrong script entirely; "
+             "this writes Malayalam every time, but still gets half the words "
+             "wrong. 1.5 GB, already converted.",
+        blurb='Without it Malayalam comes out in the wrong script. With it, about half the words are right.'),
     Specialist(
         "kn", "vasista22/whisper-kannada-medium", "kn-medium", 3.06, "apache-2.0",
         measured={"FLEURS word error": "32.3% (large-v3 67.4%)",
@@ -202,14 +210,19 @@ CATALOGUE: list = [
              "Large-v3 sized, 3 GB converted.",
         blurb='The only model that writes Sinhala. Still misses most words.'),
     Specialist(
-        "mr", "DrishtiSharma/whisper-large-v2-marathi", "mr-large-v2", 6.17,
-        "apache-2.0",
-        measured={"FLEURS word error": "47.2% (large-v3 78.7%)",
-                  "delivered Minglish": "51.6% (large-v3 73.2%)"},
-        note="Large-v2 sized: as fast as large-v3 on the same clips (2.5x "
-             "realtime), allow ~6 GB of VRAM with the main model. Converting "
-             "peaks near 11.5 GB of memory.",
-        blurb='Trained for Marathi: about half the words wrong, against 4 in 5 without it.'),
+        # Replaced DrishtiSharma/whisper-large-v2-marathi (47.2% / 51.6%
+        # delivered) in 1.1. With the detection fix of ADR 0015, held-out
+        # code-switched Marathi went from 30% to 55% of Marathi words in a
+        # spelling people use (tests/eval_codeswitch.py).
+        "mr", "itsskofficial/livewhisper-mr-indicwhisper", "mr-indicwhisper", 1.53,
+        "mit", kind="ct2",
+        measured={"FLEURS word error": "26.5% (large-v2 fine-tune 47.2%, large-v3 83.1%)",
+                  "FLEURS dev word error": "18.4%",
+                  "delivered Minglish": "31.6% (large-v2 fine-tune 51.6%)"},
+        note="AI4Bharat's IndicWhisper, Whisper-medium trained on the Vistaar "
+             "sets. A quarter the size of the model it replaces, and 1.5 GB "
+             "already converted. Writes English words in Devanagari.",
+        blurb='Trained for Marathi: about 1 word in 4 wrong, against 4 in 5 without it.'),
 ]
 
 

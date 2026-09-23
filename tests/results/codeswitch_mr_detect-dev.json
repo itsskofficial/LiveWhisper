@@ -1,0 +1,453 @@
+{
+ "lang": "mr",
+ "languages": [
+  "hi",
+  "mr",
+  "en"
+ ],
+ "split": "dev",
+ "prompt": "",
+ "fixes": true,
+ "online": false,
+ "routes": {
+  "en": "D:\\models\\ct2\\en-turbo",
+  "bn": "D:\\models\\ct2\\bn-medium",
+  "ta": "D:\\models\\ct2\\ta-medium",
+  "te": "D:\\models\\ct2\\te-medium",
+  "hi": "D:\\models\\ct2\\hinglish-prime",
+  "pa": "D:\\models\\ct2\\pa-large-v2",
+  "ml": "D:\\models\\ct2\\ml-large-v3",
+  "kn": "D:\\models\\ct2\\kn-medium",
+  "gu": "D:\\models\\ct2\\gu-medium",
+  "sd": "D:\\models\\ct2\\sd-large",
+  "si": "D:\\models\\ct2\\si-large-v3",
+  "mr": "D:\\models\\ct2\\mr-large-v2"
+ },
+ "clips": 48,
+ "heard": {
+  "hi": 14,
+  "mr": 34
+ },
+ "heard_right": 0.7083333333333334,
+ "english_kept": 0.43333333333333335,
+ "words_accepted": 0.565,
+ "native_exact": 0.635,
+ "english_lost": {
+  "ai": 2,
+  "pull": 2,
+  "cancel": 2,
+  "client": 2,
+  "reschedule": 2,
+  "hang": 2,
+  "deadline": 2,
+  "presentation": 2,
+  "ready": 2,
+  "please": 2,
+  "email": 2,
+  "reply": 2,
+  "bug": 2,
+  "production": 2,
+  "friday": 2
+ },
+ "samples": [
+  {
+   "said": "तू AI system design कुठून शिकला?",
+   "heard": "hi",
+   "raw": "2 I system design kutoon shikla.",
+   "reconsidered": [
+    "hi",
+    "mr"
+   ],
+   "romanized": "2 I system design kutoon shikla.",
+   "native": "तू आई सिस्टम दिजाईन कुठून शिकला?"
+  },
+  {
+   "said": "तू AI system design कुठून शिकला?",
+   "heard": "mr",
+   "raw": "तो आई सिस्टम दिजाईन कुठून शिकला?",
+   "reconsidered": null,
+   "romanized": "To aai system dijain kuthun shikala?",
+   "native": "तो आई सिस्टम दिजाईन कुठून शिकला?"
+  },
+  {
+   "said": "मी pull request review केला आहे, आता merge कर",
+   "heard": "mr",
+   "raw": "मी पूल रिक्वेस्ट रिव्यू केला आहे, आता मर्ज कर.",
+   "reconsidered": null,
+   "romanized": "Me pool recuvest revue kela aahe, aata marj kar.",
+   "native": "मी पूल रिक्वेस्ट रिव्यू केला आहे, आता मर्ज कर."
+  },
+  {
+   "said": "मी pull request review केला आहे, आता merge कर",
+   "heard": "hi",
+   "raw": "Mipul request review ke lie aata hai merge kar.",
+   "reconsidered": null,
+   "romanized": "Mipul request review ke lie aata hai merge kar.",
+   "native": "मी पुल रिक्वेस्ट रिव्यू के लाए है आता मर्ज कर."
+  },
+  {
+   "said": "उद्याची meeting cancel झाली, client ने reschedule करायला सांगितलं",
+   "heard": "mr",
+   "raw": "उद्याची मीटिंग कॅन्सल झाली, प्लायन्तने रीस्केडूल करायला सांगितला.",
+   "reconsidered": null,
+   "romanized": "Udyachi meeting kensal jhali, playantne rescadule karayala sangitla.",
+   "native": "उद्याची मीटिंग कॅन्सल झाली, प्लायन्तने रीस्केडूल करायला सांगितला."
+  },
+  {
+   "said": "उद्याची meeting cancel झाली, client ने reschedule करायला सांगितलं",
+   "heard": "mr",
+   "raw": "उद्याची मीटिंग कॅन्सल झाली, क्लाइन्टने रिस्केडूल करायला सांगितला.",
+   "reconsidered": null,
+   "romanized": "Udyachi meeting kensal jhali, clinetne rescadule karayala sangitla.",
+   "native": "उद्याची मीटिंग कॅन्सल झाली, क्लाइन्टने रिस्केडूल करायला सांगितला."
+  },
+  {
+   "said": "माझा laptop hang झाला, restart करून बघतो",
+   "heard": "mr",
+   "raw": "माझा लापटॉप हांक झाला, रिस्टार्ट करून बघतो.",
+   "reconsidered": null,
+   "romanized": "Majha laptop hank jhala, restart karun baghato.",
+   "native": "माझा लापटॉप हांक झाला, रिस्टार्ट करून बघतो."
+  },
+  {
+   "said": "माझा laptop hang झाला, restart करून बघतो",
+   "heard": "mr",
+   "raw": "माझा लापटॉप हांद झाला, रिस्टार्ट करून बगतो.",
+   "reconsidered": null,
+   "romanized": "Majha laptop hand jhala, restart karun bagato.",
+   "native": "माझा लापटॉप हांद झाला, रिस्टार्ट करून बगतो."
+  },
+  {
+   "said": "deadline च्या आधी presentation ready कर please",
+   "heard": "mr",
+   "raw": "डेड्लाईनच्या आधी प्रेजेंटेशन रेडी कर प्लीज.",
+   "reconsidered": null,
+   "romanized": "Dedlinechya aadhi prejentation redi kar pleese.",
+   "native": "डेड्लाईनच्या आधी प्रेजेंटेशन रेडी कर प्लीज."
+  },
+  {
+   "said": "deadline च्या आधी presentation ready कर please",
+   "heard": "mr",
+   "raw": "डेड्लाईनच्या आधी प्रेजन्टेशन रेडी कर प्लीज.",
+   "reconsidered": null,
+   "romanized": "Dedlinechya aadhi prejanteshan redi kar pleese.",
+   "native": "डेड्लाईनच्या आधी प्रेजन्टेशन रेडी कर प्लीज."
+  },
+  {
+   "said": "मला वाटतं हे feature next week पर्यंत deploy होईल",
+   "heard": "hi",
+   "raw": "Mala vaattah feature next week par yantr deploy hui.",
+   "reconsidered": [
+    "hi",
+    "mr"
+   ],
+   "romanized": "Mala vaattah feature next week par yantr deploy hui.",
+   "native": "मला वाटत हे फीचर नेक्स्ट वीकपर्यंत डिप्लवे होई."
+  },
+  {
+   "said": "मला वाटतं हे feature next week पर्यंत deploy होईल",
+   "heard": "hi",
+   "raw": "Malaavaat the feature next week par yantr deploy hui.",
+   "reconsidered": null,
+   "romanized": "Malaavaat the feature next week par yantr deploy hui.",
+   "native": "मला वाटतः फीचर नेक्स्ट वीक परियंत डिप्लवे हुई."
+  },
+  {
+   "said": "तुझा email मिळाला, मी संध्याकाळी reply करतो",
+   "heard": "mr",
+   "raw": "तुझा इमेल मिळाला, मी संध्याकाळी रिप्लाय करतो.",
+   "reconsidered": null,
+   "romanized": "Tujha imel milala, me sandhyakali riplay karto.",
+   "native": "तुझा इमेल मिळाला, मी संध्याकाळी रिप्लाय करतो."
+  },
+  {
+   "said": "तुझा email मिळाला, मी संध्याकाळी reply करतो",
+   "heard": "mr",
+   "raw": "तुझा इमेल मिळाला मी संध्याकाळी रिप्लाय करतो.",
+   "reconsidered": null,
+   "romanized": "Tujha imel milala me sandhyakali riplay karto.",
+   "native": "तुझा इमेल मिळाला मी संध्याकाळी रिप्लाय करतो."
+  },
+  {
+   "said": "आज office मध्ये खूप काम आहे, lunch नंतर call करू",
+   "heard": "hi",
+   "raw": "Aaj office mein hai khoob kaam aa hai. Lans nantar call karoon.",
+   "reconsidered": [
+    "hi",
+    "mr"
+   ],
+   "romanized": "Aaj office mein hai khoob kaam aa hai. Lans nantar call karun.",
+   "native": "आज ऑफिसमध्ये खूप काम आहे, लंस नंतर कॉल करू."
+  },
+  {
+   "said": "आज office मध्ये खूप काम आहे, lunch नंतर call करू",
+   "heard": "hi",
+   "raw": "Aaj office mein dher khoob kaam aa hai. Lunch nantar call karoon.",
+   "reconsidered": [
+    "hi",
+    "mr"
+   ],
+   "romanized": "Aaj office mein dher khoob kaam aa hai. Lunch nantar call karun.",
+   "native": "आज ऑफिसमध्ये खूप काम आहे, लंचनंतर कॉल करू."
+  },
+  {
+   "said": "हा bug production मध्ये कसा आला?",
+   "heard": "mr",
+   "raw": "हा बक प्राणक्षनमध्ये कसा आला?",
+   "reconsidered": null,
+   "romanized": "Ha bak prankshanmadhye kasa aala?",
+   "native": "हा बक प्राणक्षनमध्ये कसा आला?"
+  },
+  {
+   "said": "हा bug production मध्ये कसा आला?",
+   "heard": "mr",
+   "raw": "हा बग प्राडक्षनमध्ये कसा आला?",
+   "reconsidered": null,
+   "romanized": "Ha bag pradakshanmadhye kasa aala?",
+   "native": "हा बग प्राडक्षनमध्ये कसा आला?"
+  },
+  {
+   "said": "आपण Friday ला team outing plan करूया",
+   "heard": "mr",
+   "raw": "आपण फ्रायडेला टीम आवटिन क्लान करुया.",
+   "reconsidered": null,
+   "romanized": "Aapan fridela team aavatin klan karuya.",
+   "native": "आपण फ्रायडेला टीम आवटिन क्लान करुया."
+  },
+  {
+   "said": "आपण Friday ला team outing plan करूया",
+   "heard": "mr",
+   "raw": "आपण फ्रायडेला टीम आवटिन प्लान करुया.",
+   "reconsidered": null,
+   "romanized": "Aapan fridela team aavatin plan karuya.",
+   "native": "आपण फ्रायडेला टीम आवटिन प्लान करुया."
+  },
+  {
+   "said": "मी तुला link पाठवली आहे, check कर",
+   "heard": "mr",
+   "raw": "मी तुला लिंक पाठवली आहे, चेक कर.",
+   "reconsidered": null,
+   "romanized": "Me tula link pathavali aahe, chek kar.",
+   "native": "मी तुला लिंक पाठवली आहे, चेक कर."
+  },
+  {
+   "said": "मी तुला link पाठवली आहे, check कर",
+   "heard": "hi",
+   "raw": "Nitoola link paath liya hai, check kar.",
+   "reconsidered": null,
+   "romanized": "Nitoola link paath liya hai, check kar.",
+   "native": "मितुला लिंक पाठव लिया है चेक कर."
+  },
+  {
+   "said": "server down आहे, backend team ला सांग",
+   "heard": "mr",
+   "raw": "सर्वर डाऊन आहे, बॅकेन तीम लासान.",
+   "reconsidered": null,
+   "romanized": "Server doun aahe, beken tim lasan.",
+   "native": "सर्वर डाऊन आहे, बॅकेन तीम लासान."
+  },
+  {
+   "said": "server down आहे, backend team ला सांग",
+   "heard": "hi",
+   "raw": "Server down aae, back end team la sangh.",
+   "reconsidered": null,
+   "romanized": "Server down aae, back end team la sangh.",
+   "native": "सर्वर डाउन आहे बैकेंड टीम लासांग."
+  },
+  {
+   "said": "तू machine learning चा course कधी सुरू करणार?",
+   "heard": "mr",
+   "raw": "तू मशीन लर्णिंगचा कोर्स कधी सुरू करणार?",
+   "reconsidered": null,
+   "romanized": "Tu mashin larningcha course kadhi suru karnar?",
+   "native": "तू मशीन लर्णिंगचा कोर्स कधी सुरू करणार?"
+  },
+  {
+   "said": "तू machine learning चा course कधी सुरू करणार?",
+   "heard": "mr",
+   "raw": "तू मशीन लर्णिंगचा कोर्स कधी सुरू करणा?",
+   "reconsidered": null,
+   "romanized": "Tu mashin larningcha course kadhi suru karna?",
+   "native": "तू मशीन लर्णिंगचा कोर्स कधी सुरू करणा?"
+  },
+  {
+   "said": "मला database चा password reset करायचा आहे",
+   "heard": "mr",
+   "raw": "मला डाटाबेसचा पास्वर रिसेट करायचा आहे.",
+   "reconsidered": null,
+   "romanized": "Mala databescha paswar riset karayacha aahe.",
+   "native": "मला डाटाबेसचा पास्वर रिसेट करायचा आहे."
+  },
+  {
+   "said": "मला database चा password reset करायचा आहे",
+   "heard": "mr",
+   "raw": "मला डॅटाबेसचा पास्वर्ड रिसेट करायचा आहे.",
+   "reconsidered": null,
+   "romanized": "Mala databescha pasward riset karayacha aahe.",
+   "native": "मला डॅटाबेसचा पास्वर्ड रिसेट करायचा आहे."
+  },
+  {
+   "said": "ह्या project चा budget किती आहे?",
+   "heard": "hi",
+   "raw": "Yah project sa budget ki diya hai.",
+   "reconsidered": null,
+   "romanized": "Yah project sa budget ki diya hai.",
+   "native": "क्या प्रोजेक्ट सा बजट कित्तिया है."
+  },
+  {
+   "said": "ह्या project चा budget किती आहे?",
+   "heard": "hi",
+   "raw": "Yah project sa budget ki diya hai.",
+   "reconsidered": null,
+   "romanized": "Yah project sa budget ki diya hai.",
+   "native": "यह प्रोजेक्ट सा बजट की तिया है."
+  },
+  {
+   "said": "मी interview साठी resume update केला",
+   "heard": "mr",
+   "raw": "मी इंटरव्यूसाठी रिजूम अपडेट केला.",
+   "reconsidered": null,
+   "romanized": "Me intervyusathi resume update kela.",
+   "native": "मी इंटरव्यूसाठी रिजूम अपडेट केला."
+  },
+  {
+   "said": "मी interview साठी resume update केला",
+   "heard": "mr",
+   "raw": "मी इंटरव्यूसाठी रिजूम अपडेट केला.",
+   "reconsidered": null,
+   "romanized": "Me intervyusathi resume update kela.",
+   "native": "मी इंटरव्यूसाठी रिजूम अपडेट केला."
+  },
+  {
+   "said": "customer ने feedback दिला की app slow आहे",
+   "heard": "hi",
+   "raw": "Customer ne feedback dila ki apps lo aa hai.",
+   "reconsidered": null,
+   "romanized": "Customer ne feedback dila ki apps lo aa hai.",
+   "native": "कस्टमर ने फ़ीडबात दिला कि ऐप्स लुआ है."
+  },
+  {
+   "said": "customer ने feedback दिला की app slow आहे",
+   "heard": "hi",
+   "raw": "Customer ne feedback dila ki apps lo aa hai.",
+   "reconsidered": null,
+   "romanized": "Customer ne feedback dila ki apps lo aa hai.",
+   "native": "कस्टमर ने फ़ीडबाक दिला कि ऐप स्लो आ है."
+  },
+  {
+   "said": "आपली standup meeting दहा वाजता आहे ना?",
+   "heard": "mr",
+   "raw": "आपली स्टनदप मेटिन दहा वाजता आहेना.",
+   "reconsidered": null,
+   "romanized": "Aapli standap metin daha vajta aahena.",
+   "native": "आपली स्टनदप मेटिन दहा वाजता आहेना."
+  },
+  {
+   "said": "आपली standup meeting दहा वाजता आहे ना?",
+   "heard": "mr",
+   "raw": "आपली स्टेन्डप मीटिन दहा वास्ता आहेना.",
+   "reconsidered": null,
+   "romanized": "Aapli stendap metin daha vasta aahena.",
+   "native": "आपली स्टेन्डप मीटिन दहा वास्ता आहेना."
+  },
+  {
+   "said": "मी API documentation वाचत होतो",
+   "heard": "mr",
+   "raw": "मी एपिऐ डॉक्युमेन्टेशन वाचत होतो.",
+   "reconsidered": null,
+   "romanized": "Me apiai documentation vachat hoto.",
+   "native": "मी एपिऐ डॉक्युमेन्टेशन वाचत होतो."
+  },
+  {
+   "said": "मी API documentation वाचत होतो",
+   "heard": "mr",
+   "raw": "मी एपिऐ डॉक्युमेंटेशन वाचत होतो.",
+   "reconsidered": null,
+   "romanized": "Me apiai documentation vachat hoto.",
+   "native": "मी एपिऐ डॉक्युमेंटेशन वाचत होतो."
+  },
+  {
+   "said": "तो startup मध्ये product manager म्हणून join झाला",
+   "heard": "mr",
+   "raw": "तो स्टार्टपमध्ये प्रडट मॅनेझर म्हणून जऊन झाला.",
+   "reconsidered": null,
+   "romanized": "To startpmadhye pradat menejhar mhanun jaun jhala.",
+   "native": "तो स्टार्टपमध्ये प्रडट मॅनेझर म्हणून जऊन झाला."
+  },
+  {
+   "said": "तो startup मध्ये product manager म्हणून join झाला",
+   "heard": "mr",
+   "raw": "तो स्टार्टपमध्ये प्रॉडक्ट मॅनेजर म्हणून जाऊन झाला.",
+   "reconsidered": null,
+   "romanized": "To startpmadhye product manager mhanun jaun jhala.",
+   "native": "तो स्टार्टपमध्ये प्रॉडक्ट मॅनेजर म्हणून जाऊन झाला."
+  },
+  {
+   "said": "weekend ला मी Pune ला जाणार आहे",
+   "heard": "mr",
+   "raw": "विकेन्दलामी पुनेला जाणार आहे.",
+   "reconsidered": null,
+   "romanized": "Vikendalami punela jaanaar aahe.",
+   "native": "विकेन्दलामी पुनेला जाणार आहे."
+  },
+  {
+   "said": "weekend ला मी Pune ला जाणार आहे",
+   "heard": "mr",
+   "raw": "विकेंडला मी पुनेला जाणार आहे.",
+   "reconsidered": null,
+   "romanized": "Vikendla me punela jaanaar aahe.",
+   "native": "विकेंडला मी पुनेला जाणार आहे."
+  },
+  {
+   "said": "ही file download होत नाहीये, network problem असेल",
+   "heard": "mr",
+   "raw": "ही फायल डावनलोड होत नाहीय नेटवर्क प्राबलव असेईल.",
+   "reconsidered": null,
+   "romanized": "Hi file dovenlode hot nahiyay network prabalav aseil.",
+   "native": "ही फायल डावनलोड होत नाहीय नेटवर्क प्राबलव असेईल."
+  },
+  {
+   "said": "ही file download होत नाहीये, network problem असेल",
+   "heard": "hi",
+   "raw": "Yah file download hot nahin hai network problem assail.",
+   "reconsidered": [
+    "hi",
+    "mr"
+   ],
+   "romanized": "Yah file download hot nahin hai network problem assail.",
+   "native": "ही फायल डाऊनलोड होत नाहीये नेटवर्क प्राबला असेल."
+  },
+  {
+   "said": "मला cloud computing मध्ये career करायचं आहे",
+   "heard": "mr",
+   "raw": "मला क्लावड कॉंप्युटिंगमध्ये करियर करायचा आहे.",
+   "reconsidered": null,
+   "romanized": "Mala clawad computingmadhye carrier karayacha aahe.",
+   "native": "मला क्लावड कॉंप्युटिंगमध्ये करियर करायचा आहे."
+  },
+  {
+   "said": "मला cloud computing मध्ये career करायचं आहे",
+   "heard": "mr",
+   "raw": "मला क्लावड कॉंप्युटीनमध्ये कर्यर करायचा आहे.",
+   "reconsidered": null,
+   "romanized": "Mala clawad computinmadhye karyar karayacha aahe.",
+   "native": "मला क्लावड कॉंप्युटीनमध्ये कर्यर करायचा आहे."
+  },
+  {
+   "said": "त्याने code refactor करून test cases लिहिल्या",
+   "heard": "mr",
+   "raw": "त्याने कोड विफाक्टर करून टेस्ट केसेस लिहिल्या.",
+   "reconsidered": null,
+   "romanized": "Tyane code vifactor karun test keses lihilya.",
+   "native": "त्याने कोड विफाक्टर करून टेस्ट केसेस लिहिल्या."
+  },
+  {
+   "said": "त्याने code refactor करून test cases लिहिल्या",
+   "heard": "hi",
+   "raw": "Kya ne code refactor karoon test cases le liya?",
+   "reconsidered": null,
+   "romanized": "Kya ne code refactor karun test cases le liya?",
+   "native": "क्या ने कोड रिफैक्टर करून टेस्ट केसिस लिह लिया."
+  }
+ ]
+}

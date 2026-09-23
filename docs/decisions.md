@@ -10,6 +10,15 @@ deleting it.
 (the numbers are in the linked record or [evaluation.md](evaluation.md));
 *incident* = forced by a failure seen in testing.
 
+## 2026-09-23
+
+| Decision | Who | Why |
+| --- | --- | --- |
+| Correct Whisper when it hears Marathi as Hindi, by detection score and by the words written | incident + measured | A user's "tu AI system design kuthun shikla?" was heard as Hindi on every voice; held-out Marathi recognised 22% -> 59% ([ADR 0015](adr/0015-hear-marathi-as-marathi.md)) |
+| Take IndicWhisper for Marathi, Punjabi and Malayalam; keep the current model for Kannada, Gujarati, Telugu and Urdu | measured | Marathi 47.2% -> 26.5% word error, Punjabi 60.9% -> 40.3%, Malayalam 61.3% -> 50.6%; the others no better or worse ([ADR 0016](adr/0016-indicwhisper-specialists.md)) |
+| Do not put a code-switched example in the decoding prompt | measured | English words kept 43.3% -> 44.0%, and 52% -> 50% on IndicWhisper: noise, as in the earlier Hindi experiment |
+| Keep romanizing Marathi verbs as people type them ("shikala", not "shikla") | measured | Dakshina annotators kept the middle vowel 658 times against 297; a personal spelling is learned instead |
+
 ## 2026-09-22
 
 | Decision | Who | Why |
@@ -74,4 +83,15 @@ Decided to defer, with what would change it:
 - **Polish offline and beyond English.** Needs a local model that improves the
   held-out set with 0 violations, and an evaluation set per language.
 - **Untested hardware.** No-GPU PCs, AMD/Intel graphics and Windows 10 have not been run end to end.
-- **Weak languages.** Malayalam, Punjabi, Gujarati, Marathi and Sinhala wait on better openly licensed models; re-measure when one appears.
+- **English written in native script.** A Marathi or Hindi model writes "ready"
+  as रेडी, and romanization then spells it "redi". The lexicons cover loanwords
+  only patchily, and Marathi attaches case endings to English words
+  ("deadlineच्या"). Needs an English pronunciation dictionary and suffix
+  splitting; measured at 62% of English words kept on held-out code-switched
+  Marathi ([ADR 0015](adr/0015-hear-marathi-as-marathi.md)).
+- **Weak languages.** Gujarati, Telugu and Sinhala wait on better openly
+  licensed models; Marathi, Punjabi and Malayalam were improved in 1.1
+  ([ADR 0016](adr/0016-indicwhisper-specialists.md)); re-measure when one appears.
+- **Urdu and Sindhi confusion.** They share a script, and the word check covers
+  them, but no audio measurement has been made; the detection threshold is
+  Hindi/Marathi only.
