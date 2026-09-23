@@ -48,12 +48,62 @@ def grab(path: Path) -> None:
         return True
 
     u.EnumWindows(each, 0)
-    hwnd = found[0] if found else u.FindWindowW(None, TITLE)
-    u.SetForegroundWindow(hwnd)
-    time.sleep(0.5)
+
+    def area(h):
+        r = wintypes.RECT()
+        u.GetWindowRect(h, ctypes.byref(r))
+        return (r.right - r.left) * (r.bottom - r.top)
+
+    # The largest: this process also owns small hidden helper windows with the
+    # same title, and which one EnumWindows reaches first varies between runs.
+    hwnd = max(found, key=area) if found else u.FindWindowW(None, TITLE)
     r = wintypes.RECT()
     u.GetWindowRect(hwnd, ctypes.byref(r))
-    ImageGrab.grab(bbox=(r.left, r.top, r.right, r.bottom), all_screens=True).save(path)
+    box = (r.left, r.top, r.right, r.bottom)
+    shot = _print_window(hwnd, r.right - r.left, r.bottom - r.top)
+    if shot is None:
+        # PrintWindow gave nothing (it can, with hardware-composited content):
+        # fall back to grabbing the screen, which needs the window in front.
+        for _ in range(10):
+            u.ShowWindow(hwnd, 9)              # SW_RESTORE
+            u.BringWindowToTop(hwnd)
+            u.SetForegroundWindow(hwnd)
+            time.sleep(0.3)
+            if u.GetForegroundWindow() == hwnd:
+                break
+        time.sleep(0.4)
+        shot = ImageGrab.grab(bbox=box, all_screens=True)
+    shot.save(path)
+
+
+def _print_window(hwnd, width: int, height: int):
+    """The window's own pixels, without bringing it to the front.
+
+    Grabbing the screen instead caught whatever was on top when raising the
+    window lost to Windows' foreground lock - once, the tester's mail.
+    """
+    from PIL import Image
+    u, gdi = ctypes.windll.user32, ctypes.windll.gdi32
+    src = u.GetWindowDC(hwnd)
+    dc = gdi.CreateCompatibleDC(src)
+    bmp = gdi.CreateCompatibleBitmap(src, width, height)
+    gdi.SelectObject(dc, bmp)
+    try:
+        # 2 = PW_RENDERFULLCONTENT, which WebView2 needs
+        if not u.PrintWindow(hwnd, dc, 2):
+            return None
+        buf = ctypes.create_string_buffer(width * height * 4)
+        header = ctypes.c_buffer(40)
+        ctypes.memmove(header, ctypes.c_int32(40), 4)
+        info = (ctypes.c_int32 * 11)(40, width, -height, 1 | (32 << 16), 0, 0, 0, 0, 0, 0, 0)
+        if not gdi.GetDIBits(dc, bmp, 0, height, buf, info, 0):
+            return None
+        image = Image.frombuffer("RGB", (width, height), buf, "raw", "BGRX", 0, 1)
+        return None if not image.getbbox() else image
+    finally:
+        gdi.DeleteObject(bmp)
+        gdi.DeleteDC(dc)
+        u.ReleaseDC(hwnd, src)
 
 
 def demo_history(app) -> None:
