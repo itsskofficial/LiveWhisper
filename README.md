@@ -149,15 +149,15 @@ share written the way people most often write it.
 | --- | --- | --- | --- | --- | --- |
 | Hindi | Vaani (native), Hinglish-Prime (romanized) | **10.3%** | 3.0% | 18.1% | 75.4% |
 | Bengali | Bengali.AI medium | 14.5% | 2.6% | 24.1% | 91.5% |
+| Marathi | IndicWhisper medium | 21.9% | 5.3% | 28.1% | 64.7% |
 | Urdu | large-v3 | 23.0% | 9.2% | 20.3% | 87.3% |
 | Kannada | IIT Madras medium | 24.3% | 10.8% | 22.8% | 87.3% |
 | Tamil | IIT Madras medium | 24.6% | 12.4% | 24.3% | 89.2% |
 | Sindhi | Sindhi large | 29.2% | 13.1% | 68.4% | 19.7% |
 | Telugu | IIT Madras medium | 31.7% | 19.3% | 31.1% | 82.9% |
-| Marathi | Marathi large-v2 | 40.2% | 11.4% | 42.1% | 49.3% |
+| Punjabi | IndicWhisper medium | 37.1% | 20.6% | 33.9% | 72.5% |
+| Malayalam | IndicWhisper medium | 41.1% | 24.8% | 39.0% | 69.8% |
 | Gujarati | IIT Madras medium | 45.2% | 34.1% | 43.6% | 69.1% |
-| Malayalam | Malayalam large-v3 | 57.2% | 27.9% | 53.8% | 60.3% |
-| Punjabi | Punjabi large-v2 | 57.3% | 28.1% | 52.9% | 53.0% |
 | Sinhala* | Sinhala large-v3 | 77.6% | 34.8% | 76.9% | — |
 | English | large-v3-turbo | 4.3% | 2.2% | — | — |
 
@@ -326,11 +326,11 @@ receive after romanization, against every accepted spelling:
 | Tamil | 51.8% | **22.4%** | IIT Madras whisper-medium |
 | Telugu | 71.6% | **36.2%** | IIT Madras whisper-medium |
 | Urdu | **19.6%** | — | large-v3 is already best (a turbo fine-tune measured 24.1%) |
-| Punjabi | 68.6% | **56.3%** | whisper-large-v2 fine-tune (still weak) |
-| Marathi | 73.2% | **51.6%** | whisper-large-v2 Marathi fine-tune (still weak) |
+| Punjabi | 68.6% | **36.8%** | AI4Bharat IndicWhisper medium |
+| Marathi | 73.2% | **31.6%** | AI4Bharat IndicWhisper medium |
 | Gujarati | 63.3% | **48.5%** | IIT Madras whisper-medium (still weak) |
 | Kannada | 59.8% | **30.2%** | IIT Madras whisper-medium |
-| Malayalam | 108.7% | **58.8%** | whisper-large-v3 Malayalam fine-tune (still weak) |
+| Malayalam | 108.7% | **49.3%** | AI4Bharat IndicWhisper medium (still weak) |
 | Sindhi | 77.7% | — | no fine-tune found |
 
 Lower is better. The large-v3 column is already limited to your languages; the
@@ -523,7 +523,7 @@ actually stands — including the parts that are still worse:
 | English accuracy | 4.8% word error on FLEURS — the model's own number, not ours |
 | Code-switched Hindi/English | Better than the cloud default: they transliterate English into Devanagari ([measured](#just-ask-whisper-for-romanized-output)) |
 | Latency on a short dictation | 0.87 s English, 1.1 s Hindi on an RTX 4060; 0.84 s Hindi on a CPU with no GPU. Nothing to upload ([measured](tests/results/cpu.md)) |
-| Indic accuracy beyond Hindi | **Worse.** Gujarati, Punjabi, Malayalam and Marathi still miss about half the words, and Sindhi has no usable model at all |
+| Indic accuracy beyond Hindi | **Mixed.** Marathi is now about 1 word in 4 wrong and Punjabi 2 in 5; Gujarati, Malayalam and Sinhala still miss about half the words |
 | Polish on long-form rewriting | **Worse** unless you point it at a frontier model, which is not local |
 
 No word limits, no account, no subscription, and the numbers above are in

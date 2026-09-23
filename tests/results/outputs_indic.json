@@ -1,0 +1,210 @@
+{
+ "rows": [
+  {
+   "lang": "mr",
+   "n": 20,
+   "native_wer": 0.2185792349726776,
+   "native_cer": 0.053456221198156684,
+   "roman_wer": 0.2814207650273224,
+   "usual_spelling": 0.6469489706797891,
+   "leaks": 0,
+   "language_ok": 1.0,
+   "xrt": 1.3345415706290416,
+   "route": "mr-indicwhisper"
+  },
+  {
+   "lang": "pa",
+   "n": 20,
+   "native_wer": 0.37058823529411766,
+   "native_cer": 0.2058956916099773,
+   "roman_wer": 0.3392156862745098,
+   "usual_spelling": 0.724778549265993,
+   "leaks": 0,
+   "language_ok": 1.0,
+   "xrt": 0.9069562741170196,
+   "route": "pa-indicwhisper"
+  },
+  {
+   "lang": "ml",
+   "n": 20,
+   "native_wer": 0.410958904109589,
+   "native_cer": 0.24836097184728115,
+   "roman_wer": 0.3904109589041096,
+   "usual_spelling": 0.6982248307248307,
+   "leaks": 0,
+   "language_ok": 1.0,
+   "xrt": 0.9619911358846022,
+   "route": "ml-indicwhisper"
+  }
+ ],
+ "samples": [
+  {
+   "lang": "mr",
+   "reference": "पोलिस अधीक्षक चंद्र शेखर सोलंकी यांनी सांगितले की आरोपी चेहरा झाकून घेऊन कोर्टात हजर झाला.",
+   "native": "पोलिस अधीक्षक चंद्रशेखर सोलंकी यांनी सांगितले की आरोपी चेहरा जागून घेऊन कोर्टात हजर झाला.",
+   "romanized": "Polis adhikshak chandrashekhar solanki yanni sangitle ki aaropi chehra jagun gheun kortat hajar jhala.",
+   "heard": "mr"
+  },
+  {
+   "lang": "mr",
+   "reference": "वन्यजीवांचा विचार केल्यास मादागास्कर आतापर्यंत  सर्वात मोठे आहे आणि एक स्वतःच खंड आहे.",
+   "native": "या जीवांचा विचार केल्यास मादागास्कर आतापर्यंत सर्वात मोठे आहे आणि एक स्वतःच खंड आहे.",
+   "romanized": "Ya jivancha vichar kelyas madagaskar aataparyant sarvat mothe aahe aani ek swatahch khand aahe.",
+   "heard": "mr"
+  },
+  {
+   "lang": "mr",
+   "reference": "जे कोणी उंच भागात किंवा पर्वतांवरील रस्त्यावरून गाडी चालवणार आहेत, त्यांनी हिम, बर्फ किंवा गोठणबिंदूखालील तापमानाची शक्यता विचारात घ्यावी.",
+   "native": "जे कोणी उंच भागात किंवा पर्वतांवरील रस्त्यावरून गाडी चालणार आहेत त्यांनी हिम बर्फ किंवा गोठणबिंदू खालील तापमानाची शक्यता विचारात घ्यावी.",
+   "romanized": "Je koni unch bhagat kinva parvatanvaril rastyavarun gadi chalnar aahet tyanni him barf kinva gothanbindu khalil tapmanachi shakyata vicharat ghyavi.",
+   "heard": "mr"
+  },
+  {
+   "lang": "mr",
+   "reference": "१९७६ पर्यंत, माचू पिचूची तीस टक्के पुनर्स्थापना करण्यात आली होती आणि आजही जिर्णोद्धार सुरू आहे.",
+   "native": "एक हजार नऊ शे शहात्तर पर्यंत माचू पिचूचे तीस टक्के पुनर्सात्मक करण्यात आले होते आणि आजही जीर्णोद्धार सुरू आहे.",
+   "romanized": "Ek hajaar nauu shae shahattar paryant machuu pichuche tees takke punarsatmak karnyat aale hote aani aajahi jeernoddhaar suru aahe.",
+   "heard": "mr"
+  },
+  {
+   "lang": "mr",
+   "reference": "तुम्ही सामान्यत: नेहमीच पर्यटक आणि विक्रेत्यांचे आवाज ऐकता. आवाज आणि प्रकाशाची गोष्ट ही अगदी एखाद्या गोष्टीच्या पुस्तकासारखी आहे.",
+   "native": "तुम्ही सामान्यत नेहमीच पर्यटक आणि विक्रेत्यांचे आवाज ऐकता आवाज आणि प्रकाशाची गोष्ट ही अगदी एखाद्या गोष्टींच्या पुस्तकासारखी आहे.",
+   "romanized": "Tumhi samanyat nehmich paryatak aani vikretyanche aawaj aikta aawaj aani prakashachi gosht hi agadi ekhadya goshtinchya pustkasarkhi aahe.",
+   "heard": "mr"
+  },
+  {
+   "lang": "mr",
+   "reference": "सर्व उपलब्ध स्त्रोत संस्थेच्या सर्व कार्यान्वित विभागांमध्ये परिणामकारक वापरल्यास कलात्मकता आणि कल्पकता दिसून येते.",
+   "native": "सर्व उपलब्ध स्त्रोत संस्थेच्या सर्व कार्यान्वित विभागांमध्ये परिणामकारक वापरल्यास कलात्मकता आणि कल्पकता दिसून येते.",
+   "romanized": "Sarv uplabdh strot sansthechya sarv karyanvit vibhaganmadhye parinamkarak vaparlyas kalatmakta aani kalpakta disun yete.",
+   "heard": "mr"
+  },
+  {
+   "lang": "mr",
+   "reference": "या महिन्यामध्ये मशहाद येथे अजून एक विमान धावपट्टी ओलांडून पुढे गेले भिंतीला धडकून सतरा जणांचा जीव गेला.",
+   "native": "या महिन्यामध्ये मशहा येथे अजून एक विमान धावपट्टी ओलांडून पुढे गेले बिंदीला डडकून सतरा जणांचा जीव गेला.",
+   "romanized": "Ya mahinyamadhye mashaha yethe ajun ek vimaan dhavpatti olandun pudhe gele bindila dadakun satra janancha jeev gela.",
+   "heard": "mr"
+  },
+  {
+   "lang": "mr",
+   "reference": "सिंट्राचे रोमँटिक आणि मोहक शहर हे उत्तरेकडे व सहज पोहोचता येऊ शकणारे आहे तसेच लॉर्ड बायरनने रेकॉर्ड केलेल्या त्याच्या वैभवाच्या भव्यतेच्या वर्णनानंतर हे परदेशी लोकांमध्ये देखील प्रसिद्ध झाले आहे.",
+   "native": "सिंट्राचे रोमॅन्टिक आणि मोहक शहर हे उत्तरेकडे व सहज पोहोचता येई शकणारे आहे तसेच लॉर्ड वायरनने रेकॉर्ड केलेल्या त्यांच्या विभागाच्या भवितेच्या वर्षावर आहे नानंतर हे परदेशी लोकांमध्ये देखील प्रसिद्ध झाले आहे.",
+   "romanized": "Sintrache romantic aani mohak shahar he uttrekade va sahaj pohochta yei shaknare aahe tasech lord vayaranane record kelelya tyanchya vibhagachya bhavitechya varshavar aahe nanantar he pardeshi lokanmadhye dekhil prasiddh jhale aahe.",
+   "heard": "mr"
+  },
+  {
+   "lang": "pa",
+   "reference": "ਪਿਰਾਮਿਡ ਦਾ ਸਾਊਂਡ ਅਤੇ ਲਾਈਟ ਸ਼ੋਅ ਇਸ ਖੇਤਰ ਅੰਦਰ ਬੱਚਿਆਂ ਲਈ ਕਰਨ ਵਾਲੀਆਂ ਸਭ ਤੋਂ ਮਜ਼ੇਦਾਰ ਚੀਜ਼ਾਂ ਵਿੱਚੋਂ ਇੱਕ ਹੈ।",
+   "native": "ਪਿਰਾਮਿਟ ਦਾ ਸਾਊਂਗ ਅਤੇ ਲਾਈਟਸ ਵਿਚ ਖੇਤਰ ਅੰਦਰ ਬੱਚੇ ਲਈ ਕਰਨ ਵਾਲੀਆਂ ਸਭ ਤੋਂ ਮਜ਼ੀਦਾਰ ਚੀਜ਼ਾਂ ਵਿੱਚੋਂ ਇੱਕ ਹੈ.",
+   "romanized": "Piramit da saung ate laitas vich khetar andar bache layi karan valiyan sabh ton mazidar chizaan vichon ikk hai.",
+   "heard": "pa"
+  },
+  {
+   "lang": "pa",
+   "reference": "ਅਲਹਿਦਾ ਕਰਨਾ ਅਤੇ ਮੁੜ-ਸੁਮੇਲ ਕਰਨਾ ਹਰੇਕ ਪੀੜ੍ਹੀ ਦੇ ਦੋ ਪੂਲਾਂ ਵਿਚਕਾਰ ਪਰਿਵਰਤਿਤ ਰੂਪ ਨੂੰ ਅੱਗੇ-ਪਿੱਛੇ ਪੂਰੀ ਤਰ੍ਹਾਂ ਬੇਤਰਤੀਬ ਕਰ ਦਿੰਦਾ ਹੈ।",
+   "native": "ਅਲਹੀਦਾ ਕਰਨਾ ਅਤੇ ਮੁੜ ਸੁਮੇਲ ਕਰਨਾ ਹਰੇਕ ਪੀਡੀ ਦੇ ਦੋ ਪੁੱਲਾਂ ਵਿਚਕਾਰ ਪ੍ਰਵਰਤਿਤ ਰੂਪ ਨੂੰ ਅੱਗੇ ਪਿੱਛੇ ਪੂਰੀ ਤਰ੍ਹਾਂ ਬੇਰਤਤਿਭ ਕ.",
+   "romanized": "Alhida karna ate murh sumel karna harek pidi de do pulan vichakaar pravartit roop nu agge pichhe puri tarhaan beratatibh k.",
+   "heard": "pa"
+  },
+  {
+   "lang": "pa",
+   "reference": "ਇੰਟਰਨੈੱਟ ਬਹੁ-ਗਿਣਤੀ ਅਤੇ ਅੰਤਰਵਿਅਕਤੀ ਸੰਚਾਰ, ਦੋਵਾਂ ਤੱਤਾਂ ਦਾ ਸੁਮੇਲ ਕਰਦਾ ਹੈ।",
+   "native": "ਇੰਟਰਨੈੱਟ ਬਹੁਗਿਣਤੀ ਅਤੇ ਅੰਤਰਵਿਅਕਤੀ ਸੰਚਾਰਡ ਦੋਵਾਂ ਤੱਤਾਂ ਦਾ ਸੁਮੇਲ ਕਰਦਾ ਹੈ.",
+   "romanized": "Internet bahuginatee ate ataraviakati sacharad dovaan tattan da sumel karda hai.",
+   "heard": "pa"
+  },
+  {
+   "lang": "pa",
+   "reference": "ਰੱਦਕਰਨ ਸੰਬੰਧੀ ਨੀਤੀਆਂ ਵੱਖ-ਵੱਖ ਹੁੰਦੀਆਂ ਹਨ, ਪਰ ਮਾਰਚ ਦੇ ਅੰਤ ਤੱਕ ਜਿਆਦਾਤਰ ਕੋਰੋਨਾ-ਵਾਇਰਸ ਸੰਬੰਧੀ ਰੱਦਕਰਨ ਨੀਤੀਆਂ ਦਾ ਵਿਸਥਾਰ 2020 ਤੱਕ ਨਹੀਂ ਹੋਇਆ, ਜਦੋਂ ਉਲੰਪਿਕ ਦੀ ਸਮਾਂ-ਸੂਚੀ ਤਿਆਰ ਕੀਤੀ ਗਈ ਸੀ।",
+   "native": "ਰੱਦਕੜਨ ਸਬੰਧੀ ਨੀਤੀਆਂ ਵੱਖਵੱਖ ਹੁੰਦੀਆਂ ਹਨ ਪਰ ਮਾਰਚ ਦੀ ਅੰਤ ਤਕ ਜਿਆਦਾਤਰ ਕੋਰੋਨਾ ਵਾਇਰਸ ਸਬੰਧੀ ਰੱਦਕੜਨ ਨੀਤੀਆ ਦਾ ਵਿਸਥਾਰ 2020 ਤੱਕ ਨਹ�.",
+   "romanized": "Radakaran sabandhi nitiaan vakhavakh hundiaan han par march di ant tak jiaadaatar korona virus sabandhi radakaran nitiaa da visthar 2020 takk nah�.",
+   "heard": "pa"
+  },
+  {
+   "lang": "pa",
+   "reference": "ਬਿੱਲੀਆਂ ਵਿੱਚ ਸਭ ਤੋਂ ਵੱਧ ਸਮਾਜਿਕ ਸ਼ੇਰ ਹਨ, ਜਿਹੜੇ ਵੱਡੇ ਸਮੂਹਾਂ ਵਿੱਚ ਰਹਿੰਦੇ ਹਨ ਜਿਨ੍ਹਾਂ ਨੂੰ ਪ੍ਰਾਈਡ ਕਿਹਾ ਜਾਂਦਾ ਹੈ।",
+   "native": "ਬਿੱਲੀਆਂ ਵਿੱਚ ਸਭ ਤੋਂ ਵੱਧ ਸਮਾਜਿਕ ਸ਼ੇਰੰਗ ਜਿਹੜੇ ਵੱਡੇ ਸਮੂਹਾਂ ਵਿੱਚ ਰਹਿੰਦੇ ਹਨ ਜਿਨ੍ਹਾਂ ਨੂੰ ਪ੍ਰਾਈਡ ਕਿਹਾ ਜਾਂਦਾ ਹੈ.",
+   "romanized": "Billiyan vich sabh ton vadh samaajik saerag jehrhe vadde samuhan vich rehande han jinhaan nu praid keha janda hai.",
+   "heard": "pa"
+  },
+  {
+   "lang": "pa",
+   "reference": "ਦੂਜੇ ਪਾਸੇ, ਬਰਫ਼ ਵਾਲੀਆਂ ਅਤੇ ਬਰਫ਼ਬਾਰੀ ਦੀਆਂ ਸਥਿਤੀਆਂ ਬਹੁਤ ਸਾਰੇ ਦੇਸ਼ਾਂ ਵਿੱਚ ਆਮ ਹਨ, ਅਤੇ ਆਵਾਜਾਈ ਨਿਰਵਿਘਨ ਸਾਰਾ ਸਾਲ ਚਲਦੀ ਰਹਿੰਦੀ ਹੈ।",
+   "native": "ਦੂਜੇ ਪਾਸੇ ਬਰਫ਼ਵਾਲੀਆਂ ਅਤੇ ਬਰਫ਼ਬਾਰੀ ਦੀਆਂ ਸਥਿਤੀਆਂ ਬਹੁਤ ਸਾਰੇ ਦੇਸ਼ੇ ਵਿੱਚ ਆਂ ਹਨ ਅਤੇ ਆਵਾਜਾਈ ਨਿਰਵਿਘਨ ਸਾਰਾ ਸਾਲ ਚੱਲਦੀ ਰਹਿੰਦ�.",
+   "romanized": "Duje paase barfwalian ate baraphbaaree diyan sathitiyan bahut sare desae vich aan han ate aavaajaaee nirvighan sara saal chaldi rehand�.",
+   "heard": "pa"
+  },
+  {
+   "lang": "pa",
+   "reference": "ਕੋਕੈਮੋ ਘਾਟੀ - ਚਿੱਲੀ ਦਾ ਪ੍ਰਮੁੱਖ ਚੜ੍ਹਾਈ ਵਾਲਾ ਭਾਗ, ਜੋ ਦੱਖਣੀ ਅਮਰੀਕਾ ਦੀਆਂ ਸਖ਼ਤ ਵੱਡੀਆਂ ਦੀਵਾਰਾਂ ਦੀਆਂ ਕਿਸਮਾਂ ਅਤੇ ਕ੍ਰੇਗ ਨਾਲ ਯੋਸੇਮਾਈਟ ਦੇ ਰੂਪ ਵਿੱਚ ਜਾਣਿਆ ਜਾਂਦਾ ਹੈ।",
+   "native": "ਕੋਕੈਮੋਕਾਟੀ ਚਿੱਲੀ ਦਾ ਪ੍ਰਮੁੱਖ ਚੜਾਈ ਵਾਲਾ ਭਾਗ ਜੋ ਦੱਖਣੀ ਅਮਰੀਕਾ ਦੀਆਂ ਸਖਤ ਵੱਡੀਆਂ ਦੀਵਾਰਾਂ ਦੀਆਂ ਕਿਸਮਾਂ ਅਤੇ ਕ੍ਰੇਗ ਨਾਲ ਯੋ.",
+   "romanized": "Cocamocaty chilli da parmukh chadaai wala bhaag jo dakkhani america diyan sakhat vaddiaan deevara diyan kisman ate crag naal yo.",
+   "heard": "pa"
+  },
+  {
+   "lang": "pa",
+   "reference": "ਕੁਦਰਤੀ ਵਾਤਾਵਰਣ ਵਿੱਚ ਹੋਣ ‘ਤੇ ਪੌਦੇ ਖੂਬਸੂਰਤ ਦਿਖਾਈ ਦਿੰਦੇ ਹਨ, ਇਸਲਈ \"ਕੇਵਲ ਇੱਕ\" ਨਮੂਨੇ ਨੂੰ ਵੀ ਹਟਾਉਣ ਦੇ ਲੋਭ ਦਾ ਵਿਰੋਧ ਕਰੋ।",
+   "native": "ਕੁਦਰਤੀ ਵਾਤਾਵਰਨ ਵਿੱਚ ਹੋਣ ਤੇ ਪੌਦੇ ਖੂਬਸਰ ਦਿਖਾਈ ਦਿੰਦੇ ਹਨ ਇਸ ਲਈ ਕੇਵਲ ਇੱਕ ਨਮੂਨੇ ਨੂੰ ਵੀ ਹਟਾਉਣ ਦੇ ਲੋਪ ਦਾ ਵਿਰੋਧ ਕਰੋ.",
+   "romanized": "Kudrati vatavaran vich hon te paude khubasar dikhai dinde han is layi kewal ikk namune nu vi hataun de lop da virodh karo.",
+   "heard": "pa"
+  },
+  {
+   "lang": "ml",
+   "reference": "ഈ നഗരം രാജ്യത്തെ മറ്റ് നഗരങ്ങളിൽ നിന്ന്  പൂർണ്ണമായും വ്യത്യസ്തമാണ്, കാരണം ഇതിന് ആഫ്രിക്കൻ വാസനയേക്കാൾ അറബിവാസനയാണ് കൂടുതൽ.",
+   "native": "ഈ നഗരം രാജ്യത്തെ മറ്റു നഗരങ്ങളിൽ നിന്ന് പൂർണ്ണമായും വ്യത്യസ്തമാണ് കാരണം ഇതിന് ആഫ്രിക്കൻ വാസനയെക്കാൾ അറബി വ�.",
+   "romanized": "Ee nagaram rajyathe mattu nagarangalil ninnu poornnamaayum vyathyasthamaanu karanam ithinu african vaasanayekkaal arabi va�.",
+   "heard": "ml"
+  },
+  {
+   "lang": "ml",
+   "reference": "പാലത്തിനു താഴെയുള്ള കുത്തനെയുള്ള ഉയരം 15 മീറ്ററാണ്. ഇതിന്റെ നിർമ്മാണം 2011 ഓഗസ്റ്റിൽ പൂർത്തിയാക്കിയതാണ്, എന്നാൽ ഇത് 2017 മാർച്ച് വരെ ഗതാഗതത്തിനായി തുറന്ന് കൊടുത്തിട്ടില്ല.",
+   "native": "പാലത്തിന്റെ താഴെയുള്ള കുത്തനെയുള്ള ഉയരം 15 മീറ്ററാണ് ഇതിന്റെ നിർമ്മാണം 2011 ഓഗസ്റ്റിൽ പൂർത്തിയാക്കിയതാണ് എന്നാൽ ഇത് 2017 മാർച്ച് വരെ ഗതാഗതത്തിനായി തുറന്ന് കൊടുത്തിട്ടില്ല.",
+   "romanized": "Paalathinte thaazheyulla kutthaneyulla uyaram 15 meetaraanu ithinte nirmaanam 2011 augustil poorthiyaakkiyathaanu ennaal ithu 2017 march vare gatagatattinayi thurannu koduthittilla.",
+   "heard": "ml"
+  },
+  {
+   "lang": "ml",
+   "reference": "ഇത് ബന്ധപ്പെട്ടിരിക്കുന്നു, എന്നാൽ സാധാരണയായി ആൽപൈൻ ശൈലിയിലുള്ള സ്കീ ടൂറിംഗോ പർവ്വതാരോഹണമോ ഉൾപ്പെടുന്നില്ല. ഇതിൽ രണ്ടാമത്തേത് കുത്തനെയുള്ള ഭൂപ്രദേശങ്ങളിൽ ചെയ്യുന്നതും, കൂടുതൽ കട്ടിയുള്ള സ്‌കീകളും ബൂട്ടുകളും ആവശ്യമായതുമാണ്.",
+   "native": "ഇത് ബന്ധപ്പെട്ടിരിക്കുന്നു എന്നാൽ സാധാരണയായി ആൽ പൈൻ ശൈലിയിലുള്ള സ്കീ ടൂറിംഗോ പർവ്വതാരോഹണമോ ഉൾപ്പെടുന്ന ഇതിൽ രണ്ടാമത്തേത് കുത്തനെയുള്ള ഭൂപ്രദേശങ്ങളിൽ ചെയ്യുന്നതും കൂടുതൽ കട്ടിയുള്ള സ്കീകളും ബൂട്ടുകളും ആവശ.",
+   "romanized": "Ithu bandhappettirikkunnu ennaal sadharanayayi aal pain shailiyilulla skee turingo parvvathaarohanamo ulpedunna ithil randaamatheth kutthaneyulla bhoopradeshangalil cheyyunnathum kooduthal kattiyulla skeekalum boottukalum aavasha.",
+   "heard": "ml"
+  },
+  {
+   "lang": "ml",
+   "reference": "സഹ ഗുസ്തിക്കാരും ലൂണയ്ക്ക് ആദരാഞ്ജലികൾ അർപ്പിച്ചു.",
+   "native": "സഹഗുസ്തിക്കാരും ലൂണയ്ക്ക് ആദരാഞ്ജലികൾ അർപ്പിച്ചു.",
+   "romanized": "Sahagusthikkaarum loonaykku aadaraanjalikal arppicchu.",
+   "heard": "ml"
+  },
+  {
+   "lang": "ml",
+   "reference": "മുറിവുകൾക്കായി അദ്ദേഹം ഒരു ചിത്രം സജ്ജമാക്കിയിട്ടില്ല, ചൈനയുടെ സാമ്പത്തിക ഉൽ‌പാദനത്തെ അടിസ്ഥാനമാക്കിയാണ് അവ നിർമ്മിക്കുക എന്ന് പറഞ്ഞു.",
+   "native": "മുറിവുകൾക്കായി അദ്ദേഹം ഒരു ചിത്രം സജ്ജമാക്കിയിട്ടില്ല ചൈനയുടെ സാമ്പത്തിക ഉൽപ്പാദനത്തെ അടിസ്ഥാനമാക്കിയാണ്.",
+   "romanized": "Murivukalkkaayi adheham oru chithram sajjamaakkiyittilla chainayude sampathika ulppaadanathe adisthaanamaakkiyaanu.",
+   "heard": "ml"
+  },
+  {
+   "lang": "ml",
+   "reference": "നാഷണൽ ട്രഷർ എന്ന സിനിമ നിങ്ങൾ കണ്ടിട്ടുണ്ടെങ്കിൽ, സ്വാതന്ത്ര്യ പ്രഖ്യാപനത്തിന്റെ പിന്നിൽ ഒരു നിധിയുടെ മാപ്പ് എഴുതപ്പെട്ടതായി നിങ്ങൾക്ക് ചിലപ്പോൾ തോന്നാം.",
+   "native": "നാഷണൽ ട്രഷർ എന്ന സിനിമ നിങ്ങൾ കണ്ടിട്ടുണ്ടെങ്കിൽ സ്വാതന്ത്ര്യ പ്രഖ്യാപനത്തിന്റെ പിന്നിൽ ഒരു നിധിയുടെ മാപ.",
+   "romanized": "Naashanal trasharrr enna sinima ningal kandittundenkil svaathanthrya prakhyaapanathinte pinnil oru nidhiyude maapa.",
+   "heard": "ml"
+  },
+  {
+   "lang": "ml",
+   "reference": "കടൽത്തീരത്ത് മിക്കപ്പോഴും കടലിലെ പാറക്കൂട്ടങ്ങളിലോ സമാനമായ എന്തെങ്കിലും ഒന്നിലോ വന്ന് തട്ടിത്തെറിച്ചു മടങ്ങിവരുന്ന തിരമാലകളുടെ പ്രവാഹമാണ് റിപ്പ് കറന്റുകൾ.",
+   "native": "കടൽ തീരത്ത് മിക്കപ്പോഴും കടലിലെ പാറക്കൂട്ടങ്ങളിലോ സമാനമായ എന്തെങ്കിലും ഒന്നിലോ വന്ന് തട്ടിത്തെറിച്ച് മട�.",
+   "romanized": "Kadal theerathu mikkappozhum kadalile paarakkoottangalilo samanamaya enthenkilum onnilo vannu thattitherichu mada�.",
+   "heard": "ml"
+  },
+  {
+   "lang": "ml",
+   "reference": "കേടുപാട്, ഗുരുതരമായ സാമൂഹിക തടസം അല്ലെങ്കിൽ മനുഷ്യ ജീവൻ നഷ്‌ടപ്പെടൽ എന്നിവയുടെ സാധ്യതയുള്ള അപകടകരമായ കാലാവസ്ഥാ പ്രതിഭാസത്തിന് പൊതുവായി പറയുന്ന പദമാണ് കഠിനമായ കാലാവസ്ഥ എന്നത്.",
+   "native": "കേടുപാട് ഗുരുതരമായ സാമൂഹിക തടസ്സം അല്ലെങ്കിൽ മനുഷ്യജീവൻ നഷ്ടപ്പെടൽ എന്നിവയുടെ സാധ്യതയുള്ള അപകടകരമായ കാലാവസ്ഥ പ്രതിഭാസത്തിന് പൊതുവായി പറയുന്ന പദമാണ് കഠിനമായ കാലാവസ്ഥ എന്നത്.",
+   "romanized": "Kedupaadu gurutaramaaya saamoohika thadassam allenkil manushyajeevan nashtappedal ennivayude sadhyathayulla apakadakaramaaya kaalaavastha pratibhasattin pothuvaayi parayunna padamaan kadinamaaya kaalaavastha yennathu.",
+   "heard": "ml"
+  }
+ ]
+}
