@@ -10,6 +10,12 @@ deleting it.
 (the numbers are in the linked record or [evaluation.md](evaluation.md));
 *incident* = forced by a failure seen in testing.
 
+## 2026-09-25
+
+| Decision | Who | Why |
+| --- | --- | --- |
+| Read browser pages through UI Automation only; do not ship the OCR fallback or force Chromium's accessibility on | measured | Once the reply box's placeholder text and the depth limit were fixed, stock Chrome 153 and Edge 153 gave the email on the first read, 6/6 fresh-profile trials, 0.13-0.54 s; OCR took 3.6-8.2 s and would add ~118 MB of OpenCV to Setup.exe (tests/bench_browser_reading.py) |
+
 ## 2026-09-23
 
 | Decision | Who | Why |
@@ -94,6 +100,11 @@ Decided to defer, with what would change it:
 - **Weak languages.** Gujarati, Telugu and Sinhala wait on better openly
   licensed models; Marathi, Punjabi and Malayalam were improved in 1.1
   ([ADR 0016](adr/0016-indicwhisper-specialists.md)); re-measure when one appears.
+- **Browser pages on a PC with no accessibility client.** Chromium builds its
+  page tree for UI Automation when a client is listening; on the machine
+  measured one always was (`UiaClientsAreListening`), so a PC with none is
+  unmeasured. Rerun tests/bench_browser_reading.py on one before adding any
+  switch-on step.
 - **Urdu and Sindhi confusion.** They share a script, and the word check covers
   them, but no audio measurement has been made; the detection threshold is
   Hindi/Marathi only.

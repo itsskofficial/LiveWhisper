@@ -13,8 +13,8 @@
   a browser, Ctrl+Alt+W wrote "Hi," with no name, as if nothing were on
   screen: the empty reply box read as a placeholder character that hid the
   page, and the page was deeper than the app looked. It now finds the email
-  and greets its sender. The browser still shows its page only while
-  accessibility is on (a screen reader, or Chrome's accessibility setting).
+  and greets its sender: in fresh Chrome and Edge windows, 6 of 6 first reads
+  found it, in 0.1-0.5 s (tests/bench_browser_reading.py).
 - **Fix grammar fixes lowercase messages.** Ctrl+Alt+F on "i has went
   through the screens and they looks good" said the text already looked
   correct: told to keep lowercase and informality, the built-in model kept the

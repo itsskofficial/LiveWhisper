@@ -39,6 +39,7 @@ Contamination is checked: `steja/whisper-large-sindhi` scored an implausible
 | `tests/e2e_app.py` | the app end to end: English, Hinglish, every language, learning; `--online` |
 | `tests/bench_latency.py`, `tests/bench_windows.py`, `tests/bench_compose.py` | latency, decode window length, compose quality |
 | `tests/bench_fix.py` | Ctrl+Alt+F: mistakes gone, messages without mistakes (lowercase chat, Hinglish, learned spellings) returned exactly; `--prompt old,new` |
+| `tests/bench_browser_reading.py` | what Write mode reads from an email page in fresh Chrome/Edge windows: text, time, sender found; `--ocr` times the OCR fallback. Takes the foreground |
 | `tests/rescore_delivered.py` | re-scores saved outputs as delivered (after respelling) |
 
 ## Current results
