@@ -115,19 +115,27 @@ def _element_text(el) -> str:
                 v = pat.Value
             else:
                 v = pat.DocumentRange.GetText(MAX_CONTEXT_CHARS)
-            if v:
+            # An empty box in Chrome reads as U+FFFC, the object placeholder;
+            # taken as text, it hid the email being replied to.
+            v = (v or "").replace("￼", "")
+            if v.strip():
                 return v
         except Exception:
             continue
     try:
-        return el.Name or ""
+        return (el.Name or "").replace("￼", "")
     except Exception:
         return ""
 
 
+# Chrome's page document sits at depth 7 under its window; at 6 the walk
+# never reached the email on screen, only the window title.
+MAX_DEPTH = 14
+
+
 def _walk(el, out: list, depth: int, budget: int = 220) -> None:
-    """Shallow breadth-limited walk - deep trees are slow and mostly chrome."""
-    if depth > 6 or len(out) > budget:
+    """Breadth-limited walk: stops after `budget` pieces of text."""
+    if depth > MAX_DEPTH or len(out) > budget:
         return
     try:
         for child in el.GetChildren():

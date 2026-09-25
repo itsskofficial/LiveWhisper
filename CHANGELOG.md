@@ -9,6 +9,12 @@
   one on the desktop as an empty see-through frame - 421 of them after a day,
   stacked over the LiveWhisper window and catching its clicks. The AI page
   also took about 5 s to open because of them; it now opens in under 1 s.
+- **Write mode reads the email in Chrome and Edge.** Replying to an email in
+  a browser, Ctrl+Alt+W wrote "Hi," with no name, as if nothing were on
+  screen: the empty reply box read as a placeholder character that hid the
+  page, and the page was deeper than the app looked. It now finds the email
+  and greets its sender. The browser still shows its page only while
+  accessibility is on (a screen reader, or Chrome's accessibility setting).
 - **Fix grammar fixes lowercase messages.** Ctrl+Alt+F on "i has went
   through the screens and they looks good" said the text already looked
   correct: told to keep lowercase and informality, the built-in model kept the

@@ -38,6 +38,7 @@ FAST = [
     ("english polish guardrails", ["tests/test_polish.py"]),
     ("emails signed by name", ["tests/test_compose_prompt.py"]),
     ("no console windows", ["tests/test_no_console_windows.py"]),
+    ("write mode reads the email", ["tests/test_screen_reading.py"]),
     ("model formatting, free tier", ["tests/test_llm_format.py"]),
     ("hotkey flow", ["tests/test_app_flow.py"]),
     ("no native script left", ["tests/test_letters.py"]),
